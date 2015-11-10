@@ -10,6 +10,7 @@ using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using SharpDX;
+using Color = System.Drawing.Color;
 
 namespace Essential.AutoLevel
 {
@@ -53,6 +54,7 @@ namespace Essential.AutoLevel
             SequenceMenu.AddGroupLabel("Misc");
             SequenceMenu.Add("delay", new Slider("LevelUp Delay (ms)", 150, 0, 3000));
             SequenceMenu.Add("chat", new CheckBox("Chat Notification (Local)", false));
+            SequenceMenu.Add("switch", new CheckBox("Enable AutoLevelUp", true));
 
             var Smite = EloBuddy.Player.Spells.FirstOrDefault(s => s.SData.Name == "summonerSmite");
             var Heal = EloBuddy.Player.Spells.FirstOrDefault(h => h.SData.Name == "summonerHeal");
@@ -679,7 +681,8 @@ namespace Essential.AutoLevel
 
         private static void AIHeroClient_OnLevelUp(Obj_AI_Base sender, Obj_AI_BaseLevelUpEventArgs args)
         {
-            if (!sender.IsMe || !sender.IsValid)
+            var lvlsw = SequenceMenu["switch"].Cast<CheckBox>().CurrentValue;
+            if (!sender.IsMe || !sender.IsValid || !lvlsw)
                 return;
             var level = (uint)Player.Level;
 //            var customSW = SequenceMenu["custom"].Cast<CheckBox>().CurrentValue;
@@ -719,7 +722,9 @@ namespace Essential.AutoLevel
             }
 
             if (chat == true)
+            {
                 Chat.Print("Level UP!!", Color.LawnGreen);
+            }
         }
         /*private static DateTime Delay(int MS)
         {
