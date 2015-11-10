@@ -1,0 +1,11 @@
+c:\users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\bin\Debug\ChallengerTristana.exe.config
+C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\bin\Debug\ChallengerTristana.exe
+C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\bin\Debug\ChallengerTristana.pdb
+C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\bin\Debug\EloBuddy.dll
+C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\bin\Debug\EloBuddy.SDK.dll
+C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\bin\Debug\SharpDX.dll
+C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\bin\Debug\Newtonsoft.Json.dll
+C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\obj\Debug\ChallengerTristana.exe
+C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\obj\Debug\ChallengerTristana.pdb
+C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\obj\Debug\ChallengerTristana.csprojResolveAssemblyReference.cache
