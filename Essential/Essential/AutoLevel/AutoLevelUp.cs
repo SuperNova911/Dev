@@ -51,8 +51,8 @@ namespace Essential.AutoLevel
             SequenceMenu.Add("startLevel", new Slider("Level", 2, 2, 7));
 
             SequenceMenu.AddGroupLabel("Misc");
-            SequenceMenu.Add("chat", new CheckBox("Chat Notification (Local)", false));
             SequenceMenu.Add("delay", new Slider("LevelUp Delay (ms)", 150, 0, 3000));
+            SequenceMenu.Add("chat", new CheckBox("Chat Notification (Local)", false));
 
             var Smite = EloBuddy.Player.Spells.FirstOrDefault(s => s.SData.Name == "summonerSmite");
             var Heal = EloBuddy.Player.Spells.FirstOrDefault(h => h.SData.Name == "summonerHeal");
@@ -679,6 +679,8 @@ namespace Essential.AutoLevel
 
         private static void AIHeroClient_OnLevelUp(Obj_AI_Base sender, Obj_AI_BaseLevelUpEventArgs args)
         {
+            if (!sender.IsMe || !sender.IsValid)
+                return;
             var level = (uint)Player.Level;
 //            var customSW = SequenceMenu["custom"].Cast<CheckBox>().CurrentValue;
             var start = SequenceMenu["startlevel"].Cast<Slider>().CurrentValue;
@@ -697,29 +699,29 @@ namespace Essential.AutoLevel
 
             if (Sequence[level] == 1)
             {
-                Delay(delay);
+                //Delay(delay);
                 ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.Q);
             }
             else if (Sequence[level] == 2)
             {
-                Delay(delay);
+                //Delay(delay);
                 ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.W);
             }
             else if (Sequence[level] == 3)
             {
-                Delay(delay);
+                //Delay(delay);
                 ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.E);
             }
             else if (Sequence[level] == 4)
             {
-                Delay(delay);
+                //Delay(delay);
                 ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.R);
             }
 
             if (chat == true)
                 Chat.Print("Level UP!!", Color.LawnGreen);
         }
-        private static DateTime Delay(int MS)
+        /*private static DateTime Delay(int MS)
         {
             DateTime ThisMoment = DateTime.Now;
             TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
@@ -732,6 +734,6 @@ namespace Essential.AutoLevel
             }
 
             return DateTime.Now;
-        }
+        }*/
     }
 }
