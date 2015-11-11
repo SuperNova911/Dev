@@ -50,3 +50,6 @@ Essential/Essential/obj/Debug/Essential.exe
 Essential/Essential/obj/Debug/Essential.exe
 Essential/Essential/obj/Debug/Essential.pdb
 *.suo
+*.pdb
+*.exe
+*.suo

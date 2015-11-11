@@ -687,44 +687,48 @@ namespace Essential.AutoLevel
             var lvlsw = SequenceMenu["switch"].Cast<CheckBox>().CurrentValue;
             if (!sender.IsMe || !sender.IsValid || !lvlsw)
                 return;
+
             var level = (uint)Player.Level;
-//            var customSW = SequenceMenu["custom"].Cast<CheckBox>().CurrentValue;
             var start = SequenceMenu["startlevel"].Cast<Slider>().CurrentValue;
+            if (level < start)
+                return;
+
+//            var customSW = SequenceMenu["custom"].Cast<CheckBox>().CurrentValue;
 //            var qLogic = SequenceMenu["q"].Cast<Slider>().CurrentValue;
 //            var wLogic = SequenceMenu["w"].Cast<Slider>().CurrentValue;
 //            var eLogic = SequenceMenu["e"].Cast<Slider>().CurrentValue;
             var chat = SequenceMenu["chat"].Cast<CheckBox>().CurrentValue;
             var delay = SequenceMenu["delay"].Cast<Slider>().CurrentValue;
-//            var qlvl = Player.Spellbook.GetSpell(SpellSlot.Q).Level;
-//            var wlvl = Player.Spellbook.GetSpell(SpellSlot.W).Level;
-//            var elvl = Player.Spellbook.GetSpell(SpellSlot.E).Level;
-//            var rlvl = Player.Spellbook.GetSpell(SpellSlot.R).Level;
+            var qlvl = Player.Spellbook.GetSpell(SpellSlot.Q).Level;
+            var wlvl = Player.Spellbook.GetSpell(SpellSlot.W).Level;
+            var elvl = Player.Spellbook.GetSpell(SpellSlot.E).Level;
+            var rlvl = Player.Spellbook.GetSpell(SpellSlot.R).Level;
+            var qwer = qlvl + wlvl + elvl + rlvl + 1;
 
-            if (level < start)
-                return;
-
-            if (Sequence[level] == 1)
+            while (level >= qwer)
             {
-                Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.Q), delay);
-            }
-            else if (Sequence[level] == 2)
-            {
-                Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.W), delay);
-            }
-            else if (Sequence[level] == 3)
-            {
-                Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.E), delay);
-            }
-            else if (Sequence[level] == 4)
-            {
-                Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.R), delay);
-            }
-
-            if (chat == true)
-            {
-                Chat.Print("Level UP!!", Color.LawnGreen);
+                if (Sequence[qwer] == 1)
+                {
+                    Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.Q), delay);
+                }
+                else if (Sequence[level] == 2)
+                {
+                    Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.W), delay);
+                }
+                else if (Sequence[level] == 3)
+                {
+                    Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.E), delay);
+                }
+                else if (Sequence[level] == 4)
+                {
+                    Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.R), delay);
+                }
+                if (chat == true)
+                {
+                    Chat.Print("Level %d!!", qwer, Color.LawnGreen, Color.Orange, Color.LawnGreen);
+                }
+                qwer++;
             }
         }
-        
     }
 }
