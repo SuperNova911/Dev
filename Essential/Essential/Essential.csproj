@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AutoLevel\AutoLevelUp%28WIP%29.cs" />
     <Compile Include="AutoLevel\AutoLevelUp.cs" />
+    <Compile Include="Draw\GankAlert.cs" />
     <Compile Include="Hud\HudDraw.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +62,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
