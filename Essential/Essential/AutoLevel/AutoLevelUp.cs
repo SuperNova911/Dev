@@ -678,7 +678,10 @@ namespace Essential.AutoLevel
 
             Obj_AI_Base.OnLevelUp += AIHeroClient_OnLevelUp;
         }
+        void qLevelUp()
+        {
 
+        }
         private static void AIHeroClient_OnLevelUp(Obj_AI_Base sender, Obj_AI_BaseLevelUpEventArgs args)
         {
             var lvlsw = SequenceMenu["switch"].Cast<CheckBox>().CurrentValue;
@@ -702,23 +705,19 @@ namespace Essential.AutoLevel
 
             if (Sequence[level] == 1)
             {
-                //Delay(delay);
-                ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.Q);
+                Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.Q), delay);
             }
             else if (Sequence[level] == 2)
             {
-                //Delay(delay);
-                ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.W);
+                Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.W), delay);
             }
             else if (Sequence[level] == 3)
             {
-                //Delay(delay);
-                ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.E);
+                Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.E), delay);
             }
             else if (Sequence[level] == 4)
             {
-                //Delay(delay);
-                ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.R);
+                Core.DelayAction(() => ObjectManager.Player.Spellbook.LevelSpell(SpellSlot.R), delay);
             }
 
             if (chat == true)
@@ -726,19 +725,6 @@ namespace Essential.AutoLevel
                 Chat.Print("Level UP!!", Color.LawnGreen);
             }
         }
-        /*private static DateTime Delay(int MS)
-        {
-            DateTime ThisMoment = DateTime.Now;
-            TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
-            DateTime AfterWards = ThisMoment.Add(duration);
-
-            while (AfterWards >= ThisMoment)
-            {
-                System.Windows.Forms.Application.DoEvents();
-                ThisMoment = DateTime.Now;
-            }
-
-            return DateTime.Now;
-        }*/
+        
     }
 }
