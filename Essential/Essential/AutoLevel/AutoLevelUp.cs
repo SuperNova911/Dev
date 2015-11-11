@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Essential;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Enumerations;
@@ -54,7 +55,6 @@ namespace Essential.AutoLevel
             SequenceMenu.AddGroupLabel("Misc");
             SequenceMenu.Add("delay", new Slider("LevelUp Delay (ms)", 150, 0, 3000));
             SequenceMenu.Add("chat", new CheckBox("Chat Notification (Local)", false));
-            SequenceMenu.Add("switch", new CheckBox("Enable AutoLevelUp", true));
 
             var Smite = EloBuddy.Player.Spells.FirstOrDefault(s => s.SData.Name == "summonerSmite");
             var Heal = EloBuddy.Player.Spells.FirstOrDefault(h => h.SData.Name == "summonerHeal");
@@ -678,14 +678,12 @@ namespace Essential.AutoLevel
 
             Obj_AI_Base.OnLevelUp += AIHeroClient_OnLevelUp;
         }
-        void qLevelUp()
-        {
 
-        }
         private static void AIHeroClient_OnLevelUp(Obj_AI_Base sender, Obj_AI_BaseLevelUpEventArgs args)
         {
-            var lvlsw = SequenceMenu["switch"].Cast<CheckBox>().CurrentValue;
-            if (!sender.IsMe || !sender.IsValid || !lvlsw)
+            if (!Program.AutoLevelUpSwitch())
+                return;
+            if (!sender.IsMe || !sender.IsValid)
                 return;
 
             var level = (uint)Player.Level;

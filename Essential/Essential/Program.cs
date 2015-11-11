@@ -25,6 +25,8 @@ namespace Essential
     internal class Program
     {
         public static Menu Menu;
+
+        public static string Version = "1.0";
         private static void Main(string[] args)
         {
             Loading.OnLoadingComplete += Loading_OnLoadingComplete;
@@ -35,6 +37,13 @@ namespace Essential
         private static void Loading_OnLoadingComplete(EventArgs args)
         {
             Menu = MainMenu.AddMenu("Essential", "ess");
+            Menu.AddGroupLabel("Essential V" + Version);
+            Menu.AddSeparator();
+
+            Menu.AddGroupLabel("Master Control");
+            Menu.Add("autolvlup", new CheckBox("Auto Level Up", true));
+            Menu.Add("hud", new CheckBox("HUD", true));
+
             AutoLevelUp.Init();
             HudDraw.Init();
 
@@ -46,6 +55,16 @@ namespace Essential
             {
                 EloBuddy.Hacks.RenderWatermark = false;
             }
+        }
+        internal static bool AutoLevelUpSwitch()
+        {
+            var sw = Menu["autolvlup"].Cast<CheckBox>().CurrentValue;
+            return sw;
+        }
+        internal static bool HudSwitch()
+        {
+            var sw = Menu["hud"].Cast<CheckBox>().CurrentValue;
+            return sw;
         }
     }
 }
