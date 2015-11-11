@@ -9,3 +9,6 @@ C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\Ch
 C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\obj\Debug\ChallengerTristana.exe
 C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\obj\Debug\ChallengerTristana.pdb
 C:\Users\suwha\onedrive\문서\visual studio 2013\Projects\ChallengerTristana\ChallengerTristana\obj\Debug\ChallengerTristana.csprojResolveAssemblyReference.cache
+C:\Users\suwha\OneDrive\문서\GitHub\EloBuddy-Developing\ChallengerTristana\ChallengerTristana\bin\Debug\ChallengerTristana.exe.config
+C:\Users\suwha\OneDrive\문서\GitHub\EloBuddy-Developing\ChallengerTristana\ChallengerTristana\obj\Debug\ChallengerTristana.exe
+C:\Users\suwha\OneDrive\문서\GitHub\EloBuddy-Developing\ChallengerTristana\ChallengerTristana\obj\Debug\ChallengerTristana.pdb

@@ -53,3 +53,6 @@ Essential/Essential/obj/Debug/Essential.pdb
 *.pdb
 *.exe
 *.suo
+*.suo
+*.txt
+*.cache
