@@ -36,6 +36,7 @@ namespace ChallengerJinx.Mode
                 if (target.Distance(Player.Instance) <= Player.Instance.GetAutoAttackRange(target) - EventManager.FishBoneBonus)
                 {
                     SpellManager.Q.Cast();
+                    Chat.Print("Harass Q off");
                 }
             }
             else if (target != null && Config.Modes.Combo.UseQ)
@@ -43,6 +44,7 @@ namespace ChallengerJinx.Mode
                 if (target.Distance(Player.Instance) > Player.Instance.GetAutoAttackRange(target))
                 {
                     SpellManager.Q.Cast();
+                    Chat.Print("Harass Q on");
                 }
             }
 

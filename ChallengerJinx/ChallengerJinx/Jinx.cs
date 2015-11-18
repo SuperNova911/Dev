@@ -32,7 +32,7 @@ namespace ChallengerJinx
         {
             if (Config.Drawing.DrawAA)
             {
-                new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Player.Instance.AttackRange }.Draw(Player.Instance.Position);
+                new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = 575 }.Draw(Player.Instance.Position);
             }
             if (Config.Drawing.DrawQ)
             {
@@ -47,15 +47,15 @@ namespace ChallengerJinx
             }
             if (Config.Drawing.DrawW)
             {
-                new Circle { Color = Color.Pink, BorderWidth = 4, Radius = SpellManager.W.Radius }.Draw(Player.Instance.Position);
+                new Circle { Color = Color.Pink, BorderWidth = 4, Radius = 1450 }.Draw(Player.Instance.Position);
             }
             if (Config.Drawing.DrawE)
             {
-                new Circle { Color = Color.Orange, BorderWidth = 4, Radius = SpellManager.E.Radius }.Draw(Player.Instance.Position);
+                new Circle { Color = Color.Orange, BorderWidth = 4, Radius = 900 }.Draw(Player.Instance.Position);
             }
             if (Config.Drawing.DrawR)
             {
-                new Circle { Color = Color.LightSkyBlue, BorderWidth = 4, Radius = SpellManager.R.Radius }.Draw(Player.Instance.Position);
+                new Circle { Color = Color.LightSkyBlue, BorderWidth = 4, Radius = 3000 }.Draw(Player.Instance.Position);
             }
         }
     }
