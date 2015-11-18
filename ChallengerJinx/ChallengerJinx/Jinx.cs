@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChallengerJinx
 {
-    class Program
+    class Jinx
     {
         static void Main(string[] args)
         {
