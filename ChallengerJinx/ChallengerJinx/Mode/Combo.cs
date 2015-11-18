@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
+using Settings = ChallengerJinx.Config.Modes.Combo;
 
 namespace ChallengerJinx.Mode
 {
@@ -13,7 +14,7 @@ namespace ChallengerJinx.Mode
 
         public override void Execute()
         {
-
+            var target = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Physical);
         }
     }
 }

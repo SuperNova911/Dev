@@ -61,7 +61,7 @@
     <Compile Include="Mode\LastHit.cs" />
     <Compile Include="Mode\ModeBase.cs" />
     <Compile Include="Mode\PermaActive.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Jinx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpellManager.cs" />
   </ItemGroup>

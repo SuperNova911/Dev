@@ -19,7 +19,9 @@ namespace ChallengerJinx
             Menu.AddGroupLabel("Challenger Jinx");
             Menu.AddLabel("Kappa");
 
-            Mode.Initialize();
+            Modes.Initialize();
+
+            Drawing.Initialize();
         }
 
         public static void Initialize()
@@ -173,7 +175,44 @@ namespace ChallengerJinx
 
         public static class Drawing
         {
-            private static Menu Menu 
+            private static Menu Menu { get; set; }
+            
+            private static readonly CheckBox _drawAA;
+            private static readonly CheckBox _drawQ;
+            private static readonly CheckBox _drawW;
+            private static readonly CheckBox _drawE;
+            private static readonly CheckBox _drawR;
+
+            private static readonly CheckBox _healthbar;
+            private static readonly CheckBox _percent;
+
+            public static bool DrawAA { get { return _drawAA.CurrentValue; } }
+            public static bool DrawQ { get { return _drawQ.CurrentValue; } }
+            public static bool DrawW { get { return _drawW.CurrentValue; } }
+            public static bool DrawE { get { return _drawE.CurrentValue; } }
+            public static bool DrawR { get { return _drawR.CurrentValue; } }
+            public static bool Healthbar { get { return _healthbar.CurrentValue; } }
+            public static bool Percent { get { return _percent.CurrentValue; } }
+
+            static Drawing()
+            {
+                Menu = Config.Menu.AddSubMenu("Drawing");
+
+                Menu.AddGroupLabel("Spell Ranges");
+                _drawAA = Menu.Add("drawAA", new CheckBox("AA Range"));
+                _drawQ = Menu.Add("drawQ", new CheckBox("Q Range"));
+                _drawW = Menu.Add("drawW", new CheckBox("W Range"));
+                _drawE = Menu.Add("drawE", new CheckBox("E Range"));
+                _drawR = Menu.Add("drawR", new CheckBox("R Range"));
+
+                Menu.AddGroupLabel("Damage Indicators (Ult)");
+                _healthbar = Menu.Add("healthbar", new CheckBox("Healthbar Overlay"));
+                _percent = Menu.Add("percent", new CheckBox("Damage Percent Info"));
+            }
+
+            public static void Initialize()
+            {
+            }
         }
     }
 }
