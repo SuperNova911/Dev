@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using EloBuddy;
+using EloBuddy.SDK;
+using Settings = ChallengerJinx.Config.Modes.LaneClear;
 
 namespace ChallengerJinx.Mode
 {
-    class LaneClear
+    public class LaneClear : ModeBase
     {
+        public override bool ShouldBeExecute()
+        {
+            return Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo);
+        }
+
+        public override void Execute()
+        {
+
+        }
     }
 }

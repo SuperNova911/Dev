@@ -14,7 +14,84 @@ namespace ChallengerJinx.Mode
 
         public override void Execute()
         {
-            var target = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Physical);
+            var target = TargetSelector.SelectedTarget != null
+                      && TargetSelector.SelectedTarget.Distance(Player.Instance) < (!EventManager.FishBoneActive
+                       ? Player.Instance.GetAutoAttackRange() + EventManager.FishBoneBonus
+                       : Player.Instance.GetAutoAttackRange()) + 300
+                       ? TargetSelector.SelectedTarget
+                       : TargetSelector.GetTarget((!EventManager.FishBoneActive
+                       ? Player.Instance.GetAutoAttackRange() + EventManager.FishBoneBonus
+                       : Player.Instance.GetAutoAttackRange()) + 300, DamageType.Physical);
+
+            var targetW = TargetSelector.SelectedTarget != null
+                       && TargetSelector.SelectedTarget.Distance(Player.Instance) < SpellManager.W.Range
+                        ? TargetSelector.SelectedTarget
+                        : TargetSelector.GetTarget(SpellManager.W.Range, DamageType.Physical);
+
+            var targetE = TargetSelector.GetTarget(SpellManager.E.Range, DamageType.Magical);
+
+            Orbwalker.ForcedTarget = null;
+
+            //Q Normal
+            if (target != null && Config.Modes.Combo.UseQ && EventManager.FishBoneActive)
+            {
+                if (target.Distance(Player.Instance) <= Player.Instance.GetAutoAttackRange(target) - EventManager.FishBoneBonus)
+                {
+                    SpellManager.Q.Cast();
+                }
+            }
+            else if (target != null && Config.Modes.Combo.UseQ)
+            {
+                if (target.Distance(Player.Instance) > Player.Instance.GetAutoAttackRange(target))
+                {
+                    SpellManager.Q.Cast();
+                }
+            }
+
+            //Q AOE
+            if (target != null && Config.Modes.Combo.UseQSplash)
+            {
+                foreach (var enemy in EntityManager.Heroes.Enemies.Where(
+                    e => e.IsValidTarget(EventManager.MinigunRange(e) + EventManager.FishBoneBonus))
+                    .OrderBy(TargetSelector.GetPriority).Where(enemy => enemy.CountEnemiesInRange(150) > 1
+                    && (enemy.NetworkId == target.NetworkId || enemy.Distance(target) < 150)))
+                {
+                    if (!EventManager.FishBoneActive)
+                    {
+                        SpellManager.Q.Cast();
+                    }
+                    Orbwalker.ForcedTarget = enemy;
+
+                    return;
+                }
+            }
+
+            //W Normal
+            if (targetW != null
+                && Config.Modes.Combo.UseW
+                && targetW.Distance(Player.Instance) > Config.Misc.MinWRange
+                && targetW.IsValidTarget(SpellManager.W.Range))
+            {
+                SpellManager.W.Cast(targetW);
+            }
+
+            //E on CC
+            if (target != null
+                && Config.Modes.Combo.UseE
+                && SpellManager.E.IsReady()
+                && target.IsValidTarget(SpellManager.E.Range))
+            {
+                if (target.HasBuffOfType(BuffType.Fear)
+                    || target.HasBuffOfType(BuffType.Slow)
+                    || target.HasBuffOfType(BuffType.Snare)
+                    || target.HasBuffOfType(BuffType.Stun)
+                    || target.HasBuffOfType(BuffType.Taunt)
+                    || target.HasBuff("zhonyasringshield")
+                    || target.HasBuff("Recall"))
+                {
+                    SpellManager.E.Cast(target);
+                }
+            }
         }
     }
 }

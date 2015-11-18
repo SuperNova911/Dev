@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="EventManager.cs" />
     <Compile Include="ModeManager.cs" />
     <Compile Include="Mode\Combo.cs" />
     <Compile Include="Mode\Flee.cs" />

@@ -19,7 +19,7 @@ namespace ChallengerJinx
                 new LaneClear(),
                 new JungleClear(),
                 new LastHit(),
-                new flee(),
+                new Flee(),
                 new PermaActive()
             };
             Game.OnTick += Ontick;

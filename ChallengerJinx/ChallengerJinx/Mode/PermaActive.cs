@@ -2,7 +2,7 @@
 {
     public class PermaActive : ModeBase
     {
-        public override bool ShouldBeExcute()
+        public override bool ShouldBeExecute()
         {
             return true;
         }

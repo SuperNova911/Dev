@@ -21,6 +21,7 @@ namespace ChallengerJinx
 
             Modes.Initialize();
 
+            Misc.Initialize();
             Drawing.Initialize();
         }
 
@@ -48,6 +49,9 @@ namespace ChallengerJinx
                 JungleClear.Initialize();
                 Menu.AddSeparator();
 
+                LastHit.Initialize();
+                Menu.AddSeparator();
+
                 Flee.Initialize();
             }
 
@@ -61,11 +65,13 @@ namespace ChallengerJinx
                 private static readonly CheckBox _useW;
                 private static readonly CheckBox _useE;
                 private static readonly CheckBox _useR;
+                private static readonly CheckBox _useQSplash;
 
                 public static bool UseQ { get { return _useQ.CurrentValue; } }
                 public static bool UseW { get { return _useW.CurrentValue; } }
                 public static bool UseE { get { return _useE.CurrentValue; } }
                 public static bool UseR { get { return _useR.CurrentValue; } }
+                public static bool UseQSplash { get { return _useQSplash.CurrentValue; } }
 
                 static Combo()
                 {
@@ -75,6 +81,7 @@ namespace ChallengerJinx
                     _useW = Menu.Add("comboUseW", new CheckBox("Use W"));
                     _useE = Menu.Add("comboUseE", new CheckBox("Use E"));
                     _useR = Menu.Add("comboUseR", new CheckBox("Use R"));
+                    _useQSplash = Menu.Add("comboUseQSplash", new CheckBox("Use Q Splash"));
                 }
 
                 public static void Initialize()
@@ -101,7 +108,7 @@ namespace ChallengerJinx
                     _mana = Menu.Add("harassMana", new Slider("Minimum mana in %", 30));
                 }
 
-                public static Initialize()
+                public static void Initialize()
                 {
                 }
             }
@@ -122,7 +129,7 @@ namespace ChallengerJinx
                     _mana = Menu.Add("laneMana", new Slider("Minimum mana in %", 30));
                 }
 
-                public static Initialize()
+                public static void Initialize()
                 {
                 }
             }
@@ -146,7 +153,15 @@ namespace ChallengerJinx
                     _mana = Menu.Add("jungleMana", new Slider("Minimum mana in %", 30));
                 }
 
-                public static Initialize()
+                public static void Initialize()
+                {
+                }
+            }
+
+            public static class LastHit
+            {
+
+                public static void Initialize()
                 {
                 }
             }
@@ -167,9 +182,34 @@ namespace ChallengerJinx
                     _useE = Menu.Add("fleeUseE", new CheckBox("Use E"));
                 }
 
-                public static Initialize()
+                public static void Initialize()
                 {
                 }
+            }
+        }
+
+        public static class Misc
+        {
+            private static Menu Menu { get; set; }
+
+            private static readonly CheckBox _gapcloser;
+            private static readonly Slider _minWRange;
+
+            public static bool GapCloser { get { return _gapcloser.CurrentValue; } }
+            public static int MinWRange { get { return _minWRange.CurrentValue; } }
+
+            static Misc()
+            {
+                Menu = Config.Menu.AddSubMenu("Misc");
+
+                Menu.AddGroupLabel("Misc Features");
+
+                _gapcloser = Menu.Add("gapcloser", new CheckBox("Use E on Gapcloser"));
+                _minWRange = Menu.Add("minWRange", new Slider("Minimum W Range", 600, 250, 1450));
+            }
+
+            public static void Initialize()
+            {
             }
         }
 
