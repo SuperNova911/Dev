@@ -1,7 +1,7 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Enumerations;
-using SharpDX;
+
 namespace ChallengerJinx
 {
     public static class SpellManager
@@ -14,7 +14,9 @@ namespace ChallengerJinx
         static SpellManager()
         {
             Q = new Spell.Active(SpellSlot.Q, 600);
-            W = new Spell.Skillshot(SpellSlot.W, 1450, SkillShotType.Linear,  3300 60)
+            W = new Spell.Skillshot(SpellSlot.W, 1450, SkillShotType.Linear, 600, 3300, 60);
+            E = new Spell.Skillshot(SpellSlot.E, 900, SkillShotType.Circular, 1200, 1750, 1);
+            R = new Spell.Skillshot(SpellSlot.R, 3000, SkillShotType.Linear, 600, 1700, 140);
         }
     }
 }
