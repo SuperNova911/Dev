@@ -4,7 +4,16 @@ using EloBuddy.SDK;
 
 namespace ChallengerJinx.Mode
 {
-    class Combo
+    public class Combo : ModeBase
     {
+        public override bool ShouldBeExecute()
+        {
+            return Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo);
+        }
+
+        public override void Execute()
+        {
+
+        }
     }
 }

@@ -19,7 +19,41 @@ namespace ChallengerJinx
             Menu.AddGroupLabel("Challenger Jinx");
             Menu.AddLabel("Kappa");
 
-            
+            Mode.Initialize();
+        }
+
+        public static void Initialize()
+        {
+        }
+
+        public static class Modes
+        {
+            private static readonly Menu Menu;
+
+            static Modes()
+            {
+                Menu = Config.Menu.AddSubMenu("Modes", "modes");
+
+                Combo.Initialize();
+                Menu.AddSeparator();
+
+                Harass.Initialize();
+                Menu.AddSeparator();
+
+                LaneClear.Initialize();
+                Menu.AddSeparator();
+
+                JungleClear.Initialize();
+                Menu.AddSeparator();
+
+                Flee.Initialize();
+            }
+
+            public static void Initialize()
+            {
+            }
+
+
         }
     }
 }

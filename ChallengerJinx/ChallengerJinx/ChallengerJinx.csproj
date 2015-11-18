@@ -52,10 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="ModeManager.cs" />
     <Compile Include="Mode\Combo.cs" />
+    <Compile Include="Mode\Flee.cs" />
     <Compile Include="Mode\Harass.cs" />
     <Compile Include="Mode\JungleClear.cs" />
     <Compile Include="Mode\LaneClear.cs" />
+    <Compile Include="Mode\LastHit.cs" />
     <Compile Include="Mode\ModeBase.cs" />
     <Compile Include="Mode\PermaActive.cs" />
     <Compile Include="Program.cs" />

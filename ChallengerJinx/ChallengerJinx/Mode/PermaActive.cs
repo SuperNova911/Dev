@@ -1,4 +1,4 @@
-﻿/*namespace ChallengerJinx.Mode
+﻿namespace ChallengerJinx.Mode
 {
     public class PermaActive : ModeBase
     {
@@ -13,4 +13,3 @@
         }
     }
 }
-*/

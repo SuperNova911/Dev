@@ -12,8 +12,8 @@ namespace ChallengerJinx.Mode
         private Spell.Skillshot E { get { return SpellManager.E; } }
         private Spell.Skillshot R { get { return SpellManager.R; } }
 
-//        public abstract bool ShouldBeExecute();
+        public abstract bool ShouldBeExecute();
 
-//        public abstract void Execute();
+        public abstract void Execute();
     }
 }
