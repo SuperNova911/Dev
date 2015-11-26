@@ -30,16 +30,17 @@ namespace KurisuBlitz
         public static Spell.Active W { get; private set; }
         public static Spell.Active E { get; private set; }
         public static Spell.Active R { get; private set; }
+        static Geometry.Polygon.Circle DashCircle;
 
         private static readonly AIHeroClient Me = ObjectManager.Player;
 
         static void Main(string[] args)
         {
             Console.WriteLine("Blitzcrank injected...");
-            Loading.OnLoadingComplete += BlitzOnLoad;
+            Loading.OnLoadingComplete += Loading_OnLoadingComplete;
         }
 
-        private static void BlitzOnLoad(EventArgs args)
+        private static void Loading_OnLoadingComplete(EventArgs args)
         {
             if (Me.ChampionName != "Blitzcrank")
                 return;
@@ -60,6 +61,7 @@ namespace KurisuBlitz
             SpellMenu.Add("usecomboq", new CheckBox("Combo"));
             SpellMenu.Add("interruptq", new CheckBox("Interrupt"));
             SpellMenu.Add("secureq", new CheckBox("Killsteal", true));
+            SpellMenu.AddSeparator();
             SpellMenu.Add("qdashing", new CheckBox("Use Q on Dashing Enemy"));
             SpellMenu.Add("qimmobil", new CheckBox("Use Q on Immobile Enemy"));
             SpellMenu.Add("hitchanceq", new Slider("Hitchance", 3, 1, 3));
@@ -98,12 +100,18 @@ namespace KurisuBlitz
             Drawing.OnDraw += BlitzOnDraw;
             Game.OnTick += Game_OnTick;
             Interrupter.OnInterruptableSpell += Interrupter_OnInterruptableSpell;
+            Dash.OnDash += Dash_OnDash;
 
             Chat.Print("<font color=\"#FF9900\"><b>KurisuBlitz:</b></font> Loaded");
 
         }
 
-
+        private static void Dash_OnDash(Obj_AI_Base sender, Dash.DashEventArgs e)
+        {
+            DashCircle = new Geometry.Polygon.Circle(/*center*/ e.EndPos, /*radius*/ 70);
+            Core.DelayAction(() => DashCircle = null, e.Duration); //I don't know if Duration is in miliseconds, you need to print it when doing a test
+        }
+        
         private static bool Immobile(AIHeroClient unit)
         {
             return unit.HasBuffOfType(BuffType.Charm) || unit.HasBuffOfType(BuffType.Knockup) ||
@@ -147,6 +155,7 @@ namespace KurisuBlitz
 
         private static void BlitzOnDraw(EventArgs args)
         {
+            if (DashCircle != null) DashCircle.Draw(Color.Yellow);
             if (!Me.IsDead)
             {
                 var rcircle = DrawingMenu["drawR"].Cast<CheckBox>().CurrentValue;
@@ -164,6 +173,16 @@ namespace KurisuBlitz
         {
             if (Me.IsDead || MenuGUI.IsChatOpen || Me.IsRecalling())
                 return;
+            foreach (var target in EntityManager.Heroes.Enemies.Where(
+                x => x.IsValidTarget(25000)))
+            {
+                if (target.IsDashing())
+                {
+                    
+                    Chat.Print(target.ChampionName, Color.LawnGreen);
+                    Chat.Print("Dashing!!!", Color.LightCyan);
+                }
+            }
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
                 Combo(SpellMenu["usecomboq"].Cast<CheckBox>().CurrentValue, SpellMenu["usecomboe"].Cast<CheckBox>().CurrentValue,
@@ -190,6 +209,7 @@ namespace KurisuBlitz
                 }*/
             }
         }
+
 
         private static void AutoCast(bool dashing, bool immobile)
         {
@@ -239,7 +259,7 @@ namespace KurisuBlitz
         {
             if (useq && Q.IsReady())
             {
-                var qtarget = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
+                var qtarget = TargetSelector.GetTarget(1250, DamageType.Magical);
                 if (qtarget.IsValidTarget(MiscMenu["maxdist"].Cast<Slider>().CurrentValue))
                 {
                     if (qtarget.Distance(Me.ServerPosition) > MiscMenu["mindist"].Cast<Slider>().CurrentValue)
@@ -247,6 +267,7 @@ namespace KurisuBlitz
                         if (MiscMenu["dograb" + qtarget.ChampionName].Cast<Slider>().CurrentValue != 0)
                         {
                             var pouput = Q.GetPrediction(qtarget);
+                            Chat.Print(pouput.HitChance);
                             if (pouput.HitChance >= (HitChance) SpellMenu["hitchanceq"].Cast<Slider>().CurrentValue+3)
                             {
                                 Q.Cast(pouput.CastPosition);
