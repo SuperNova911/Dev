@@ -16,6 +16,8 @@ namespace ChallengerBlitzcrank
 {
     public class Blitzcrank
     {
+        static Geometry.Polygon.Circle DashCircle; //don't use new, just what I wrote
+
         static Blitzcrank()
         {
             Loading.OnLoadingComplete += Loading_OnLoadingComplete;
@@ -36,6 +38,22 @@ namespace ChallengerBlitzcrank
             Drawing.OnDraw += Drawing_OnDraw;
             Interrupter2.OnInterruptableTarget += Interrupter2_OnInterruptableTarget;
             Orbwalker.OnAttack += Orbwalker_OnAttack;
+            Dash.OnDash += Dash_OnDash;
+        }
+
+        private static void Drawing_OnDraw(EventArgs args)
+        {
+            if (Config.Drawing.DrawQ)
+            {
+                new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Instance.Position);
+            }
+            if (Config.Drawing.DrawR)
+            {
+                new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Instance.Position);
+            }
+
+            if (DashCircle != null)
+                DashCircle.Draw(Color.Yellow);
         }
 
         private static void Interrupter2_OnInterruptableTarget(AIHeroClient sender, Interrupter2.InterruptableTargetEventArgs args)
@@ -59,24 +77,36 @@ namespace ChallengerBlitzcrank
             }
         }
 
-        private static void Drawing_OnDraw(EventArgs args)
-        {
-            if (Config.Drawing.DrawQ)
-            {
-                new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Instance.Position);
-            }
-            if (Config.Drawing.DrawR)
-            {
-                new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Instance.Position);
-            }
-        }
-
         private static void Orbwalker_OnAttack(AttackableUnit target, EventArgs args)
         {
             var t = target as AIHeroClient;
             if (SpellManager.E.IsReady() && Config.SpellSetting.E.ComboE && t.IsValidTarget())
             {
                 SpellManager.E.Cast();
+            }
+        }
+
+        private static void Dash_OnDash(Obj_AI_Base sender, Dash.DashEventArgs e)
+        {
+            DashCircle = new Geometry.Polygon.Circle(/*center*/ e.EndPos, /*radius*/ 70);
+            Core.DelayAction(() => DashCircle = null, e.Duration); //I don't know if Duration is in miliseconds, you need to print it when doing a test
+
+            if (!sender.IsEnemy || sender.HasBuff("powerfistslow"))
+                return;
+
+            if (e.EndPos.Distance(Player.Instance.Position) < Config.SpellSetting.Q.MinrangeQ)
+            {
+                Chat.Print("Too Close");
+            }
+            else if (e.EndPos.Distance(Player.Instance.Position) > Config.SpellSetting.Q.MaxrangeQ)
+            {
+                Chat.Print("Too Far");
+            }
+            else if (e.EndPos.Distance(Player.Instance.Position) > Config.SpellSetting.Q.MinrangeQ &&
+                     e.EndPos.Distance(Player.Instance.Position) < Config.SpellSetting.Q.MaxrangeQ)
+            {
+                Chat.Print("9ood");
+                SpellManager.Q.Cast(e.EndPos);
             }
         }
     }
