@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
 using Color = System.Drawing.Color;
-using ChallengerBlitzcrank;
-using ChallengerBlitzcrank.Mode;
 using EloBuddy.SDK.Enumerations;
 
 namespace ChallengerBlitzcrank
@@ -17,6 +12,23 @@ namespace ChallengerBlitzcrank
     public class Blitzcrank
     {
         static Geometry.Polygon.Circle DashCircle; //don't use new, just what I wrote
+
+        private static bool SpellShield(AIHeroClient unit)
+        {
+            return unit.HasBuffOfType(BuffType.SpellImmunity) || unit.HasBuffOfType(BuffType.SpellShield);
+        }
+        private static bool SpellShield(Obj_AI_Base unit)
+        {
+            return unit.HasBuffOfType(BuffType.SpellImmunity) || unit.HasBuffOfType(BuffType.SpellShield);
+        }
+
+        private static bool CC(AIHeroClient unit)
+        {
+            return unit.HasBuffOfType(BuffType.Charm) || unit.HasBuffOfType(BuffType.Fear)
+                || unit.HasBuffOfType(BuffType.Snare) || unit.HasBuffOfType(BuffType.Slow)
+                || unit.HasBuffOfType(BuffType.Taunt) || unit.HasBuffOfType(BuffType.Stun)
+                || unit.HasBuffOfType(BuffType.Knockup) || unit.HasBuffOfType(BuffType.Suppression);
+        }
 
         static Blitzcrank()
         {
@@ -35,14 +47,66 @@ namespace ChallengerBlitzcrank
             Config.Initialize();
             ModeManager.Initialize();
 
+            Game.OnTick += Game_OnTick;
             Drawing.OnDraw += Drawing_OnDraw;
             Interrupter2.OnInterruptableTarget += Interrupter2_OnInterruptableTarget;
             Orbwalker.OnAttack += Orbwalker_OnAttack;
             Dash.OnDash += Dash_OnDash;
         }
 
+        private static void Game_OnTick(EventArgs args)
+        {
+            if (Player.Instance.IsDead || Player.Instance.IsRecalling())
+                return;
+
+            KillSteal();
+            AutoGrab();
+            Immobile();
+        }
+
+        private static void KillSteal()
+        {
+            if (Config.SpellSetting.Q.KillstealQ && SpellManager.Q.IsReady())
+            {
+                var Qtarget = ObjectManager.Get<AIHeroClient>().FirstOrDefault(e => e.IsEnemy);
+
+                if (Qtarget.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ) &&
+                    Player.Instance.GetSpellDamage(Qtarget, SpellSlot.Q) > Qtarget.Health &&
+                    !SpellShield(Qtarget))
+                {
+                    var predic = SpellManager.Q.GetPrediction(Qtarget);
+                    SpellManager.Q.Cast(predic.CastPosition);
+                }
+            }
+
+            if (Config.SpellSetting.R.KillstealR && SpellManager.R.IsReady())
+            {
+                var Rtarget = ObjectManager.Get<AIHeroClient>().FirstOrDefault(e => e.IsEnemy);
+
+                if (Rtarget.IsValidTarget(SpellManager.R.Range) &&
+                    Player.Instance.GetSpellDamage(Rtarget, SpellSlot.R) > Rtarget.Health &&
+                    !SpellShield(Rtarget))
+                {
+                    SpellManager.R.Cast();
+                }
+            }
+        }
+
+        private static void AutoGrab()
+        {
+
+        }
+
+        private static void Immobile()
+        {
+            
+        }
+
         private static void Drawing_OnDraw(EventArgs args)
         {
+            if (Player.Instance.IsDead || Player.Instance.IsRecalling())
+                return;
+
             if (Config.Drawing.DrawQ)
             {
                 new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Instance.Position);
@@ -58,10 +122,14 @@ namespace ChallengerBlitzcrank
 
         private static void Interrupter2_OnInterruptableTarget(AIHeroClient sender, Interrupter2.InterruptableTargetEventArgs args)
         {
-            if (!sender.IsEnemy)
+            if (Player.Instance.IsDead || Player.Instance.IsRecalling())
                 return;
 
-            if (Config.SpellSetting.Q.InterruptQ && SpellManager.Q.IsReady() && sender.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ))
+            if (!sender.IsEnemy || SpellShield(sender))
+                return;
+
+            if (Config.SpellSetting.Q.InterruptQ && SpellManager.Q.IsReady() &&
+                sender.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ))
             {
                 var predic = SpellManager.Q.GetPrediction(sender);
 
@@ -71,7 +139,9 @@ namespace ChallengerBlitzcrank
                 }
             }
 
-            if (Config.SpellSetting.R.InterruptR && SpellManager.R.IsReady() && sender.IsValidTarget(SpellManager.R.Range))
+            if (Config.SpellSetting.R.InterruptR && SpellManager.R.IsReady() &&
+                sender.IsValidTarget(SpellManager.R.Range) &&
+                !sender.HasBuffOfType(BuffType.SpellImmunity) && !sender.HasBuffOfType(BuffType.SpellShield))
             {
                 SpellManager.R.Cast();
             }
@@ -80,6 +150,10 @@ namespace ChallengerBlitzcrank
         private static void Orbwalker_OnAttack(AttackableUnit target, EventArgs args)
         {
             var t = target as AIHeroClient;
+
+            if (SpellShield(t))
+                return;
+
             if (SpellManager.E.IsReady() && Config.SpellSetting.E.ComboE && t.IsValidTarget())
             {
                 SpellManager.E.Cast();
@@ -88,10 +162,12 @@ namespace ChallengerBlitzcrank
 
         private static void Dash_OnDash(Obj_AI_Base sender, Dash.DashEventArgs e)
         {
+            if (Player.Instance.IsDead || Player.Instance.IsRecalling())
+                return;
             DashCircle = new Geometry.Polygon.Circle(/*center*/ e.EndPos, /*radius*/ 70);
             Core.DelayAction(() => DashCircle = null, e.Duration); //I don't know if Duration is in miliseconds, you need to print it when doing a test
 
-            if (!sender.IsEnemy || sender.HasBuff("powerfistslow"))
+            if (!sender.IsEnemy || sender.HasBuff("powerfistslow") || SpellShield(sender))
                 return;
 
             if (e.EndPos.Distance(Player.Instance.Position) < Config.SpellSetting.Q.MinrangeQ)

@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoGrab.cs" />
     <Compile Include="Blitzcrank.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Interrupter2.cs" />

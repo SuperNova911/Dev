@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EloBuddy;
 using EloBuddy.SDK;
 using ChallengerBlitzcrank.Mode;
@@ -26,6 +23,9 @@ namespace ChallengerBlitzcrank
 
         private static void Game_OnTick(EventArgs args)
         {
+            if (Player.Instance.IsDead || Player.Instance.IsRecalling())
+                return;
+
             AvailableModes.ForEach(mode =>
             {
                 if (mode.ShouldBeExecute())

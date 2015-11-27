@@ -1,22 +1,17 @@
-﻿using System.Linq;
-using EloBuddy;
+﻿using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Constants;
 using EloBuddy.SDK.Enumerations;
-using EloBuddy.SDK.Events;
-using EloBuddy.SDK.Menu;
-using EloBuddy.SDK.Menu.Values;
-using EloBuddy.SDK.Rendering;
-using EloBuddy.SDK.Utils;
-using SharpDX;
-using Color = System.Drawing.Color;
 using Settings = ChallengerBlitzcrank.Config.SpellSetting;
-using ChallengerBlitzcrank;
 
 namespace ChallengerBlitzcrank.Mode
 {
     public class Combo : ModeBase
     {
+        private static bool SpellShield(AIHeroClient unit)
+        {
+            return unit.HasBuffOfType(BuffType.SpellImmunity) || unit.HasBuffOfType(BuffType.SpellShield);
+        }
+
         public override bool ShouldBeExecute()
         {
             return Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo);
@@ -28,7 +23,8 @@ namespace ChallengerBlitzcrank.Mode
 
             if (Settings.Q.ComboQ && Q.IsReady() &&
                 Qtarget.IsValidTarget(Settings.Q.MaxrangeQ) &&
-                Qtarget.Distance(Player.ServerPosition) > Settings.Q.MinrangeQ)
+                Qtarget.Distance(Player.ServerPosition) > Settings.Q.MinrangeQ &&
+                SpellShield(Qtarget))
             {
                 var predic = Q.GetPrediction(Qtarget);
 
@@ -53,16 +49,12 @@ namespace ChallengerBlitzcrank.Mode
 
             if (Settings.R.ComboR && R.IsReady() && Rtarget.IsValidTarget(R.Range))
             {
-                if (Settings.E.ComboE)
-                {
-                    if (E.IsOnCooldown)
-                        R.Cast();
-                }
-                else
-                {
-                    if (Rtarget.HasBuffOfType(BuffType.Knockup))
-                        R.Cast();
-                }
+                if (Rtarget.HasBuff("powerfistslow"))
+                    R.Cast();
+                if (Rtarget.HasBuff("rocketgrab2") && E.IsOnCooldown && Settings.E.ComboE)
+                    R.Cast();
+                if (Player.CountEnemiesInRange(R.Range) >= Settings.R.MinEnemyR)
+                    R.Cast();
             }
         }
     }
