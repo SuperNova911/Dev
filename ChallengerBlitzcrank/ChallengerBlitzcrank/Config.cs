@@ -50,6 +50,7 @@ namespace ChallengerBlitzcrank
             {
                 public static CheckBox comboQ;
                 public static CheckBox harassQ;
+                public static CheckBox _focusQ;
                 public static CheckBox killstealQ;
                 public static CheckBox interruptQ;
                 public static CheckBox dashQ;
@@ -61,6 +62,7 @@ namespace ChallengerBlitzcrank
 
                 public static bool ComboQ { get { return comboQ.CurrentValue; } }
                 public static bool HarassQ { get { return harassQ.CurrentValue; } }
+                public static bool FocusQ { get { return _focusQ.CurrentValue; } }
                 public static bool KillstealQ { get { return killstealQ.CurrentValue; } }
                 public static bool InterruptQ { get { return interruptQ.CurrentValue; } }
                 public static bool DashQ { get { return dashQ.CurrentValue; } }
@@ -76,11 +78,12 @@ namespace ChallengerBlitzcrank
 
                     comboQ = Menu.Add("comboQ", new CheckBox("Combo", true));
                     harassQ = Menu.Add("harassQ", new CheckBox("Harass", true));
+                    _focusQ = Menu.Add("_focusQ", new CheckBox("Grab Selected Target", true));
                     killstealQ = Menu.Add("killstealQ", new CheckBox("Kill Steal", true));
                     interruptQ = Menu.Add("interruptQ", new CheckBox("Interrupt Enemy", true));
                     dashQ = Menu.Add("dashQ", new CheckBox("Dashing Enemy", true));
                     immobileQ = Menu.Add("immobileQ", new CheckBox("Immobile Enemy", true));
-                    hitchanceQ = Menu.Add("hitchanceQ", new Slider("Hit Chance", 3, 1, 3));
+                    hitchanceQ = Menu.Add("hitchanceQ", new Slider("Hitchance", 3, 1, 3));
                     minrangeQ = Menu.Add("minrangeQ", new Slider("Minimum Range", 450, 0, 950));
                     maxrangeQ = Menu.Add("maxrangeQ", new Slider("Maximum Range", 950, 0, 950));
                     _minHealthQ = Menu.Add("_minManaQ", new Slider("Minimum Health % for AutoGrab", 10, 0, 100)); 
@@ -97,11 +100,15 @@ namespace ChallengerBlitzcrank
                 public static CheckBox harassE;
                 public static CheckBox interruptE;
                 public static CheckBox killstealE;
+                public static CheckBox _autoE;
+                public static CheckBox _aaResetE;
 
                 public static bool ComboE { get { return comboE.CurrentValue; } }
                 public static bool HarassE { get { return harassE.CurrentValue; } }
                 public static bool InterruptE { get { return interruptE.CurrentValue; } }
                 public static bool KillstealE { get { return killstealE.CurrentValue; } }
+                public static bool AutoE { get { return _autoE.CurrentValue; } }
+                public static bool AAResetE { get { return _aaResetE.CurrentValue; } }
 
                 static E()
                 {
@@ -111,6 +118,8 @@ namespace ChallengerBlitzcrank
                     harassE = Menu.Add("harassE", new CheckBox("Harass", true));
                     interruptE = Menu.Add("interruptE", new CheckBox("Interrupt Enemy", true));
                     killstealE = Menu.Add("killstealE", new CheckBox("Killsteal Enemy", false));
+                    _autoE = Menu.Add("_autoE", new CheckBox("Auto E when Attack Hero", false));
+                    _aaResetE = Menu.Add("_aaResetE", new CheckBox("AA Reset", false));
                 }
 
                 public static void Initialize()
@@ -124,12 +133,14 @@ namespace ChallengerBlitzcrank
                 public static CheckBox harassR;
                 public static CheckBox killstealR;
                 public static CheckBox interruptR;
+                public static CheckBox _gapcloseR;
                 public static Slider minEnemyR;
 
                 public static bool ComboR { get { return comboR.CurrentValue; } }
                 public static bool HarassR { get { return harassR.CurrentValue; } }
                 public static bool KillstealR { get { return killstealR.CurrentValue; } }
                 public static bool InterruptR { get { return interruptR.CurrentValue; } }
+                public static bool GapcloseR { get { return _gapcloseR.CurrentValue; } }
                 public static int MinEnemyR { get { return minEnemyR.CurrentValue; } }
 
                 static R()
@@ -140,6 +151,7 @@ namespace ChallengerBlitzcrank
                     harassR = Menu.Add("harassR", new CheckBox("Harass", false));
                     killstealR = Menu.Add("killstealR", new CheckBox("Interrupt Enemy", true));
                     interruptR = Menu.Add("interruptR", new CheckBox("Killsteal Enemy", true));
+                    _gapcloseR = Menu.Add("_gapcloseR", new CheckBox("On Gapcloser", true));
                     minEnemyR = Menu.Add("minEnemyR", new Slider("Minimum Enemies In Range", 2, 1, 5));
                 }
 
@@ -185,12 +197,14 @@ namespace ChallengerBlitzcrank
 
             public static CheckBox drawQ;
             public static CheckBox drawR;
+            public static CheckBox _smartDrawing;
             public static CheckBox drawTarget;
             public static CheckBox drawHitchance;
             public static CheckBox drawDamage;
 
             public static bool DrawQ { get { return drawQ.CurrentValue; } }
             public static bool DrawR { get { return drawR.CurrentValue; } }
+            public static bool SmartDrawing { get { return _smartDrawing.CurrentValue; } }
             public static bool DrawTarget { get { return drawTarget.CurrentValue; } }
             public static bool DrawHitchance { get { return drawHitchance.CurrentValue; } }
             public static bool DrawDamage { get { return drawDamage.CurrentValue; } }
@@ -202,6 +216,8 @@ namespace ChallengerBlitzcrank
                 Menu.AddGroupLabel("Spell");
                 drawQ = Menu.Add("drawQ", new CheckBox("Q Range", true));
                 drawR = Menu.Add("drawR", new CheckBox("R Range", false));
+                drawR = Menu.Add("_smartDrawing", new CheckBox("Smart Drawing", true));
+                Menu.AddLabel("Green = Ready, Orange = On CoolDown, Red = Too Low Health % for AutoGrab");
 
                 Menu.AddGroupLabel("Misc");
                 drawTarget = Menu.Add("DrawTarget", new CheckBox("Mark Q Target", true));
