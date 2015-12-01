@@ -57,6 +57,7 @@ namespace ChallengerBlitzcrank
                 public static Slider hitchanceQ;
                 public static Slider minrangeQ;
                 public static Slider maxrangeQ;
+                public static Slider _minHealthQ;
 
                 public static bool ComboQ { get { return comboQ.CurrentValue; } }
                 public static bool HarassQ { get { return harassQ.CurrentValue; } }
@@ -67,6 +68,7 @@ namespace ChallengerBlitzcrank
                 public static int HitchanceQ { get { return hitchanceQ.CurrentValue; } }
                 public static int MinrangeQ { get { return minrangeQ.CurrentValue; } }
                 public static int MaxrangeQ { get { return maxrangeQ.CurrentValue; } }
+                public static int MinHealthQ { get { return _minHealthQ.CurrentValue; } }
 
                 static Q()
                 {
@@ -81,6 +83,7 @@ namespace ChallengerBlitzcrank
                     hitchanceQ = Menu.Add("hitchanceQ", new Slider("Hit Chance", 3, 1, 3));
                     minrangeQ = Menu.Add("minrangeQ", new Slider("Minimum Range", 450, 0, 950));
                     maxrangeQ = Menu.Add("maxrangeQ", new Slider("Maximum Range", 950, 0, 950));
+                    _minHealthQ = Menu.Add("_minManaQ", new Slider("Minimum Health % for AutoGrab", 10, 0, 100)); 
                 }
 
                 public static void Initialize()
@@ -94,13 +97,11 @@ namespace ChallengerBlitzcrank
                 public static CheckBox harassE;
                 public static CheckBox interruptE;
                 public static CheckBox killstealE;
-                public static CheckBox immobileE;
 
                 public static bool ComboE { get { return comboE.CurrentValue; } }
                 public static bool HarassE { get { return harassE.CurrentValue; } }
                 public static bool InterruptE { get { return interruptE.CurrentValue; } }
                 public static bool KillstealE { get { return killstealE.CurrentValue; } }
-                public static bool ImmobileE { get { return immobileE.CurrentValue; } }
 
                 static E()
                 {
@@ -110,7 +111,6 @@ namespace ChallengerBlitzcrank
                     harassE = Menu.Add("harassE", new CheckBox("Harass", true));
                     interruptE = Menu.Add("interruptE", new CheckBox("Interrupt Enemy", true));
                     killstealE = Menu.Add("killstealE", new CheckBox("Killsteal Enemy", false));
-                    immobileE = Menu.Add("immobileE", new CheckBox("Immobile Enemy", true));
                 }
 
                 public static void Initialize()
@@ -124,14 +124,12 @@ namespace ChallengerBlitzcrank
                 public static CheckBox harassR;
                 public static CheckBox killstealR;
                 public static CheckBox interruptR;
-                public static CheckBox immobileR;
                 public static Slider minEnemyR;
 
                 public static bool ComboR { get { return comboR.CurrentValue; } }
                 public static bool HarassR { get { return harassR.CurrentValue; } }
                 public static bool KillstealR { get { return killstealR.CurrentValue; } }
                 public static bool InterruptR { get { return interruptR.CurrentValue; } }
-                public static bool ImmobileR { get { return immobileR.CurrentValue; } }
                 public static int MinEnemyR { get { return minEnemyR.CurrentValue; } }
 
                 static R()
