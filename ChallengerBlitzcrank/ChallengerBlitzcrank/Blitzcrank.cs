@@ -99,7 +99,18 @@ namespace ChallengerBlitzcrank
 
         private static void Immobile()
         {
-            
+            var Qtarget = TargetSelector.GetTarget(Config.SpellSetting.Q.MaxrangeQ, DamageType.Magical);
+
+            if (Qtarget == null || SpellShield(Qtarget) || Config.SpellSetting.Q.MinHealthQ > Player.Instance.HealthPercent)
+                return;
+
+            if (Config.SpellSetting.Q.ImmobileQ && SpellManager.Q.IsReady() &&
+                Qtarget.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ) &&
+                Qtarget.Distance(Player.Instance.ServerPosition) > Config.SpellSetting.Q.MinrangeQ &&
+                CC(Qtarget))
+            {
+                SpellManager.Q.Cast(Qtarget);
+            }
         }
 
         private static void Drawing_OnDraw(EventArgs args)
@@ -125,7 +136,7 @@ namespace ChallengerBlitzcrank
             if (Player.Instance.IsDead || Player.Instance.IsRecalling())
                 return;
 
-            if (!sender.IsEnemy || SpellShield(sender))
+            if (!sender.IsEnemy || SpellShield(sender) || Config.SpellSetting.Q.MinHealthQ > Player.Instance.HealthPercent)
                 return;
 
             if (Config.SpellSetting.Q.InterruptQ && SpellManager.Q.IsReady() &&
@@ -167,7 +178,7 @@ namespace ChallengerBlitzcrank
             DashCircle = new Geometry.Polygon.Circle(/*center*/ e.EndPos, /*radius*/ 70);
             Core.DelayAction(() => DashCircle = null, e.Duration); //I don't know if Duration is in miliseconds, you need to print it when doing a test
 
-            if (!sender.IsEnemy || sender.HasBuff("powerfistslow") || SpellShield(sender))
+            if (!sender.IsEnemy || sender.HasBuff("powerfistslow") || SpellShield(sender) || Config.SpellSetting.Q.MinHealthQ > Player.Instance.HealthPercent)
                 return;
 
             if (e.EndPos.Distance(Player.Instance.Position) < Config.SpellSetting.Q.MinrangeQ)
