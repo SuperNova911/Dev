@@ -50,7 +50,9 @@ namespace ChallengerBlitzcrank
             Game.OnTick += Game_OnTick;
             Drawing.OnDraw += Drawing_OnDraw;
             Interrupter2.OnInterruptableTarget += Interrupter2_OnInterruptableTarget;
+            AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
             Orbwalker.OnAttack += Orbwalker_OnAttack;
+            Orbwalker.OnPostAttack += Orbwalker_OnPostAttack;
             Dash.OnDash += Dash_OnDash;
         }
 
@@ -118,15 +120,41 @@ namespace ChallengerBlitzcrank
             if (Player.Instance.IsDead || Player.Instance.IsRecalling())
                 return;
 
-            if (Config.Drawing.DrawQ)
+            if (Config.Drawing.SmartDrawing)
             {
-                new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Instance.Position);
-            }
-            if (Config.Drawing.DrawR)
-            {
-                new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Instance.Position);
-            }
+                if (Config.Drawing.DrawQ)
+                {
+                    if (SpellManager.Q.IsReady())
+                    {
+                        if (Config.SpellSetting.Q.MinHealthQ < Player.Instance.HealthPercent)
+                            new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Instance.Position);
+                        else
+                            new Circle { Color = Color.Red, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Instance.Position);
+                    }
+                    else
+                        new Circle { Color = Color.Orange, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Instance.Position);
+                }
 
+                if (Config.Drawing.DrawR)
+                {
+                    if (SpellManager.R.IsReady())
+                        new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Instance.Position);
+                    else
+                        new Circle { Color = Color.Orange, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Instance.Position);
+                }
+            }
+            else
+            {
+                if (Config.Drawing.DrawQ)
+                {
+                    new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Instance.Position);
+                }
+                if (Config.Drawing.DrawR)
+                {
+                    new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Instance.Position);
+                }
+            }
+            
             if (DashCircle != null)
                 DashCircle.Draw(Color.Yellow);
         }
@@ -158,6 +186,18 @@ namespace ChallengerBlitzcrank
             }
         }
 
+        private static void AntiGapcloser_OnEnemyGapcloser(ActiveGapcloser gapcloser)
+        {
+            if (Player.Instance.IsDead || Player.Instance.IsRecalling())
+                return;
+
+            if (gapcloser.Sender.IsValidTarget(SpellManager.R.Range) || SpellShield(gapcloser.Sender))
+                return;
+
+            if (Config.SpellSetting.R.GapcloseR && SpellManager.R.IsReady())
+                SpellManager.R.Cast();
+        }
+
         private static void Orbwalker_OnAttack(AttackableUnit target, EventArgs args)
         {
             var t = target as AIHeroClient;
@@ -165,7 +205,20 @@ namespace ChallengerBlitzcrank
             if (SpellShield(t))
                 return;
 
-            if (SpellManager.E.IsReady() && Config.SpellSetting.E.ComboE && t.IsValidTarget())
+            if (Config.SpellSetting.E.AutoE && SpellManager.E.IsReady() && t.IsValidTarget(500))
+            {
+                SpellManager.E.Cast();
+            }
+        }
+
+        private static void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
+        {
+            var t = target as AIHeroClient;
+
+            if (SpellShield(t))
+                return;
+
+            if (Config.SpellSetting.E.AAResetE && SpellManager.E.IsReady() && t.IsValidTarget(500))
             {
                 SpellManager.E.Cast();
             }
