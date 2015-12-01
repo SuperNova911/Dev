@@ -20,23 +20,35 @@ namespace ChallengerBlitzcrank.Mode
         public override void Execute()
         {
             var Qtarget = TargetSelector.GetTarget(Settings.Q.MaxrangeQ, DamageType.Magical);
+            var Starget = TargetSelector.SelectedTarget;
 
-            if (Settings.Q.ComboQ && Q.IsReady() &&
-                Qtarget.IsValidTarget(Settings.Q.MaxrangeQ) &&
-                Qtarget.Distance(Player.ServerPosition) > Settings.Q.MinrangeQ &&
-                SpellShield(Qtarget))
+            if (Settings.Q.ComboQ && Q.IsReady())
             {
-                var predic = Q.GetPrediction(Qtarget);
-
-                if (predic.HitChance > (HitChance)Settings.Q.HitchanceQ + 2)
+                if (Settings.Q.FocusQ && Starget.IsValidTarget(Settings.Q.MaxrangeQ) &&
+                    Starget.Distance(Player.ServerPosition) > Settings.Q.MinrangeQ && SpellShield(Starget))
                 {
-                    Q.Cast(predic.CastPosition);
+                    var predic = Q.GetPrediction(Starget);
+
+                    if (predic.HitChance > (HitChance)Settings.Q.HitchanceQ + 2)
+                    {
+                        Q.Cast(predic.CastPosition);
+                    }
+                }
+                else if (!Settings.Q.FocusQ && Qtarget.IsValidTarget(Settings.Q.MaxrangeQ) &&
+                    Qtarget.Distance(Player.ServerPosition) > Settings.Q.MinrangeQ && SpellShield(Qtarget))
+                {
+                    var predic = Q.GetPrediction(Qtarget);
+
+                    if (predic.HitChance > (HitChance)Settings.Q.HitchanceQ + 2)
+                    {
+                        Q.Cast(predic.CastPosition);
+                    }
                 }
             }
 
             var Etarget = TargetSelector.GetTarget(Settings.Q.MaxrangeQ, DamageType.Physical);
 
-            if (Settings.E.ComboE && E.IsReady() &&
+            if (Settings.E.ComboE && Settings.E.AutoE && E.IsReady() &&
                 Etarget.IsValidTarget(Settings.Q.MaxrangeQ))
             {
                 if (Etarget.HasBuff("rocketgrab2"))
