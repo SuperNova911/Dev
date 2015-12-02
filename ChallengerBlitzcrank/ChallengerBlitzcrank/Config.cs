@@ -14,12 +14,10 @@ namespace ChallengerBlitzcrank
         {
             Menu = MainMenu.AddMenu(MenuName, "blitzMenu");
             Menu.AddGroupLabel("Challenger Blitzcrank");
-            Menu.AddSeparator();
-            Menu.AddGroupLabel("Interrupt Priority");
-            Menu.AddLabel("R > Q > E");
+            //Menu.AddGroupLabel("");
+            //Menu.AddLabel("");
 
             SpellSetting.Initialize();
-            Mode.Initialize();
             Drawing.Initialize();
         }
 
@@ -120,14 +118,14 @@ namespace ChallengerBlitzcrank
                 static E()
                 {
                     Menu.AddGroupLabel("E - Power Fist");
-                    
+
                     Menu.AddLabel("Orbwalk");
                     _comboE = Menu.Add("comboE", new CheckBox("Combo", true));
                     _harassE = Menu.Add("harassE", new CheckBox("Harass", true));
                     Menu.AddLabel("Settings");
                     _interruptE = Menu.Add("interruptE", new CheckBox("Interrupt Enemy", true));
                     _killstealE = Menu.Add("killstealE", new CheckBox("Killsteal Enemy", false));
-                    _autoE = Menu.Add("autoE", new CheckBox("Auto E (Before AA)", false));
+                    _autoE = Menu.Add("autoE", new CheckBox("Auto E (Before AA)", true));
                     _aaResetE = Menu.Add("aaResetE", new CheckBox("AA Reset (After AA)", false));
                 }
 
@@ -162,43 +160,13 @@ namespace ChallengerBlitzcrank
                     Menu.AddLabel("Settings");
                     _killstealR = Menu.Add("killstealR", new CheckBox("Interrupt Enemy", true));
                     _interruptR = Menu.Add("interruptR", new CheckBox("Killsteal Enemy", true));
-                    _gapcloseR = Menu.Add("gapcloseR", new CheckBox("On Gapcloser", true));
+                    _gapcloseR = Menu.Add("gapcloseR", new CheckBox("On Gapcloser", false));
                     _minEnemyR = Menu.Add("minEnemyR", new Slider("Minimum Enemies In Range", 2, 1, 5));
                 }
 
                 public static void Initialize()
                 {
                 }
-            }
-        }
-
-        public static class Mode
-        {
-            public static Menu Menu { get; set; }
-
-            public static Slider _grabMode;
-
-            public static int GrabMode { get { return _grabMode.CurrentValue; } }
-
-            static Mode()
-            {
-                Menu = Config.Menu.AddSubMenu("Grab Mode");
-
-                Menu.AddGroupLabel("Grab Mode");
-                Menu.AddLabel("1 = Don't Grab, 2 = Normal Grab, 3 = Auto Grab");
-
-                var num = 1;
-                foreach (var enemy in EntityManager.Heroes.Enemies)
-                {
-                    Chat.Print(num);
-                    num++;
-                    _grabMode = Menu.Add("grabMode" + enemy.ChampionName, new Slider(enemy.ChampionName, 2, 1, 3));
-                }
-
-            }
-
-            public static void Initialize()
-            {
             }
         }
 
@@ -227,8 +195,12 @@ namespace ChallengerBlitzcrank
                 Menu.AddGroupLabel("Spell");
                 _drawQ = Menu.Add("drawQ", new CheckBox("Q Range", true));
                 _drawR = Menu.Add("drawR", new CheckBox("R Range", false));
-                _drawR = Menu.Add("smartDrawing", new CheckBox("Smart Drawing", true));
-                Menu.AddLabel("Green = Ready, Orange = On CoolDown, Red = Too Low Health % for AutoGrab");
+                Menu.AddSeparator();
+                _smartDrawing = Menu.Add("smartDrawing", new CheckBox("Smart Drawing", true));
+                Menu.AddLabel("Green = Ready");
+                Menu.AddLabel("Orange = On CoolDown");
+                Menu.AddLabel("Red = Too Low Health % for AutoGrab");
+                Menu.AddSeparator();
 
                 Menu.AddGroupLabel("Misc");
                 _drawTarget = Menu.Add("DrawTarget", new CheckBox("Mark Q Target", true));
