@@ -251,33 +251,33 @@ namespace ChallengerBlitzcrank
                 if (Config.Drawing.DrawQ && Q.IsLearned)
                 {
                     if (Config.SpellSetting.Q.MinHealthQ > Player.HealthPercent)
-                        new Circle { Color = Color.Red, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.ServerPosition);
+                        new Circle { Color = Color.Red, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Position);
                     else
                     {
                         if (SpellManager.Q.IsReady())
-                            new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.ServerPosition);
+                            new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Position);
                         else
-                            new Circle { Color = Color.Orange, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.ServerPosition);
+                            new Circle { Color = Color.Orange, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Position);
                     }
                 }
 
                 if (Config.Drawing.DrawR && SpellManager.R.IsLearned)
                 {
                     if (SpellManager.R.IsReady())
-                        new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.ServerPosition);
+                        new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Position);
                     else
-                        new Circle { Color = Color.Orange, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.ServerPosition);
+                        new Circle { Color = Color.Orange, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Position);
                 }
             }
             else
             {
                 if (Config.Drawing.DrawQ)
                 {
-                    new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.ServerPosition);
+                    new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Position);
                 }
                 if (Config.Drawing.DrawR)
                 {
-                    new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.ServerPosition);
+                    new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Position);
                 }
             }
             
