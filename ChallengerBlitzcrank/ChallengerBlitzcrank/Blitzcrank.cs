@@ -91,15 +91,13 @@ namespace ChallengerBlitzcrank
             KillSteal();
             Immobile();
 
-            Target = TargetSelector.GetTarget(2000, DamageType.Physical);
+            Target = TargetSelector.GetTarget(2000, DamageType.Magical);
         }
 
         private static void Combo()
         {
             var Qtarget = TargetSelector.GetTarget(Config.SpellSetting.Q.MaxrangeQ, DamageType.Magical);
             var Starget = TargetSelector.SelectedTarget;
-
-            Chat.Print(Player.GetSpellDamage(Starget, SpellSlot.R));
 
             if (Config.SpellSetting.Q.ComboQ && Q.IsReady() &&
                 Qtarget.Distance(Player.ServerPosition) > Config.SpellSetting.Q.MinrangeQ && !SpellShield(Qtarget))
@@ -207,7 +205,7 @@ namespace ChallengerBlitzcrank
             if (Config.SpellSetting.Q.KillstealQ && Q.IsReady())
             {
                 var Qtarget = EntityManager.Heroes.Enemies.FirstOrDefault
-                    (enemy => SpellDamage(SpellSlot.Q) >= enemy.Health + 25 && enemy.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ));
+                    (enemy => SpellDamage(SpellSlot.Q) >= enemy.Health + 50 && enemy.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ));
 
                 if (Qtarget != default(AIHeroClient) && !SpellShield(Qtarget))
                 {
@@ -219,7 +217,7 @@ namespace ChallengerBlitzcrank
             if (Config.SpellSetting.R.KillstealR && R.IsReady())
             {
                 var Rtarget = EntityManager.Heroes.Enemies.FirstOrDefault
-                    (enemy => SpellDamage(SpellSlot.R) >= enemy.Health + 25 && enemy.IsValidTarget(R.Range));
+                    (enemy => SpellDamage(SpellSlot.R) >= enemy.Health + 75 && enemy.IsValidTarget(R.Range));
 
                 if (Rtarget != default(AIHeroClient) && !SpellShield(Rtarget))
                 {
@@ -256,7 +254,7 @@ namespace ChallengerBlitzcrank
                 float comboDamage = new float();
 
                 comboDamage = Q.IsReady() ? SpellDamage(SpellSlot.Q) : 0;
-                comboDamage += E.IsReady() ? SpellDamage(SpellSlot.E) : 0;
+                //comboDamage += E.IsReady() ? SpellDamage(SpellSlot.E) : 0;
                 comboDamage += R.IsReady() ? SpellDamage(SpellSlot.R) : 0;
 
                 return comboDamage;
@@ -288,39 +286,66 @@ namespace ChallengerBlitzcrank
             if (Config.Drawing.SmartDrawing)
             {
                 if (Config.Drawing.DrawQ && Q.IsLearned)
-                    Drawing.DrawCircle(Player.Position, Config.SpellSetting.Q.MaxrangeQ,
-                        Config.SpellSetting.Q.MinHealthQ > Player.HealthPercent ? Color.Red : Q.IsReady() ? Color.LawnGreen : Color.Orange);
+                    new Circle
+                    {
+                        Color = Config.SpellSetting.Q.MinHealthQ > Player.HealthPercent ? Color.Red : Q.IsReady() ? Color.LawnGreen : Color.Orange,
+                        BorderWidth = 4,
+                        Radius = Config.SpellSetting.Q.MaxrangeQ
+                    }.Draw(Player.Position);
 
                 if (Config.Drawing.DrawR && SpellManager.R.IsLearned)
-                    Drawing.DrawCircle(Player.Position, R.Range, R.IsReady() ? Color.LawnGreen : Color.Orange);
+                    new Circle
+                    {
+                        Color = R.IsReady() ? Color.LawnGreen : Color.Orange,
+                        BorderWidth = 4,
+                        Radius = R.Range
+                    }.Draw(Player.Position);
             }
             else
             {
                 if (Config.Drawing.DrawQ)
-                    Drawing.DrawCircle(Player.Position, Config.SpellSetting.Q.MaxrangeQ, Color.LawnGreen);
+                    new Circle
+                    {
+                        Color = Color.LawnGreen,
+                        BorderWidth = 4,
+                        Radius = Config.SpellSetting.Q.MaxrangeQ
+                    }.Draw(Player.Position);
                 if (Config.Drawing.DrawR)
-                    Drawing.DrawCircle(Player.Position, R.Range, Color.LawnGreen);
+                    new Circle
+                    {
+                        Color = Color.LawnGreen,
+                        BorderWidth = 4,
+                        Radius = R.Range
+                    }.Draw(Player.Position);
             }
             
             if (DashCircle != null)
                 DashCircle.Draw(Color.Yellow);
+            new Circle
+            {
+                Color = Color.LightYellow,
+                BorderWidth = 6,
+                Radius = 50
+            }.Draw(Target.Position);
         }
 
         private static void Drawing_OnEndScene(EventArgs args)
         {
-            if (Player.IsDead)
+            if (Player.IsDead || !Config.Drawing.DrawDamage)
                 return;
 
-            if (Target != null && Config.Drawing.DrawDamage)
+            foreach (var enemy in EntityManager.Heroes.Enemies)
             {
-                float TotalDamage = ComboDamage() > Target.Health ? 1 : ComboDamage() / Target.MaxHealth;
-
-                Line.DrawLine
+                if (enemy.IsValidTarget(2000))
+                {
+                    float TotalDamage = ComboDamage() > enemy.Health ? enemy.Health / enemy.MaxHealth : ComboDamage() / enemy.MaxHealth;
+                    Line.DrawLine
                         (
-                            Color.LightSkyBlue, 9f,
-                            new Vector2(Target.HPBarPosition.X + 1, Target.HPBarPosition.Y + 9),
-                            new Vector2(Target.HPBarPosition.X + 1 + TotalDamage * 104, Target.HPBarPosition.Y + 9)
+                            Color.DarkRed, 9f,
+                            new Vector2(enemy.HPBarPosition.X + 1, enemy.HPBarPosition.Y + 9),
+                            new Vector2(enemy.HPBarPosition.X + 1 + TotalDamage * 104, enemy.HPBarPosition.Y + 9)
                         );
+                }
             }
         }
 
@@ -393,8 +418,6 @@ namespace ChallengerBlitzcrank
                 Chat.Print("AA Reset");
                 E.Cast();
                 Orbwalker.ResetAutoAttack();
-                if (Target != null)
-                    EloBuddy.Player.IssueOrder(GameObjectOrder.AttackTo, Target);
             }
         }
 
