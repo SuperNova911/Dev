@@ -104,14 +104,12 @@ namespace ChallengerBlitzcrank
                 public static CheckBox _comboE;
                 public static CheckBox _harassE;
                 public static CheckBox _interruptE;
-                public static CheckBox _killstealE;
                 public static CheckBox _autoE;
                 public static CheckBox _aaResetE;
 
                 public static bool ComboE { get { return _comboE.CurrentValue; } }
                 public static bool HarassE { get { return _harassE.CurrentValue; } }
                 public static bool InterruptE { get { return _interruptE.CurrentValue; } }
-                public static bool KillstealE { get { return _killstealE.CurrentValue; } }
                 public static bool AutoE { get { return _autoE.CurrentValue; } }
                 public static bool AAResetE { get { return _aaResetE.CurrentValue; } }
 
@@ -123,10 +121,9 @@ namespace ChallengerBlitzcrank
                     _comboE = Menu.Add("comboE", new CheckBox("Combo", true));
                     _harassE = Menu.Add("harassE", new CheckBox("Harass", true));
                     Menu.AddLabel("Settings");
-                    _interruptE = Menu.Add("interruptE", new CheckBox("Interrupt Enemy", true));
-                    _killstealE = Menu.Add("killstealE", new CheckBox("Killsteal Enemy", false));
                     _autoE = Menu.Add("autoE", new CheckBox("Auto E (Before AA)", true));
                     _aaResetE = Menu.Add("aaResetE", new CheckBox("AA Reset (After AA)", false));
+                    _interruptE = Menu.Add("interruptE", new CheckBox("Interrupt Enemy", true));
                 }
 
                 public static void Initialize()
@@ -158,8 +155,8 @@ namespace ChallengerBlitzcrank
                     _comboR = Menu.Add("comboR", new CheckBox("Combo", true));
                     _harassR = Menu.Add("harassR", new CheckBox("Harass", false));
                     Menu.AddLabel("Settings");
-                    _killstealR = Menu.Add("killstealR", new CheckBox("Interrupt Enemy", true));
-                    _interruptR = Menu.Add("interruptR", new CheckBox("Killsteal Enemy", true));
+                    _killstealR = Menu.Add("killstealR", new CheckBox("Killsteal Enemy", true));
+                    _interruptR = Menu.Add("interruptR", new CheckBox("Interrupt Enemy", true));
                     _gapcloseR = Menu.Add("gapcloseR", new CheckBox("On Gapcloser", false));
                     _minEnemyR = Menu.Add("minEnemyR", new Slider("Minimum Enemies In Range", 2, 1, 5));
                 }
