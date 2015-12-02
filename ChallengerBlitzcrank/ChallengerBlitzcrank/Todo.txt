@@ -1,0 +1,60 @@
+﻿	Q
+Combo				O
+Harass				O
+Interrupt			O
+Killsteal			Not working
+Immobile			O
+Dash				Fix grabing minion
+Hitchance			O
+Min/Max Range		O
+Mana				Deleted
+Health				Apply on auto grab
+Search Range		Deleted
+Focusing			Need test
+
+	E
+Combo				O
+Harass				O
+Interrupt			Need test
+Killsteal			O
+Immobile			Deleted
+Mana				Deleted
+Auto Use			O
+AA Reset			O	
+
+	R
+Combo				O
+Harass				O
+Interrupt (preferred over Q)	Need test
+Killsteal			Not working
+Immobile			Deleted
+Gapclose			O
+Mana				Deleted
+Auto R				O
+
+	Mode
+Grab Mode			Need test
+Q E R				O
+R Q E				
+Smite Q				
+Flash Q				
+
+	Draw
+Q					O
+R					O
+Smart Drawing		O
+Q Target			
+Target Hitchance	
+Damage Indicator	
+
+
+	ETC
+Rearrange Menu
+Check Menu Bool
+Touchup Harass
+Optimize Q searching area
+Grab Mode smart setting
+Add !target.iszombie
+Use Chat.Print to check all function works
+Interrupter will not check autograb mode
+Check Interrupter is grabing minion (I deleted prediction code)
