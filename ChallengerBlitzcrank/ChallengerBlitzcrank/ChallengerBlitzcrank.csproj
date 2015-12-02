@@ -58,13 +58,7 @@
   <ItemGroup>
     <Compile Include="Blitzcrank.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="Gapcloser.cs" />
-    <Compile Include="Interrupter2.cs" />
-    <Compile Include="ModeManager.cs" />
-    <Compile Include="Mode\Combo.cs" />
-    <Compile Include="Mode\Harass.cs" />
-    <Compile Include="Mode\ModeBase.cs" />
-    <Compile Include="Mode\PermaActive.cs" />
+    <Compile Include="Interrupt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpellManager.cs" />
   </ItemGroup>
