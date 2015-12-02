@@ -8,30 +8,33 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Color = System.Drawing.Color;
 using EloBuddy.SDK.Enumerations;
+using SharpDX;
 
 namespace ChallengerBlitzcrank
 {
     public class Blitzcrank
     {
-        private static AIHeroClient Player = EloBuddy.Player.Instance;
+        static AIHeroClient Player = EloBuddy.Player.Instance;
+        static AIHeroClient Target = null;
 
-        private static Spell.Skillshot Q { get { return SpellManager.Q; } }
-        private static Spell.Active W { get { return SpellManager.W; } }
-        private static Spell.Active E { get { return SpellManager.E; } }
-        private static Spell.Active R { get { return SpellManager.R; } }
+        static Spell.Skillshot Q { get { return SpellManager.Q; } }
+        static Spell.Active W { get { return SpellManager.W; } }
+        static Spell.Active E { get { return SpellManager.E; } }
+        static Spell.Active R { get { return SpellManager.R; } }
+        static readonly int[] QDamages = new int[] { 80, 135, 190, 245, 300 };
+        static readonly int[] RDamages = new int[] { 250, 375, 500 };
 
         static Geometry.Polygon.Circle DashCircle; //don't use new, just what I wrote
 
-        private static bool SpellShield(AIHeroClient unit)
+        static bool SpellShield(AIHeroClient unit)
         {
             return unit.HasBuffOfType(BuffType.SpellImmunity) || unit.HasBuffOfType(BuffType.SpellShield);
         }
-        private static bool SpellShield(Obj_AI_Base unit)
+        static bool SpellShield(Obj_AI_Base unit)
         {
             return unit.HasBuffOfType(BuffType.SpellImmunity) || unit.HasBuffOfType(BuffType.SpellShield);
         }
-
-        private static bool CC(AIHeroClient unit)
+        static bool CC(AIHeroClient unit)
         {
             return unit.HasBuffOfType(BuffType.Charm) || unit.HasBuffOfType(BuffType.Fear)
                 || unit.HasBuffOfType(BuffType.Snare) || unit.HasBuffOfType(BuffType.Slow)
@@ -39,7 +42,7 @@ namespace ChallengerBlitzcrank
                 || unit.HasBuffOfType(BuffType.Knockup) || unit.HasBuffOfType(BuffType.Suppression);
         }
 
-        public static Menu Menu;
+        static Menu Menu;
 
         static Blitzcrank()
         {
@@ -54,9 +57,7 @@ namespace ChallengerBlitzcrank
         {
             if (Player.ChampionName != "Blitzcrank")
                 return;
-
-
-
+                
             Config.Initialize();
 
             Menu = Config.Menu.AddSubMenu("Grab Mode", "grabMenu");
@@ -69,6 +70,7 @@ namespace ChallengerBlitzcrank
 
             Game.OnTick += Game_OnTick;
             Drawing.OnDraw += Drawing_OnDraw;
+            Drawing.OnEndScene += Drawing_OnEndScene;
             Interrupt.OnInterruptableTarget += Interrupt_OnInterruptableTarget;
             Gapcloser.OnGapcloser += Gapcloser_OnGapcloser;
             Orbwalker.OnAttack += Orbwalker_OnAttack;
@@ -88,6 +90,8 @@ namespace ChallengerBlitzcrank
 
             KillSteal();
             Immobile();
+
+            Target = TargetSelector.GetTarget(2000, DamageType.Physical);
         }
 
         private static void Combo()
@@ -95,8 +99,10 @@ namespace ChallengerBlitzcrank
             var Qtarget = TargetSelector.GetTarget(Config.SpellSetting.Q.MaxrangeQ, DamageType.Magical);
             var Starget = TargetSelector.SelectedTarget;
 
+            Chat.Print(Player.GetSpellDamage(Starget, SpellSlot.R));
+
             if (Config.SpellSetting.Q.ComboQ && Q.IsReady() &&
-                Qtarget.Distance(Player.ServerPosition) > Config.SpellSetting.Q.MinrangeQ && SpellShield(Qtarget))
+                Qtarget.Distance(Player.ServerPosition) > Config.SpellSetting.Q.MinrangeQ && !SpellShield(Qtarget))
             {
                 if (Starget != null && Config.SpellSetting.Q.FocusQ && Starget.IsValidTarget(2000))
                 {
@@ -149,7 +155,7 @@ namespace ChallengerBlitzcrank
             var Starget = TargetSelector.SelectedTarget;
 
             if (Config.SpellSetting.Q.HarassQ && Q.IsReady() &&
-                Qtarget.Distance(Player.ServerPosition) > Config.SpellSetting.Q.MinrangeQ && SpellShield(Qtarget))
+                Qtarget.Distance(Player.ServerPosition) > Config.SpellSetting.Q.MinrangeQ && !SpellShield(Qtarget))
             {
                 if (Starget != null && Config.SpellSetting.Q.FocusQ && Starget.IsValidTarget(2000))
                 {
@@ -200,29 +206,62 @@ namespace ChallengerBlitzcrank
         {
             if (Config.SpellSetting.Q.KillstealQ && Q.IsReady())
             {
-                var Qtarget = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
+                var Qtarget = EntityManager.Heroes.Enemies.FirstOrDefault
+                    (enemy => SpellDamage(SpellSlot.Q) >= enemy.Health + 25 && enemy.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ));
 
-                if (Qtarget.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ) &&
-                    Player.GetSpellDamage(Qtarget, SpellSlot.Q) > Qtarget.Health + Qtarget.AllShield && !SpellShield(Qtarget) &&
-                    Menu["grabMode" + Qtarget.ChampionName].Cast<Slider>().CurrentValue == 2)
+                if (Qtarget != default(AIHeroClient) && !SpellShield(Qtarget))
                 {
                     Chat.Print("KillSteal Q");
-                    SpellManager.Q.Cast(Qtarget);
+                    Q.Cast(Qtarget);
                 }
             }
 
             if (Config.SpellSetting.R.KillstealR && R.IsReady())
             {
-                var Rtarget = TargetSelector.GetTarget(R.Range, DamageType.Magical);
+                var Rtarget = EntityManager.Heroes.Enemies.FirstOrDefault
+                    (enemy => SpellDamage(SpellSlot.R) >= enemy.Health + 25 && enemy.IsValidTarget(R.Range));
 
-                if (Rtarget.IsValidTarget(SpellManager.R.Range) &&
-                    Player.GetSpellDamage(Rtarget, SpellSlot.R) > Rtarget.Health + Rtarget.AllShield &&
-                    !SpellShield(Rtarget))
+                if (Rtarget != default(AIHeroClient) && !SpellShield(Rtarget))
                 {
                     Chat.Print("KillSteal R");
-                    SpellManager.R.Cast();
+                    R.Cast();
                 }
             }
+        }
+
+        private static float SpellDamage(SpellSlot slot)
+        {
+            float damage = new float();
+
+            switch (slot)
+            {
+                case SpellSlot.Q:
+                    damage = Damage.CalculateDamageOnUnit(Player, Target, DamageType.Magical, QDamages[Q.Level - 1] + 1 * Player.TotalMagicalDamage);
+                    break;
+                case SpellSlot.E:
+                    damage = Damage.CalculateDamageOnUnit(Player, Target, DamageType.Physical, Player.GetAutoAttackDamage(Target) * 2, true, true);
+                    break;
+                case SpellSlot.R:
+                    damage = Damage.CalculateDamageOnUnit(Player, Target, DamageType.Magical, RDamages[R.Level - 1] + 1 * Player.TotalMagicalDamage);
+                    break;
+            }
+
+            return damage;
+        }
+
+        private static float ComboDamage()
+        {
+            if (Target != null)
+            {
+                float comboDamage = new float();
+
+                comboDamage = Q.IsReady() ? SpellDamage(SpellSlot.Q) : 0;
+                comboDamage += E.IsReady() ? SpellDamage(SpellSlot.E) : 0;
+                comboDamage += R.IsReady() ? SpellDamage(SpellSlot.R) : 0;
+
+                return comboDamage;
+            }
+            return 0;
         }
 
         private static void Immobile()
@@ -234,7 +273,7 @@ namespace ChallengerBlitzcrank
 
             if (Config.SpellSetting.Q.ImmobileQ && Q.IsReady() && Qtarget.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ) &&
                 Qtarget.Distance(Player.ServerPosition) > Config.SpellSetting.Q.MinrangeQ && CC(Qtarget) &&
-                Menu["grabMode" + Qtarget.ChampionName].Cast<Slider>().CurrentValue == 2)
+                Menu["grabMode" + Qtarget.ChampionName].Cast<Slider>().CurrentValue == 3)
             {
                 Chat.Print("Immobile");
                 Q.Cast(Qtarget);
@@ -249,40 +288,40 @@ namespace ChallengerBlitzcrank
             if (Config.Drawing.SmartDrawing)
             {
                 if (Config.Drawing.DrawQ && Q.IsLearned)
-                {
-                    if (Config.SpellSetting.Q.MinHealthQ > Player.HealthPercent)
-                        new Circle { Color = Color.Red, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Position);
-                    else
-                    {
-                        if (SpellManager.Q.IsReady())
-                            new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Position);
-                        else
-                            new Circle { Color = Color.Orange, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Position);
-                    }
-                }
+                    Drawing.DrawCircle(Player.Position, Config.SpellSetting.Q.MaxrangeQ,
+                        Config.SpellSetting.Q.MinHealthQ > Player.HealthPercent ? Color.Red : Q.IsReady() ? Color.LawnGreen : Color.Orange);
 
                 if (Config.Drawing.DrawR && SpellManager.R.IsLearned)
-                {
-                    if (SpellManager.R.IsReady())
-                        new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Position);
-                    else
-                        new Circle { Color = Color.Orange, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Position);
-                }
+                    Drawing.DrawCircle(Player.Position, R.Range, R.IsReady() ? Color.LawnGreen : Color.Orange);
             }
             else
             {
                 if (Config.Drawing.DrawQ)
-                {
-                    new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = Config.SpellSetting.Q.MaxrangeQ }.Draw(Player.Position);
-                }
+                    Drawing.DrawCircle(Player.Position, Config.SpellSetting.Q.MaxrangeQ, Color.LawnGreen);
                 if (Config.Drawing.DrawR)
-                {
-                    new Circle { Color = Color.LawnGreen, BorderWidth = 4, Radius = SpellManager.R.Range }.Draw(Player.Position);
-                }
+                    Drawing.DrawCircle(Player.Position, R.Range, Color.LawnGreen);
             }
             
             if (DashCircle != null)
                 DashCircle.Draw(Color.Yellow);
+        }
+
+        private static void Drawing_OnEndScene(EventArgs args)
+        {
+            if (Player.IsDead)
+                return;
+
+            if (Target != null && Config.Drawing.DrawDamage)
+            {
+                float TotalDamage = ComboDamage() > Target.Health ? 1 : ComboDamage() / Target.MaxHealth;
+
+                Line.DrawLine
+                        (
+                            Color.LightSkyBlue, 9f,
+                            new Vector2(Target.HPBarPosition.X + 1, Target.HPBarPosition.Y + 9),
+                            new Vector2(Target.HPBarPosition.X + 1 + TotalDamage * 104, Target.HPBarPosition.Y + 9)
+                        );
+            }
         }
 
         private static void Interrupt_OnInterruptableTarget(AIHeroClient sender, Interrupt.InterruptableTargetEventArgs args)
@@ -335,7 +374,7 @@ namespace ChallengerBlitzcrank
             if (SpellShield(t))
                 return;
 
-            if (Config.SpellSetting.E.AutoE && E.IsReady() && t.IsValidTarget(200))
+            if (Config.SpellSetting.E.AutoE && E.IsReady() && t.IsValidTarget())
             {
                 Chat.Print("Auto AA");
                 E.Cast();
@@ -349,10 +388,13 @@ namespace ChallengerBlitzcrank
             if (SpellShield(t))
                 return;
 
-            if (Config.SpellSetting.E.AAResetE && E.IsReady() && t.IsValidTarget(500))
+            if (Config.SpellSetting.E.AAResetE && E.IsReady() && t.IsValidTarget(350))
             {
                 Chat.Print("AA Reset");
                 E.Cast();
+                Orbwalker.ResetAutoAttack();
+                if (Target != null)
+                    EloBuddy.Player.IssueOrder(GameObjectOrder.AttackTo, Target);
             }
         }
 
@@ -364,14 +406,15 @@ namespace ChallengerBlitzcrank
             DashCircle = new Geometry.Polygon.Circle(/*center*/ e.EndPos, /*radius*/ 70);
             Core.DelayAction(() => DashCircle = null, e.Duration); //I don't know if Duration is in miliseconds, you need to print it when doing a test
 
-            if (!sender.IsEnemy || sender.HasBuff("powerfistslow") || SpellShield(sender) || Config.SpellSetting.Q.MinHealthQ > Player.HealthPercent)
+            if (!sender.IsEnemy || sender.HasBuff("powerfistslow") || SpellShield(sender) || Config.SpellSetting.Q.MinHealthQ > Player.HealthPercent
+                || !Config.SpellSetting.Q.DashQ)
                 return;
             
             if (e.EndPos.Distance(Player.ServerPosition) > Config.SpellSetting.Q.MinrangeQ &&
                      e.EndPos.Distance(Player.ServerPosition) < Config.SpellSetting.Q.MaxrangeQ)
             {
                 Chat.Print("Dash");
-                Q.Cast(e.EndPos);
+                Q.Cast(sender);
             }
         }
     }
