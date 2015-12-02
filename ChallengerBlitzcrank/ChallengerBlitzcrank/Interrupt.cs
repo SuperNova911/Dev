@@ -9,10 +9,10 @@ namespace ChallengerBlitzcrank
     /// <summary>
     /// Provides information an API regarding interruptable spells.
     /// </summary>
-    public static class Interrupter2
+    public static class Interrupt
     {
         /// <summary>
-        /// The delegate for <see cref="Interrupter2.OnInterruptableTarget"/>.
+        /// The delegate for <see cref="Interrupt.OnInterruptableTarget"/>.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="args">The <see cref="InterruptableTargetEventArgs"/> instance containing the event data.</param>
@@ -40,9 +40,9 @@ namespace ChallengerBlitzcrank
         }
 
         /// <summary>
-        /// Initializes static members of the <see cref="Interrupter2"/> class. 
+        /// Initializes static members of the <see cref="Interrupt"/> class. 
         /// </summary>
-        static Interrupter2()
+        static Interrupt()
         {
             // Initialize Properties
             InterruptableSpells = new Dictionary<string, List<InterruptableSpell>>();
@@ -232,7 +232,7 @@ namespace ChallengerBlitzcrank
         }
 
         /// <summary>
-        /// Prevents event arguments for the <see cref="Interrupter2.OnInterruptableTarget"/>
+        /// Prevents event arguments for the <see cref="Interrupt.OnInterruptableTarget"/>
         /// </summary>
         public class InterruptableTargetEventArgs : EventArgs
         {
