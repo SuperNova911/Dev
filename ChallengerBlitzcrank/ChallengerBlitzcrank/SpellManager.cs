@@ -16,7 +16,7 @@ namespace ChallengerBlitzcrank
 
         static SpellManager()
         {
-            Q = new Spell.Skillshot(SpellSlot.Q, 950, SkillShotType.Linear, 250, 1800, 70);
+            Q = new Spell.Skillshot(SpellSlot.Q, 950, SkillShotType.Linear, 250, 1800, 85);
             W = new Spell.Active(SpellSlot.W, 0);
             E = new Spell.Active(SpellSlot.E, 150);
             R = new Spell.Active(SpellSlot.R, 550);
