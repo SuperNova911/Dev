@@ -4,7 +4,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 
 
-namespace ChallengerBlitzcrank
+namespace DatBlitzcrank
 {
     /// <summary>
     /// Provides information an API regarding interruptable spells.

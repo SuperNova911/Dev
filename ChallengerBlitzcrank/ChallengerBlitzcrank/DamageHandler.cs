@@ -1,8 +1,7 @@
-﻿using System;
-using EloBuddy;
+﻿using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ChallengerBlitzcrank
+namespace DatBlitzcrank
 {
     internal class DamageHandler
     {

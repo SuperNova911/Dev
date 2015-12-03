@@ -1,12 +1,11 @@
 ﻿using System;
 using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Rendering;
 using SharpDX;
 using Color = System.Drawing.Color;
 
-namespace ChallengerBlitzcrank
+namespace DatBlitzcrank
 {
     public class DamageIndicator
     {

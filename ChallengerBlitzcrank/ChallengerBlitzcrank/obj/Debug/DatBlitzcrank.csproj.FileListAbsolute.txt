@@ -1,0 +1,10 @@
+C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\ChallengerBlitzcrank.exe.config
+C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\ChallengerBlitzcrank.exe
+C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\ChallengerBlitzcrank.pdb
+C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\EloBuddy.dll
+C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\EloBuddy.SDK.dll
+C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\SharpDX.dll
+C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\Newtonsoft.Json.dll
+C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\obj\Debug\ChallengerBlitzcrank.exe
+C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\obj\Debug\ChallengerBlitzcrank.pdb

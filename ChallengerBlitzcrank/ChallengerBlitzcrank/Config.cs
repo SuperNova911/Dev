@@ -1,9 +1,7 @@
-﻿using EloBuddy;
-using EloBuddy.SDK;
-using EloBuddy.SDK.Menu;
+﻿using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace ChallengerBlitzcrank
+namespace DatBlitzcrank
 {
     public static class Config
     {

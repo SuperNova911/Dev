@@ -8,9 +8,8 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Color = System.Drawing.Color;
 using EloBuddy.SDK.Enumerations;
-using SharpDX;
 
-namespace ChallengerBlitzcrank
+namespace DatBlitzcrank
 {
     public class Blitzcrank
     {
