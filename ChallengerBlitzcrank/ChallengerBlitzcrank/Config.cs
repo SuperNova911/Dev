@@ -13,9 +13,12 @@ namespace ChallengerBlitzcrank
         static Config()
         {
             Menu = MainMenu.AddMenu(MenuName, "blitzMenu");
-            Menu.AddGroupLabel("Challenger Blitzcrank");
-            //Menu.AddGroupLabel("");
-            //Menu.AddLabel("");
+            Menu.AddGroupLabel("Dat Blitzcrank");
+            Menu.AddLabel("Version : 1.0.0.0");
+            Menu.AddSeparator();
+            Menu.AddGroupLabel("Credits");
+            Menu.AddLabel("Tychus: Addon creator");
+            Menu.AddLabel("Fluxy: Damage Indicator");
 
             SpellSetting.Initialize();
             Drawing.Initialize();
@@ -82,7 +85,7 @@ namespace ChallengerBlitzcrank
                     _focusQ = Menu.Add("focusQ", new CheckBox("Force Grab Selected Target", true));
                     Menu.AddSeparator();
                     Menu.AddLabel("Auto Grab");
-                    _killstealQ = Menu.Add("killstealQ", new CheckBox("Kill Secure", true));
+                    _killstealQ = Menu.Add("killstealQ", new CheckBox("Kill Secure", false));
                     _dashQ = Menu.Add("dashQ", new CheckBox("Dashing Enemy", true));
                     _interruptQ = Menu.Add("interruptQ", new CheckBox("Interrupt Enemy", true));
                     _immobileQ = Menu.Add("immobileQ", new CheckBox("Immobile Enemy", true));
@@ -91,7 +94,7 @@ namespace ChallengerBlitzcrank
                     _hitchanceQ = Menu.Add("hitchanceQ", new Slider("Hitchance", 3, 1, 3));
                     _minrangeQ = Menu.Add("minrangeQ", new Slider("Minimum Range", 450, 0, 950));
                     _maxrangeQ = Menu.Add("maxrangeQ", new Slider("Maximum Range", 950, 0, 950));
-                    _minHealthQ = Menu.Add("minHealthQ", new Slider("Minimum Health % for AutoGrab", 10, 0, 100));
+                    _minHealthQ = Menu.Add("minHealthQ", new Slider("Minimum Health % for AutoGrab", 30, 0, 100));
                 }
 
                 public static void Initialize()
@@ -155,9 +158,9 @@ namespace ChallengerBlitzcrank
                     _comboR = Menu.Add("comboR", new CheckBox("Combo", true));
                     _harassR = Menu.Add("harassR", new CheckBox("Harass", false));
                     Menu.AddLabel("Settings");
-                    _killstealR = Menu.Add("killstealR", new CheckBox("Killsteal Enemy", true));
+                    _killstealR = Menu.Add("killstealR", new CheckBox("Kill Secure", false));
                     _interruptR = Menu.Add("interruptR", new CheckBox("Interrupt Enemy", true));
-                    _gapcloseR = Menu.Add("gapcloseR", new CheckBox("On Gapcloser", false));
+                    //_gapcloseR = Menu.Add("gapcloseR", new CheckBox("On Gapcloser", false));
                     _minEnemyR = Menu.Add("minEnemyR", new Slider("Minimum Enemies In Range", 2, 1, 5));
                 }
 
@@ -201,7 +204,7 @@ namespace ChallengerBlitzcrank
 
                 Menu.AddGroupLabel("Misc");
                 _drawTarget = Menu.Add("DrawTarget", new CheckBox("Mark Q Target", true));
-                _drawHitchance = Menu.Add("drawHitchance", new CheckBox("Hitchance", false));
+                //_drawHitchance = Menu.Add("drawHitchance", new CheckBox("Hitchance", false));
                 _drawDamage = Menu.Add("drawDamage", new CheckBox("Damage Indicator", true));
             }
 
