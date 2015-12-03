@@ -58,8 +58,6 @@
   <ItemGroup>
     <Compile Include="Blitzcrank.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="DamageHandler.cs" />
-    <Compile Include="DamageIndicator.cs" />
     <Compile Include="Interrupt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpellManager.cs" />
