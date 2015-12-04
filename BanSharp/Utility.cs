@@ -25,7 +25,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using LeagueSharp.Common.Data;
+using BanSharp.Data;
 using SharpDX;
 using Color = System.Drawing.Color;
 using EloBuddy;

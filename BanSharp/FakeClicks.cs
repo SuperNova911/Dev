@@ -200,7 +200,7 @@ namespace BanSharp
         /// <param name="args">
         ///     The args.
         /// </param>
-        private static void OnIssueOrder(Obj_AI_Base sender, GameObjectIssueOrderEventArgs args)
+        private static void OnIssueOrder(Obj_AI_Base sender, PlayerIssueOrderEventArgs args)
         {
             if (sender.IsMe &&
                 (args.Order == GameObjectOrder.MoveTo || args.Order == GameObjectOrder.AttackUnit ||
@@ -250,7 +250,7 @@ namespace BanSharp
             Orbwalking.BeforeAttack += BeforeAttackFake;
             Spellbook.OnCastSpell += BeforeSpellCast;
             Orbwalking.AfterAttack += AfterAttack;
-            Obj_AI_Base.OnIssueOrder += OnIssueOrder;
+            Player.OnIssueOrder += OnIssueOrder;
         }
 
         /// <summary>

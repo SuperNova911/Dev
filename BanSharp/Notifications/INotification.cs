@@ -20,6 +20,8 @@
 
 #endregion
 
+using EloBuddy;
+
 namespace BanSharp
 {
     public interface INotification

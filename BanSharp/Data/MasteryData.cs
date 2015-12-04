@@ -23,6 +23,7 @@
 #region
 
 using System.Diagnostics.CodeAnalysis;
+using EloBuddy;
 
 #endregion
 

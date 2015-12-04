@@ -90,6 +90,7 @@ namespace BanSharp
         /// <value>
         /// The selected language.
         /// </value>
+        
         public static string SelectedLanguage
         {
             get
@@ -98,11 +99,7 @@ namespace BanSharp
                 {
                     try
                     {
-                        _selectedLanguage = Sandbox.SandboxConfig.SelectedLanguage;
-                        if(_selectedLanguage == "Traditional-Chinese")
-                        {
-                            _selectedLanguage = "Chinese";
-                        }
+
                     }
                     catch (Exception)
                     {
@@ -114,7 +111,7 @@ namespace BanSharp
                 return _selectedLanguage;
             }
         }
-
+        
         /// <summary>
         /// Gets the show menu press key.
         /// </summary>

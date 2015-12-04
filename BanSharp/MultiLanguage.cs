@@ -26,7 +26,6 @@ using System;
 using System.Collections.Generic;
 using System.Resources;
 using System.Web.Script.Serialization;
-using EloBuddy;
 using BanSharp.Properties;
 
 #endregion
@@ -72,7 +71,7 @@ namespace BanSharp
             try
             {
                 var languageStrings = new ResourceManager("LeagueSharp.Common.Properties.Resources", typeof(Resources).Assembly).GetString(languageName + "Json");
-                
+
                 if (String.IsNullOrEmpty(languageStrings))
                 {
                     return false;

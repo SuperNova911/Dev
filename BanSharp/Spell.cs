@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SharpDX;
 using EloBuddy;
+using EloBuddy.SDK;
 
 #endregion
 
@@ -393,7 +394,7 @@ namespace BanSharp
             _chargedCastedT = 0;
 
             Obj_AI_Base.OnProcessSpellCast += AIHeroClient_OnProcessSpellCast;
-            Spellbook.OnUpdateChargedSpell += Spellbook_OnUpdateChargedSpell;
+            Spellbook.OnUpdateChargeableSpell += Spellbook_OnUpdateChargedSpell;
             Spellbook.OnCastSpell += SpellbookOnCastSpell;
         }
 
@@ -427,13 +428,14 @@ namespace BanSharp
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="args">The <see cref="SpellbookUpdateChargedSpellEventArgs"/> instance containing the event data.</param>
-        void Spellbook_OnUpdateChargedSpell(Spellbook sender, SpellbookUpdateChargedSpellEventArgs args)
+        private void Spellbook_OnUpdateChargedSpell(Spellbook sender, SpellbookUpdateChargeableSpellEventArgs args)
         {
             if (sender.Owner.IsMe && Utils.TickCount - _chargedReqSentT < 3000 && args.ReleaseCast)
             {
                 args.Process = false;
             }
         }
+
 
         /// <summary>
         /// Fired when the spellbook casts a spell.
@@ -519,7 +521,7 @@ namespace BanSharp
         /// <returns>List&lt;Obj_AI_Base&gt;.</returns>
         public List<Obj_AI_Base> GetCollision(Vector2 from, List<Vector2> to, float delayOverride = -1)
         {
-            return Common.Collision.GetCollision(
+            return BanSharp.Collision.GetCollision(
                 to.Select(h => h.To3D()).ToList(),
                 new PredictionInput
                 {
@@ -556,7 +558,7 @@ namespace BanSharp
             bool exactHitChance = false,
             int minTargets = -1)
         {
-            if (unit == null || MenuGUI.IsShopOpen || MenuGUI.IsChatOpen)
+            if (unit == null || Shop.IsOpen || MenuGUI.IsChatOpen)
             {
                 return CastStates.NotCasted;
             }
@@ -671,7 +673,7 @@ namespace BanSharp
                 return false;
             }
 
-            if (MenuGUI.IsShopOpen || MenuGUI.IsChatOpen)
+            if (Shop.IsOpen || MenuGUI.IsChatOpen)
             {
                 return false;
             }
@@ -729,7 +731,7 @@ namespace BanSharp
         /// <returns><c>true</c> if the spell was sucessfully casted, <c>false</c> otherwise.</returns>
         public bool Cast(Vector3 fromPosition, Vector3 toPosition)
         {
-            if (MenuGUI.IsShopOpen || MenuGUI.IsChatOpen)
+            if (Shop.IsOpen || MenuGUI.IsChatOpen)
             {
                 return false;
             }
@@ -744,7 +746,7 @@ namespace BanSharp
         /// <returns><c>true</c> if the spell was casted successfully, <c>false</c> otherwise.</returns>
         public bool Cast(Vector2 position, bool packetCast = false)
         {
-            if (MenuGUI.IsShopOpen || MenuGUI.IsChatOpen)
+            if (Shop.IsOpen || MenuGUI.IsChatOpen)
             {
                 return false;
             }
@@ -810,7 +812,7 @@ namespace BanSharp
         private static void ShootChargedSpell(SpellSlot slot, Vector3 position, bool releaseCast = true)
         {
             position.Z = NavMesh.GetHeightForPosition(position.X, position.Y);
-            ObjectManager.Player.Spellbook.UpdateChargedSpell(slot, position, releaseCast, false);
+            ObjectManager.Player.Spellbook.UpdateChargeableSpell(slot, position, releaseCast, false);
             ObjectManager.Player.Spellbook.CastSpell(slot, position, false);
         }
 
@@ -949,7 +951,7 @@ namespace BanSharp
         /// <value>The mana cost.</value>
         public float ManaCost
         {
-            get { return ObjectManager.Player.Spellbook.GetSpell(Slot).ManaCost; }
+            get { return ObjectManager.Player.Spellbook.GetSpell(Slot).SData.Mana; }
         }
 
         /// <summary>
@@ -1101,7 +1103,7 @@ namespace BanSharp
         /// <returns>CastStates.</returns>
         public CastStates CastOnBestTarget(float extraRange = 0, bool packetCast = false, bool aoe = false)
         {
-            if (MenuGUI.IsShopOpen || MenuGUI.IsChatOpen)
+            if (Shop.IsOpen || MenuGUI.IsChatOpen)
             {
                 return CastStates.NotCasted;
             }
@@ -1156,16 +1158,21 @@ namespace BanSharp
             IsChanneling = false;
             LetSpellcancel = letSpellCancel;
 
-            Obj_AI_Base.OnDoCast += OnDoCast;
+            Obj_AI_Base.OnSpellCast += OnDoCast;
             GameObject.OnDelete += OnDelete;
             Game.OnWndProc += OnWndProc;
-            Obj_AI_Base.OnIssueOrder += OnOrder;
+            Player.OnIssueOrder += OnOrder;
             Spellbook.OnCastSpell += OnCastSpell;
 
             if (ObjectManager.Player.ChampionName == "Fiddlesticks")
             {
                 GameObject.OnCreate += OnCreate;
             }
+        }
+
+        private void Player_OnIssueOrder(Obj_AI_Base sender, PlayerIssueOrderEventArgs args)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -1257,11 +1264,11 @@ namespace BanSharp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void OnOrder(Obj_AI_Base sender, GameObjectIssueOrderEventArgs args)
+        private void OnOrder(Obj_AI_Base sender, PlayerIssueOrderEventArgs args)
         {
             if (!sender.IsMe) return;
-            
-            if (!IsChanneling) return;  
+
+            if (!IsChanneling) return;
 
             if (args.Order == GameObjectOrder.MoveTo || args.Order == GameObjectOrder.AttackTo ||
                 args.Order == GameObjectOrder.AttackUnit || args.Order == GameObjectOrder.AutoAttack)

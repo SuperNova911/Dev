@@ -532,7 +532,7 @@ namespace BanSharp
         }
 
         /// <summary>
-        /// Receives the packet.
+        /// Receives the packet
         /// </summary>
         /// <param name="channel">The channel.</param>
         public void Process(PacketChannel channel = PacketChannel.S2C)

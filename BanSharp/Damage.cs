@@ -5748,17 +5748,17 @@ namespace BanSharp
 
         internal static Mastery GetMastery(this AIHeroClient hero, Ferocity ferocity)
         {
-            return FindMastery(hero, MasteryPage.Ferocity, (int)ferocity);
+            return FindMastery(hero, MasteryPage.Offense, (int)ferocity);
         }
 
         internal static Mastery GetMastery(this AIHeroClient hero, Cunning cunning)
         {
-            return FindMastery(hero, MasteryPage.Cunning, (int)cunning);
+            return FindMastery(hero, MasteryPage.Utility, (int)cunning);
         }
 
         internal static Mastery GetMastery(this AIHeroClient hero, Resolve resolve)
         {
-            return FindMastery(hero, MasteryPage.Resolve, (int)resolve);
+            return FindMastery(hero, MasteryPage.Defense, (int)resolve);
         }
 
         internal static bool IsActive(this Mastery mastery)

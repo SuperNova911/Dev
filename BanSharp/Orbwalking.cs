@@ -240,7 +240,7 @@ namespace BanSharp
             Player = ObjectManager.Player;
             _championName = Player.ChampionName;
             Obj_AI_Base.OnProcessSpellCast += OnProcessSpell;
-            Obj_AI_Base.OnDoCast += Obj_AI_Base_OnDoCast;
+            Obj_AI_Base.OnSpellCast += Obj_AI_Base_OnDoCast;
             Spellbook.OnStopCast += SpellbookOnStopCast;
         }
 
@@ -531,7 +531,7 @@ namespace BanSharp
             {
                 if (Player.Path.Length > 0)
                 {
-                    Player.IssueOrder(GameObjectOrder.Stop, playerPosition);
+                    EloBuddy.Player.IssueOrder(GameObjectOrder.Stop, playerPosition);
                     LastMoveCommandPosition = playerPosition;
                     LastMoveCommandT = Utils.GameTimeTickCount - 70;
                 }
@@ -574,7 +574,7 @@ namespace BanSharp
                 return;
             }
 
-            Player.IssueOrder(GameObjectOrder.MoveTo, point);
+            EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, point);
             LastMoveCommandPosition = point;
             LastMoveCommandT = Utils.GameTimeTickCount;
         }
@@ -614,7 +614,7 @@ namespace BanSharp
                             _missileLaunched = false;
                         }
 
-                        if (Player.IssueOrder(GameObjectOrder.AttackUnit, target))
+                        if (EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, target))
                         {
                             LastAttackCommandT = Utils.GameTimeTickCount;
                             _lastTarget = target;
@@ -653,9 +653,9 @@ namespace BanSharp
         /// </summary>
         /// <param name="spellbook">The spellbook.</param>
         /// <param name="args">The <see cref="SpellbookStopCastEventArgs"/> instance containing the event data.</param>
-        private static void SpellbookOnStopCast(Spellbook spellbook, SpellbookStopCastEventArgs args)
+        private static void SpellbookOnStopCast(Obj_AI_Base sender, SpellbookStopCastEventArgs args)
         {
-            if (spellbook.Owner.IsValid && spellbook.Owner.IsMe && args.DestroyMissile && args.StopAnimation)
+            if (sender.IsValid && sender.IsMe && args.DestroyMissile && args.StopAnimation)
             {
                 ResetAutoAttackTimer();
             }

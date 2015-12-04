@@ -27,6 +27,7 @@ using System.IO;
 using SharpDX;
 using SharpDX.Direct3D9;
 using Color = System.Drawing.Color;
+using EloBuddy;
 
 #endregion
 
