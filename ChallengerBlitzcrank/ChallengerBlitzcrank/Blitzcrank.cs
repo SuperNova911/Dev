@@ -8,6 +8,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Color = System.Drawing.Color;
 using EloBuddy.SDK.Enumerations;
+using SPrediction;
 
 namespace DatBlitzcrank
 {
@@ -22,6 +23,7 @@ namespace DatBlitzcrank
         static Spell.Active W { get { return SpellManager.W; } }
         static Spell.Active E { get { return SpellManager.E; } }
         static Spell.Active R { get { return SpellManager.R; } }
+        static BanSharp.Spell _Q;
 
         static bool SpellShield(AIHeroClient unit)
         {
@@ -67,7 +69,7 @@ namespace DatBlitzcrank
 
             Game.OnTick += Game_OnTick;
             Drawing.OnDraw += Drawing_OnDraw;
-            Interrupt.OnInterruptableTarget += Interrupt_OnInterruptableTarget;
+            BanSharp.Interrupter2.OnInterruptableTarget += Interrupter2_OnInterruptableTarget;
             Gapcloser.OnGapcloser += Gapcloser_OnGapcloser;
             Orbwalker.OnAttack += Orbwalker_OnAttack;
             Orbwalker.OnPostAttack += Orbwalker_OnPostAttack;
@@ -242,8 +244,10 @@ namespace DatBlitzcrank
 
         private static void Drawing_OnDraw(EventArgs args)
         {
+            /*
             if (Player.IsDead)
                 return;
+            
 
             if (Config.Drawing.SmartDrawing)
             {
@@ -288,16 +292,18 @@ namespace DatBlitzcrank
                     BorderWidth = 6,
                     Radius = 50
                 }.Draw(Target.Position);
+                */
         }
         
-        private static void Interrupt_OnInterruptableTarget(AIHeroClient sender, Interrupt.InterruptableTargetEventArgs args)
+        private static void Interrupter2_OnInterruptableTarget(AIHeroClient sender, BanSharp.Interrupter2.InterruptableTargetEventArgs args)
         {
+            Chat.Print("BanSharp Confirmed");
             if (Player.IsDead || Player.IsRecalling())
                 return;
 
             if (!sender.IsEnemy || SpellShield(sender))
                 return;
-            
+
             if (Config.SpellSetting.R.InterruptR && R.IsReady() &&
                 sender.IsValidTarget(R.Range))
             {
@@ -307,7 +313,7 @@ namespace DatBlitzcrank
                 sender.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ) &&
                 Config.SpellSetting.Q.MinHealthQ < Player.HealthPercent)
             {
-                    Q.Cast(sender);
+                Q.Cast(sender);
             }
             else if (Config.SpellSetting.E.InterruptE && E.IsReady() &&
                 sender.IsValidTarget(300))

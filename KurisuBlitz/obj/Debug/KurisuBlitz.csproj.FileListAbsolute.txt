@@ -1,1 +1,2 @@
 C:\Users\SuperNova\Documents\GitHub\EloBuddy-Developing\KurisuBlitz\bin\Release\KurisuBlitz.exe.config
+C:\Users\SpringField\Documents\GitHub\EloBuddy-Developing\KurisuBlitz\bin\Release\KurisuBlitz.exe.config
