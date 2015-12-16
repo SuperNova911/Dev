@@ -558,7 +558,7 @@ namespace BanSharp
             bool exactHitChance = false,
             int minTargets = -1)
         {
-            if (unit == null || Shop.IsOpen || MenuGUI.IsChatOpen)
+            if (unit == null || /* !Shop.IsOpen*/ MenuGUI.IsChatOpen)
             {
                 return CastStates.NotCasted;
             }
@@ -673,7 +673,7 @@ namespace BanSharp
                 return false;
             }
 
-            if (Shop.IsOpen || MenuGUI.IsChatOpen)
+            if (/*Shop.IsOpen || */MenuGUI.IsChatOpen)
             {
                 return false;
             }
@@ -731,7 +731,7 @@ namespace BanSharp
         /// <returns><c>true</c> if the spell was sucessfully casted, <c>false</c> otherwise.</returns>
         public bool Cast(Vector3 fromPosition, Vector3 toPosition)
         {
-            if (Shop.IsOpen || MenuGUI.IsChatOpen)
+            if (/*Shop.IsOpen || */ MenuGUI.IsChatOpen)
             {
                 return false;
             }
@@ -746,7 +746,7 @@ namespace BanSharp
         /// <returns><c>true</c> if the spell was casted successfully, <c>false</c> otherwise.</returns>
         public bool Cast(Vector2 position, bool packetCast = false)
         {
-            if (Shop.IsOpen || MenuGUI.IsChatOpen)
+            if (/*Shop.IsOpen || */MenuGUI.IsChatOpen)
             {
                 return false;
             }
@@ -1103,7 +1103,7 @@ namespace BanSharp
         /// <returns>CastStates.</returns>
         public CastStates CastOnBestTarget(float extraRange = 0, bool packetCast = false, bool aoe = false)
         {
-            if (Shop.IsOpen || MenuGUI.IsChatOpen)
+            if (/*Shop.IsOpen || */ MenuGUI.IsChatOpen)
             {
                 return CastStates.NotCasted;
             }

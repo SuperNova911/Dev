@@ -2139,7 +2139,7 @@ namespace BanSharp
                     break;
                 case MenuValueType.KeyBind:
 
-                    if (!MenuGUI.IsChatOpen && !Shop.IsOpen)
+                    if (!MenuGUI.IsChatOpen/* && !Shop.IsOpen*/)
                     {
                         switch (message)
                         {
