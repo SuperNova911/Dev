@@ -1,0 +1,11 @@
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\bin\Debug\Path Tracker.exe.config
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\bin\Debug\Path Tracker.exe
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\bin\Debug\Path Tracker.pdb
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\bin\Debug\EloBuddy.dll
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\bin\Debug\EloBuddy.SDK.dll
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\bin\Debug\SharpDX.dll
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\bin\Debug\Newtonsoft.Json.dll
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\obj\Debug\Path Tracker.csprojResolveAssemblyReference.cache
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\obj\Debug\Path Tracker.exe
+C:\Users\SuperNova\Documents\GitHub\Dev\Path Tracker\Path Tracker\obj\Debug\Path Tracker.pdb
