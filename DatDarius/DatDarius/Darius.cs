@@ -24,6 +24,7 @@ namespace DatDarius
         public static float Angle = 50 * (float)Math.PI / 180;
 
         public static AIHeroClient Player { get { return ObjectManager.Player; } }
+        public static AIHeroClient ETarget = null;
 
         public static Item Randuin;
         public static Item RavenousHydra;
@@ -128,10 +129,11 @@ namespace DatDarius
                 Radius = Q.Range
             }.Draw(Player.Position);
 
-            new Geometry.Polygon.Sector(Player.Position, Game.CursorPos, Angle, E.Range).Draw(Color.Yellow);
+            new Geometry.Polygon.Sector(Player.Position, Game.CursorPos, Angle, E.Range).Draw(E.GetPrediction(ETarget).HitChance >= HitChance.High ? Color.LawnGreen : Color.Orange);
 
+            #region Debug
             // Debug zone
-            if (true)
+            if (false)
             {
                 foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => e.VisibleOnScreen))
                 {
@@ -201,7 +203,7 @@ namespace DatDarius
                     Drawing.DrawLine(Drawing.WorldToScreen(Player.Path[i - 1]), Drawing.WorldToScreen(Player.Path[i]), 5, Color.Green);
                 }
             }
-
+            #endregion
         }
 
         private static void Game_OnTick(EventArgs args)
@@ -211,6 +213,8 @@ namespace DatDarius
 
             AutoUlt();
             KillSecure();
+
+            ETarget = TargetSelector.GetTarget(E.Range + 100, DamageType.Physical);
 
             switch (Orbwalker.ActiveModesFlags)
             {
@@ -243,7 +247,11 @@ namespace DatDarius
                     CastQ(Qtarget);
                 }
 
+                // 1 vs 1
+                if (Player.Position.CountEnemiesInRange(2000) == 1)
+                {
 
+                }
             }
 
             public static void Harass()
@@ -388,62 +396,23 @@ namespace DatDarius
 
         public static void TowerE()
         {
+            if (E.IsReady() && ETarget.IsValidTarget())
+            {
+                Obj_AI_Turret Turret = EntityManager.Turrets.Allies.FirstOrDefault(t => t.Distance(Player.ServerPosition) < 1000);
 
+                if (Turret.IsValidTarget() && !Turret.IsDead && Player.ServerPosition.Distance(Turret) < Turret.AttackRange - 50)
+                {
+                    if (Player.Health > ETarget.Health)
+                    {
+                        if (E.GetPrediction(ETarget).HitChance >= HitChance.High)
+                            E.Cast(ETarget);
+                    }
+                    else if (Player.HealthPercent > 40 && E.GetPrediction(ETarget).HitChance >= HitChance.High)
+                        E.Cast(ETarget);
+                }
+            }
         }
-
-        /*
-		public static Vector3 GetBestEPos()
-		{
-			var CS = new List<Geometry.Polygon.Sector>();
-			var Vectors = new List<Vector3>()
-			{
-				new Vector3(Target.ServerPosition.X + 550, Target.ServerPosition.Y, Target.ServerPosition.Z),
-				new Vector3(Target.ServerPosition.X - 550, Target.ServerPosition.Y, Target.ServerPosition.Z),
-				new Vector3(Target.ServerPosition.X, Target.ServerPosition.Y + 550, Target.ServerPosition.Z),
-				new Vector3(Target.ServerPosition.X, Target.ServerPosition.Y - 550, Target.ServerPosition.Z),
-				new Vector3(Target.ServerPosition.X + 230, Target.ServerPosition.Y, Target.ServerPosition.Z),
-				new Vector3(Target.ServerPosition.X - 230, Target.ServerPosition.Y, Target.ServerPosition.Z),
-				new Vector3(Target.ServerPosition.X, Target.ServerPosition.Y + 230, Target.ServerPosition.Z),
-				new Vector3(Target.ServerPosition.X, Target.ServerPosition.Y - 230, Target.ServerPosition.Z), Target.ServerPosition };
-
-			var CS1 = new Geometry.Polygon.Sector(Player.Position, Vectors[0], Angle, 600);
-			var CS2 = new Geometry.Polygon.Sector(Player.Position, Vectors[1], Angle, 600);
-			var CS3 = new Geometry.Polygon.Sector(Player.Position, Vectors[2], Angle, 600);
-			var CS4 = new Geometry.Polygon.Sector(Player.Position, Vectors[3], Angle, 600);
-			var CS5 = new Geometry.Polygon.Sector(Player.Position, Vectors[4], Angle, 600);
-			var CS6 = new Geometry.Polygon.Sector(Player.Position, Vectors[5], Angle, 600);
-			var CS7 = new Geometry.Polygon.Sector(Player.Position, Vectors[6], Angle, 600);
-			var CS8 = new Geometry.Polygon.Sector(Player.Position, Vectors[7], Angle, 600);
-			var CS9 = new Geometry.Polygon.Sector(Player.Position, Vectors[8], Angle, 600);
-
-			CS.Add(CS1);
-			CS.Add(CS2);
-			CS.Add(CS3);
-			CS.Add(CS4);
-			CS.Add(CS5);
-			CS.Add(CS6);
-			CS.Add(CS7);
-			CS.Add(CS8);
-			CS.Add(CS9);
-
-			var CSHits = new List<byte>() { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-			for (byte j = 0; j < 9; j++)
-			{
-				foreach (AIHeroClient hero in EntityManager.Heroes.Enemies.Where(enemy => !enemy.IsDead && enemy.IsValidTarget(W.Range)))
-				{
-					if (CS.ElementAt(j).IsInside(hero)) CSHits[j]++;
-					if (hero == Target) CSHits[j] += 10;
-				}
-			}
-
-			byte i = (byte)CSHits.Select((value, index) => new { Value = value, Index = index }).Aggregate((a, b) => (a.Value > b.Value) ? a : b).Index;
-
-			if (CSHits[i] == 0) return default(Vector3);
-
-			return Vectors[i];
-		}
-		*/
+        
         private static void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
         {
             var t = target as AIHeroClient;
@@ -459,11 +428,11 @@ namespace DatDarius
 
         private static void Dash_OnDash(Obj_AI_Base sender, Dash.DashEventArgs e)
         {
-            if (Player.IsDead || Player.IsRecalling() || MenuGUI.IsChatOpen)
+            if (Player.IsDead || Player.IsRecalling() || MenuGUI.IsChatOpen || !sender.IsEnemy || !sender.IsValidTarget())
                 return;
 
             if (e.EndPos.Distance(Player.ServerPosition) < Q.Range + sender.BoundingRadius &&
-                e.EndPos.Distance(Player.ServerPosition) > Q.Range + sender.BoundingRadius - 220)
+                e.EndPos.Distance(Player.ServerPosition) > Q.Range + sender.BoundingRadius - 220 && Q.IsReady())
             {
                 if (e.Duration < 750)
                     Q.Cast();
@@ -471,10 +440,9 @@ namespace DatDarius
                     Core.DelayAction(() => Q.Cast(), e.Duration - 750);
             }
 
-            if (e.StartPos.Distance(Player.ServerPosition) < E.Range && e.EndPos.Distance(Player.ServerPosition) > E.Range)
+            if (e.StartPos.Distance(Player.ServerPosition) < E.Range && 
+                e.EndPos.Distance(Player.ServerPosition) > E.Range && E.IsReady())
             {
-                if (sender.IsMe)
-                    return;
                 E.Cast(sender);
                 Chat.Print("Dash E");
             }
