@@ -31,6 +31,7 @@ namespace DatDarius
         public static Item TitanicHydra;
 
         public static Menu Menu;
+        public static DamageIndicator Indicator;
 
         /// <summary>
         /// Check enemy target has spell shield.
@@ -114,9 +115,11 @@ namespace DatDarius
             Dash.OnDash += Dash_OnDash;
             SDK.Interrupt.OnInterruptableTarget += Interrupt_OnInterruptableTarget;
 
+            Indicator = new DamageIndicator();
+
             Chat.Print("Dat Darius Loaded", Color.OrangeRed);
         }
-
+        
         private static void Drawing_OnDraw(EventArgs args)
         {
             if (Player.IsDead)
@@ -129,7 +132,19 @@ namespace DatDarius
                 Radius = Q.Range
             }.Draw(Player.Position);
 
-            new Geometry.Polygon.Sector(Player.Position, Game.CursorPos, Angle, E.Range).Draw(E.GetPrediction(ETarget).HitChance >= HitChance.High ? Color.LawnGreen : Color.Orange);
+            if (ETarget.IsValidTarget() && Player.VisibleOnScreen)
+            {
+                if (ETarget.ServerPosition.Distance(Player.ServerPosition) < E.Range)
+                    new Geometry.Polygon.Sector(Player.Position, PositionPrediction(ETarget, 0.25f), Angle, E.Range).Draw(Color.Red);
+                else
+                    new Geometry.Polygon.Sector(Player.Position, PositionPrediction(ETarget, 0.25f), Angle, E.Range).Draw(Color.Orange);
+            }
+            else
+                new Geometry.Polygon.Sector(Player.Position, Game.CursorPos, Angle, E.Range).Draw(Color.LawnGreen);
+
+            if (Player.VisibleOnScreen)
+                Drawing.DrawLine(Drawing.WorldToScreen(Player.Position), Drawing.WorldToScreen(PositionPrediction(Player, 0.25f)), 2, Color.Red);
+            Drawing.DrawLine(Drawing.WorldToScreen(ETarget.Position), Drawing.WorldToScreen(PositionPrediction(ETarget, 0.25f)), 2, Color.Red);
 
             #region Debug
             // Debug zone
@@ -206,15 +221,48 @@ namespace DatDarius
             #endregion
         }
 
+        public static Vector3 DirectionVector(AIHeroClient unit)
+        {
+            Vector3 Kappa;
+
+            Kappa.X = (unit.Direction.X * (float)Math.Cos(90 * Math.PI / 180)) - (unit.Direction.Y * (float)Math.Sin(90 * Math.PI / 180));
+            Kappa.Y = (unit.Direction.X * (float)Math.Sin(90 * Math.PI / 180)) - (unit.Direction.Y * (float)Math.Cos(90 * Math.PI / 180));
+            Kappa.Z = 0;
+
+            return Kappa;
+        }
+
+        public static Vector3 UnitVector(Vector3 vec3)
+        {
+            Vector3 Kappa;
+
+            var length = Math.Sqrt(Math.Pow(vec3.X, 2) + Math.Pow(vec3.Y, 2) + Math.Pow(vec3.Z, 2));
+            Kappa.X = vec3.X / (float)length;
+            Kappa.Y = vec3.Y / (float)length;
+            Kappa.Z = vec3.Z / (float)length;
+
+            return Kappa;
+        }
+
+        public static Vector3 PositionPrediction(AIHeroClient unit, float sec)
+        {
+            Vector3 Kappa;
+
+            Kappa = unit.Position + (UnitVector(DirectionVector(unit)) * (unit.MoveSpeed * sec));
+
+            return Kappa;
+        }
+
         private static void Game_OnTick(EventArgs args)
         {
             if (Player.IsDead || MenuGUI.IsChatOpen)
                 return;
-
+            
             AutoUlt();
             KillSecure();
+            TowerE();
 
-            ETarget = TargetSelector.GetTarget(E.Range + 100, DamageType.Physical);
+            ETarget = TargetSelector.GetTarget(E.Range + 150, DamageType.Physical);
 
             switch (Orbwalker.ActiveModesFlags)
             {
@@ -240,11 +288,18 @@ namespace DatDarius
         {
             public static void Combo()
             {
+                var ComboQ = Menu["useQcombo"].Cast<CheckBox>().CurrentValue;
                 var Qtarget = TargetSelector.GetTarget(1000, DamageType.Physical);
 
-                if (Qtarget.IsValidTarget() && Q.IsReady())
+                if (Qtarget.IsValidTarget() && Q.IsReady() && ComboQ)
                 {
                     CastQ(Qtarget);
+                }
+
+                var ComboE = Menu["useEcombo"].Cast<CheckBox>().CurrentValue;
+                if (ETarget.IsValidTarget() && E.IsReady() && ComboE)
+                {
+                    CastE(ETarget);
                 }
 
                 // 1 vs 1
@@ -331,8 +386,22 @@ namespace DatDarius
             var MySpeed = Player.MoveSpeed;
             var TargetSpeed = Qtarget.MoveSpeed;
             var TargetBoundingRadius = Qtarget.BoundingRadius;
-            var Distance = Qtarget.ServerPosition.Distance(Player.ServerPosition);
+            var Distance = PositionPrediction(Qtarget, 0.75f).Distance(PositionPrediction(Player, 0.75f)) + 100;
+            //var Distance = Qtarget.ServerPosition.Distance(Player.ServerPosition);
 
+            if (Qtarget.IsMoving)
+            {
+                if (Distance < Q.Range && Distance > Q.Range - 220)
+                    Q.Cast();
+            }
+            else
+            {
+                if (PositionPrediction(Player, 0.75f).Distance(Qtarget.ServerPosition) + 200 < Q.Range &&
+                    PositionPrediction(Player, 0.75f).Distance(Qtarget.ServerPosition) > Q.Range - 220)
+                    Q.Cast();
+            }
+
+            /*
             // Minimun distance
             if (Distance > Q.Range - 220)
             {
@@ -383,6 +452,7 @@ namespace DatDarius
                     }
                 }
             }
+            */
         }
 
         /// <summary>
@@ -391,7 +461,30 @@ namespace DatDarius
         /// <param name="target"></param>
         public static void CastE(AIHeroClient target)
         {
+            if (!Player.IsFacing(target) && target.IsFacing(Player))
+                return;
 
+            var Distance = PositionPrediction(target, 0.25f).Distance(Player.ServerPosition);
+
+            if (target.IsMoving)
+            {
+                if (target.MoveSpeed < Player.MoveSpeed)
+                {
+                    if (Distance < E.Range && Distance > 450)
+                        E.Cast(PositionPrediction(target, 0.25f));
+                }
+                else
+                {
+                    if (Distance < E.Range && Distance > 450)
+                        E.Cast(PositionPrediction(target, 0.25f));
+                }
+            }
+            else
+            {
+                if (target.ServerPosition.Distance(Player.ServerPosition) < E.Range &&
+                    target.ServerPosition.Distance(Player.ServerPosition) > 450)
+                    E.Cast(target.ServerPosition);
+            }
         }
 
         public static void TowerE()
