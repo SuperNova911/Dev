@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DamageHandler.cs" />
+    <Compile Include="DamageIndicator.cs" />
     <Compile Include="Darius.cs" />
     <Compile Include="HealHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
