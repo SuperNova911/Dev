@@ -1,8 +1,8 @@
-﻿using System;
-using EloBuddy;
+﻿using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Rendering;
 using SharpDX;
+using System;
 using Color = System.Drawing.Color;
 
 namespace DatDarius
@@ -35,11 +35,12 @@ namespace DatDarius
                                      ? 1
                                      : (DamageHandler.RDamage(enemy) / enemy.MaxHealth));
 
-                Line.DrawLine(Color.FromArgb(100, Color.Orange), 9f, new Vector2(pos.X, pos.Y),
+                Line.DrawLine(Color.Orange, 9f, 
+                    new Vector2(pos.X, pos.Y),
                     new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage)), pos.Y));
-                //Line.DrawLine(Color.Black, 9,
-                //new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage) - 2), pos.Y),
-                //new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage) + 2), pos.Y));
+              //Line.DrawLine(Color.Black, 9,
+                  //new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage) - 2), pos.Y),
+                  //new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage) + 2), pos.Y));
             }
         }
     }

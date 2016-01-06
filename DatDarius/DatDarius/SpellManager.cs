@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using EloBuddy;
+﻿using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Enumerations;
 
@@ -11,9 +10,7 @@ namespace DatDarius
         public static Spell.Active W { get; private set; }
         public static Spell.Skillshot E { get; private set; }
         public static Spell.Targeted R { get; private set; }
-
-        public static List<Spell.SpellBase> AllSpells { get; private set; }
-
+                
         static SpellManager()
         {
             Q = new Spell.Active(SpellSlot.Q, 425);
