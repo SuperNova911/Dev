@@ -115,6 +115,7 @@ namespace DatDarius
             Dash.OnDash += Dash_OnDash;
             SDK.Interrupt.OnInterruptableTarget += Interrupt_OnInterruptableTarget;
 
+            Debug.Initialize();
             Indicator = new DamageIndicator();
 
             Chat.Print("Dat Darius Loaded", Color.OrangeRed);
@@ -124,7 +125,7 @@ namespace DatDarius
         {
             if (Player.IsDead)
                 return;
-
+            /*
             new Circle
             {
                 Color = Q.IsReady() ? Color.LawnGreen : Color.Red,
@@ -141,10 +142,8 @@ namespace DatDarius
             }
             else
                 new Geometry.Polygon.Sector(Player.Position, Game.CursorPos, Angle, E.Range).Draw(Color.LawnGreen);
-
-            if (Player.VisibleOnScreen)
-                Drawing.DrawLine(Drawing.WorldToScreen(Player.Position), Drawing.WorldToScreen(PositionPrediction(Player, 0.25f)), 2, Color.Red);
-            Drawing.DrawLine(Drawing.WorldToScreen(ETarget.Position), Drawing.WorldToScreen(PositionPrediction(ETarget, 0.25f)), 2, Color.Red);
+                */
+            
 
             #region Debug
             // Debug zone
