@@ -13,23 +13,15 @@ using System.Collections.Generic;
 
 namespace DatDarius
 {
-    public class Debug : Darius
+    public class Debug
     {
-        public static Menu DMenu;
-
+        private static AIHeroClient Player = ObjectManager.Player;
+        
         static Debug()
         {
-            DMenu = Menu.AddSubMenu("Debug", "Debug");
-            DMenu.AddGroupLabel("Drawing");
-            DMenu.Add("ePosPred", new CheckBox("E position prediction", true));
-            DMenu.AddGroupLabel("HUD");
-            DMenu.Add("hud", new CheckBox("Show hud", true));
-            DMenu.Add("hudGeneral", new CheckBox("General properties", true));
-            DMenu.Add("hudHealth", new CheckBox("Health properties", false));
-            DMenu.Add("hudPrediction", new CheckBox("Prediction properties", false));
-            DMenu.Add("hudDamage", new CheckBox("Damage properties", false));
+            
 
-            //DMenu.Add("", new CheckBox("", ));
+            
             Drawing.OnDraw += Drawing_OnDraw;
         }
 
@@ -38,26 +30,29 @@ namespace DatDarius
             foreach (var hero in EntityManager.Heroes.AllHeroes.Where(h => h.VisibleOnScreen && h.IsValidTarget()))
             {
                 #region ePosPred
-                if (DMenu["ePosPred"].Cast<CheckBox>().CurrentValue && hero.IsEnemy)
+                if (Config.DebugMenu["ePosPred"].Cast<CheckBox>().CurrentValue && hero.IsEnemy)
                 {
-                    Drawing.DrawLine(Drawing.WorldToScreen(hero.Position), Drawing.WorldToScreen(PositionPrediction(hero, 0.25f)), 2, Color.Red);
+                    Drawing.DrawLine(Drawing.WorldToScreen(hero.Position), Drawing.WorldToScreen(Darius.PositionPrediction(hero, 0.25f)), 2, Color.Red);
                 }
                 #endregion
 
                 #region HUD
-                if (DMenu["hud"].Cast<CheckBox>().CurrentValue)
+                if (Config.DebugMenu["hud"].Cast<CheckBox>().CurrentValue)
                 {
                     var i = 0;
                     const int step = 20;
 
                     #region General
-                    if (DMenu["hudGeneral"].Cast<CheckBox>().CurrentValue)
+                    if (Config.DebugMenu["hudGeneral"].Cast<CheckBox>().CurrentValue)
                     {
                         var data = new Dictionary<string, object>
                             {
                                 { "BaseSkinName", hero.BaseSkinName },
                                 { "IsValied", hero.IsValid },
-                                { "IsValidTarget", hero.IsValidTarget() }
+                                { "IsValidTarget", hero.IsValidTarget() },
+                                { "AttackCastDelay", hero.AttackCastDelay },
+                                { "AttackDelay", hero.AttackDelay },
+                                { "Attacking", Darius.Attacking }
                             };
 
                         Drawing.DrawText(hero.Position.WorldToScreen() + new Vector2(0, i), Color.Orange, "General properties", 10);
@@ -71,7 +66,7 @@ namespace DatDarius
                     #endregion
 
                     #region Health
-                    if (DMenu["hudHealth"].Cast<CheckBox>().CurrentValue)
+                    if (Config.DebugMenu["hudHealth"].Cast<CheckBox>().CurrentValue)
                     {
                         var data = new Dictionary<string, object>
                             {
@@ -94,7 +89,7 @@ namespace DatDarius
                     #endregion
 
                     #region Prediction
-                    if (DMenu["hudPrediction"].Cast<CheckBox>().CurrentValue)
+                    if (Config.DebugMenu["hudPrediction"].Cast<CheckBox>().CurrentValue)
                     {
                         var data = new Dictionary<string, object>
                             {
@@ -115,7 +110,7 @@ namespace DatDarius
                     #endregion
 
                     #region Damage
-                    if (DMenu["hudDamage"].Cast<CheckBox>().CurrentValue)
+                    if (Config.DebugMenu["hudDamage"].Cast<CheckBox>().CurrentValue)
                     {
                         var data = new Dictionary<string, object>
                             {
@@ -137,7 +132,7 @@ namespace DatDarius
 
                     /*
                     #region
-                    if (DMenu["hudPrediction"].Cast<CheckBox>().CurrentValue)
+                    if (Config.DebugMenu["hudPrediction"].Cast<CheckBox>().CurrentValue)
                     {
                         var data = new Dictionary<string, object>
                             {
@@ -164,7 +159,7 @@ namespace DatDarius
 
                 /*
                 #region
-                if (DMenu[""].Cast<CheckBox>().CurrentValue)
+                if (Config.DebugMenu[""].Cast<CheckBox>().CurrentValue)
                 {
 
                 }
@@ -173,7 +168,7 @@ namespace DatDarius
             }
         }
 
-        public static void Initialize()
+        public static new void Initialize()
         {
 
         }

@@ -12,6 +12,8 @@ namespace DatDarius
     {
         public static AIHeroClient Player = ObjectManager.Player;
 
+        public static AIHeroClient RTarget = null;
+
         static TargetManager()
         {
             Game.OnTick += Game_OnTick;
@@ -28,20 +30,22 @@ namespace DatDarius
             if (Player.IsDead && Player.CountEnemiesInRange(1000) == 0)
                 return;
 
-            RTarget();
+            GetRTarget();
         }
 
-        private static AIHeroClient RTarget()
+        private static AIHeroClient ETarget()
         {
             AIHeroClient target = null;
 
-            foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => e.IsValidTarget(SpellManager.R.Range)))
-            {
-                if (Player.HealthPercent >= 75 && enemy.HealthPercent <= 25 && Player.CountEnemiesInRange(1000) <= 1)
-                {
-                    continue;
-                }
+            return target;
+        }
 
+        private static void GetRTarget()
+        {
+            AIHeroClient target = null;
+
+            foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => Ultimate.UltimateCal(e).Killable))
+            {
                 if (target == null)
                 {
                     target = enemy;
@@ -57,7 +61,7 @@ namespace DatDarius
                 }
             }
 
-            return target;
+            RTarget = target;
         }
 
         public static void Initialize()

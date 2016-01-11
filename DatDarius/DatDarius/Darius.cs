@@ -15,32 +15,43 @@ namespace DatDarius
 {
     public class Darius
     {
-        public static Spell.Active Q = new Spell.Active(SpellSlot.Q, 425);
-        public static Spell.Active W = new Spell.Active(SpellSlot.W, 175);
-        public static Spell.Skillshot E = new Spell.Skillshot(SpellSlot.E, 540, SkillShotType.Cone, 250, int.MaxValue, 225);
-        public static Spell.Targeted R = new Spell.Targeted(SpellSlot.R, 460);
-        public static Spell.Skillshot Flash;
-        public static Spell.Targeted Ignite;
-        public static float Angle = 50 * (float)Math.PI / 180;
+        private static Spell.Active Q = SpellManager.Q;
+        private static Spell.Active W = SpellManager.W;
+        private static Spell.Skillshot E = SpellManager.E;
+        private static Spell.Targeted R = SpellManager.R;
+        private static Spell.Skillshot Flash = SpellManager.Flash;
+        private static Spell.Targeted Ignite = SpellManager.Ignite;
 
-        public static AIHeroClient Player { get { return ObjectManager.Player; } }
+        private static AIHeroClient Player = ObjectManager.Player;
         public static AIHeroClient ETarget = null;
 
         public static Item Randuin;
         public static Item RavenousHydra;
         public static Item TitanicHydra;
 
-        public static Menu Menu;
         public static DamageIndicator Indicator;
+
+        public static bool Attacking = false;
 
         /// <summary>
         /// Check enemy target has spell shield.
         /// </summary>
         /// <param name="unit">The target.</param>
         /// <returns>true = true, false = false.</returns>
-        public static bool SpellShield(AIHeroClient unit)
+        public static bool HasSpellShield(AIHeroClient unit)
         {
             return unit.HasBuffOfType(BuffType.SpellImmunity) || unit.HasBuffOfType(BuffType.SpellShield);
+        }
+
+        public static int SaveRMana()
+        {
+            if (Player.Level < 5)
+                return 0;
+            
+            if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue)
+                return R.Level == 3 ? 0 :100;
+
+            return 0;
         }
 
         static void Main(string[] args)
@@ -60,93 +71,68 @@ namespace DatDarius
             RavenousHydra = new Item(3074, 400);
             TitanicHydra = new Item(3748, 385);
 
-            SpellDataInst flash = Player.Spellbook.Spells.Where(s => s.Name.Contains("summonerflash")).Any()
-                ? Player.Spellbook.Spells.Where(spell => spell.Name.Contains("summonerflash")).First() : null;
-            SpellDataInst ignite = Player.Spellbook.Spells.Where(s => s.Name.Contains("summonerdot")).Any()
-                ? Player.Spellbook.Spells.Where(spell => spell.Name.Contains("summonerdot")).First() : null;
-            if (flash != null)
-            {
-                Flash = new Spell.Skillshot(flash.Slot, 425, SkillShotType.Linear);
-            }
-            if (ignite != null)
-            {
-                Ignite = new Spell.Targeted(ignite.Slot, 600);
-            }
-
-            Menu = MainMenu.AddMenu("Dat Darius", "Dat Darius");
-
-            Menu.AddGroupLabel("Combo");
-            {
-                Menu.Add("useQcombo", new CheckBox("Use Q"));
-                Menu.Add("useWcombo", new CheckBox("Use W"));
-                Menu.Add("useEcombo", new CheckBox("Use E"));
-                Menu.Add("useRcombo", new CheckBox("Use R"));
-                Menu.Add("IgniteTime", new Slider("Ignite Tick", 3, 1, 5));
-                Menu.AddSeparator();
-            }
-
-            Menu.AddGroupLabel("Harass");
-            {
-                Menu.AddSeparator();
-            }
-
-            Menu.AddGroupLabel("LastHit");
-            {
-                Menu.AddSeparator();
-            }
-
-            Menu.AddGroupLabel("LaneClear");
-            {
-                Menu.AddSeparator();
-            }
-
-            Menu.AddGroupLabel("Flee");
-            {
-                Menu.AddSeparator();
-            }
-
-            Menu.AddSubMenu("Misc");
-
-            Menu.AddSubMenu("Draw");
+            Config.Initialize();
+            Debug.Initialize();
 
             Game.OnTick += Game_OnTick;
             Drawing.OnDraw += Drawing_OnDraw;
+            Orbwalker.OnAttack += Orbwalker_OnAttack;
             Orbwalker.OnPostAttack += Orbwalker_OnPostAttack;
             Dash.OnDash += Dash_OnDash;
             SDK.Interrupt.OnInterruptableTarget += Interrupt_OnInterruptableTarget;
 
-            Debug.Initialize();
             Indicator = new DamageIndicator();
 
             Chat.Print("Dat Darius Loaded", Color.OrangeRed);
         }
-        
+
         private static void Drawing_OnDraw(EventArgs args)
         {
             if (Player.IsDead)
                 return;
-            /*
-            new Circle
-            {
-                Color = Q.IsReady() ? Color.LawnGreen : Color.Red,
-                BorderWidth = 2,
-                Radius = Q.Range
-            }.Draw(Player.Position);
 
-            if (ETarget.IsValidTarget() && Player.VisibleOnScreen)
+            if (Config.DrawMenu["drawQ"].Cast<CheckBox>().CurrentValue && Player.VisibleOnScreen)
+                new Circle
+                {
+                    Color = Q.IsReady() ? Color.LawnGreen : Color.Red,
+                    BorderWidth = 2,
+                    Radius = Q.Range
+                }.Draw(Player.Position);
+
+            if (Config.DrawMenu["drawE"].Cast<CheckBox>().CurrentValue && Player.VisibleOnScreen)
             {
-                if (ETarget.ServerPosition.Distance(Player.ServerPosition) < E.Range)
-                    new Geometry.Polygon.Sector(Player.Position, PositionPrediction(ETarget, 0.25f), Angle, E.Range).Draw(Color.Red);
+                if (ETarget.IsValidTarget())
+                    new Geometry.Polygon.Sector(Player.Position, PositionPrediction(ETarget, 0.25f), SpellManager.eAngle, E.Range)
+                        .Draw(ETarget.ServerPosition.Distance(Player.ServerPosition) < E.Range ? Color.Red : Color.Orange);
                 else
-                    new Geometry.Polygon.Sector(Player.Position, PositionPrediction(ETarget, 0.25f), Angle, E.Range).Draw(Color.Orange);
+                    new Geometry.Polygon.Sector(Player.Position, Game.CursorPos, SpellManager.eAngle, E.Range).Draw(Color.LawnGreen);
             }
-            else
-                new Geometry.Polygon.Sector(Player.Position, Game.CursorPos, Angle, E.Range).Draw(Color.LawnGreen);
-                */
-            
+
+            if (Config.DrawMenu["drawR"].Cast<CheckBox>().CurrentValue && Player.VisibleOnScreen)
+                new Circle
+                {
+                    Color = R.IsReady() ? Color.LawnGreen : Color.Red,
+                    BorderWidth = 2,
+                    Radius = R.Range
+                }.Draw(Player.Position);
+
+            if (Config.DrawMenu["drawFlashE"].Cast<CheckBox>().CurrentValue && Player.VisibleOnScreen && E.IsReady() && Flash.IsReady())
+                new Circle
+                {
+                    Color = Color.Orange,
+                    BorderWidth = 2,
+                    Radius = E.Range + Flash.Range
+                }.Draw(Player.Position);
+
+            if (Config.DrawMenu["drawFlashR"].Cast<CheckBox>().CurrentValue && Player.VisibleOnScreen && R.IsReady() && Flash.IsReady())
+                new Circle
+                {
+                    Color = Color.Red,
+                    BorderWidth = 2,
+                    Radius = R.Range + Flash.Range
+                }.Draw(Player.Position);
 
             #region Debug
-            // Debug zone
             if (false)
             {
                 foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => e.VisibleOnScreen))
@@ -256,7 +242,7 @@ namespace DatDarius
         {
             if (Player.IsDead || MenuGUI.IsChatOpen)
                 return;
-            
+
             AutoUlt();
             KillSecure();
             TowerE();
@@ -287,7 +273,7 @@ namespace DatDarius
         {
             public static void Combo()
             {
-                var ComboQ = Menu["useQcombo"].Cast<CheckBox>().CurrentValue;
+                var ComboQ = Config.Menu["useQcombo"].Cast<CheckBox>().CurrentValue;
                 var Qtarget = TargetSelector.GetTarget(1000, DamageType.Physical);
 
                 if (Qtarget.IsValidTarget() && Q.IsReady() && ComboQ)
@@ -295,7 +281,7 @@ namespace DatDarius
                     CastQ(Qtarget);
                 }
 
-                var ComboE = Menu["useEcombo"].Cast<CheckBox>().CurrentValue;
+                var ComboE = Config.Menu["useEcombo"].Cast<CheckBox>().CurrentValue;
                 if (ETarget.IsValidTarget() && E.IsReady() && ComboE)
                 {
                     CastE(ETarget);
@@ -331,10 +317,12 @@ namespace DatDarius
 
         public static void AutoUlt()
         {
+            UltimateOutPut result = Ultimate.UltimateCal(TargetManager.RTarget);
+
             foreach (var target in EntityManager.Heroes.Enemies.Where(target => target.Distance(Player.ServerPosition) < R.Range + Flash.Range))
             {
                 if (DamageHandler.RDamage(target) > target.Health + target.AllShield + target.HPRegenRate &&
-                    R.IsReady() && target.IsValidTarget(R.Range) && !SpellShield(target) && !target.HasBuff("kindredrnodeathbuff"))
+                    R.IsReady() && target.IsValidTarget(R.Range) && !HasSpellShield(target) && !target.HasBuff("kindredrnodeathbuff"))
                 {
                     R.Cast(target);
                     Chat.Print(DamageHandler.RDamage(target));
@@ -355,7 +343,7 @@ namespace DatDarius
                     return;
 
                 // Damage Prediction
-                var time = Menu["IgniteTime"].Cast<Slider>().CurrentValue;
+                var time = Config.Menu["IgniteTime"].Cast<Slider>().CurrentValue;
                 var heal = HealHandler.Potion.GetHeal(IgniteTarget, time);
 
                 if (heal == 0)
@@ -488,25 +476,35 @@ namespace DatDarius
 
         public static void TowerE()
         {
+            if (!Config.SpellMenu["towerE"].Cast<CheckBox>().CurrentValue)
+                return;
+            
             if (E.IsReady() && ETarget.IsValidTarget())
             {
                 Obj_AI_Turret Turret = EntityManager.Turrets.Allies.FirstOrDefault(t => t.Distance(Player.ServerPosition) < 1000);
 
-                if (Turret.IsValidTarget() && !Turret.IsDead && Player.ServerPosition.Distance(Turret) < Turret.AttackRange - 50)
+                if (!Turret.IsDead && Player.ServerPosition.Distance(Turret) < Turret.AttackRange - 50)
                 {
                     if (Player.Health > ETarget.Health)
-                    {
-                        if (E.GetPrediction(ETarget).HitChance >= HitChance.High)
-                            E.Cast(ETarget);
-                    }
-                    else if (Player.HealthPercent > 40 && E.GetPrediction(ETarget).HitChance >= HitChance.High)
-                        E.Cast(ETarget);
+                        CastE(ETarget);
+                    else if (Player.HealthPercent > 40)
+                        CastE(ETarget);
                 }
             }
         }
-        
+
+        private static void Orbwalker_OnAttack(AttackableUnit target, EventArgs args)
+        {
+            Attacking = true;
+            var delay = Player.AttackCastDelay * 1000;
+            Core.DelayAction(() => Attacking = false, (int)delay);
+        }
+
         private static void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
         {
+            if (!Config.SpellMenu["aaReset"].Cast<CheckBox>().CurrentValue)
+                return;
+
             var t = target as AIHeroClient;
 
             if (t.IsValidTarget() && W.IsReady())
@@ -520,9 +518,13 @@ namespace DatDarius
 
         private static void Dash_OnDash(Obj_AI_Base sender, Dash.DashEventArgs e)
         {
-            if (Player.IsDead || Player.IsRecalling() || MenuGUI.IsChatOpen || !sender.IsEnemy || !sender.IsValidTarget())
+            if (!Config.SpellMenu["dashE"].Cast<CheckBox>().CurrentValue)
                 return;
 
+            if (Player.IsDead || Player.IsRecalling() || MenuGUI.IsChatOpen || !sender.IsEnemy || !sender.IsValidTarget() || sender.IsZombie)
+                return;
+
+            /*
             if (e.EndPos.Distance(Player.ServerPosition) < Q.Range + sender.BoundingRadius &&
                 e.EndPos.Distance(Player.ServerPosition) > Q.Range + sender.BoundingRadius - 220 && Q.IsReady())
             {
@@ -531,25 +533,24 @@ namespace DatDarius
                 else
                     Core.DelayAction(() => Q.Cast(), e.Duration - 750);
             }
+            */
 
-            if (e.StartPos.Distance(Player.ServerPosition) < E.Range && 
+            if (e.StartPos.Distance(Player.ServerPosition) < E.Range &&
                 e.EndPos.Distance(Player.ServerPosition) > E.Range && E.IsReady())
-            {
                 E.Cast(sender);
-                Chat.Print("Dash E");
-            }
 
         }
 
         private static void Interrupt_OnInterruptableTarget(AIHeroClient sender, SDK.Interrupt.InterruptableTargetEventArgs args)
         {
-            if (Player.IsDead || Player.IsRecalling() || MenuGUI.IsChatOpen)
+            if (!Config.SpellMenu["interruptE"].Cast<CheckBox>().CurrentValue)
                 return;
 
-            if (sender.IsValidTarget(E.Range + sender.BoundingRadius) && E.IsReady())
-            {
-                E.Cast(sender);
-            }
+            if (Player.IsDead || Player.IsRecalling() || MenuGUI.IsChatOpen || !sender.IsEnemy || !sender.IsValidTarget() || sender.IsZombie)
+                return;
+
+            if (sender.IsValidTarget(E.Range) && E.IsReady())
+                E.Cast(sender.ServerPosition);
         }
     }
 }
