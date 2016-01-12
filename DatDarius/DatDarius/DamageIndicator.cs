@@ -30,17 +30,24 @@ namespace DatDarius
 
                 var pos = new Vector2(enemy.HPBarPosition.X + _xOffset, enemy.HPBarPosition.Y + _yOffset);
                 var fullbar = (_barLength) * (enemy.HealthPercent / 100);
-                var damage = (_barLength) *
-                                 ((DamageHandler.RDamage(enemy) / enemy.MaxHealth) > 1
-                                     ? 1
-                                     : (DamageHandler.RDamage(enemy) / enemy.MaxHealth));
 
-                Line.DrawLine(Color.Orange, 9f, 
+                var damage = (_barLength) *
+                                 ((enemy.RDamage() / enemy.MaxHealth) > 1
+                                     ? 1
+                                     : (enemy.RDamage() / enemy.MaxHealth));
+                var fulldamage = (_barLength) *
+                                 ((enemy.RDamage(5) / enemy.MaxHealth) > 1
+                                     ? 1
+                                     : (enemy.RDamage(5) / enemy.MaxHealth));
+
+                Line.DrawLine(
+                    Ultimate.GetResult(enemy).IsKillable ? Color.LawnGreen : Color.Red,
+                    9f, 
                     new Vector2(pos.X, pos.Y),
                     new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage)), pos.Y));
-              //Line.DrawLine(Color.Black, 9,
-                  //new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage) - 2), pos.Y),
-                  //new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage) + 2), pos.Y));
+                Line.DrawLine(Color.Orange, 9f,
+                    new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage)), pos.Y),
+                    new Vector2((float)(pos.X + (fulldamage > fullbar ? fullbar : fulldamage)), pos.Y));
             }
         }
     }
