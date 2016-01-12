@@ -32,7 +32,7 @@ namespace DatDarius
                 #region ePosPred
                 if (Config.DebugMenu["ePosPred"].Cast<CheckBox>().CurrentValue && hero.IsEnemy)
                 {
-                    Drawing.DrawLine(Drawing.WorldToScreen(hero.Position), Drawing.WorldToScreen(Darius.PositionPrediction(hero, 0.25f)), 2, Color.Red);
+                    Drawing.DrawLine(Drawing.WorldToScreen(hero.Position), Drawing.WorldToScreen(Utility.PositionPrediction(hero, 0.25f)), 2, Color.Red);
                 }
                 #endregion
 
@@ -114,9 +114,10 @@ namespace DatDarius
                     {
                         var data = new Dictionary<string, object>
                             {
-                                { "UltDamage",DamageHandler.RDamage(hero) },
-                                { "PassiveDamage", DamageHandler.PassiveDamage(hero) },
-                                { "IgniteDamage", DamageHandler.IgniteDamage(true) }
+                                { "UltDamage",hero.RDamage() },
+                                { "UltFullDamage",hero.RDamage(5) },
+                                { "PassiveDamage", hero.PassiveDamage() },
+                                { "IgniteDamage", DamageManager.IgniteDamage() }
                             };
 
                         Drawing.DrawText(hero.Position.WorldToScreen() + new Vector2(0, i), Color.Red, "Damage properties", 10);
@@ -168,7 +169,7 @@ namespace DatDarius
             }
         }
 
-        public static new void Initialize()
+        public static void Initialize()
         {
 
         }

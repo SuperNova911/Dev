@@ -44,7 +44,7 @@ namespace DatDarius
         {
             AIHeroClient target = null;
 
-            foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => Ultimate.UltimateCal(e).Killable))
+            foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => Ultimate.GetResult(e).IsKillable))
             {
                 if (target == null)
                 {
