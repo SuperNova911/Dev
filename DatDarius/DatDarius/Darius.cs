@@ -33,16 +33,7 @@ namespace DatDarius
 
         public static bool Attacking = false;
 
-        /// <summary>
-        /// Check enemy target has spell shield.
-        /// </summary>
-        /// <param name="unit">The target.</param>
-        /// <returns>true = true, false = false.</returns>
-        public static bool HasSpellShield(AIHeroClient unit)
-        {
-            return unit.HasBuffOfType(BuffType.SpellImmunity) || unit.HasBuffOfType(BuffType.SpellShield);
-        }
-
+        
         public static int SaveRMana()
         {
             if (Player.Level < 5)
@@ -102,7 +93,7 @@ namespace DatDarius
             if (Config.DrawMenu["drawE"].Cast<CheckBox>().CurrentValue && Player.VisibleOnScreen)
             {
                 if (ETarget.IsValidTarget())
-                    new Geometry.Polygon.Sector(Player.Position, PositionPrediction(ETarget, 0.25f), SpellManager.eAngle, E.Range)
+                    new Geometry.Polygon.Sector(Player.Position, Utility.PositionPrediction(ETarget, 0.25f), SpellManager.eAngle, E.Range)
                         .Draw(ETarget.ServerPosition.Distance(Player.ServerPosition) < E.Range ? Color.Red : Color.Orange);
                 else
                     new Geometry.Polygon.Sector(Player.Position, Game.CursorPos, SpellManager.eAngle, E.Range).Draw(Color.LawnGreen);
@@ -142,16 +133,12 @@ namespace DatDarius
 
                     var Damage = new Dictionary<string, object>
                             {
-                                { "Passive Stack", enemy.HasBuff("dariushemo") ? enemy.GetBuffCount("dariushemo") : 0 },
-                                { "Passive Remain Time", enemy.HasBuff("dariushemo") ? enemy.Buffs.OrderByDescending(buff => buff.EndTime - Game.Time)
-                                                        .Where(buff => buff.Name == "dariushemo")
-                                                        .Select(buff => buff.EndTime)
-                                                        .FirstOrDefault() - Game.Time
-                                                        : 0 },
-                                { "Passive Damage", DamageHandler.PassiveDamage(enemy) },
-                                { "R Min Damage", new double[] { 100, 200, 300 }[SpellManager.R.Level - 1] + (0.75 * ObjectManager.Player.FlatPhysicalDamageMod) },
-                                { "R Max Damage", DamageHandler.RDamage(enemy) },
-                                { "Passive + Ignite", DamageHandler.PassiveDamage(enemy) + DamageHandler.IgniteDamage(true) },
+                                { "Passive Stack", enemy.BuffCount("dariushemo") },
+                                { "Passive Remain Time", enemy.BuffRemainTime("dariushemo") },
+                                { "Passive Damage", enemy.PassiveDamage() },
+                                { "R Min Damage", enemy.RDamage(1) },
+                                { "R Max Damage", enemy.RDamage(5) },
+                                { "Passive + Ignite", enemy.PassiveDamage() + DamageManager.IgniteDamage() },
                                 { "Health", enemy.Health },
                                 { "Hp Regen rate", enemy.HPRegenRate }
                             };
@@ -206,37 +193,9 @@ namespace DatDarius
             #endregion
         }
 
-        public static Vector3 DirectionVector(AIHeroClient unit)
-        {
-            Vector3 Kappa;
+        
 
-            Kappa.X = (unit.Direction.X * (float)Math.Cos(90 * Math.PI / 180)) - (unit.Direction.Y * (float)Math.Sin(90 * Math.PI / 180));
-            Kappa.Y = (unit.Direction.X * (float)Math.Sin(90 * Math.PI / 180)) - (unit.Direction.Y * (float)Math.Cos(90 * Math.PI / 180));
-            Kappa.Z = 0;
-
-            return Kappa;
-        }
-
-        public static Vector3 UnitVector(Vector3 vec3)
-        {
-            Vector3 Kappa;
-
-            var length = Math.Sqrt(Math.Pow(vec3.X, 2) + Math.Pow(vec3.Y, 2) + Math.Pow(vec3.Z, 2));
-            Kappa.X = vec3.X / (float)length;
-            Kappa.Y = vec3.Y / (float)length;
-            Kappa.Z = vec3.Z / (float)length;
-
-            return Kappa;
-        }
-
-        public static Vector3 PositionPrediction(AIHeroClient unit, float sec)
-        {
-            Vector3 Kappa;
-
-            Kappa = unit.Position + (UnitVector(DirectionVector(unit)) * (unit.MoveSpeed * sec));
-
-            return Kappa;
-        }
+        
 
         private static void Game_OnTick(EventArgs args)
         {
@@ -317,17 +276,7 @@ namespace DatDarius
 
         public static void AutoUlt()
         {
-            UltimateOutPut result = Ultimate.UltimateCal(TargetManager.RTarget);
 
-            foreach (var target in EntityManager.Heroes.Enemies.Where(target => target.Distance(Player.ServerPosition) < R.Range + Flash.Range))
-            {
-                if (DamageHandler.RDamage(target) > target.Health + target.AllShield + target.HPRegenRate &&
-                    R.IsReady() && target.IsValidTarget(R.Range) && !HasSpellShield(target) && !target.HasBuff("kindredrnodeathbuff"))
-                {
-                    R.Cast(target);
-                    Chat.Print(DamageHandler.RDamage(target));
-                }
-            }
         }
 
         public static void KillSecure()
@@ -337,27 +286,27 @@ namespace DatDarius
 
             if (Ignite.IsReady())
             {
-                var IgniteTarget = EntityManager.Heroes.Enemies.FirstOrDefault(t => DamageHandler.IgniteDamage(true) >= t.Health);
+                var IgniteTarget = EntityManager.Heroes.Enemies.FirstOrDefault(t => DamageManager.IgniteDamage() >= t.Health);
 
                 if (!IgniteTarget.IsValidTarget(Ignite.Range + Flash.Range))
                     return;
 
                 // Damage Prediction
-                var time = Config.Menu["IgniteTime"].Cast<Slider>().CurrentValue;
-                var heal = HealHandler.Potion.GetHeal(IgniteTarget, time);
+                var time = Config.SpellMenu["igniteTick"].Cast<Slider>().CurrentValue;
+                var heal = HealHandler.GetHeal(IgniteTarget, time);
 
                 if (heal == 0)
                 {
-                    if (DamageHandler.IgniteDamage(false) * time >= IgniteTarget.Health
-                        - DamageHandler.PassiveDamage(IgniteTarget)
+                    if (DamageManager.IgniteDamage(1) * time >= IgniteTarget.Health
+                        - IgniteTarget.PassiveDamage()
                         + (IgniteTarget.HPRegenRate * time) / 2
-                        + HealHandler.Potion.HealTick(IgniteTarget) * (time - 1))
+                        + HealHandler.HealTick(IgniteTarget) * (time - 1))
                         Ignite.Cast(IgniteTarget);
                 }
                 else if (heal > 0)
                 {
-                    if (DamageHandler.IgniteDamage(false) * time >= IgniteTarget.Health
-                        - DamageHandler.PassiveDamage(IgniteTarget)
+                    if (DamageManager.IgniteDamage(1) * time >= IgniteTarget.Health
+                        - IgniteTarget.PassiveDamage()
                         + (IgniteTarget.HPRegenRate * time) / 2
                         + heal)
                         Ignite.Cast(IgniteTarget);
@@ -373,7 +322,7 @@ namespace DatDarius
             var MySpeed = Player.MoveSpeed;
             var TargetSpeed = Qtarget.MoveSpeed;
             var TargetBoundingRadius = Qtarget.BoundingRadius;
-            var Distance = PositionPrediction(Qtarget, 0.75f).Distance(PositionPrediction(Player, 0.75f)) + 100;
+            var Distance = Utility.PositionPrediction(Qtarget, 0.75f).Distance(Utility.PositionPrediction(Player, 0.75f)) + 100;
             //var Distance = Qtarget.ServerPosition.Distance(Player.ServerPosition);
 
             if (Qtarget.IsMoving)
@@ -383,8 +332,8 @@ namespace DatDarius
             }
             else
             {
-                if (PositionPrediction(Player, 0.75f).Distance(Qtarget.ServerPosition) + 200 < Q.Range &&
-                    PositionPrediction(Player, 0.75f).Distance(Qtarget.ServerPosition) > Q.Range - 220)
+                if (Utility.PositionPrediction(Player, 0.75f).Distance(Qtarget.ServerPosition) + 200 < Q.Range &&
+                    Utility.PositionPrediction(Player, 0.75f).Distance(Qtarget.ServerPosition) > Q.Range - 220)
                     Q.Cast();
             }
 
@@ -451,19 +400,19 @@ namespace DatDarius
             if (!Player.IsFacing(target) && target.IsFacing(Player))
                 return;
 
-            var Distance = PositionPrediction(target, 0.25f).Distance(Player.ServerPosition);
+            var Distance = Utility.PositionPrediction(target, 0.25f).Distance(Player.ServerPosition);
 
             if (target.IsMoving)
             {
                 if (target.MoveSpeed < Player.MoveSpeed)
                 {
                     if (Distance < E.Range && Distance > 450)
-                        E.Cast(PositionPrediction(target, 0.25f));
+                        E.Cast(Utility.PositionPrediction(target, 0.25f));
                 }
                 else
                 {
                     if (Distance < E.Range && Distance > 450)
-                        E.Cast(PositionPrediction(target, 0.25f));
+                        E.Cast(Utility.PositionPrediction(target, 0.25f));
                 }
             }
             else
