@@ -15,56 +15,72 @@ namespace DatDarius
 {
     public class UltimateOutPut
     {
-        public bool Targetable = false;
-        
         public bool IsKillable = false;
 
         public bool LetItGo = false;
 
-        public bool InRange = false;
+        public bool IsInRange = false;
 
-        public bool InFlashRange = false;
+        public bool IsInFlashRange = false;
 
-        public bool Alone = false;
+        public bool IsAlone = false;
 
-        public bool UnnecessaryR = false;
+        public bool Unnecessary = false;
+
+        public bool LanePhase = false;
     }
 
-    public class Ultimate
+    public static class Ultimate
     {
-        public static UltimateOutPut GetResult(AIHeroClient unit)
+        public static UltimateOutPut GetResult(this AIHeroClient unit)
         {
             UltimateOutPut result = null;
 
-            var Health = unit.Health;
-            var Shield = unit.AllShield + unit.MordeShield();
-            double HPRegenRate = unit.HPRegenRate;
-            double PotionHeal = 0;  //이 부분 힐 매니저에서 새로 짜기
-            if (unit.IsHealing())
-                    PotionHeal = HealHandler.GetHeal(unit, 3);
-            if (unit.HasPotion() != 0 && !unit.IsHealing())
-                PotionHeal = HealHandler.HealTick(unit) * 3;
-
+            float Health = unit.Health;
+            float Shield = unit.AllShield + unit.MordeShield();
+            float HPRegenRate = unit.HPRegenRate;
+            float PotionHealAmount = unit.PotionHeal(3);
             int Stack = unit.BuffCount("dariushemo");
+            int 오차 = Config.SpellMenu["오차"].Cast<Slider>().CurrentValue;
 
-            if (unit.IsValidTarget(SpellManager.R.Range + SpellManager.Flash.Range) && !unit.HasSpellShield() && !unit.HasBuff("kindredrnodeathbuff"))
-                result.Targetable = true;
+            if (!unit.IsValidTarget(SpellManager.R.Range + SpellManager.Flash.Range) && unit.HasSpellShield() && unit.HasBuff("kindredrnodeathbuff"))
+                return result;
+
             if (Player.Instance.CountEnemiesInRange(1500) == 1)
-                result.Alone = true;
-            if (Player.Instance.HealthPercent >= 75 && unit.HealthPercent <= 25 && result.Alone && SpellManager.R.Level < 3)
-                result.UnnecessaryR = true;
+                result.IsAlone = true;
 
-            if (unit.RDamage() > Health + Shield + HPRegenRate)
+            if (Player.Instance.CountAlliesInRange(1500) == 1 && Player.Instance.CountEnemiesInRange(1500) == 1)
+                result.LanePhase = true;
+
+            if (Player.Instance.HealthPercent >= 75 && unit.HealthPercent <= 25 && result.IsAlone && SpellManager.R.Level < 3)
+                result.Unnecessary = true;
+
+            if (unit.RDamage() > Health + Shield + HPRegenRate + 오차)
             {
-                if (unit.IsValidTarget(SpellManager.R.Range))
-                    result.InRange = true;
-                else if (unit.IsValidTarget(SpellManager.R.Range + SpellManager.Flash.Range))
-                    result.InFlashRange = true;
-            }
-            else if (unit.RDamage() + unit.PassiveDamage(Stack == 5 ? Stack : Stack + 1, 3) > Health + Shield + (unit.FlatHPRegenMod * 3) + PotionHeal)
-                result.LetItGo = true;
+                result.IsKillable = true;
 
+                if (unit.IsValidTarget(SpellManager.R.Range))
+                    result.IsInRange = true;
+
+                if (unit.IsValidTarget(SpellManager.R.Range + SpellManager.Flash.Range))
+                    result.IsInFlashRange = true;
+            }
+
+            if (unit.RDamage() + unit.PassiveDamage(Stack == 5 ? Stack : Stack + 1, 3) > Health + Shield + PotionHealAmount + (HPRegenRate - unit.GetHeal(1)) * 3 && result.IsAlone)
+                result.LetItGo = true;
+            
             return result;
+        }
+
+        public static float PotionHeal(this AIHeroClient unit, int second)
+        {
+            if (unit.IsUsingPotion())
+                return unit.GetHeal(second);
+
+            if (unit.HasPotion() != Potion.NoPotion)
+                return unit.HealTick(second);
+
+            return 0;
         }
     }
 }
