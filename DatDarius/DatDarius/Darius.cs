@@ -54,7 +54,7 @@ namespace DatDarius
         {
             if (Player.BaseSkinName != "Darius")
                 return;
-
+            
             E.ConeAngleDegrees = 50;
             E.MinimumHitChance = HitChance.Medium;
 
@@ -72,7 +72,7 @@ namespace DatDarius
             Dash.OnDash += Dash_OnDash;
             SDK.Interrupt.OnInterruptableTarget += Interrupt_OnInterruptableTarget;
 
-            Indicator = new DamageIndicator();
+            //Indicator = new DamageIndicator();
 
             Chat.Print("Dat Darius Loaded", Color.OrangeRed);
         }
@@ -193,10 +193,6 @@ namespace DatDarius
             #endregion
         }
 
-        
-
-        
-
         private static void Game_OnTick(EventArgs args)
         {
             if (Player.IsDead || MenuGUI.IsChatOpen)
@@ -206,7 +202,6 @@ namespace DatDarius
             KillSecure();
             TowerE();
 
-            ETarget = TargetSelector.GetTarget(E.Range + 150, DamageType.Physical);
 
             switch (Orbwalker.ActiveModesFlags)
             {
@@ -241,11 +236,15 @@ namespace DatDarius
                 }
 
                 var ComboE = Config.Menu["useEcombo"].Cast<CheckBox>().CurrentValue;
+                ETarget = TargetSelector.GetTarget(E.Range + 150, DamageType.Physical);
                 if (ETarget.IsValidTarget() && E.IsReady() && ComboE)
                 {
+                    Chat.Print("ComboE");
                     CastE(ETarget);
                 }
 
+
+                Chat.Print(ETarget.RDamage());
                 // 1 vs 1
                 if (Player.Position.CountEnemiesInRange(2000) == 1)
                 {
@@ -276,7 +275,13 @@ namespace DatDarius
 
         public static void AutoUlt()
         {
+            if (!R.IsReady())
+                return;
 
+            foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => e.IsValidTarget(R.Range)))
+            {
+                UltLogic(enemy);
+            }
         }
 
         public static void KillSecure()
@@ -293,14 +298,14 @@ namespace DatDarius
 
                 // Damage Prediction
                 var time = Config.SpellMenu["igniteTick"].Cast<Slider>().CurrentValue;
-                var heal = HealHandler.GetHeal(IgniteTarget, time);
+                var heal = IgniteTarget.GetHeal(time);
 
                 if (heal == 0)
                 {
                     if (DamageManager.IgniteDamage(1) * time >= IgniteTarget.Health
                         - IgniteTarget.PassiveDamage()
                         + (IgniteTarget.HPRegenRate * time) / 2
-                        + HealHandler.HealTick(IgniteTarget) * (time - 1))
+                        + IgniteTarget.HealTick(time - 1))
                         Ignite.Cast(IgniteTarget);
                 }
                 else if (heal > 0)
@@ -390,36 +395,45 @@ namespace DatDarius
             }
             */
         }
-
-        /// <summary>
-        /// E Logic.
-        /// </summary>
-        /// <param name="target"></param>
+        
         public static void CastE(AIHeroClient target)
         {
+            /*
             if (!Player.IsFacing(target) && target.IsFacing(Player))
                 return;
+                */
 
-            var Distance = Utility.PositionPrediction(target, 0.25f).Distance(Player.ServerPosition);
+            var distance1 = Utility.PositionPrediction(target, 0.25f).Distance(Player.ServerPosition);
+            var distance2 = target.ServerPosition.Distance(Player.ServerPosition);
 
-            if (target.IsMoving)
+            if (target.IsMoving && 450 < distance1 && distance1 < E.Range)
+                E.Cast(Utility.PositionPrediction(target, 0.25f));
+            else if (450 < distance2 && distance2 < E.Range)
+                E.Cast(target.ServerPosition);
+        }
+
+        public static void UltLogic(AIHeroClient target)
+        {
+            UltimateOutPut result = target.GetResult();
+
+            if (result.Unnecessary)
+                return;
+
+            if (result.IsKillable)
             {
-                if (target.MoveSpeed < Player.MoveSpeed)
+                if (result.IsInRange)
+                    R.Cast(target);
+
+                if (result.IsInFlashRange && Config.SpellMenu["flashR"].Cast<KeyBind>().CurrentValue)
                 {
-                    if (Distance < E.Range && Distance > 450)
-                        E.Cast(Utility.PositionPrediction(target, 0.25f));
-                }
-                else
-                {
-                    if (Distance < E.Range && Distance > 450)
-                        E.Cast(Utility.PositionPrediction(target, 0.25f));
+                    Flash.Cast(target.ServerPosition);
+                    R.Cast(target);
                 }
             }
-            else
+
+            if (result.LetItGo && result.LanePhase && !Attacking && false)
             {
-                if (target.ServerPosition.Distance(Player.ServerPosition) < E.Range &&
-                    target.ServerPosition.Distance(Player.ServerPosition) > 450)
-                    E.Cast(target.ServerPosition);
+                R.Cast(target);
             }
         }
 
@@ -427,7 +441,9 @@ namespace DatDarius
         {
             if (!Config.SpellMenu["towerE"].Cast<CheckBox>().CurrentValue)
                 return;
-            
+
+            ETarget = TargetSelector.GetTarget(E.Range + 150, DamageType.Physical);
+
             if (E.IsReady() && ETarget.IsValidTarget())
             {
                 Obj_AI_Turret Turret = EntityManager.Turrets.Allies.FirstOrDefault(t => t.Distance(Player.ServerPosition) < 1000);

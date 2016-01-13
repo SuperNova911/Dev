@@ -3,6 +3,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Rendering;
 using SharpDX;
 using System;
+using System.Linq;
 using Color = System.Drawing.Color;
 
 namespace DatDarius
@@ -23,11 +24,8 @@ namespace DatDarius
             if (Player.Instance.IsDead)
                 return;
 
-            foreach (var enemy in EntityManager.Heroes.Enemies)
+            foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => e.IsHPBarRendered && e.VisibleOnScreen))
             {
-                if (!enemy.IsHPBarRendered || !enemy.VisibleOnScreen)
-                    continue;
-
                 var pos = new Vector2(enemy.HPBarPosition.X + _xOffset, enemy.HPBarPosition.Y + _yOffset);
                 var fullbar = (_barLength) * (enemy.HealthPercent / 100);
 
