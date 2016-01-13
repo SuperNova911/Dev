@@ -83,21 +83,23 @@ namespace DatDarius
             #endregion
     */
             #region Spell Menu
-            DrawMenu = Menu.AddSubMenu("Spell");
+            SpellMenu = Menu.AddSubMenu("Spell");
             SpellMenu.AddGroupLabel("Q");
             SpellMenu.Add("moveAssist", new CheckBox("Movement assist", true));
             SpellMenu.AddGroupLabel("W");
             SpellMenu.Add("aaReset", new CheckBox("AA Reset", true));
             SpellMenu.AddGroupLabel("E");
+            SpellMenu.Add("flashE", new KeyBind("Flash E", false, KeyBind.BindTypes.HoldActive, 'T'));
             SpellMenu.Add("dashE", new CheckBox("Use E on dashing enemy", true));
             SpellMenu.Add("interruptE", new CheckBox("Interrupt enemy", true));
             SpellMenu.Add("towerE", new CheckBox("Tower E", true));
-            SpellMenu.Add("flashE", new KeyBind("Flash E", false, KeyBind.BindTypes.HoldActive, 'T'));
             SpellMenu.AddGroupLabel("R");
             SpellMenu.Add("autoR", new KeyBind("Auto R", true, KeyBind.BindTypes.PressToggle, 'Z'));
+            SpellMenu.Add("flashR", new KeyBind("Flash R", false, KeyBind.BindTypes.HoldActive, 'G'));
             SpellMenu.Add("dieR", new CheckBox("Use R before die", true));
             SpellMenu.Add("freeR", new CheckBox("Use R before end free R buff", true));
             SpellMenu.Add("saveRMana", new CheckBox("Save mana for R", true));
+            SpellMenu.Add("오차", new Slider("오차범위", 0, 0, 50));
             SpellMenu.AddGroupLabel("Ignite");
             SpellMenu.Add("1tick", new CheckBox("Instant Kill", true));
             SpellMenu.Add("igniteTick", new Slider("Ignite calculation tick", 3, 1, 5));
