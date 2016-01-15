@@ -29,7 +29,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace DatDarius.SDK
+namespace DatDarius
 {
 	/// <summary>
 	/// Provides information an API regarding interruptable spells.
