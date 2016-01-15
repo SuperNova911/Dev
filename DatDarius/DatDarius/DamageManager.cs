@@ -12,11 +12,17 @@ namespace DatDarius
     {
         public static double RDamage(this AIHeroClient target)
         {
+            if (!SpellManager.R.IsLearned)
+                return 0;
+
             return (new double[] { 100, 200, 300 }[SpellManager.R.Level - 1] + 0.75 * Player.Instance.FlatPhysicalDamageMod) * (1 + 0.2 * target.BuffCount("dariushemo"));
         }
 
         public static double RDamage(this AIHeroClient target, int stack)
         {
+            if (!SpellManager.R.IsLearned)
+                return 0;
+
             return (new double[] { 100, 200, 300 }[SpellManager.R.Level - 1] + 0.75 * Player.Instance.FlatPhysicalDamageMod) * (1 + 0.2 * stack);
         }
 
@@ -30,6 +36,13 @@ namespace DatDarius
             float damagePerSec = (9 + Player.Instance.Level + 0.3f * Player.Instance.FlatPhysicalDamageMod) / 5;
 
             return Damage.CalculateDamageOnUnit(Player.Instance, target, DamageType.Physical, damagePerSec * target.BuffCount("dariushemo") * target.BuffRemainTime("dariushemo"), false, false);
+        }
+
+        public static float PassiveDamage(this AIHeroClient target, int second)
+        {
+            float damagePerSec = (9 + Player.Instance.Level + 0.3f * Player.Instance.FlatPhysicalDamageMod) / 5;
+
+            return Damage.CalculateDamageOnUnit(Player.Instance, target, DamageType.Physical, damagePerSec * target.BuffCount("dariushemo") * second, false, false);
         }
 
         public static float PassiveDamage(this AIHeroClient target, int stack, int second)
