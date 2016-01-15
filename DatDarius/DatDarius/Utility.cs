@@ -30,18 +30,7 @@ namespace DatDarius
 
             return Kappa;
         }
-
-        public static Vector3 DirectionVector(Vector3 vec3)
-        {
-            Vector3 Kappa;
-
-            Kappa.X = (vec3.X * (float)Math.Cos(90 * Math.PI / 180)) - (vec3.Y * (float)Math.Sin(90 * Math.PI / 180));
-            Kappa.Y = (vec3.X * (float)Math.Sin(90 * Math.PI / 180)) - (vec3.Y * (float)Math.Cos(90 * Math.PI / 180));
-            Kappa.Z = 0;
-
-            return Kappa;
-        }
-
+        
         public static Vector3 UnitVector(Vector3 vec3)
         {
             Vector3 Kappa;
@@ -56,21 +45,12 @@ namespace DatDarius
 
         public static Vector3 PositionPrediction(AIHeroClient unit, float sec)
         {
+            if (!unit.IsMoving)
+                return unit.ServerPosition;
+
             Vector3 Kappa;
 
             Kappa = unit.Position + UnitVector(DirectionVector(unit)) * unit.MoveSpeed * sec;
-
-            return Kappa;
-        }
-
-        public static Vector3 WaypointPrediction(AIHeroClient unit, float sec)
-        {
-            Vector3 Kappa;
-
-            if (unit.IsMoving && unit.Path.Length > 1)
-                Kappa = unit.Position + UnitVector(DirectionVector(unit.Path[1])) * unit.MoveSpeed * sec;
-            else
-                Kappa = unit.ServerPosition;
 
             return Kappa;
         }

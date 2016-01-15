@@ -52,7 +52,7 @@ namespace DatDarius
                                 { "IsValidTarget", hero.IsValidTarget() },
                                 { "AttackCastDelay", hero.AttackCastDelay },
                                 { "AttackDelay", hero.AttackDelay },
-                                { "Attacking", Darius.Attacking }
+                                { "Attacking", Darius.PlayerIsAttacking }
                             };
 
                         Drawing.DrawText(hero.Position.WorldToScreen() + new Vector2(0, i), Color.Orange, "General properties", 10);

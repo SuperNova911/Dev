@@ -70,7 +70,7 @@
     <Compile Include="Menu\Interfaces\ICustomControl.cs" />
     <Compile Include="Menu\Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SDK\Interrupt.cs" />
+    <Compile Include="Interrupt.cs" />
     <Compile Include="SpellManager.cs" />
     <Compile Include="Ultimate.cs" />
     <Compile Include="Utility.cs" />
