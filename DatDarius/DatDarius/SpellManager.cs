@@ -46,24 +46,6 @@ namespace DatDarius
             E.ConeAngleDegrees = 50;
         }
 
-        public static int QMana()
-        {
-            return new int[] { 30, 35, 40, 45, 50 }[Q.Level - 1];
-        }
-
-        public static int WMana()
-        {
-            return new int[] { 30, 30, 30, 30, 30 }[Q.Level - 1];
-        }
-
-        public static int EMana()
-        {
-            return new int[] { 45, 45, 45, 45, 45 }[Q.Level - 1];
-        }
-
-        public static int RMana()
-        {
-            return new int[] { 100, 100, 0 }[Q.Level - 1];
-        }
+        
     }
 }

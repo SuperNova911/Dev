@@ -76,7 +76,7 @@ namespace DatDarius
 
             if (Config.DrawMenu["drawE"].Cast<CheckBox>().CurrentValue && E.IsLearned && Player.VisibleOnScreen)
             {
-                if (ETarget.IsValid)
+                if (ETarget.IsValidTarget())
                     new Geometry.Polygon.Sector(Player.Position, Utility.PositionPrediction(ETarget, 0.25f), SpellManager.eAngle, E.Range)
                         .Draw(Utility.PositionPrediction(ETarget, 0.25f).Distance(Player.ServerPosition) < E.Range ? Color.Red : Color.Orange);
                 else
@@ -105,7 +105,7 @@ namespace DatDarius
             ETarget = TargetSelector.GetTarget(E.Range + 150, DamageType.Physical);
 
             Logic.AutoIgnite();
-            Logic.AutoUlt();
+            //Logic.AutoUlt();
 
             switch (Orbwalker.ActiveModesFlags)
             {
@@ -206,7 +206,7 @@ namespace DatDarius
                 if (!Q.IsReady() || !Qtarget.IsValidTarget())
                     return;
 
-                if (Config.Menu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - SpellManager.QMana() <= SpellManager.RMana())
+                if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.QMana() <= Utility.RMana())
                     return;
 
                 if (PlayerIsAttacking)
@@ -292,7 +292,7 @@ namespace DatDarius
                 if (!E.IsReady() || !ETarget.IsValidTarget())
                     return;
 
-                if (Config.Menu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - SpellManager.QMana() <= SpellManager.RMana())
+                if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.QMana() <= Utility.RMana())
                     return;
 
                 if (ETarget.IsMoving)
@@ -361,12 +361,12 @@ namespace DatDarius
 
                 foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => e.IsValidTarget()))
                 {
-                    if (Config.Menu["1tick"].Cast<CheckBox>().CurrentValue)
+                    if (Config.SpellMenu["1tick"].Cast<CheckBox>().CurrentValue)
                         if (DamageManager.IgniteDamage(1) > enemy.Health + enemy.AllShield && enemy.IsValidTarget(Ignite.Range) &&
                             enemy.PassiveDamage() / 2 < enemy.Health + enemy.AllShield + enemy.HPRegenRate * enemy.BuffRemainTime("dariushemo"))
                             Ignite.Cast(enemy);
 
-                    int tick = Config.Menu["igniteTick"].Cast<Slider>().CurrentValue;
+                    int tick = Config.SpellMenu["igniteTick"].Cast<Slider>().CurrentValue;
 
                     if (DamageManager.IgniteDamage(tick) + enemy.PassiveDamage(tick) > enemy.Health + enemy.AllShield + enemy.HPRegenRate(tick, true) * 0.6f)
                         Ignite.Cast(enemy);
@@ -385,15 +385,37 @@ namespace DatDarius
             if (!Config.SpellMenu["aaReset"].Cast<CheckBox>().CurrentValue || target == null)
                 return;
 
-            if (Config.Menu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - SpellManager.WMana() <= SpellManager.RMana())
+            if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.WMana() <= Utility.RMana())
                 return;
 
-            if (target.IsValidTarget() && W.IsReady())
+            var t = target as AIHeroClient;
+
+            if (t.IsValidTarget() && W.IsReady())
             {
                 W.Cast();
                 Orbwalker.ResetAutoAttack();
-                EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, target);
+                if (target != null)
+                    EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, target);
             }
+
+
+            /*
+            if (!Config.SpellMenu["aaReset"].Cast<CheckBox>().CurrentValue || target == null)
+                return;
+
+            if (Config.Menu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - SpellManager.WMana() <= SpellManager.RMana())
+                return;
+
+            var t = target as AIHeroClient;
+
+            if (t.IsValidTarget() && W.IsReady())
+            {
+                W.Cast();
+                Orbwalker.ResetAutoAttack();
+                if (target != null)
+                    EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, target);
+            }
+            */
         }
 
         private static void Interrupt_OnInterruptableTarget(AIHeroClient sender, Interrupt.InterruptableTargetEventArgs args)
@@ -410,10 +432,10 @@ namespace DatDarius
             if (!Config.SpellMenu["dashE"].Cast<CheckBox>().CurrentValue || Player.IsDead || Player.IsRecalling() || !sender.IsEnemy)
                 return;
 
-            if (Config.Menu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - SpellManager.EMana() <= SpellManager.RMana())
+            if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.EMana() <= Utility.RMana())
                 return;
 
-            if (sender.IsValidTarget() && E.IsReady())
+            if (sender.IsValidTarget(E.Range) && E.IsReady())
                 E.Cast(sender);
         }
     }

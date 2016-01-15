@@ -77,5 +77,25 @@ namespace DatDarius
                   .FirstOrDefault() - Game.Time
                 : 0;
         }
+
+        public static int QMana()
+        {
+            return new int[] { 30, 35, 40, 45, 50 }[SpellManager.Q.Level - 1];
+        }
+
+        public static int WMana()
+        {
+            return new int[] { 30, 30, 30, 30, 30 }[SpellManager.W.Level - 1];
+        }
+
+        public static int EMana()
+        {
+            return new int[] { 45, 45, 45, 45, 45 }[SpellManager.E.Level - 1];
+        }
+
+        public static int RMana()
+        {
+            return new int[] { 100, 100, 0 }[SpellManager.R.Level - 1];
+        }
     }
 }
