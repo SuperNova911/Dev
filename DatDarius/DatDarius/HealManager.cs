@@ -104,5 +104,16 @@ namespace DatDarius
             else
                 return 0;
         }
+
+        public static float HPRegenRate(this AIHeroClient unit, int second, bool potionPrediction)
+        {
+            if (unit.IsUsingPotion())
+                return unit.HPRegenRate * second + unit.GetHeal(second);
+
+            if (potionPrediction)
+                return unit.HPRegenRate * second + unit.HealTick(second);
+
+            return unit.HPRegenRate * second;
+        }
     }
 }
