@@ -42,7 +42,7 @@ namespace DatDarius
         {
             float damagePerSec = (9 + Player.Instance.Level + 0.3f * Player.Instance.FlatPhysicalDamageMod) / 5;
 
-            return Damage.CalculateDamageOnUnit(Player.Instance, target, DamageType.Physical, damagePerSec * target.BuffCount("dariushemo") * second, false, false);
+            return Damage.CalculateDamageOnUnit(Player.Instance, target, DamageType.Physical, damagePerSec * target.BuffCount("dariushemo") * target.BuffRemainTime("dariushemo") > second ? second : target.BuffRemainTime("dariushemo"), false, false);
         }
 
         public static float PassiveDamage(this AIHeroClient target, int stack, int second)
