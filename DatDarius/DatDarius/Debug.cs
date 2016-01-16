@@ -130,6 +130,28 @@ namespace DatDarius
                     }
                     #endregion
 
+                    #region
+                    if (Config.DebugMenu["hudUltimateOutPut"].Cast<CheckBox>().CurrentValue && hero.IsEnemy)
+                    {
+                        var data = new Dictionary<string, object>
+                            {
+                                { "IsKillable", hero.GetResult().IsKillable },
+                                { "LetItGo", hero.GetResult().LetItGo },
+                                { "LanePhase", hero.GetResult().LanePhase },
+                                { "IsAlone", hero.GetResult().IsAlone },
+                                { "Range", hero.GetResult().Range },
+                                { "Unnecessary", hero.GetResult().Unnecessary }
+                            };
+
+                        Drawing.DrawText(hero.Position.WorldToScreen() + new Vector2(0, i), Color.Plum, "UltimateOutPut properties", 10);
+                        i += step;
+                        foreach (var dataEntry in data)
+                        {
+                            Drawing.DrawText(hero.Position.WorldToScreen() + new Vector2(0, i), Color.NavajoWhite, string.Format("{0}: {1}", dataEntry.Key, dataEntry.Value), 10);
+                            i += step;
+                        }
+                    }
+                    #endregion
 
                     /*
                     #region
