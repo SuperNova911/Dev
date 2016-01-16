@@ -156,22 +156,22 @@ namespace DatDarius
         {
             public static void Combo()
             {
-                if (Config.Menu["useQcombo"].Cast<CheckBox>().CurrentValue)
+                if (Config.OrbMenu["useQcombo"].Cast<CheckBox>().CurrentValue)
                 {
                     Logic.CastQ();
                 }
 
-                if (Config.Menu["useWcombo"].Cast<CheckBox>().CurrentValue)
+                if (Config.OrbMenu["useWcombo"].Cast<CheckBox>().CurrentValue)
                 {
 
                 }
 
-                if (Config.Menu["useEcombo"].Cast<CheckBox>().CurrentValue)
+                if (Config.OrbMenu["useEcombo"].Cast<CheckBox>().CurrentValue)
                 {
                     Logic.CastE();
                 }
 
-                if (Config.Menu["useRcombo"].Cast<CheckBox>().CurrentValue)
+                if (Config.OrbMenu["useRcombo"].Cast<CheckBox>().CurrentValue)
                 {
                     Logic.CastR();
                 }
@@ -179,22 +179,22 @@ namespace DatDarius
 
             public static void Harass()
             {
-                if (Config.Menu["useQharass"].Cast<CheckBox>().CurrentValue)
+                if (Config.OrbMenu["useQharass"].Cast<CheckBox>().CurrentValue)
                 {
                     Logic.CastQ();
                 }
 
-                if (Config.Menu["useWharass"].Cast<CheckBox>().CurrentValue)
+                if (Config.OrbMenu["useWharass"].Cast<CheckBox>().CurrentValue)
                 {
 
                 }
 
-                if (Config.Menu["useEharass"].Cast<CheckBox>().CurrentValue)
+                if (Config.OrbMenu["useEharass"].Cast<CheckBox>().CurrentValue)
                 {
                     Logic.CastE();
                 }
 
-                if (Config.Menu["useRharass"].Cast<CheckBox>().CurrentValue)
+                if (Config.OrbMenu["useRharass"].Cast<CheckBox>().CurrentValue)
                 {
                     Logic.CastR();
                 }
