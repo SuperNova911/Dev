@@ -37,13 +37,13 @@ namespace DatDarius
     {
         public static UltimateOutPut GetResult(this AIHeroClient unit)
         {
-            UltimateOutPut result = null;
-            
+            UltimateOutPut result = new UltimateOutPut();
+
             float Health = unit.Health;
             float Shield = unit.AllShield + unit.MordeShield();
             int Stack = unit.BuffCount("dariushemo");
-            int 오차 = Config.SpellMenu["오차"].Cast<Slider>().CurrentValue;
-
+            int error = Config.SpellMenu["error"].Cast<Slider>().CurrentValue;
+            
             if (!unit.IsValidTarget(SpellManager.R.Range + SpellManager.Flash.Range) && unit.HasSpellShield() && unit.HasBuff("kindredrnodeathbuff"))
                 return new UltimateOutPut();
 
@@ -56,7 +56,7 @@ namespace DatDarius
             if (Player.Instance.HealthPercent >= 75 && unit.HealthPercent <= 25 && result.IsAlone && SpellManager.R.Level < 3)
                 result.Unnecessary = true;
 
-            if (unit.RDamage() > Health + Shield + unit.HPRegenRate + 오차)
+            if (unit.RDamage() > Health + Shield + unit.HPRegenRate + error)
             {
                 result.IsKillable = true;
 

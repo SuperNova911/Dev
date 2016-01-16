@@ -99,7 +99,7 @@ namespace DatDarius
             SpellMenu.Add("dieR", new CheckBox("Use R before die", true));
             SpellMenu.Add("freeR", new CheckBox("Use R before end free R buff", true));
             SpellMenu.Add("saveRMana", new CheckBox("Save mana for R", true));
-            SpellMenu.Add("오차", new Slider("오차범위", 0, 0, 50));
+            SpellMenu.Add("error", new Slider("오차범위", 0, 0, 50));
             SpellMenu.AddGroupLabel("Ignite");
             SpellMenu.Add("1tick", new CheckBox("Instant Kill", true));
             SpellMenu.Add("igniteTick", new Slider("Ignite calculation tick", 3, 1, 5));
@@ -126,6 +126,7 @@ namespace DatDarius
             DebugMenu.Add("hudHealth", new CheckBox("Health properties", false));
             DebugMenu.Add("hudPrediction", new CheckBox("Prediction properties", false));
             DebugMenu.Add("hudDamage", new CheckBox("Damage properties", false));
+            DebugMenu.Add("hudUltimateOutPut", new CheckBox("UltimateOutPut properties", false));
 
             //DebugMenu.Add("", new CheckBox("", ));
             #endregion

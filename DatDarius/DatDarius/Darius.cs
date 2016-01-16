@@ -105,7 +105,7 @@ namespace DatDarius
             ETarget = TargetSelector.GetTarget(E.Range + 150, DamageType.Physical);
 
             Logic.AutoIgnite();
-            //Logic.AutoUlt();
+            Logic.AutoUlt();
 
             switch (Orbwalker.ActiveModesFlags)
             {
@@ -361,6 +361,9 @@ namespace DatDarius
 
                 foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => e.IsValidTarget()))
                 {
+                    if (enemy.GetResult().IsKillable && enemy.GetResult().Range == UltRange.RRange && R.IsReady())
+                        continue;
+
                     if (Config.SpellMenu["1tick"].Cast<CheckBox>().CurrentValue)
                         if (DamageManager.IgniteDamage(1) > enemy.Health + enemy.AllShield && enemy.IsValidTarget(Ignite.Range) &&
                             enemy.PassiveDamage() / 2 < enemy.Health + enemy.AllShield + enemy.HPRegenRate * enemy.BuffRemainTime("dariushemo"))
@@ -382,7 +385,7 @@ namespace DatDarius
 
         private static void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
         {
-            if (!Config.SpellMenu["aaReset"].Cast<CheckBox>().CurrentValue || target == null)
+            if (!Config.SpellMenu["aaReset"].Cast<CheckBox>().CurrentValue || target == null || !W.IsReady())
                 return;
 
             if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.WMana() <= Utility.RMana())
@@ -429,13 +432,13 @@ namespace DatDarius
 
         private static void Dash_OnDash(Obj_AI_Base sender, Dash.DashEventArgs e)
         {
-            if (!Config.SpellMenu["dashE"].Cast<CheckBox>().CurrentValue || Player.IsDead || Player.IsRecalling() || !sender.IsEnemy)
+            if (!Config.SpellMenu["dashE"].Cast<CheckBox>().CurrentValue || Player.IsDead || Player.IsRecalling() || !sender.IsEnemy ||!E.IsReady())
                 return;
 
             if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.EMana() <= Utility.RMana())
                 return;
 
-            if (sender.IsValidTarget(E.Range) && E.IsReady())
+            if (sender.IsValidTarget(E.Range))
                 E.Cast(sender);
         }
     }

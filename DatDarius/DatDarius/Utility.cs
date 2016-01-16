@@ -80,22 +80,25 @@ namespace DatDarius
 
         public static int QMana()
         {
-            return new int[] { 30, 35, 40, 45, 50 }[SpellManager.Q.Level - 1];
+            return new int[] { 0, 30, 35, 40, 45, 50 }[SpellManager.Q.Level];
         }
 
         public static int WMana()
         {
-            return new int[] { 30, 30, 30, 30, 30 }[SpellManager.W.Level - 1];
+            return new int[] { 0, 30, 30, 30, 30, 30 }[SpellManager.W.Level];
         }
 
         public static int EMana()
         {
-            return new int[] { 45, 45, 45, 45, 45 }[SpellManager.E.Level - 1];
+            return new int[] { 0, 45, 45, 45, 45, 45 }[SpellManager.E.Level];
         }
 
         public static int RMana()
         {
-            return new int[] { 100, 100, 0 }[SpellManager.R.Level - 1];
+            if (!SpellManager.R.IsReady() || Player.Instance.HasBuff("DariusExecuteMulticast"))
+                return 0;
+
+            return new int[] { 0, 100, 100, 0 }[SpellManager.R.Level];
         }
     }
 }
