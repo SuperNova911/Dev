@@ -110,7 +110,7 @@ namespace DatDarius
                     #endregion
 
                     #region Damage
-                    if (Config.DebugMenu["hudDamage"].Cast<CheckBox>().CurrentValue)
+                    if (Config.DebugMenu["hudDamage"].Cast<CheckBox>().CurrentValue && hero.IsEnemy)
                     {
                         var data = new Dictionary<string, object>
                             {
@@ -144,6 +144,25 @@ namespace DatDarius
                             };
 
                         Drawing.DrawText(hero.Position.WorldToScreen() + new Vector2(0, i), Color.Plum, "UltimateOutPut properties", 10);
+                        i += step;
+                        foreach (var dataEntry in data)
+                        {
+                            Drawing.DrawText(hero.Position.WorldToScreen() + new Vector2(0, i), Color.NavajoWhite, string.Format("{0}: {1}", dataEntry.Key, dataEntry.Value), 10);
+                            i += step;
+                        }
+                    }
+                    #endregion
+
+                    #region
+                    if (Config.DebugMenu["hudTarget"].Cast<CheckBox>().CurrentValue && hero.IsMe)
+                    {
+                        var data = new Dictionary<string, object>
+                            {
+                                { "Q Target", Darius.QTarget.IsValidTarget() ? Darius.QTarget.BaseSkinName : "No Target" },
+                                { "E Target", Darius.ETarget.IsValidTarget() ? Darius.ETarget.BaseSkinName : "No Target" }
+                            };
+
+                        Drawing.DrawText(hero.Position.WorldToScreen() + new Vector2(0, i), Color.Plum, "Target properties", 10);
                         i += step;
                         foreach (var dataEntry in data)
                         {

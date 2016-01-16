@@ -127,6 +127,7 @@ namespace DatDarius
             DebugMenu.Add("hudPrediction", new CheckBox("Prediction properties", false));
             DebugMenu.Add("hudDamage", new CheckBox("Damage properties", false));
             DebugMenu.Add("hudUltimateOutPut", new CheckBox("UltimateOutPut properties", false));
+            DebugMenu.Add("hudTarget", new CheckBox("Target properties", false));
 
             //DebugMenu.Add("", new CheckBox("", ));
             #endregion
