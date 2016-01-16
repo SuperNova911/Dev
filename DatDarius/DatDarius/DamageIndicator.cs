@@ -39,7 +39,7 @@ namespace DatDarius
                                      : (enemy.RDamage(5) / enemy.MaxHealth));
 
                 Line.DrawLine(
-                    Color.Red,
+                    enemy.GetResult().IsKillable ? Color.Red : Color.LawnGreen,
                     9f, 
                     new Vector2(pos.X, pos.Y),
                     new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage)), pos.Y));
