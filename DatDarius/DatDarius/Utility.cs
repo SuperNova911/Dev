@@ -95,7 +95,7 @@ namespace DatDarius
 
         public static int RMana()
         {
-            if (!SpellManager.R.IsReady() || Player.Instance.HasBuff("DariusExecuteMulticast"))
+            if (SpellManager.R.IsOnCooldown || Player.Instance.HasBuff("DariusExecuteMulticast"))
                 return 0;
 
             return new int[] { 0, 100, 100, 0 }[SpellManager.R.Level];
