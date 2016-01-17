@@ -31,6 +31,11 @@ namespace DatDarius
             return (10 + 4 * Player.Instance.Level) * second;
         }
 
+        public static int IgniteDamage(this AIHeroClient target)
+        {
+            return IgniteDamage(1) * (int)target.BuffRemainTime("SummonerIgnite");
+        }
+
         public static float PassiveDamage(this AIHeroClient target)
         {
             float damagePerSec = (9 + Player.Instance.Level + 0.3f * Player.Instance.FlatPhysicalDamageMod) / 5;
