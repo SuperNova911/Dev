@@ -19,14 +19,14 @@ namespace DatDarius
         
         static Debug()
         {
-            
-
-            
             Drawing.OnDraw += Drawing_OnDraw;
         }
 
         private static void Drawing_OnDraw(EventArgs args)
         {
+            if (!Config.Menu["debug"].Cast<CheckBox>().CurrentValue || Config.DebugMenu == null)
+                return;
+
             foreach (var hero in EntityManager.Heroes.AllHeroes.Where(h => h.VisibleOnScreen && h.IsValidTarget()))
             {
                 #region ePosPred
