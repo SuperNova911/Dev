@@ -54,6 +54,7 @@ namespace DatDarius
 
             Drawing.OnDraw += Drawing_OnDraw;
             Game.OnTick += Game_OnTick;
+            Game.OnUpdate += Game_OnUpdate;
             Orbwalker.OnAttack += Orbwalker_OnAttack;
             Orbwalker.OnPostAttack += Orbwalker_OnPostAttack;
             Interrupt.OnInterruptableTarget += Interrupt_OnInterruptableTarget;
@@ -61,6 +62,36 @@ namespace DatDarius
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
 
             Chat.Print("Dat Darius Loaded", Color.LawnGreen);
+        }
+
+        private static void Game_OnUpdate(EventArgs args)
+        {
+            if (!Config.Menu["skin"].Cast<CheckBox>().CurrentValue)
+                return;
+
+            var skin = Config.Menu["sID"].DisplayName;
+            
+            switch (skin)
+            {
+                case "Classic":
+                    Player.SetSkinId(0);
+                    break;
+                case "Lord Darius":
+                    Player.SetSkinId(1);
+                    break;
+                case "Bioforge Darius":
+                    Player.SetSkinId(2);
+                    break;
+                case "Woad King Darius":
+                    Player.SetSkinId(3);
+                    break;
+                case "Dunkmaster Darius":
+                    Player.SetSkinId(4);
+                    break;
+                case "Academy Darius":
+                    Player.SetSkinId(8);
+                    break;
+            }
         }
 
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
@@ -77,16 +108,9 @@ namespace DatDarius
 
         private static void Drawing_OnDraw(EventArgs args)
         {
-            if (Player.IsDead)
+            if (Player.IsDead || !Config.Menu["drawing"].Cast<CheckBox>().CurrentValue)
                 return;
-
-            new Circle
-            {
-                Color = Color.Gold,
-                BorderWidth = 2,
-                Radius = Q.Range - 180
-            }.Draw(Player.Position);
-
+            
             if (Config.DrawMenu["drawQ"].Cast<CheckBox>().CurrentValue && Q.IsLearned && Player.VisibleOnScreen)
                 new Circle
                 {
@@ -115,6 +139,14 @@ namespace DatDarius
 
             // FlashE
             // FlashR
+
+            if (Config.DrawMenu["drawText"].Cast<CheckBox>().CurrentValue)
+            {
+                if (Config.SpellMenu["autoR"].Cast<KeyBind>().CurrentValue)
+                    Drawing.DrawText(Player.Position.WorldToScreen() + new Vector2(-50, 30), Color.LawnGreen, "AutoUlt Enabled", 10);
+                else
+                    Drawing.DrawText(Player.Position.WorldToScreen() + new Vector2(-50, 30), Color.Gray, "AutoUlt Disabled", 10);
+            }
         }
 
         private static void Game_OnTick(EventArgs args)
@@ -135,9 +167,6 @@ namespace DatDarius
                     break;
                 case Orbwalker.ActiveModes.Harass:
                     Mode.Harass();
-                    break;
-                case Orbwalker.ActiveModes.LastHit:
-                    Mode.LastHit();
                     break;
                 case Orbwalker.ActiveModes.LaneClear:
                     Mode.LaneClear();
@@ -161,11 +190,6 @@ namespace DatDarius
                     Logic.CastQ();
                 }
 
-                if (Config.OrbMenu["useWcombo"].Cast<CheckBox>().CurrentValue)
-                {
-
-                }
-
                 if (Config.OrbMenu["useEcombo"].Cast<CheckBox>().CurrentValue)
                 {
                     Logic.CastE();
@@ -184,11 +208,6 @@ namespace DatDarius
                     Logic.CastQ();
                 }
 
-                if (Config.OrbMenu["useWharass"].Cast<CheckBox>().CurrentValue)
-                {
-
-                }
-
                 if (Config.OrbMenu["useEharass"].Cast<CheckBox>().CurrentValue)
                 {
                     Logic.CastE();
@@ -200,19 +219,14 @@ namespace DatDarius
                 }
             }
 
-            public static void LastHit()
-            {
-
-            }
-
             public static void LaneClear()
             {
-
+                Logic.LaneClear();
             }
 
             public static void JungleClear()
             {
-
+                Logic.JungleClear();
             }
 
             public static void Flee()
@@ -238,8 +252,9 @@ namespace DatDarius
                     return;
 
                 var distance = QTarget.ServerPosition.Distance(Player.ServerPosition);
+                var predDistance = Utility.PositionPrediction(QTarget, 0.25f).Distance(Utility.PositionPrediction(Player, 0.25f));
 
-                if (Q.Range - 200 < distance && distance < Q.Range)
+                if (Player.AttackRange < distance && distance < Q.Range && Player.AttackRange < predDistance)
                     Q.Cast();
 
                 #region WIP Logic
@@ -319,7 +334,7 @@ namespace DatDarius
 
             public static void CastE()
             {
-                if (!E.IsReady() || !ETarget.IsValidTarget() || ETarget.IsZombie)
+                if (!E.IsReady() || !ETarget.IsValidTarget() || ETarget.IsZombie || ETarget.HasSpellShield())
                     return;
 
                 if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.QMana() <= Utility.RMana())
@@ -377,7 +392,7 @@ namespace DatDarius
 
             public static void AutoUlt()
             {
-                if (!R.IsReady())
+                if (!R.IsReady() || !Config.SpellMenu["autoR"].Cast<KeyBind>().CurrentValue)
                     return;
 
                 foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => e.IsValidTarget() && !e.IsZombie))
@@ -397,12 +412,15 @@ namespace DatDarius
 
             public static void AutoIgnite()
             {
-                if (Ignite == null || !Ignite.IsReady())
+                if (Ignite == null || !Ignite.IsReady() && !Config.SpellMenu["useIgnite"].Cast<CheckBox>().CurrentValue)
                     return;
 
-                foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => e.IsValidTarget() && !e.IsZombie))
+                foreach (var enemy in EntityManager.Heroes.Enemies.Where(e => e.IsValidTarget(Ignite.Range) && !e.IsZombie))
                 {
                     if (enemy.GetResult().IsKillable && enemy.GetResult().Range == UltRange.RRange && R.IsReady())
+                        continue;
+
+                    if (enemy.ServerPosition.Distance(Player.ServerPosition) < Player.AttackRange && Player.HealthPercent < 30)
                         continue;
 
                     if (Config.SpellMenu["1tick"].Cast<CheckBox>().CurrentValue)
@@ -414,6 +432,49 @@ namespace DatDarius
 
                     if (DamageManager.IgniteDamage(tick) + enemy.PassiveDamage(tick) > enemy.Health + enemy.AllShield + enemy.HPRegenRate(tick, true) * 0.6f)
                         Ignite.Cast(enemy);
+                }
+            }
+
+            public static void LaneClear()
+            {
+                if (Config.OrbMenu["laneMana"].Cast<Slider>().CurrentValue > Player.ManaPercent)
+                    return;
+                
+                if (Config.OrbMenu["useQlaneclear"].Cast<CheckBox>().CurrentValue)
+                {
+                    if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.QMana() <= Utility.RMana())
+                        return;
+
+                    var minion = EntityManager.MinionsAndMonsters.EnemyMinions.Where(m => m.IsValidTarget(Q.Range));
+
+                    if (minion == null || !minion.Any(t => t.IsValidTarget(Q.Range)) || PlayerIsAttacking)
+                        return;
+
+                    if (Q.IsReady() && minion.Count(m => m.Distance(Player.ServerPosition) < Q.Range) >= 4)
+                        Q.Cast();
+                }
+            }
+
+            public static void JungleClear()
+            {
+                if (Config.OrbMenu["jungleMana"].Cast<Slider>().CurrentValue > Player.ManaPercent)
+                    return;
+
+                if (Config.OrbMenu["useQjungleclear"].Cast<CheckBox>().CurrentValue)
+                {
+                    if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.QMana() <= Utility.RMana())
+                        return;
+
+                    var mob = EntityManager.MinionsAndMonsters.Monsters.Where(m => m.IsValidTarget(Q.Range));
+
+                    if (mob == null || !mob.Any(t => t.IsValidTarget(Q.Range)) || PlayerIsAttacking)
+                        return;
+
+                    if (Config.OrbMenu["useWjungleclear"].Cast<CheckBox>().CurrentValue && W.IsReady())
+                        return;
+
+                    if (Q.IsReady() && mob.Count(m => m.Distance(Player.ServerPosition) < Q.Range) >= 3)
+                        Q.Cast();
                 }
             }
         }
@@ -432,6 +493,15 @@ namespace DatDarius
             if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.WMana() <= Utility.RMana())
                 return;
 
+            if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Combo && !Config.OrbMenu["useWcombo"].Cast<CheckBox>().CurrentValue)
+                return;
+
+            if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Harass && !Config.OrbMenu["useWharass"].Cast<CheckBox>().CurrentValue)
+                return;
+
+            if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.JungleClear && !Config.OrbMenu["useWjungleclear"].Cast<CheckBox>().CurrentValue)
+                return;
+
             var t = target as AIHeroClient;
 
             if (t.IsValidTarget() && W.IsReady())
@@ -440,6 +510,21 @@ namespace DatDarius
                 Orbwalker.ResetAutoAttack();
                 if (target != null)
                     EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, target);
+
+                return;
+            }
+
+            if (Config.OrbMenu["jungleMana"].Cast<Slider>().CurrentValue < Player.ManaPercent)
+            {
+                var j = target as Obj_AI_Base;
+
+                if (j.IsMonster && j.IsValidTarget() && W.IsReady())
+                {
+                    W.Cast();
+                    Orbwalker.ResetAutoAttack();
+                    if (target != null)
+                        EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, target);
+                }
             }
         }
 
