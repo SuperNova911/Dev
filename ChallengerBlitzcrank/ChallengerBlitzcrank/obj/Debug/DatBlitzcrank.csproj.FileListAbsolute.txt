@@ -24,3 +24,4 @@ C:\Users\SpringField\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\C
 C:\Users\SpringField\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\obj\Debug\ChallengerBlitzcrank.pdb
 C:\Users\SpringField\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\SPrediction.dll
 C:\Users\SpringField\Documents\GitHub\EloBuddy-Developing\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\SPrediction.pdb
+C:\Users\SuperNova\Documents\GitHub\Dev\ChallengerBlitzcrank\ChallengerBlitzcrank\bin\Debug\ChallengerBlitzcrank.exe.config
