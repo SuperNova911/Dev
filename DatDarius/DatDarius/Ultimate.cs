@@ -42,18 +42,18 @@ namespace DatDarius
             float Health = unit.Health;
             float Shield = unit.AllShield + unit.MordeShield();
             int Stack = unit.BuffCount("dariushemo");
-            
+
+            if (Player.Instance.HealthPercent >= 75 && unit.HealthPercent <= 25 && result.IsAlone && SpellManager.R.Level < 3 && Config.SpellMenu["unneR"].Cast<CheckBox>().CurrentValue)
+                result.Unnecessary = true;
+
             if (!unit.IsValidTarget(SpellManager.R.Range + SpellManager.Flash.Range) && unit.HasSpellShield() && unit.HasBuff("kindredrnodeathbuff"))
-                return new UltimateOutPut();
+                return result;
 
             if (Player.Instance.CountEnemiesInRange(1500) == 1)
                 result.IsAlone = true;
 
             if (Player.Instance.CountAlliesInRange(1500) == 1 && Player.Instance.CountEnemiesInRange(1500) == 1)
                 result.LanePhase = true;
-
-            if (Player.Instance.HealthPercent >= 75 && unit.HealthPercent <= 25 && result.IsAlone && SpellManager.R.Level < 3)
-                result.Unnecessary = true;
 
             if (unit.RDamage() > Health + Shield + unit.HPRegenRate)
             {
@@ -66,7 +66,7 @@ namespace DatDarius
                     result.Range = UltRange.RRange;
             }
 
-            if (unit.RDamage() + unit.PassiveDamage(Stack == 5 ? Stack : Stack + 1, 3) > Health + Shield + unit.HPRegenRate(3, true) && result.IsAlone)
+            if (unit.RDamage() + unit.PassiveDamage(Stack == 5 ? Stack : Stack + 1, 3) + unit.IgniteDamage() > Health + Shield + unit.HPRegenRate(3, true) && result.IsAlone)
                 result.LetItGo = true;
             
             return result;
