@@ -113,7 +113,7 @@ namespace DatDarius
             if (potionPrediction)
                 return unit.HPRegenRate * second + unit.HealTick(second);
 
-            return unit.HPRegenRate * second;
+            return unit.HasBuff("SummonerIgnite") ? unit.HPRegenRate * second * 0.6f : unit.HPRegenRate * second;
         }
     }
 }
