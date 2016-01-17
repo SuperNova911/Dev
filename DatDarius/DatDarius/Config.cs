@@ -114,10 +114,10 @@ namespace DatDarius
                 #region Debug Menu
                 DebugMenu = Menu.AddSubMenu("Debug", "Debug");
                 DebugMenu.AddGroupLabel("Drawing");
-                DebugMenu.Add("ePosPred", new CheckBox("E position prediction", true));
+                DebugMenu.Add("ePosPred", new CheckBox("E position prediction", false));
                 DebugMenu.AddSeparator();
                 DebugMenu.AddGroupLabel("HUD");
-                DebugMenu.Add("hud", new CheckBox("Show hud", true));
+                DebugMenu.Add("hud", new CheckBox("Show hud", false));
                 DebugMenu.AddSeparator();
                 DebugMenu.Add("hudGeneral", new CheckBox("General properties", true));
                 DebugMenu.Add("hudHealth", new CheckBox("Health properties", false));
