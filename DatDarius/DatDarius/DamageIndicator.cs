@@ -42,7 +42,7 @@ namespace DatDarius
                 UltimateOutPut result = enemy.GetResult();
 
                 Line.DrawLine(
-                    result.IsKillable ? Color.Red : Color.LawnGreen,
+                    result.IsKillable ? Color.Red : Color.Maroon,
                     9f, 
                     new Vector2(pos.X, pos.Y),
                     new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage)), pos.Y));
