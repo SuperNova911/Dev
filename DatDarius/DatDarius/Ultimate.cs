@@ -66,7 +66,9 @@ namespace DatDarius
                     result.Range = UltRange.RRange;
             }
 
-            if (unit.RDamage() + unit.PassiveDamage(Stack == 5 ? Stack : Stack + 1, 3) + unit.IgniteDamage() > Health + Shield + unit.HPRegenRate(3, true) && result.IsAlone)
+            int sec = 4;
+
+            if (unit.RDamage() + unit.PassiveDamage(Stack == 5 ? Stack : Stack + 1, sec) + unit.IgniteDamage() > Health + Shield + unit.HPRegenRate(sec, true) && result.IsAlone)
                 result.LetItGo = true;
             
             return result;

@@ -159,27 +159,19 @@ namespace DatDarius
 
             Logic.AutoIgnite();
             Logic.AutoUlt();
+            Logic.TowerE();
 
-            switch (Orbwalker.ActiveModesFlags)
-            {
-                case Orbwalker.ActiveModes.Combo:
-                    Mode.Combo();
-                    break;
-                case Orbwalker.ActiveModes.Harass:
-                    Mode.Harass();
-                    break;
-                case Orbwalker.ActiveModes.LaneClear:
-                    Mode.LaneClear();
-                    break;
-                case Orbwalker.ActiveModes.JungleClear:
-                    Mode.JungleClear();
-                    break;
-                case Orbwalker.ActiveModes.Flee:
-                    Mode.Flee();
-                    break;
-            }
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
+                Mode.Combo();
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
+                Mode.Harass();
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                Mode.LaneClear();
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+                Mode.JungleClear();
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))
+                Mode.Flee();
         }
-
         
         public class Mode
         {
@@ -340,18 +332,20 @@ namespace DatDarius
                 if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.QMana() <= Utility.RMana())
                     return;
 
+                var minRange = Config.SpellMenu["minErange"].Cast<Slider>().CurrentValue;
+
                 if (ETarget.IsMoving)
                 {
-                    var distance = Utility.PositionPrediction(ETarget, 0.25f).Distance(Player.ServerPosition);
+                    var distance = Utility.PositionPrediction(ETarget, 0.25f).Distance(Player.ServerPosition) - ETarget.BoundingRadius;
 
-                    if (450 < distance && distance < E.Range)
+                    if (minRange < distance && distance < E.Range)
                         E.Cast(Utility.PositionPrediction(ETarget, 0.25f));
                 }
                 else
                 {
-                    var distance = ETarget.ServerPosition.Distance(Player.ServerPosition);
+                    var distance = ETarget.ServerPosition.Distance(Player.ServerPosition) - ETarget.BoundingRadius;
 
-                    if (450 < distance && distance < E.Range)
+                    if (minRange < distance && distance < E.Range)
                         E.Cast(ETarget.ServerPosition);
                 }
             }
@@ -387,7 +381,13 @@ namespace DatDarius
                 if (Config.SpellMenu["saveRMana"].Cast<CheckBox>().CurrentValue && Player.Mana - Utility.QMana() <= Utility.RMana())
                     return;
 
+                var tower = EntityManager.Turrets.Allies.OrderBy(t => t.Distance(Player)).First();
 
+                if (tower == null)
+                    return;
+
+                if (tower.Distance(Player) < tower.AttackRange - 100 && ETarget.IsValidTarget())
+                    CastE();
             }
 
             public static void AutoUlt()
@@ -473,7 +473,7 @@ namespace DatDarius
                     if (Config.OrbMenu["useWjungleclear"].Cast<CheckBox>().CurrentValue && W.IsReady())
                         return;
 
-                    if (Q.IsReady() && mob.Count(m => m.Distance(Player.ServerPosition) < Q.Range) >= 3)
+                    if (Q.IsReady() && mob.Count(m => m.Distance(Player.ServerPosition) < Q.Range) >= 1)
                         Q.Cast();
                 }
             }
@@ -502,7 +502,19 @@ namespace DatDarius
             if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.JungleClear && !Config.OrbMenu["useWjungleclear"].Cast<CheckBox>().CurrentValue)
                 return;
 
-            var t = target as AIHeroClient;
+            var h = target as AIHeroClient;
+
+            if (h.IsValidTarget() && W.IsReady())
+            {
+                W.Cast();
+                Orbwalker.ResetAutoAttack();
+                if (target != null)
+                    EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, target);
+
+                return;
+            }
+
+            var t = target as Obj_AI_Turret;
 
             if (t.IsValidTarget() && W.IsReady())
             {

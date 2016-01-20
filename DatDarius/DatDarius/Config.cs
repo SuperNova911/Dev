@@ -84,6 +84,7 @@ namespace DatDarius
             SpellMenu.Add("dashE", new CheckBox("Dash E", true));
             SpellMenu.Add("interruptE", new CheckBox("Interrupt E", true));
             SpellMenu.Add("towerE", new CheckBox("Tower E", true));
+            SpellMenu.Add("minErange", new Slider("Minimum E range", 450, 0, 550));
             SpellMenu.AddGroupLabel("R");
             SpellMenu.Add("flashR", new KeyBind("Flash R", false, KeyBind.BindTypes.HoldActive, 'G'));
             SpellMenu.Add("autoR", new KeyBind("Enable Auto R", true, KeyBind.BindTypes.PressToggle, 'Z'));
