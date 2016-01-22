@@ -36,9 +36,9 @@ namespace DatBlitzcrank
 
                 Line.DrawLine(Color.FromArgb(100, Color.Orange), 9f, new Vector2(pos.X, pos.Y),
                     new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage)), pos.Y));
-                Line.DrawLine(Color.Black, 9,
-                    new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage) - 2), pos.Y),
-                    new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage) + 2), pos.Y));
+                //Line.DrawLine(Color.Black, 9,
+                    //new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage) - 2), pos.Y),
+                    //new Vector2((float)(pos.X + (damage > fullbar ? fullbar : damage) + 2), pos.Y));
             }
         }
     }

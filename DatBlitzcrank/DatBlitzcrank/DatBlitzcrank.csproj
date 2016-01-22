@@ -7,8 +7,8 @@
     <ProjectGuid>{CFF37AA3-0B89-47C1-AE0D-302E672264D7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChallengerBlitzcrank</RootNamespace>
-    <AssemblyName>ChallengerBlitzcrank</AssemblyName>
+    <RootNamespace>DatBlitzcrank</RootNamespace>
+    <AssemblyName>DatBlitzcrank</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BanSharp">
-      <HintPath>..\..\BanSharp\bin\Release\BanSharp.dll</HintPath>
-    </Reference>
     <Reference Include="EloBuddy">
       <HintPath>..\..\..\..\..\..\..\..\EloBuddy\System\EloBuddy.dll</HintPath>
     </Reference>
@@ -47,9 +44,6 @@
     </Reference>
     <Reference Include="SharpDX.Direct3D9">
       <HintPath>..\..\..\..\..\..\..\..\EloBuddy\System\SharpDX.Direct3D9.dll</HintPath>
-    </Reference>
-    <Reference Include="SPrediction">
-      <HintPath>..\..\..\..\..\Desktop\LeagueSharp-master\Spacebar Prediction\Spacebar Prediction\bin\x86\Debug\SPrediction.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

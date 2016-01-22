@@ -8,7 +8,6 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Color = System.Drawing.Color;
 using EloBuddy.SDK.Enumerations;
-using SPrediction;
 
 namespace DatBlitzcrank
 {
@@ -16,6 +15,7 @@ namespace DatBlitzcrank
     {
         static AIHeroClient Player = EloBuddy.Player.Instance;
         static AIHeroClient Target = null;
+        static PredictionResult TargetPred = null;
         static DamageIndicator Indicator;
         static Menu Menu;
 
@@ -23,7 +23,6 @@ namespace DatBlitzcrank
         static Spell.Active W { get { return SpellManager.W; } }
         static Spell.Active E { get { return SpellManager.E; } }
         static Spell.Active R { get { return SpellManager.R; } }
-        static BanSharp.Spell _Q;
 
         static bool SpellShield(AIHeroClient unit)
         {
@@ -54,7 +53,7 @@ namespace DatBlitzcrank
         {
             if (Player.ChampionName != "Blitzcrank")
                 return;
-                
+
             Config.Initialize();
 
             Menu = Config.Menu.AddSubMenu("Grab Mode", "grabMenu");
@@ -69,7 +68,7 @@ namespace DatBlitzcrank
 
             Game.OnTick += Game_OnTick;
             Drawing.OnDraw += Drawing_OnDraw;
-            BanSharp.Interrupter2.OnInterruptableTarget += Interrupter2_OnInterruptableTarget;
+            Interrupt.OnInterruptableTarget += Interrupt_OnInterruptableTarget;
             Gapcloser.OnGapcloser += Gapcloser_OnGapcloser;
             Orbwalker.OnAttack += Orbwalker_OnAttack;
             Orbwalker.OnPostAttack += Orbwalker_OnPostAttack;
@@ -77,7 +76,7 @@ namespace DatBlitzcrank
 
             Indicator = new DamageIndicator();
 
-            Chat.Print("Dat Blitzcrank Loaded, [By Tychus] , Version: 1.0.0.0", Color.Aquamarine);
+            Chat.Print("DatBlitzcrank Loaded, Version: 1.0.0.0", Color.LawnGreen);
         }
 
         private static void Game_OnTick(EventArgs args)
@@ -94,6 +93,7 @@ namespace DatBlitzcrank
             Immobile();
 
             Target = TargetSelector.GetTarget(Config.SpellSetting.Q.MaxrangeQ, DamageType.Magical);
+            TargetPred = Q.GetPrediction(Target);
         }
 
         private static void Combo()
@@ -110,7 +110,7 @@ namespace DatBlitzcrank
 
                     if (predic.HitChance > (HitChance)Config.SpellSetting.Q.HitchanceQ + 2)
                     {
-                        Q.Cast(Starget);
+                        Q.Cast(predic.CastPosition);
                     }
                 }
                 else if (Qtarget.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ) &&
@@ -120,7 +120,7 @@ namespace DatBlitzcrank
 
                     if (predic.HitChance > (HitChance)Config.SpellSetting.Q.HitchanceQ + 2)
                     {
-                        Q.Cast(Qtarget);
+                        Q.Cast(predic.CastPosition);
                     }
                 }
             }
@@ -163,7 +163,7 @@ namespace DatBlitzcrank
 
                     if (predic.HitChance > (HitChance)Config.SpellSetting.Q.HitchanceQ + 2)
                     {
-                        Q.Cast(Starget);
+                        Q.Cast(predic.CastPosition);
                     }
                 }
                 else if (Qtarget.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ) &&
@@ -173,7 +173,7 @@ namespace DatBlitzcrank
 
                     if (predic.HitChance > (HitChance)Config.SpellSetting.Q.HitchanceQ + 2)
                     {
-                        Q.Cast(Qtarget);
+                        Q.Cast(predic.CastPosition);
                     }
                 }
             }
@@ -209,9 +209,10 @@ namespace DatBlitzcrank
                 var Qtarget = EntityManager.Heroes.Enemies.FirstOrDefault
                     (enemy => DamageHandler.QDamage(enemy) >= enemy.Health + 50 && enemy.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ));
 
-                if (Qtarget != default(AIHeroClient) && !SpellShield(Qtarget))
+                if (Qtarget != default(AIHeroClient) && !SpellShield(Qtarget) &&
+                    Qtarget.Distance(Player.ServerPosition) > Config.SpellSetting.Q.MinrangeQ)
                 {
-                    Q.Cast(Qtarget);
+                    Q.Cast(Q.GetPrediction(Qtarget).CastPosition);
                 }
             }
 
@@ -238,16 +239,14 @@ namespace DatBlitzcrank
                 Qtarget.Distance(Player.ServerPosition) > Config.SpellSetting.Q.MinrangeQ && CC(Qtarget) &&
                 Menu["grabMode" + Qtarget.ChampionName].Cast<Slider>().CurrentValue == 3)
             {
-                Q.Cast(Qtarget);
+                Q.Cast(Q.GetPrediction(Qtarget).CastPosition);
             }
         }
 
         private static void Drawing_OnDraw(EventArgs args)
         {
-            /*
             if (Player.IsDead)
                 return;
-            
 
             if (Config.Drawing.SmartDrawing)
             {
@@ -285,25 +284,25 @@ namespace DatBlitzcrank
                     }.Draw(Player.Position);
             }
 
-            if (TargetSelector.SelectedTarget == null)
+            //if (TargetSelector.SelectedTarget == null)
                 new Circle
                 {
-                    Color = Color.LightYellow,
+                    Color = Menu["grabMode" + Target.ChampionName].Cast<Slider>().CurrentValue == 1 || 
+                    Target.Distance(Player.ServerPosition) <= Config.SpellSetting.Q.MinrangeQ ? Color.Red 
+                    : TargetPred.HitChance >= HitChance.High && !SpellShield(Target) ? Color.LawnGreen : Color.Orange,
                     BorderWidth = 6,
                     Radius = 50
                 }.Draw(Target.Position);
-                */
         }
         
-        private static void Interrupter2_OnInterruptableTarget(AIHeroClient sender, BanSharp.Interrupter2.InterruptableTargetEventArgs args)
+        private static void Interrupt_OnInterruptableTarget(AIHeroClient sender, Interrupt.InterruptableTargetEventArgs args)
         {
-            Chat.Print("BanSharp Confirmed");
             if (Player.IsDead || Player.IsRecalling())
                 return;
 
             if (!sender.IsEnemy || SpellShield(sender))
                 return;
-
+            
             if (Config.SpellSetting.R.InterruptR && R.IsReady() &&
                 sender.IsValidTarget(R.Range))
             {
@@ -313,7 +312,7 @@ namespace DatBlitzcrank
                 sender.IsValidTarget(Config.SpellSetting.Q.MaxrangeQ) &&
                 Config.SpellSetting.Q.MinHealthQ < Player.HealthPercent)
             {
-                Q.Cast(sender);
+                    Q.Cast(Q.GetPrediction(sender).CastPosition);
             }
             else if (Config.SpellSetting.E.InterruptE && E.IsReady() &&
                 sender.IsValidTarget(300))
@@ -362,7 +361,7 @@ namespace DatBlitzcrank
             }
         }
 
-        private static void Dash_OnDash(Obj_AI_Base sender, Dash.DashEventArgs e)
+        private static void Dash_OnDash(Obj_AI_Base sender, EloBuddy.SDK.Events.Dash.DashEventArgs e)
         {
             if (Player.IsDead || Player.IsRecalling())
                 return;
@@ -372,7 +371,8 @@ namespace DatBlitzcrank
                 return;
             
             if (e.EndPos.Distance(Player.ServerPosition) > Config.SpellSetting.Q.MinrangeQ &&
-                     e.EndPos.Distance(Player.ServerPosition) < Config.SpellSetting.Q.MaxrangeQ)
+                     e.EndPos.Distance(Player.ServerPosition) < Config.SpellSetting.Q.MaxrangeQ &&
+                     Menu["grabMode" + Target.ChampionName].Cast<Slider>().CurrentValue == 3)
             {
                 Q.Cast(sender);
             }

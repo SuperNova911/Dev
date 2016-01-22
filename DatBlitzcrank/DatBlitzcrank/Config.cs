@@ -14,6 +14,13 @@ namespace DatBlitzcrank
             Menu.AddGroupLabel("Dat Blitzcrank");
             Menu.AddLabel("Version : 1.0.0.0");
             Menu.AddSeparator();
+            Menu.AddGroupLabel("Notice");
+            Menu.AddLabel("Please turn on (Target Selector - Enable manual selected target)");
+            Menu.AddLabel("Check one thing between (Auto E) and (AA Reset)");
+            Menu.AddSeparator();
+            Menu.AddLabel("Problems with not use Q frequently, please decrease Hitchance Buddy's prediction is");
+            Menu.AddLabel("Because Buddy's prediction is not so good enough now.");
+            Menu.AddSeparator();
             Menu.AddGroupLabel("Credits");
             Menu.AddLabel("Tychus: Addon creator");
             Menu.AddLabel("Fluxy: Damage Indicator");
@@ -192,7 +199,7 @@ namespace DatBlitzcrank
 
                 Menu.AddGroupLabel("Spell");
                 _drawQ = Menu.Add("drawQ", new CheckBox("Q Range", true));
-                _drawR = Menu.Add("drawR", new CheckBox("R Range", false));
+                _drawR = Menu.Add("drawR", new CheckBox("R Range", true));
                 Menu.AddSeparator();
                 _smartDrawing = Menu.Add("smartDrawing", new CheckBox("Smart Drawing", true));
                 Menu.AddLabel("Green = Ready");
@@ -204,6 +211,9 @@ namespace DatBlitzcrank
                 _drawTarget = Menu.Add("DrawTarget", new CheckBox("Mark Q Target", true));
                 //_drawHitchance = Menu.Add("drawHitchance", new CheckBox("Hitchance", false));
                 _drawDamage = Menu.Add("drawDamage", new CheckBox("Damage Indicator", true));
+                Menu.AddLabel("Green = Can Grab");
+                Menu.AddLabel("Orange = Can't Grab");
+                Menu.AddLabel("Red = Don't Grab or Too close");
             }
 
             public static void Initialize()
