@@ -1,17 +1,5 @@
-﻿using System;
-using System.Linq;
-using EloBuddy;
-using EloBuddy.SDK;
-using EloBuddy.SDK.Events;
-using EloBuddy.SDK.Rendering;
-using EloBuddy.SDK.Menu;
+﻿using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
-using Color = System.Drawing.Color;
-using EloBuddy.SDK.Enumerations;
-using SharpDX;
-using System.Collections.Generic;
-using DatDarius.Example.Menu.Controls;
-using DatDarius.Example.Menu.Interfaces;
 
 namespace DatDarius
 {
@@ -26,7 +14,7 @@ namespace DatDarius
             Menu.Add("damageIndicator", new CheckBox("Damage Indicator", true));
             Menu.Add("drawing", new CheckBox("Enable Drawing", true));
             Menu.Add("skin", new CheckBox("Skin Changer", false));
-            Menu.Add("debug", new CheckBox("Enable Debug  (need F5)", true));
+            Menu.Add("debug", new CheckBox("Enable Debug  (need F5)", false));
             Menu.Add("useItem", new CheckBox("Use Item", true));
             Menu.AddSeparator();
             Menu.AddGroupLabel("SkinChanger");
@@ -41,7 +29,7 @@ namespace DatDarius
                 };
             Menu.AddSeparator();
             Menu.AddGroupLabel("Credit");
-            Menu.AddLabel("Addons - by Tychus");
+            Menu.AddLabel("Addon - by Tychus");
             Menu.AddLabel("DamageIndicator - by Fluxy");
 
             #region Orbwalk Menu
@@ -75,18 +63,19 @@ namespace DatDarius
 
             #region Spell Menu
             SpellMenu = Menu.AddSubMenu("Spell settings");
-            SpellMenu.AddGroupLabel("Q");
-            SpellMenu.Add("moveAssist", new CheckBox("Movement assist", true));
+            //SpellMenu.AddGroupLabel("Q");
+            //SpellMenu.Add("moveAssist", new CheckBox("Movement assist", true));
             SpellMenu.AddGroupLabel("W");
             SpellMenu.Add("aaReset", new CheckBox("AA Reset", true));
+            SpellMenu.Add("towerW", new CheckBox("Use on tower", true));
             SpellMenu.AddGroupLabel("E");
-            SpellMenu.Add("flashE", new KeyBind("Flash E", false, KeyBind.BindTypes.HoldActive, 'T'));
+            //SpellMenu.Add("flashE", new KeyBind("Flash E", false, KeyBind.BindTypes.HoldActive, 'T'));
             SpellMenu.Add("dashE", new CheckBox("Dash E", true));
             SpellMenu.Add("interruptE", new CheckBox("Interrupt E", true));
             SpellMenu.Add("towerE", new CheckBox("Tower E", true));
             SpellMenu.Add("minErange", new Slider("Minimum E range", 450, 0, 550));
             SpellMenu.AddGroupLabel("R");
-            SpellMenu.Add("flashR", new KeyBind("Flash R", false, KeyBind.BindTypes.HoldActive, 'G'));
+            //SpellMenu.Add("flashR", new KeyBind("Flash R", false, KeyBind.BindTypes.HoldActive, 'G'));
             SpellMenu.Add("autoR", new KeyBind("Enable Auto R", true, KeyBind.BindTypes.PressToggle, 'Z'));
             SpellMenu.Add("saveRMana", new CheckBox("Save mana for R", true));
             SpellMenu.Add("unneR", new CheckBox("Don't use if unnecessary", true));
@@ -104,9 +93,9 @@ namespace DatDarius
             DrawMenu.Add("drawE", new CheckBox("Draw E", true));
             DrawMenu.Add("drawR", new CheckBox("Draw R", false));
             DrawMenu.AddSeparator();
-            DrawMenu.Add("drawFlashE", new CheckBox("Draw Flash E", false));
-            DrawMenu.Add("drawFlashR", new CheckBox("Draw Flash R", false));
-            DrawMenu.AddSeparator();
+            //DrawMenu.Add("drawFlashE", new CheckBox("Draw Flash E", false));
+            //DrawMenu.Add("drawFlashR", new CheckBox("Draw Flash R", false));
+            //DrawMenu.AddSeparator();
             DrawMenu.Add("drawText", new CheckBox("Draw Text", true));
             #endregion
 

@@ -22,19 +22,19 @@
 
 #region
 
-using System;
-using System.Collections.Generic;
 using EloBuddy;
 using EloBuddy.SDK;
+using System;
+using System.Collections.Generic;
 
 #endregion
 
 namespace DatDarius
 {
-	/// <summary>
-	/// Provides information an API regarding interruptable spells.
-	/// </summary>
-	public static class Interrupt
+    /// <summary>
+    /// Provides information an API regarding interruptable spells.
+    /// </summary>
+    public static class Interrupt
 	{
 		/// <summary>
 		/// The delegate for <see cref="Interrupt.OnInterruptableTarget"/>.

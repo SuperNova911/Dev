@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EloBuddy;
+﻿using EloBuddy;
 using EloBuddy.SDK;
 
 namespace DatDarius
@@ -22,6 +17,15 @@ namespace DatDarius
         {
             if (!SpellManager.R.IsLearned)
                 return 0;
+
+            if (stack == 5)
+            {
+                var bonus = 0f;
+                if (!Player.HasBuff("DariusHemoMax"))
+                    bonus = new float[] { 0, 40, 40, 40, 45, 45, 45, 50, 60, 70, 80, 90, 100, 110, 120, 140, 160, 180, 200 }[Player.Instance.Level];
+
+                return (new double[] { 100, 200, 300 }[SpellManager.R.Level - 1] + 0.75 * (Player.Instance.FlatPhysicalDamageMod + bonus)) * (1 + 0.2 * stack);
+            }
 
             return (new double[] { 100, 200, 300 }[SpellManager.R.Level - 1] + 0.75 * Player.Instance.FlatPhysicalDamageMod) * (1 + 0.2 * stack);
         }

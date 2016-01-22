@@ -1,15 +1,12 @@
-﻿using System;
-using System.Linq;
-using EloBuddy;
+﻿using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Events;
-using EloBuddy.SDK.Rendering;
-using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
-using Color = System.Drawing.Color;
-using EloBuddy.SDK.Enumerations;
+using EloBuddy.SDK.Rendering;
 using SharpDX;
-using System.Collections.Generic;
+using System;
+using System.Linq;
+using Color = System.Drawing.Color;
 
 namespace DatDarius
 {
@@ -386,7 +383,7 @@ namespace DatDarius
                 if (tower == null)
                     return;
 
-                if (tower.Distance(Player) < tower.AttackRange - 100 && ETarget.IsValidTarget())
+                if (tower.Distance(Player) < 750 && ETarget.IsValidTarget() && Player.HealthPercent > 30 && Player.CountEnemiesInRange(E.Range) <= 2)
                     CastE();
             }
 
@@ -514,18 +511,22 @@ namespace DatDarius
                 return;
             }
 
-            var t = target as Obj_AI_Turret;
 
-            if (t.IsValidTarget() && W.IsReady())
+            if (Config.SpellMenu["towerW"].Cast<CheckBox>().CurrentValue && Config.OrbMenu["laneMana"].Cast<Slider>().CurrentValue < Player.ManaPercent)
             {
-                W.Cast();
-                Orbwalker.ResetAutoAttack();
-                if (target != null)
-                    EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, target);
+                var t = target as Obj_AI_Turret;
 
-                return;
+                if (t.IsValidTarget() && W.IsReady())
+                {
+                    W.Cast();
+                    Orbwalker.ResetAutoAttack();
+                    if (target != null)
+                        EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, target);
+
+                    return;
+                }
             }
-
+                
             if (Config.OrbMenu["jungleMana"].Cast<Slider>().CurrentValue < Player.ManaPercent)
             {
                 var j = target as Obj_AI_Base;
