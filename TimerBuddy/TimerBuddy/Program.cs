@@ -16,67 +16,8 @@ namespace TimerBuddy
 {
     public static class Program
     {
-        static Font TeleportFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 17));
-        static Font TrapFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 15));
-
-        public static List<Timer> TimerList = new List<Timer>();
-        public static List<GameObj> ObjList = new List<GameObj>();
-
-        public static TimerInfo[] TimerInfoList = new TimerInfo[]
-        {
-            new TimerInfo { type = ObjType.Teleport, name = "summonerteleport", endTime = 3500 },
-            new TimerInfo { type = ObjType.Item, name = "ZhonyasHourglass", endTime = 2500 },
-            //new TimerInfo { type = ObjType.Spell, name = "SoulShackles", endTime = 3000 },
-            //new TimerInfo { type = ObjType.Spell, name = "VladimirSanguinePool", endTime = 2000 },
-            new TimerInfo { type = ObjType.Spell, championName = "Morgana", slot = SpellSlot.R, endTime = 3000 },
-            new TimerInfo { type = ObjType.Spell, championName = "Vladimir", slot = SpellSlot.W, endTime = 2000 },
-            new TimerInfo { type = ObjType.Spell, championName = "FiddleStick", slot = SpellSlot.R, endTime = 1500 },
-            new TimerInfo { type = ObjType.Spell, championName = "Anivia", slot = SpellSlot.W, endTime = 5000 },
-            new TimerInfo { type = ObjType.Spell, championName = "Veigar", slot = SpellSlot.W, endTime = 1200 },
-            new TimerInfo { type = ObjType.Spell, championName = "Ekko", slot = SpellSlot.W, endTime = 3000 },
-            new TimerInfo { type = ObjType.Spell, championName = "Urgot", slot = SpellSlot.R, endTime = 1000 },
-            new TimerInfo { type = ObjType.Spell, championName = "Warwick", slot = SpellSlot.R, endTime = 1800 },
-            new TimerInfo { type = ObjType.Spell, championName = "FiddleStick", slot = SpellSlot.R, endTime = 1500 },
-            new TimerInfo { type = ObjType.Spell, championName = "FiddleStick", slot = SpellSlot.R, endTime = 1500 },
-            new TimerInfo { type = ObjType.Spell, championName = "FiddleStick", slot = SpellSlot.R, endTime = 1500 },
-            new TimerInfo { type = ObjType.Spell, championName = "FiddleStick", slot = SpellSlot.R, endTime = 1500 },
-            new TimerInfo { type = ObjType.Spell, championName = "FiddleStick", slot = SpellSlot.R, endTime = 1500 },
-        };
-        public static GameObjInfo[] GameObjInfoList = new GameObjInfo[]
-        {
-            new GameObjInfo { type = ObjType.Trap, name = "Noxious Trap", endTime = 300000 },
-            //new GameObjInfo { type = ObjType.Trap, name = "Noxious Trap", endTime = 120000 },           //Nidalee W
-            new GameObjInfo { type = ObjType.Trap, name = "Cupcake Trap", endTime = 90000 },
-            new GameObjInfo { type = ObjType.Trap, name = "JinxEMine", endTime = 5000 },
-            new GameObjInfo { type = ObjType.Trap, name = "Jack In The Box", endTime = 60000 },
-            
-            new GameObjInfo { type = ObjType.Spell, name = "Gragas_Base_Q_Ally.troy", deleteName = "Gragas_Base_Q_End.troy", endTime = 4000 },
-            new GameObjInfo { type = ObjType.Spell, name = "Nasus_E_Green_Ring.troy", endTime = 4500 },
-            new GameObjInfo { type = ObjType.Spell, name = "Lux_Base_E_tar_aoe_green.troy", endTime = 5000 },
-            new GameObjInfo { type = ObjType.Spell, name = "LeBlanc_Base_W_return_indicator.troy", endTime = 4000 },
-            new GameObjInfo { type = ObjType.Spell, name = "LeBlanc_Base_RW_return_indicator.troy", endTime = 4000 },
-            new GameObjInfo { type = ObjType.Spell, name = "MasterYi_Base_W_Buf.troy", endTime = 4000 },
-            new GameObjInfo { type = ObjType.Spell, name = "Akali_Base_smoke_bomb_tar_team_green.troy", endTime = 8000 },
-            new GameObjInfo { type = ObjType.Spell, name = "OMNOMNOMNOMONOM", endTime = 1500 },     // Fizz R Kappa
-            new GameObjInfo { type = ObjType.Spell, name = "Nunu_Base_R_indicator_blue.troy", endTime = 3000 },
-
-            new GameObjInfo { type = ObjType.Spell, name = "GangplankE", endTime = 60000 },
-            new GameObjInfo { type = ObjType.Spell, name = "GravesW", endTime = 4000 },
-            new GameObjInfo { type = ObjType.Spell, name = "NasusE", endTime = 5000 },
-            new GameObjInfo { type = ObjType.Spell, name = "RumbleR", endTime = 5000 },
-            new GameObjInfo { type = ObjType.Spell, name = "LissandraR", endTime = 2500 },
-            new GameObjInfo { type = ObjType.Spell, name = "MalzaharW", endTime = 5000 },
-            new GameObjInfo { type = ObjType.Spell, name = "MissR", endTime = 3000 },
-            new GameObjInfo { type = ObjType.Spell, name = "AniviaEgg", endTime = 6000 },
-            new GameObjInfo { type = ObjType.Spell, name = "zedR", endTime = 3000 },
-            new GameObjInfo { type = ObjType.Spell, name = "twistR", endTime = 3000 },
-            new GameObjInfo { type = ObjType.Spell, name = "trindaR", endTime = 3000 }, 
-            new GameObjInfo { type = ObjType.Spell, name = "EkkoW", endTime = 3000 },
-            new GameObjInfo { type = ObjType.Spell, name = "EkkoW", endTime = 3000 },
-        };
-
-        public static Menu Menu;
-
+        public static List<Spell> SpellList = new List<Spell>();
+        
         static void Main(string[] args)
         {
             try
@@ -94,23 +35,10 @@ namespace TimerBuddy
         {
             try
             {
-                Menu = MainMenu.AddMenu("TimerBuddy", "TimerBuddy");
-                Menu.AddGroupLabel("TrackList");
-                Menu.Add("teleport", new CheckBox("Teleport", true));
-                Menu.Add("trap", new CheckBox("Trap", true));
-                Menu.Add("spell", new CheckBox("Spell", true));
-                Menu.Add("item", new CheckBox("Item", true));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE MENU");
-            }
+                Config.Initialize();
 
-            try
-            {
                 Drawing.OnEndScene += Drawing_OnEndScene;
-                Game.OnUpdate += Game_OnUpdate;
+                Game.OnTick += Game_OnTick;
                 Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
                 GameObject.OnCreate += GameObject_OnCreate;
                 GameObject.OnDelete += GameObject_OnDelete;
@@ -134,27 +62,29 @@ namespace TimerBuddy
 
                 var baseObject = sender as Obj_AI_Base;
                 var objectName = baseObject == null ? sender.Name : baseObject.BaseSkinName;
-
-                if (sender.Name.Contains("Minion"))
-                    return;
-                
                 Console.WriteLine("Add\tType: {0} | Name: {1} | NetID: {2} | objectName: {3}", sender.GetType().Name, sender.Name, sender.NetworkId, objectName);
 
-                var list = GameObjInfoList.FirstOrDefault(l => l.name == sender.Name);
+                var database = SpellDatabase.Database.FirstOrDefault(d => d.Name == sender.Name && d.GameObject == true);
 
-                if (list != null)
+                if (database != null)
                 {
-                    ObjList.Add(new GameObj
+                    SpellList.Add(new Spell
                     {
-                        team = sender.IsAlly ? Team.Ally : Team.Enemy,
-                        type = list.type,
-                        position = sender.Position,
-                        endTime = TickCount + list.endTime,
-                        name = sender.Name,
-                        networkID = sender.NetworkId
+                        SpellType = database.SpellType,
+                        Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
+                        Slot = database.Slot,
+                        Caster = null,
+                        CastPosition = sender.Position,
+                        ChampionName = database.ChampionName,
+                        Name = sender.Name,
+                        MenuString = database.MenuString,
+                        EndTime = database.EndTime + Utility.TickCount,
+                        NetworkID = sender.NetworkId,
+                        GameObject = database.GameObject,
+                        SkillShot = database.SkillShot
                     });
 
-                    Chat.Print("Add " + sender.Name + sender.NetworkId);
+                    Chat.Print("Add " + sender.Name + " " + sender.NetworkId, System.Drawing.Color.LawnGreen);
                 }
             }
             catch (Exception e)
@@ -171,13 +101,13 @@ namespace TimerBuddy
                 if (!sender.IsValid)
                     return;
                 
-                if (sender.Name.Contains("Minion") || sender.Name.Contains("Odin") || sender.Name.Contains("Shopkeeper") || sender.Name.Contains("SRU") ||
-                    sender.GetType().Name == "MissileClient" || sender.GetType().Name == "DrawFX")
+                if (sender.Name.Contains("Minion") || sender.Name.Contains("NAV") || sender.Name.Contains("Odin") || sender.Name.Contains("Shopkeeper") || sender.Name.Contains("SRU") ||
+                    sender.GetType().Name == "MissileClient" || sender.GetType().Name == "DrawFX" || sender.Name.Contains("empty.troy")) 
                     return;
 
-                ObjList.RemoveAll(l => l.networkID == sender.NetworkId);
-
                 Console.WriteLine("Delete\tType: {0} | Name: {1} | NetID: {2}", sender.GetType().Name, sender.Name, sender.NetworkId);
+
+                SpellList.RemoveAll(l => l.NetworkID == sender.NetworkId);
             }
             catch (Exception e)
             {
@@ -190,35 +120,61 @@ namespace TimerBuddy
         {
             try
             {
-                Chat.Print(args.SData.Name + " | " + sender.BaseSkinName + args.Slot);
+                Chat.Print(sender.BaseSkinName + " " + args.Slot + " | " + args.SData.Name);
 
-                var list = TimerInfoList.FirstOrDefault(s => s.championName == sender.BaseSkinName && s.slot == args.Slot);
-
-                if (list != null)
+                if (sender.BaseSkinName == "Shen" && args.Slot == SpellSlot.R)
                 {
-                    TimerList.Add(new Timer
+                    SpellList.Add(new Spell
                     {
-                        type = list.type,
-                        team = sender.IsAlly ? Team.Ally : Team.Enemy,
-                        caster = sender,
-                        castPosition = args.End,
-                        name = args.SData.Name,
-                        endTime = TickCount + list.endTime,
-                        slot = args.Slot
+                        SpellType = SpellType.Teleport,
+                        Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
+                        Slot = args.Slot,
+                        Caster = sender,
+                        Target = args.Target,
+                        CastPosition = args.End,
+                        ChampionName = sender.BaseSkinName,
+                        Name = args.SData.Name,
+                        MenuString = "Shen R",
+                        EndTime = 3000 + Utility.TickCount,
+                        NetworkID = sender.NetworkId,
+                        GameObject = false,
+                        SkillShot = false
                     });
+
+                    return;
+                }
+
+                var database = SpellDatabase.Database.FirstOrDefault(d => (d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot && d.GameObject == false) || (d.Name == args.SData.Name && d.SpellType != SpellType.Spell));
+
+                if (database != null)
+                {
+                    SpellList.Add(new Spell
+                    {
+                        SpellType = database.SpellType,
+                        Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
+                        Slot = database.Slot,
+                        Caster = sender,
+                        CastPosition = args.End,
+                        ChampionName = database.ChampionName,
+                        Name = args.SData.Name,
+                        MenuString = database.MenuString,
+                        EndTime = database.EndTime + Utility.TickCount,
+                        NetworkID = sender.NetworkId,
+                        GameObject = database.GameObject,
+                        SkillShot = database.SkillShot
+                    });
+
+                    Chat.Print("Add " + args.SData.Name + " " + sender.NetworkId, System.Drawing.Color.LawnGreen);
 
                     return;
                 }
 
                 if (args.SData.Name == "teleportcancel")
                 {
-                    var tlist = TimerList.FirstOrDefault(l => l.name == "summonerteleport" && sender == l.caster);
+                    var slist = SpellList.FirstOrDefault(l => l.Name == "summonerteleport" && l.Caster == sender);
 
-                    if (tlist != null)
-                    {
-                        tlist.cancel = true;
-                        tlist.endTime = TickCount + 2000;
-                    }
+                    if (slist != null)
+                        CastCancel(slist);
                 }
             }
             catch (Exception e)
@@ -228,12 +184,25 @@ namespace TimerBuddy
             }
         }
 
-        private static void Game_OnUpdate(EventArgs args)
+        private static void CastCancel(Spell list)
         {
             try
             {
-                TimerList.RemoveAll(l => l.endTime < Environment.TickCount);
-                ObjList.RemoveAll(l => l.endTime < Environment.TickCount);
+                list.Cancel = true;
+                list.EndTime = Utility.TickCount + 2000;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error: CODE CANCEL");
+            }
+        }
+
+        private static void Game_OnTick(EventArgs args)
+        {
+            try
+            {
+                SpellList.RemoveAll(l => l.EndTime <= Utility.TickCount);
             }
             catch (Exception e)
             {
@@ -242,55 +211,31 @@ namespace TimerBuddy
             }
         }
 
-        public static void DrawBuff()
-        {
-            foreach (var hero in EntityManager.Heroes.AllHeroes.Where(h => h.IsValidTarget() && h.VisibleOnScreen))
-            {
-                if (hero.HasBuff("VladimirHemoplagueDebuff"))
-                    DrawText(hero.BuffRemainTime("VladimirHemoplagueDebuff").ToString("F2"), hero.Position, Color.White, ObjType.Spell);
-
-                if (hero.HasBuff("RengarRBuff"))
-                    DrawText(hero.BuffRemainTime("RengarRBuff").ToString("F2"), hero.Position, Color.White, ObjType.Spell);
-            }
-        }
-
         private static void Drawing_OnEndScene(EventArgs args)
         {
             try
             {
-                //DrawText(Player.Instance.BaseSkinName, Game.CursorPos + new Vector3(-60, 10, 0), Color.White, ObjType.Teleport);
-                //DrawText("Canceled", Game.CursorPos + new Vector3(-70, 65, 0), Color.Red, ObjType.Teleport);
+                DrawManager.DrawBuff();
 
-                DrawBuff();
-
-                foreach (var list in TimerList.Where(l => l.endTime > Environment.TickCount))
+                foreach (var list in SpellList.Where(l => l.EndTime >= Utility.TickCount))
                 {
-                    switch (list.type)
+                    
+                    switch (list.SpellType)
                     {
-                        case ObjType.Teleport:
-                            DrawTeleport(list);
+                        case SpellType.Teleport:
+                            DrawManager.DrawTeleport(list);
                             break;
-                        case ObjType.Item:
-                            DrawItem(list);
+                        case SpellType.Item:
+                            DrawManager.DrawItem(list);
                             break;
-                        case ObjType.Spell:
-                            DrawSpell(list);
+                        case SpellType.Spell:
+                            DrawManager.DrawSpell(list);
                             break;
-                    }
-                }
-
-                foreach (var list in ObjList.Where(l =>l.endTime > Environment.TickCount))
-                {
-                    switch (list.type)
-                    {
-                        case ObjType.Trap:
-                            DrawTrap(list);
-                            break;
-                        case ObjType.Spell:
-                            DrawSpell(list);
+                        case SpellType.Trap:
+                            DrawManager.DrawTrap(list);
                             break;
                         default:
-                            Chat.Print("Fappa");
+                            Chat.Print("error CODE DRAW_TYPE");
                             break;
                     }
                 }
@@ -300,215 +245,6 @@ namespace TimerBuddy
                 Console.WriteLine(e);
                 Chat.Print("error: CODE DRAW");
             }            
-        }
-
-        public static void DrawTeleport(Timer list)
-        {
-            try
-            {
-                if (!list.cancel)
-                {
-                    DrawText(list.caster.BaseSkinName, list.castPosition + new Vector3(-60, 10, 0), Color.White, list.type);
-                    DrawText(list.GetRemainTime(), list.castPosition + new Vector3(-30, 65, 0), Color.LawnGreen, list.type);
-                }
-                else
-                {
-                    DrawText(list.caster.BaseSkinName, list.castPosition + new Vector3(-60, 10, 0), Color.White, list.type);
-                    DrawText("Canceled", list.castPosition + new Vector3(-70, 65, 0), Color.Red, list.type);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW_TP " + list.caster.BaseSkinName);
-            }
-        }
-
-        public static void DrawItem(Timer list)
-        {
-            try
-            {
-                DrawText(list.GetRemainTime(), list.castPosition + new Vector3(-15, 10, 0), Color.White, list.type);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW_ITEM " + list.caster.BaseSkinName);
-            }
-        }
-
-        public static void DrawTrap(GameObj list)
-        {
-            try
-            {
-                DrawText(list.GetRemainTime(), list.position + new Vector3(-20, 0, 0), Color.White, ObjType.Trap);
-
-                if (list.team == Team.Enemy)
-                    new Circle
-                    {
-                        Color = System.Drawing.Color.Red,
-                        BorderWidth = 4,
-                        Radius = 50,
-                    }.Draw(list.position);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW_TRAP " + list.name);
-            }
-        }
-
-        public static void DrawSpell(GameObj list)
-        {
-            try
-            {
-                DrawText(list.GetRemainTime(), list.position + new Vector3(-40, -30, 0), Color.White, list.type);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW_ITEM " + list.name);
-            }
-        }
-
-        public static void DrawSpell(Timer list)
-        {
-            try
-            {
-                DrawText(list.GetRemainTime(), list.caster.Position + new Vector3(-40, -30, 0), Color.White, list.type);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW_ITEM " + list.name);
-            }
-        }
-
-        public static void DrawText(string text, Vector3 position, Color color, ObjType type)
-        {
-            try
-            {
-                switch (type)
-                {
-                    case ObjType.Trap:
-                        TrapFont.DrawText(null,
-                        text,
-                        (int)Drawing.WorldToScreen(position).X,
-                        (int)Drawing.WorldToScreen(position).Y,
-                        color);
-                        break;
-                    case ObjType.Teleport:
-                        TeleportFont.DrawText(null,
-                        text,
-                        (int)Drawing.WorldToScreen(position).X,
-                        (int)Drawing.WorldToScreen(position).Y,
-                        color);
-                        break;
-                    case ObjType.Item:
-                        TeleportFont.DrawText(null,
-                        text,
-                        (int)Drawing.WorldToScreen(position).X,
-                        (int)Drawing.WorldToScreen(position).Y,
-                        color);
-                        break;
-                    case ObjType.Spell:
-                        TeleportFont.DrawText(null,
-                        text,
-                        (int)Drawing.WorldToScreen(position).X,
-                        (int)Drawing.WorldToScreen(position).Y,
-                        color);
-                        break;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW_TEXT");
-            }
-        }
-
-        public static string GetRemainTime(this Timer list)
-        {
-            try
-            {
-                if (list.type == ObjType.Spell)
-                {
-                    var sdata = TimerInfoList.FirstOrDefault(d => d.championName == list.caster.BaseSkinName && d.slot == list.slot);
-
-                    if (sdata == null)
-                    {
-                        Chat.Print("error: CODE REMAIN_TIMER_SPELL KAPPA " + list.caster.BaseSkinName);
-                        return "Kappa";
-                    }
-
-                    if (sdata.endTime <= 10000)
-                        return ((list.endTime - TickCount) / 1000f).ToString("F2");
-                    else
-                        return ((int)(list.endTime - TickCount) / 1000 + 1).ToString();
-                }
-
-                var data = TimerInfoList.FirstOrDefault(d => list.name == d.name);
-
-                if (data == null)
-                {
-                    Chat.Print("error: CODE REMAIN_TIMER KAPPA " + list.caster.BaseSkinName);
-                    return "Kappa";
-                }
-
-                if (data.endTime <= 10000)
-                    return ((list.endTime - TickCount) / 1000f).ToString("F2");
-                else
-                    return ((int)(list.endTime - TickCount) / 1000 + 1).ToString();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE REMAIN_TIMER " + list.caster.BaseSkinName);
-                return "Kappa";
-            }
-        }
-
-        public static string GetRemainTime(this GameObj list)
-        {
-            try
-            {
-                var data = GameObjInfoList.FirstOrDefault(d => list.name == d.name);
-
-                if (data == null)
-                {
-                    Chat.Print("error: CODE REMAIN_OBJ KAPPA " + list.name);
-                    return "Kappa";
-                }
-
-                if (data.endTime <= 10000)
-                    return ((list.endTime - TickCount) / 1000f).ToString("F2");
-                else
-                    return ((int)(list.endTime - TickCount) / 1000 + 1).ToString();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE REMAIN_OBJ " + list.name);
-                return "Kappa";
-            }
-        }
-
-        public static int TickCount
-        {
-            get
-            {
-                return Environment.TickCount & int.MaxValue;
-            }
-        }
-
-        public static float BuffRemainTime(this Obj_AI_Base unit, string buffName)
-        {
-            return unit.HasBuff(buffName)
-                ? unit.Buffs.OrderByDescending(buff => buff.EndTime - Game.Time)
-                  .Where(buff => buff.Name == buffName)
-                  .Select(buff => buff.EndTime)
-                  .FirstOrDefault() - Game.Time
-                : 0;
         }
     }
 }
