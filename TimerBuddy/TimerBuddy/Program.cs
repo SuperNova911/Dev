@@ -40,6 +40,9 @@ namespace TimerBuddy
                 Drawing.OnEndScene += Drawing_OnEndScene;
                 Game.OnTick += Game_OnTick;
                 Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
+                Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
+                Obj_AI_Base.OnBuffUpdate += Obj_AI_Base_OnBuffUpdate;
+                Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
                 GameObject.OnCreate += GameObject_OnCreate;
                 GameObject.OnDelete += GameObject_OnDelete;
             }
@@ -49,7 +52,74 @@ namespace TimerBuddy
                 Chat.Print("error: CODE INIT");
             }
         }
-        
+
+        private static void Obj_AI_Base_OnBuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)
+        {
+            try
+            {
+                var hero = sender as AIHeroClient;
+
+                if (hero == null || !args.Buff.Caster.IsValid)
+                    return;
+
+                var database = SpellDatabase.Database.FirstOrDefault(d => d.Name == args.Buff.DisplayName && d.Buff == true);
+
+                if (database != null)
+                {
+                    var target = args.Buff.Caster as AIHeroClient;
+
+                    SpellList.Add(new Spell
+                    {
+                        Target = target,
+                        Caster = sender,
+                        FullTime = args.Buff.EndTime * 1000 - args.Buff.StartTime * 1000,
+                        EndTime = args.Buff.EndTime * 1000,
+                        Name = database.Name,
+                        SpellType = database.SpellType,
+                        Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
+                        Buff = database.Buff,
+                    });
+
+                    Chat.Print("Add " + args.Buff.DisplayName + " " + args.Buff.EndTime * 1000 + " " + args.Buff.Caster.Name, System.Drawing.Color.LawnGreen);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error: CODE BUFF_GAIN " + args.Buff.DisplayName);
+            }
+        }
+
+        private static void Obj_AI_Base_OnBuffUpdate(Obj_AI_Base sender, Obj_AI_BaseBuffUpdateEventArgs args)
+        {
+            var hero = sender as AIHeroClient;
+
+            if (hero == null || !args.Buff.Caster.IsValid)
+                return;
+
+            var buff = SpellList.FirstOrDefault(l => l.Name == args.Buff.Name && l.Caster == sender && l.Buff == true);
+
+            buff.EndTime = args.Buff.EndTime * 1000;
+        }
+
+        private static void Obj_AI_Base_OnBuffLose(Obj_AI_Base sender, Obj_AI_BaseBuffLoseEventArgs args)
+        {
+            try
+            {
+                var hero = sender as AIHeroClient;
+
+                if (hero == null || !args.Buff.Caster.IsValid)
+                    return;
+
+                SpellList.RemoveAll(l => l.Name == args.Buff.DisplayName && l.Caster == args.Buff.Caster && l.Buff == true);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error: CODE BUFF_LOSE " + args.Buff.DisplayName);
+            }
+        }
+
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
         {
             try
@@ -57,12 +127,39 @@ namespace TimerBuddy
                 if (!sender.IsValid)
                     return;
                 
-                if (sender.Name.Contains("Minion") || sender.GetType().Name == "MissileClient" || sender.Name.Contains("SRU"))
+                if (sender.Name.Contains("Minion") || sender.GetType().Name == "MissileClient" || sender.Name.Contains("SRU") || sender.Name.Contains("FeelNoPain"))
                     return;
 
                 var baseObject = sender as Obj_AI_Base;
                 var objectName = baseObject == null ? sender.Name : baseObject.BaseSkinName;
+                
                 Console.WriteLine("Add\tType: {0} | Name: {1} | NetID: {2} | objectName: {3}", sender.GetType().Name, sender.Name, sender.NetworkId, objectName);
+
+                var trapDatabase = SpellDatabase.Database.FirstOrDefault(d => d.Name == sender.Name && d.ObjectName == objectName && d.GameObject == true && d.SpellType == SpellType.Trap);
+
+                if (trapDatabase != null)
+                {
+                    SpellList.Add(new Spell
+                    {
+                        SpellType = trapDatabase.SpellType,
+                        Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
+                        Slot = trapDatabase.Slot,
+                        Caster = null,
+                        CastPosition = sender.Position,
+                        ChampionName = trapDatabase.ChampionName,
+                        Name = sender.Name,
+                        ObjectName = objectName,
+                        MenuString = trapDatabase.MenuString,
+                        EndTime = trapDatabase.EndTime + Utility.TickCount,
+                        NetworkID = sender.NetworkId,
+                        GameObject = trapDatabase.GameObject,
+                        SkillShot = trapDatabase.SkillShot
+                    });
+
+                    Chat.Print("Add " + sender.Name + " " + objectName + " " + sender.NetworkId, System.Drawing.Color.LawnGreen);
+
+                    return;
+                }
 
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.Name == sender.Name && d.GameObject == true);
 
@@ -85,6 +182,8 @@ namespace TimerBuddy
                     });
 
                     Chat.Print("Add " + sender.Name + " " + sender.NetworkId, System.Drawing.Color.LawnGreen);
+
+                    return;
                 }
             }
             catch (Exception e)
@@ -102,7 +201,8 @@ namespace TimerBuddy
                     return;
                 
                 if (sender.Name.Contains("Minion") || sender.Name.Contains("NAV") || sender.Name.Contains("Odin") || sender.Name.Contains("Shopkeeper") || sender.Name.Contains("SRU") ||
-                    sender.GetType().Name == "MissileClient" || sender.GetType().Name == "DrawFX" || sender.Name.Contains("empty.troy")) 
+                    sender.GetType().Name == "MissileClient" || sender.GetType().Name == "DrawFX" || sender.Name.Contains("empty.troy") || sender.Name.Contains("LevelProp")
+                     || sender.Name.Contains("FeelNoPain") || sender.Name.Contains("LaserSight")) 
                     return;
 
                 Console.WriteLine("Delete\tType: {0} | Name: {1} | NetID: {2}", sender.GetType().Name, sender.Name, sender.NetworkId);
@@ -122,29 +222,7 @@ namespace TimerBuddy
             {
                 Chat.Print(sender.BaseSkinName + " " + args.Slot + " | " + args.SData.Name);
 
-                if (sender.BaseSkinName == "Shen" && args.Slot == SpellSlot.R)
-                {
-                    SpellList.Add(new Spell
-                    {
-                        SpellType = SpellType.Teleport,
-                        Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
-                        Slot = args.Slot,
-                        Caster = sender,
-                        Target = args.Target,
-                        CastPosition = args.End,
-                        ChampionName = sender.BaseSkinName,
-                        Name = args.SData.Name,
-                        MenuString = "Shen R",
-                        EndTime = 3000 + Utility.TickCount,
-                        NetworkID = sender.NetworkId,
-                        GameObject = false,
-                        SkillShot = false
-                    });
-
-                    return;
-                }
-
-                var database = SpellDatabase.Database.FirstOrDefault(d => (d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot && d.GameObject == false) || (d.Name == args.SData.Name && d.SpellType != SpellType.Spell));
+                var database = SpellDatabase.Database.FirstOrDefault(d => (d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot && d.GameObject == false && d.Buff == false) || (d.Name == args.SData.Name && d.SpellType != SpellType.Spell && d.Buff == false));
 
                 if (database != null)
                 {
@@ -202,7 +280,7 @@ namespace TimerBuddy
         {
             try
             {
-                SpellList.RemoveAll(l => l.EndTime <= Utility.TickCount);
+                SpellList.RemoveAll(l => l.Buff == true ? l.EndTime < Game.Time * 1000 : l.EndTime < Utility.TickCount);
             }
             catch (Exception e)
             {
@@ -215,15 +293,15 @@ namespace TimerBuddy
         {
             try
             {
-                DrawManager.DrawBuff();
+                if (Config.DebugMenu["c1"].Cast<CheckBox>().CurrentValue)
+                    DrawManager.DrawLine();
 
-                foreach (var list in SpellList.Where(l => l.EndTime >= Utility.TickCount))
+                foreach (var list in SpellList.Where(l => l.Buff == true ? l.EndTime >= Game.Time * 1000f : l.EndTime >= Utility.TickCount))
                 {
-                    
                     switch (list.SpellType)
                     {
-                        case SpellType.Teleport:
-                            DrawManager.DrawTeleport(list);
+                        case SpellType.SummonerSpell:
+                            DrawManager.DrawSummoner(list);
                             break;
                         case SpellType.Item:
                             DrawManager.DrawItem(list);
@@ -238,6 +316,11 @@ namespace TimerBuddy
                             Chat.Print("error CODE DRAW_TYPE");
                             break;
                     }
+                }
+
+                foreach (var list in SpellList.Where(l => l.Buff == true))
+                {
+                    DrawManager.DrawBuff(list);
                 }
             }
             catch (Exception e)
