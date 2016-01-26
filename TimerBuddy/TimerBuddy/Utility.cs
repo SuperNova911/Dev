@@ -23,13 +23,13 @@ namespace TimerBuddy
                 {
                     //Chat.Print("error: CODE REMAIN_TIMER KAPPA " + list.Caster.BaseSkinName);
                     //return "Kappa";
-                    return list.EndTime - TickCount >= 0 ? ((list.EndTime - TickCount) / 1000f).ToString("F2") : 0f.ToString("F2");
+                    return list.EndTime - TickCount >= 0 ? ((list.EndTime - TickCount) / 1000f).ToString("F1") : 0f.ToString("F1");
                 }
                                 
                 if (database.EndTime > 10000)
                     return ((list.EndTime - TickCount) / 1000 + 1).ToString();
                 else
-                    return list.EndTime - TickCount >= 0 ? ((list.EndTime - TickCount) / 1000f).ToString("F2") : 0f.ToString("F2");
+                    return list.EndTime - TickCount >= 0 ? ((list.EndTime - TickCount) / 1000f).ToString("F1") : 0f.ToString("F1");
             }
             catch (Exception e)
             {
@@ -138,6 +138,11 @@ namespace TimerBuddy
                 Chat.Print("error CODE GET_DATA " + spell.Name);
                 return SpellDatabase.Database.FirstOrDefault(d => d.Name == spell.Name);
             }
+        }
+        
+        public static AIHeroClient FIndCaster(this Spell spell)
+        {
+            return Player.Instance;
         }
     }
 }
