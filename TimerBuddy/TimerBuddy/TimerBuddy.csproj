@@ -58,14 +58,1944 @@
   <ItemGroup>
     <Compile Include="ColorMenu.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Debug.cs" />
     <Compile Include="DrawManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ObjectManager.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TextureDraw.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CorkiBoom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZiggsE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZedW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZedR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZedQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZedP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZedE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZacW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZacR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZacQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZacP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZacE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YorickW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YorickR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YorickQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YorickP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YorickE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YasuoW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YasuoR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YasuoQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YasuoP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YasuoE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XinZhaoW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XinZhaoR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XinZhaoQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XinZhaoP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XinZhaoE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XerathW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XerathR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XerathQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XerathP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XerathE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WukongW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WukongR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WukongQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WukongP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WukongE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WarwickW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WarwickR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WarwickQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WarwickP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WarwickE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VolibearW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VolibearR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VolibearQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VolibearP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VolibearE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VladimirW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VladimirR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VladimirQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VladimirP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VladimirE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViktorW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViktorR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViktorQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViktorP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViktorE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VelkozW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VelkozR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VelkozQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VelkozP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VelkozE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VeigarW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VeigarR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VeigarQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VeigarP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VeigarE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VayneW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VayneR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VayneQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VayneP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VayneE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VarusW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VarusR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VarusQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VarusP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VarusE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UrgotW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UrgotR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UrgotQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UrgotP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UrgotE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UdyrW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UdyrR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UdyrQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UdyrP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UdyrE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwitchW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwitchR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwitchQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwitchP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwitchE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwistedFateW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwistedFateR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwistedFateQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwistedFateP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwistedFateE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TryndamereW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TryndamereR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TryndamereQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TryndamereP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TryndamereE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrundleW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrundleR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrundleQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrundleP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrundleE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TristanaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TristanaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TristanaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TristanaP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TristanaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThreshW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThreshR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThreshQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThreshP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThreshE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TeemoW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TeemoR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TeemoQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TeemoP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TeemoE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TaricW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TaricR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TaricQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TaricP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TaricE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TalonW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TalonR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TalonQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TalonP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TalonE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TahmKenchW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TahmKenchQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TahmKenchP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TahmKenchNewR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TahmKenchE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SyndraW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SyndraR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SyndraQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SyndraP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SyndraE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwainW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwainR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwainQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwainP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwainE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SorakaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SorakaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SorakaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SorakaP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SorakaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SonaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SonaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SonaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SonaP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SonaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SkarnerW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SkarnerR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SkarnerQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SkarnerP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SkarnerE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SivirW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SivirR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SivirQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SivirP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SivirE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SionW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SionR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SionQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SionP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SionE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SingedW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SingedR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SingedQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SingedP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SingedE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShyvanaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShyvanaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShyvanaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShyvanaP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShyvanaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShenW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShenR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShenQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShenP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShenE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShacoW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShacoR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShacoQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShacoP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShacoE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SejuaniW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SejuaniR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SejuaniQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SejuaniP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SejuaniE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RyzeW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RyzeR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RyzeQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RyzeP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RyzeE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RumbleW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RumbleR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RumbleQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RumbleP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RumbleE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RivenW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RivenR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RivenQpng.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RivenP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RivenE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RengarW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RengarR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RengarQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RengarP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RengarE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RenektonW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RenektonR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RenektonQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RenektonP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RenektonE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RekSaiW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RekSaiR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RekSaiQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RekSaiP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RekSaiE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RammusW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RammusR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RammusQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RammusP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RammusE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QuinnW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QuinnR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QuinnQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QuinnP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QuinnE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PoppyW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PoppyR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PoppyQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PoppyP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PoppyE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PantheonW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PantheonR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PantheonQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PantheonP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PantheonE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OriannaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OriannaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OriannaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OriannaP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OriannaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OlafW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OlafR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OlafQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OlafP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OlafE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NunuW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NunuR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NunuQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NunuP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NunuE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NocturneW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NocturneR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NocturneQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NocturneP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NocturneE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NidaleeR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NidaleeP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NidaleeHumanW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NidaleeHumanQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NidaleeHumanE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NidaleeCougarW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NidaleeCougarQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NidaleeCougarE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NautilusW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NautilusR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NautilusQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NautilusPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NautilusE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NasusW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NasusR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NasusQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NasusPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NasusE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NamiW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NamiR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NamiQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NamiPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NamiE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MorganaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MorganaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MorganaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MorganaP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MorganaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MordekaiserW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MordekaiserR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MordekaiserQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MordekaiserP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MordekaiserE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MissFortuneW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MissFortuneR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MissFortuneQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MissFortuneP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MissFortuneE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MasterYiW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MasterYiR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MasterYiQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MasterYiP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MasterYiE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MaokaiW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MaokaiR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MaokaiQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MaokaiP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MaokaiE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MalzaharW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MalzaharR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MalzaharQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MalzaharP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MalzaharE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MalphiteW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MalphiteQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MalphiteP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LuxW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LuxR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LuxQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LuxP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LuxE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LuluW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LuluR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LuluQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LuluP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LuluE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LucianW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LucianR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LucianQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LucianP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LucianE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LissandraW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LissandraR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LissandraQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LissandraP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LissandraE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeonaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeonaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeonaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeonaP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeonaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeBlancW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeBlancR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeBlancQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeBlancP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeBlancE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KogMawW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KogMawR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KogMawQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KogMawP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KogMawE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KindredW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KindredR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KindredQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KindredP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KindredEWrapper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KhaZixW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KhazixR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KhazixQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KhazixP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KhazixE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KennenW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KennenR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KennenQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KennenP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KennenE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KayleW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KayleR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KayleQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KayleP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KayleE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KatarinaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KatarinaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KassadinW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KassadinR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KassadinQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KassadinE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KarthusW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KarthusR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KarthusQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KarthusP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KarthusE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KarmaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KarmaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KarmaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KarmaP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KarmaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KalistaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KalistaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KalistaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KalistaPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KalistaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JinxW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JinxR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JinxQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JinxPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JinxE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JaycePassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JayceHammerW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JayceHammerR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JayceHammerQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JayceHammerE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JayceCannonW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JayceCannonR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JayceCannonQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JayceCannonE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JaxQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JaxPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\E.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JarvanW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JarvanR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JarvanQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JarvanPassvie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JarvanE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JannaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JannaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JannaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JannaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IreliaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IreliaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IreliaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IreliaPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IreliaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IllaoiW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IllaoiR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IllaoiQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IllaoiPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IllaoiE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeimerdingerW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeimerdingerR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeimerdingerQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeimerdingerPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeimerdingerE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HecarimW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HecarimR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HecarimQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HecarimPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HecarimE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GravesW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GravesE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GragasW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GragasR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GragasQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GragasP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GragasE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GnarWBuff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GnarTransformSoon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GnarMega.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GarenW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GarenQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GarenE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GangplankR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GangplankPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GangplankE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GangplankDeBuff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GangplankBuff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FizzW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FizzR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FizzQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FizzPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FizzE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FioraW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FioraR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FioraQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FioraPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FioraE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FiddlesticksW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FiddlesticksR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FiddlesticksQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FiddlesticksPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FiddlesticksE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EzrealW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EzrealR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EzrealQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EzrealPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EzrealE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EvelynnW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EvelynnR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EvelynnQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EvelynnPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EvelynnE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EliseSpiderW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EliseSpiderEInitial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EliseR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EkkoW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EkkoR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EkkoQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EkkoPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EkkoE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrMundoR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DravenW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DravenQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DianaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DariusW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DariusR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DariusPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CorkiW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CorkiE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CassiopeiaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CassiopeiaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CassiopeiaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CassiopeiaPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CassiopeiaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CaitlynW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CaitlynR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CaitlynQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CaitlynPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CaitlynE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BraumW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BraumRWrapper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BraumQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BraumPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BraumE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BrandW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BrandR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BrandQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BrandPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BrandE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlitzcrankW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlitzcrankR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlitzcrankQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlitzcrankPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlitzcrankE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BardW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BardR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BardQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BardPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BardE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AzirW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AzirR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AzirQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AzirPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AzirE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AsheW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AsheR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AsheQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AshePassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AsheE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AnnieW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AnnieR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AnnieQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AnniePassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AnnieE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AniviaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AniviaR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AniviaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AniviaPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AniviaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AmumuW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AmumuR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AmumuQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AmumuPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AmumuE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlistarW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlistarR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlistarQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlistarPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlistarE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AkaliW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AkaliR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AkaliQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AkaliPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AkaliE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AhriW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AhriR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AhriQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AhriPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AhriE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AatroxW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AatroxR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AatroxQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AatroxPassive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AatroxE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Teleport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Smite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Recall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ignite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Heal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Haste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exhaust.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Barrier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zhonya%27s Hourglass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Youmuu%27s Ghostblade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Total Biscuit of Rejuvenation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tear of the Goddess.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Talisman of Ascension.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sweeping Lens %28Trinket%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refillable Potion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Randuin%27s Omen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oracle Alteration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maw of Malmortius.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Locket of the Iron Solari.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Iceborn Gauntlet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hunter%27s Potion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hexdrinker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Health Potion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Guardian Ange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Frost Queen%27s Claim.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Face of the Mountain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Elixir of Wrath.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Elixir of Sorcery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Elixir of Iron.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Corrupting Potion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blade of the Ruined King.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bilgewater Cutlass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZyraW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZyraR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZyraQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZyraP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZyraE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZileanW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZileanR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZileanQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZileanP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZileanE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZiggsW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZiggsR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZiggsQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZiggsP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cleanse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
