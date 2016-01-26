@@ -87,6 +87,8 @@ namespace TimerBuddy
                 DebugMenu.Add("s1", new Slider("Slider 1", 0, 0, 200));
                 DebugMenu.Add("s2", new Slider("Slider 2", 0, 0, 200));
                 DebugMenu.Add("s3", new Slider("Slider 3", 0, 0, 200));
+                DebugMenu.Add("s4", new Slider("Slider 4", 0, 0, 200));
+                DebugMenu.Add("s5", new Slider("Slider 5", 0, 0, 200));
                 DebugMenu.Add("c1", new CheckBox("CheckBox 1"));
                 DebugMenu.Add("c2", new CheckBox("CheckBox 2"));
                 DebugMenu.Add("c3", new CheckBox("CheckBox 3"));
