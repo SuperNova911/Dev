@@ -153,7 +153,6 @@ namespace TimerBuddy
                         SpellType = trapDatabase.SpellType,
                         Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
                         Slot = trapDatabase.Slot,
-                        Caster = null,
                         CastPosition = sender.Position,
                         ChampionName = trapDatabase.ChampionName,
                         Name = sender.Name,
@@ -243,6 +242,7 @@ namespace TimerBuddy
                         Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
                         Slot = database.Slot,
                         Caster = sender,
+                        Target = args.Target as Obj_AI_Base,
                         CastPosition = args.End,
                         ChampionName = database.ChampionName,
                         Name = args.SData.Name,
@@ -265,6 +265,21 @@ namespace TimerBuddy
 
                     if (slist != null)
                         CastCancel(slist);
+
+                    return;
+                }
+
+                if (args.SData.Name == "ShacoBoxSpell")
+                {
+                    var slist = SpellList.FirstOrDefault(l => l.Name == "Jack In The Box" && l.NetworkID == sender.NetworkId && l.Cancel == false);
+
+                    if (slist != null)
+                    {
+                        slist.Cancel = true;
+                        slist.EndTime = 5000 + Utility.TickCount;
+                    }
+
+                    return;
                 }
             }
             catch (Exception e)
