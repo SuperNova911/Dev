@@ -316,9 +316,6 @@
   <data name="BraumQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BraumQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BraumRWrapper" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BraumRWrapper.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="BraumW" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BraumW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -381,9 +378,6 @@
   </data>
   <data name="DrMundoR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DrMundoR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="E" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\E.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EkkoE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EkkoE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -868,21 +862,6 @@
   <data name="LeBlancW" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LeBlancW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LeeSinE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LeeSinE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LeeSinP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LeeSinP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LeeSinQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LeeSinQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LeeSinR" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LeeSinR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LeeSinW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LeeSinW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="LeonaE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LeonaE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1240,9 +1219,6 @@
   <data name="QuinnW" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QuinnW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="R" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\R.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RammusE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RammusE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1317,9 +1293,6 @@
   </data>
   <data name="RivenP" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RivenP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RivenQpng" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RivenQpng.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RivenR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RivenR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1545,9 +1518,6 @@
   </data>
   <data name="TahmKenchE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TahmKenchE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TahmKenchNewR" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TahmKenchNewR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TahmKenchP" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TahmKenchP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1855,9 +1825,6 @@
   <data name="VolibearW" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\VolibearW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="W" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\W.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="WarwickE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WarwickE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -2034,5 +2001,74 @@
   </data>
   <data name="CorkiBoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CorkiBoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DianaQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DianaQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BraumR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\braumr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JaxE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\jaxe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JaxR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\jaxr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JaxW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\jaxw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeeSinE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LeeSinE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeeSinEE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LeeSinEE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeeSinP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LeeSinP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeeSinQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LeeSinQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeeSinQQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LeeSinQQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeeSinR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LeeSinR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeeSinW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LeeSinW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeeSinWW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LeeSinWW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MalphiteE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MalphiteE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RivenQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\rivenq.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ViktorQQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ViktorQQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CorkiQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CorkiQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IreliaRR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IreliaRR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KatarinaE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KatarinaE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KatarinaP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KatarinaP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KatarinaW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KatarinaW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TahmKenchR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\tahmkenchr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DianaP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DianaP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -501,7 +501,7 @@
     <None Include="Resources\TahmKenchP.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\TahmKenchNewR.png" />
+    <None Include="Resources\TahmKenchR.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TahmKenchE.png" />
@@ -723,7 +723,7 @@
     <None Include="Resources\RivenR.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\RivenQpng.png" />
+    <None Include="Resources\RivenQ.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RivenP.png" />
@@ -1140,21 +1140,6 @@
     <None Include="Resources\LeonaE.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\LeeSinW.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\LeeSinR.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\LeeSinQ.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\LeeSinP.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\LeeSinE.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\LeBlancW.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1350,10 +1335,10 @@
     <None Include="Resources\JayceCannonE.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\W.png" />
+    <None Include="Resources\JaxW.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\R.png" />
+    <None Include="Resources\JaxR.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\JaxQ.png" />
@@ -1362,7 +1347,7 @@
     <None Include="Resources\JaxPassive.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\E.png" />
+    <None Include="Resources\JaxE.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\JarvanW.png" />
@@ -1665,7 +1650,7 @@
     <None Include="Resources\BraumW.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\BraumRWrapper.png" />
+    <None Include="Resources\BraumR.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BraumQ.png" />
@@ -1996,6 +1981,57 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cleanse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DianaQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinWW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinEE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinQQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeeSinR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MalphiteE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViktorQQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IreliaRR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KatarinaP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KatarinaW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KatarinaE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CorkiQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DianaP.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

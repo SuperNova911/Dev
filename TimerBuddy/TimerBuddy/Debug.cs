@@ -28,7 +28,7 @@ namespace TimerBuddy
             if (!sender.IsMe)
                 return;
 
-            Chat.Print(args.Buff.DisplayName, System.Drawing.Color.LawnGreen);
+            Chat.Print(args.Buff.DisplayName + " " + args.Buff.Name, System.Drawing.Color.LawnGreen);
         }
 
         private static void Obj_AI_Base_OnBuffUpdate(Obj_AI_Base sender, Obj_AI_BaseBuffUpdateEventArgs args)
