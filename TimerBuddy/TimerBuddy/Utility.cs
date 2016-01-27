@@ -27,7 +27,7 @@ namespace TimerBuddy
                 }
                                 
                 if (database.EndTime > 10000)
-                    return ((list.EndTime - TickCount) / 1000 + 1).ToString();
+                    return ((int)(list.EndTime - TickCount) / 1000 + 1).ToString();
                 else
                     return list.EndTime - TickCount >= 0 ? ((list.EndTime - TickCount) / 1000f).ToString("F1") : 0f.ToString("F1");
             }
@@ -99,7 +99,27 @@ namespace TimerBuddy
 
         public static SharpDX.Color GetColor(this Spell spell)
         {
-            return Config.SpellMenu.GetColor(spell.MenuString + "color");
+            try
+            {
+                switch (spell.SpellType)
+                {
+                    case SpellType.SummonerSpell:
+                        return Config.SummonerMenu.GetColor(spell.MenuString + "color");
+                    case SpellType.Spell:
+                        return Config.SpellMenu.GetColor(spell.MenuString + "color");
+                    case SpellType.Trap:
+                        return Config.TrapMenu.GetColor(spell.MenuString + "color");
+                    case SpellType.Item:
+                        return Config.ItemMenu.GetColor(spell.MenuString + "color");
+                }
+                return SharpDX.Color.White;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error CODE GET_COLOR " + spell.Name);
+                return SharpDX.Color.White;
+            }
         }
 
         public static System.Drawing.Color ConvertColor(SharpDX.Color color)
