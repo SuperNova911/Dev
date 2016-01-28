@@ -18,9 +18,9 @@ namespace TimerBuddy
     {
         static Debug()
         {
-            Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
-            Obj_AI_Base.OnBuffUpdate += Obj_AI_Base_OnBuffUpdate;
-            Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
+            //Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
+            //Obj_AI_Base.OnBuffUpdate += Obj_AI_Base_OnBuffUpdate;
+            //Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
         }
 
         private static void Obj_AI_Base_OnBuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)
