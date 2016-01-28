@@ -17,6 +17,7 @@ namespace TimerBuddy
     public static class Program
     {
         public static List<Spell> SpellList = new List<Spell>();
+        public static List<SpellCaster> CasterList = new List<SpellCaster>();
         
         static void Main(string[] args)
         {
@@ -37,16 +38,17 @@ namespace TimerBuddy
             {
                 Config.Initialize();
                 TextureDraw.Initialize();
+                ObjectDetector.Initialize();
                 Debug.Initialize();
 
                 Drawing.OnEndScene += Drawing_OnEndScene;
-                Game.OnTick += Game_OnTick;
-                Game.OnUpdate += Game_OnUpdate;
-                Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
-                Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
-                Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
-                GameObject.OnCreate += GameObject_OnCreate;
-                GameObject.OnDelete += GameObject_OnDelete;
+                //Game.OnTick += Game_OnTick;
+                //Game.OnUpdate += Game_OnUpdate;
+                //Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
+                //Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
+                //Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
+                //GameObject.OnCreate += GameObject_OnCreate;
+                //GameObject.OnDelete += GameObject_OnDelete;
             }
             catch (Exception e)
             {
@@ -264,7 +266,7 @@ namespace TimerBuddy
                     var slist = SpellList.FirstOrDefault(l => l.Name == "summonerteleport" && l.Caster == sender);
 
                     if (slist != null)
-                        CastCancel(slist);
+                        Utility.CastCancel(slist);
 
                     return;
                 }
@@ -289,25 +291,12 @@ namespace TimerBuddy
             }
         }
 
-        private static void CastCancel(Spell list)
-        {
-            try
-            {
-                list.Cancel = true;
-                list.EndTime = Utility.TickCount + 2000;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE CANCEL");
-            }
-        }
-
         private static void Game_OnTick(EventArgs args)
         {
             try
             {
                 SpellList.RemoveAll(l => l.Buff == true ? l.EndTime < Game.Time * 1000 : l.EndTime < Utility.TickCount);
+                CasterList.RemoveAll(l => l.EndTime < Utility.TickCount);
             }
             catch (Exception e)
             {
@@ -325,7 +314,7 @@ namespace TimerBuddy
                 if (Config.DebugMenu["c2"].Cast<CheckBox>().CurrentValue)
                     DrawManager.DrawKappa(); ;
 
-                foreach (var list in SpellList.Where(l => l.Buff == true ? l.EndTime >= Game.Time * 1000f : l.EndTime >= Utility.TickCount))
+                foreach (var list in SpellList.Where(l => l.Buff == true ? l.EndTime >= Game.Time : l.EndTime >= Utility.TickCount))
                 {
                     switch (list.SpellType)
                     {
