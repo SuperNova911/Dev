@@ -1,4 +1,5 @@
 ﻿using EloBuddy;
+using EloBuddy.SDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace TimerBuddy
 {
     public static class Utility
     {
-        public static string GetRemainTime(this Spell list)
+        /*public static string GetRemainTime(this Spell list)
         {
             try
             {
@@ -37,9 +38,23 @@ namespace TimerBuddy
                 Chat.Print("error: CODE REMAIN_TIMER " + list.Caster.BaseSkinName);
                 return "Kappa";
             }
+        }*/
+
+        public static string GetRemainTimeString(this Spell spell)
+        {
+            try
+            {
+                return (spell.GetRemainTime() / 1000f).ToString("F1");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error: CODE REMAIN_STRING " + spell.Caster.BaseSkinName);
+                return "KAPPA";
+            }
         }
 
-        public static float GetRemainTimeFloat(this Spell list)
+        /*public static float GetRemainTimeFloat(this Spell list)
         {
             try
             {
@@ -66,6 +81,25 @@ namespace TimerBuddy
                 Chat.Print("error: CODE REMAIN_FLOAT " + list.Caster.BaseSkinName);
                 return 777f;
             }
+        }*/
+
+        public static float GetRemainTime(this Spell spell)
+        {
+            try
+            {
+                if (spell.Buff)
+                    return spell.BuffRemainTime();
+
+                var remainTime = (spell.EndTime - TickCount);
+
+                return remainTime > 0 ? remainTime : 0f;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error: CODE REMAIN_TIME " + spell.Caster.BaseSkinName);
+                return 4444;
+            }
         }
 
         public static int TickCount
@@ -78,23 +112,40 @@ namespace TimerBuddy
 
         public static float BuffRemainTime(this Spell spell)
         {
-            if (spell.Target.HasBuff(spell.Name))
+            try
             {
-                if (spell.EndTime >= Game.Time * 1000)
-                {
-                    return spell.EndTime - Game.Time * 1000;
-                }
-                return 0;
-            }
-            return 0;
+                if (spell.Target.HasBuff(spell.Name))
+                    if (spell.EndTime >= Game.Time)
+                    {
+                        var remainTime = spell.EndTime * 1000 - Game.Time * 1000;
 
-            /*
-            return unit.HasBuff(buffName)
-                ? unit.Buffs.OrderByDescending(buff => buff.EndTime - Game.Time)
-                  .Where(buff => buff.Name == buffName)
-                  .Select(buff => buff.EndTime)
-                  .FirstOrDefault() - Game.Time
-                : 0;*/
+                        return remainTime > 0 ? remainTime : 0f;
+                    }
+                return 0f;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error CODE BUFF_REMAIN " + spell.Name);
+                return 0f;
+            }
+        }
+
+        public static float GetFullTime(this Spell spell)
+        {
+            try
+            {
+                if (spell.Buff)
+                    return spell.FullTime * 1000f;
+
+                return spell.FullTime;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error CODE GET_FULL " + spell.Name);
+                return 0f;
+            }
         }
 
         public static SharpDX.Color GetColor(this Spell spell)
@@ -127,7 +178,7 @@ namespace TimerBuddy
             return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
         }
 
-        public static Spell GetDatabase(Spell spell)
+        public static Spell GetDatabase(this Spell spell)
         {
             try
             {
@@ -160,9 +211,70 @@ namespace TimerBuddy
             }
         }
         
-        public static AIHeroClient FIndCaster(this Spell spell)
+        public static Obj_AI_Base FIndCaster(this GameObject sender, Spell database)
         {
-            return Player.Instance;
+            try
+            {
+                if (database.GameObject == true)
+                {
+                    var name = database.ChampionName;
+
+                    var heroList = EntityManager.Heroes.AllHeroes.Where(h => h.BaseSkinName == database.ChampionName).ToList();
+
+                    if (heroList.Count == 1)
+                    {
+                        return heroList.First();
+                    }
+
+                    var caster = Program.CasterList.FirstOrDefault(c => c.Caster.BaseSkinName == database.ChampionName && c.Slot == database.Slot);
+
+                    if (caster != null)
+                        return caster.Caster;
+                }
+                return Player.Instance;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error CODE FIND_CASTER " + database.Name);
+                return Player.Instance;
+            }
+        }
+
+        public static string BaseObjectName(this GameObject sender)
+        {
+            var baseObject = sender as Obj_AI_Base;
+            return baseObject == null ? sender.Name : baseObject.BaseSkinName;
+        }
+
+        public static void ShacoBoxActive(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
+            if (args.SData.Name == "ShacoBoxSpell")
+            {
+                var shacobox = Program.SpellList.FirstOrDefault(d => d.GameObject && sender.NetworkId == d.NetworkID && d.Cancel == false);
+
+                if (shacobox != null)
+                {
+                    shacobox.Cancel = true;
+                    shacobox.EndTime = 5000 + TickCount;
+                }
+
+                return;
+            }
+        }
+
+        public static void CastCancel(Spell list)
+        {
+            try
+            {
+                list.Cancel = true;
+                list.EndTime = TickCount + 2000;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error: CODE CANCEL");
+            }
         }
     }
 }
