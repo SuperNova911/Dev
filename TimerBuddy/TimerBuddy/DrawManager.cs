@@ -26,7 +26,7 @@ namespace TimerBuddy
                     if (!list.Cancel)
                     {
                         DrawText(list.Caster.BaseSkinName, list.Target.Position + new Vector3(-60, 10, 0), list.GetColor(), list.SpellType);
-                        DrawText(list.GetRemainTime(), list.Target.Position + new Vector3(-30, 65, 0), Color.LawnGreen, list.SpellType);
+                        DrawText(list.GetRemainTimeString(), list.Target.Position + new Vector3(-30, 65, 0), Color.LawnGreen, list.SpellType);
                     }
                     else
                     {
@@ -39,9 +39,9 @@ namespace TimerBuddy
                 if (!list.Cancel)
                 {
                     DrawText(list.Caster.BaseSkinName, list.CastPosition + new Vector3(-60, 10, 0), list.GetColor(), list.SpellType);
-                    DrawText(list.GetRemainTime(), list.CastPosition + new Vector3(-30, 65, 0), Color.LawnGreen, list.SpellType);
+                    DrawText(list.GetRemainTimeString(), list.CastPosition + new Vector3(-30, 65, 0), Color.LawnGreen, list.SpellType);
                     
-                    DrawText(list.GetRemainTime(), list.Caster.Position + new Vector3(-15, -10, 0), Color.LawnGreen, list.SpellType);
+                    DrawText(list.GetRemainTimeString(), list.Caster.Position + new Vector3(-15, -10, 0), Color.LawnGreen, list.SpellType);
                 }
                 else
                 {
@@ -94,7 +94,7 @@ namespace TimerBuddy
         {
             try
             {
-                DrawText(list.GetRemainTime(), list.CastPosition + new Vector3(-15, 0, 0), list.GetColor(), list.SpellType);
+                DrawText(list.GetRemainTimeString(), list.CastPosition + new Vector3(-15, 0, 0), list.GetColor(), list.SpellType);
 
                 if (list.Team == Team.Enemy)
                     new Circle
@@ -270,9 +270,10 @@ namespace TimerBuddy
                 //var mainpos = hero.Position.WorldToScreen();
                 var startpos = hero.IsMe ? mainpos + new Vector2(s1, s2) : mainpos + new Vector2(3, 32);
                 //var startpos = mainpos + new Vector2(-50, 45);
+
                 float length = spell.Buff == true
-                    ? spell.GetRemainTimeFloat() / spell.FullTime * 100
-                    : spell.GetRemainTimeFloat() / Utility.GetDatabase(spell).EndTime * 100;
+                    ? spell.GetRemainTime() / spell.GetFullTime() * 100
+                    : spell.GetRemainTime() / spell.GetFullTime() * 100;
                 var endpos = startpos + new Vector2(length, 0);
                 var endpos2 = endpos + new Vector2(0, 6);
 
@@ -283,7 +284,7 @@ namespace TimerBuddy
                 Drawing.DrawLine(endpos, endpos2, 1f, lineColor);
 
                 var textpos = endpos2 + new Vector2(10, 0);
-                Drawing.DrawText(textpos, textColor, (spell.GetRemainTimeFloat() / 1000f).ToString("F1"), 10);
+                Drawing.DrawText(textpos, textColor, spell.GetRemainTimeString(), 10);
                 var spritepos = textpos + new Vector2(-18, 0);
                 TextureDraw.DrawSprite(spritepos, spell);
             }
@@ -348,7 +349,7 @@ namespace TimerBuddy
             Drawing.DrawLine(centerpos + new Vector2(-500, 0), centerpos + new Vector2(500, 0), 1, System.Drawing.Color.Red);
             Drawing.DrawLine(centerpos + new Vector2(0, -500), centerpos + new Vector2(0, 500), 1, System.Drawing.Color.Red);
             
-            DrawText((s5 / 10f).ToString("F1"), (centerpos + new Vector2(-15, -13)), Color.White, SpellType.Spell);
+            DrawText(Game.Time.ToString("F3"), (centerpos + new Vector2(-15, -13)), Color.White, SpellType.Spell);
             // -15, -13
 
             var length = s5 / 50f * 50f;
@@ -361,26 +362,27 @@ namespace TimerBuddy
 
         public static void DrawKappa(Spell spell)
         {
-            var s5 = Config.DebugMenu["s5"].Cast<Slider>().CurrentValue;
-            var centerpos = Drawing.WorldToScreen(spell.CastPosition) + new Vector2(0, s5);
+            int s5 = Config.DebugMenu["s5"].Cast<Slider>().CurrentValue;
+            Vector2 centerpos = Drawing.WorldToScreen(spell.CastPosition) + new Vector2(0, s5);
 
             //Drawing.DrawLine(centerpos + new Vector2(-500, 0), centerpos + new Vector2(500, 0), 1, System.Drawing.Color.Red);
             //Drawing.DrawLine(centerpos + new Vector2(0, -500), centerpos + new Vector2(0, 500), 1, System.Drawing.Color.Red);
 
-            var remain = spell.GetRemainTimeFloat();
-            var full = spell.Buff == true ? spell.FullTime * 100 : Utility.GetDatabase(spell).EndTime;
-            var Kappa = full <= 3000 ? false : true;
+            float remain = spell.GetRemainTime();
+            float full = spell.GetFullTime();
+            bool Kappa = full >= 3000 ? true : false;
 
-            float length = Kappa ? remain / full * 70 : remain / (full - 500) * 45;
+            float length = Kappa ? remain / full * 70f : remain / full * 55f;
             
-            if (spell.GetRemainTimeFloat() >= 3000 && Utility.GetDatabase(spell).EndTime - spell.GetRemainTimeFloat() <= 500)
+            if (spell.GetFullTime() >= 3500 && full - remain <= 500)
             {
-                length = (Utility.GetDatabase(spell).EndTime - spell.GetRemainTimeFloat()) * 0.14f;
+                float length2 = (full - remain) / 500f * length;
+                length = length2;
             }
             
-            DrawText(spell.GetRemainTime(), centerpos + new Vector2(-15, -13), Color.White, SpellType.Spell);
+            DrawText(spell.GetRemainTimeString(), centerpos + new Vector2(-15, -13), Color.White, SpellType.Spell);
             // -15, -13
-            var barColor = spell.Team == Team.Enemy ? System.Drawing.Color.Red : System.Drawing.Color.LawnGreen;
+            var barColor = spell.Team == Team.Ally ? System.Drawing.Color.LawnGreen : spell.Team == Team.Enemy ? System.Drawing.Color.Red : System.Drawing.Color.Orange;
 
             var linestart = centerpos - new Vector2(length, 0);
             var lineend = centerpos + new Vector2(length, 0);
