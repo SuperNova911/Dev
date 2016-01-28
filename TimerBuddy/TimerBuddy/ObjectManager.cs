@@ -34,6 +34,13 @@ namespace TimerBuddy
         SummonerSpell, Item, Trap, Spell, Ward
     }
 
+    public class SpellCaster
+    {
+        public Obj_AI_Base Caster;
+        public SpellSlot Slot;
+        public float EndTime;
+    }
+
     public class Spell
     {
         public SpellType SpellType;
@@ -526,72 +533,5 @@ namespace TimerBuddy
                 //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Hecarim", Name = "", MenuString = "Hecarim E", SpriteName = Resources.HecarimE },
             };
         }
-    }
-
-    
-    /*
-    public class Timer
-    {
-        public ObjType type;
-
-        public Team team = Team.None;
-
-        public Obj_AI_Base caster;
-
-        public Vector3 castPosition;
-
-        public string name;
-
-        public float endTime;
-
-        public bool cancel;
-
-        public SpellSlot slot;
-
-        public bool skillshot = false;
-    }
-
-    public class TimerInfo
-    {
-        public ObjType type;
-
-        public string name;
-
-        public float endTime;
-
-        public SpellSlot slot;
-
-        public string championName;
-
-        public bool skillshot = false;
-    }
-
-    public class GameObj
-    {
-        public ObjType type;
-
-        public Team team = Team.None;
-
-        public Vector3 position;
-
-        public float endTime;
-
-        public string name;
-        
-        public int networkID;
-    }
-
-    public class GameObjInfo
-    {
-        public ObjType type;
-
-        public string name;
-        
-        public float endTime;
-    }*/
-    
-    public class BuffInfo
-    {
-        public string buffname;
     }
 }
