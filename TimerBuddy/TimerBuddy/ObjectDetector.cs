@@ -18,19 +18,27 @@ namespace TimerBuddy
     {
         static ObjectDetector()
         {
-            Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
-            Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
-            Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
-            GameObject.OnCreate += GameObject_OnCreate;
-            GameObject.OnDelete += GameObject_OnDelete;
-            Game.OnTick += Game_OnTick;
+            try
+            {
+                Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
+                Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
+                Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
+                GameObject.OnCreate += GameObject_OnCreate;
+                GameObject.OnDelete += GameObject_OnDelete;
+                Game.OnTick += Game_OnTick;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE OBJ_INIT", Color.LightBlue);
+            }
         }
         
         private static void Obj_AI_Base_OnBuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)
         {
             try
             {
-                if (!sender.IsValid || !args.Buff.Caster.IsValid)
+                if (!sender.IsValid || !args.Buff.Caster.IsValid || !sender.IsHero())
                     return;
 
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.Buff && (d.Name == args.Buff.DisplayName || d.Name == args.Buff.Name));
@@ -41,6 +49,7 @@ namespace TimerBuddy
                     {
                         SpellType = database.SpellType,
                         Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
+                        DrawType = database.DrawType,
                         Caster = sender,
                         Target = sender,
                         CastPosition = sender.Position,
@@ -55,7 +64,7 @@ namespace TimerBuddy
                         SpriteName = database.SpriteName,
                     });
 
-                    Chat.Print("Buff " + args.Buff.DisplayName + sender.BaseSkinName, Color.LawnGreen);
+                    Chat.Print("Buff " + args.Buff.DisplayName + " " + sender.BaseSkinName, Color.LawnGreen);
 
                     return;
                 }
@@ -63,7 +72,7 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE BUFF_GAIN " + args.Buff.DisplayName, Color.Blue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE BUFF_GAIN " + args.Buff.DisplayName, Color.LightBlue);
             }
         }
 
@@ -71,7 +80,7 @@ namespace TimerBuddy
         {
             try
             {
-                if (!sender.IsValid || !args.Buff.Caster.IsValid)
+                if (!sender.IsValid || !args.Buff.Caster.IsValid || !sender.IsHero())
                     return;
 
                 Program.SpellList.RemoveAll(d => d.Buff && d.Target == sender && (d.Name == args.Buff.DisplayName || d.Name == args.Buff.Name));
@@ -79,7 +88,7 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE BUFF_LOSE " + args.Buff.DisplayName, Color.Blue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE BUFF_LOSE " + args.Buff.DisplayName, Color.LightBlue);
             }
         }
 
@@ -90,7 +99,7 @@ namespace TimerBuddy
                 if (!sender.IsValid)
                     return;
 
-                var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && d.SpellType == SpellType.Trap
+                var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && d.ObjectName != null
                 ? d.Name == sender.Name && d.ObjectName == sender.BaseObjectName()
                 : d.Name == sender.Name);
 
@@ -104,6 +113,7 @@ namespace TimerBuddy
                         Team = caster.IsAlly ? Team.Ally : caster.IsEnemy ? Team.Enemy : Team.None,
                         Slot = database.Slot,
                         Caster = caster,
+                        Object = sender,
                         CastPosition = sender.Position,
                         ChampionName = database.ChampionName,
                         Name = database.Name,
@@ -125,7 +135,7 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_CREATE " + sender.Name, Color.Blue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_CREATE " + sender.Name, Color.LightBlue);
             }
         }
 
@@ -141,7 +151,7 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_DELETE " + sender.Name, Color.Blue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_DELETE " + sender.Name, Color.LightBlue);
             }
         }
 
@@ -204,7 +214,7 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_SPELLCAST " + sender.BaseSkinName + " " + args.Slot, Color.Blue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_SPELLCAST " + sender.BaseSkinName + " " + args.Slot, Color.LightBlue);
             }
         }
 
@@ -224,7 +234,7 @@ namespace TimerBuddy
                 {
                     foreach (var buff in hero.Buffs.Where(b => b.IsValid()))
                     {
-                        var bufflist = Program.SpellList.FirstOrDefault(d => d.Buff && d.Name == buff.DisplayName);
+                        var bufflist = Program.SpellList.FirstOrDefault(d => d.Buff && d.Name == buff.DisplayName && d.Caster.BaseSkinName == hero.BaseSkinName);
 
                         if (bufflist != null)
                             bufflist.EndTime = buff.EndTime;
@@ -234,7 +244,7 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_TICK", Color.Blue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_TICK", Color.LightBlue);
             }
         }
 
@@ -247,7 +257,7 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE OBJECT_DETECTOR", Color.Blue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE OBJECT_DETECTOR", Color.LightBlue);
             }
         }
     }

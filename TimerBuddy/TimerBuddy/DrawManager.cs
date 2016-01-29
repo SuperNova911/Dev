@@ -94,7 +94,7 @@ namespace TimerBuddy
         {
             try
             {
-                DrawText(list.GetRemainTimeString(), list.CastPosition + new Vector3(-15, 0, 0), list.GetColor(), list.SpellType);
+                DrawText(list.GetRemainTimeString(), list.Object.Position + new Vector3(-15, 0, 0), list.GetColor(), list.SpellType);
 
                 if (list.Team == Team.Enemy)
                     new Circle
@@ -115,6 +115,9 @@ namespace TimerBuddy
         {
             try
             {
+                if (spell.DrawType == DrawType.NumberLine)
+                    DrawKappa(spell);
+
                 if (spell.GameObject || spell.SkillShot)
                 {
                     DrawKappa(spell);
@@ -219,6 +222,9 @@ namespace TimerBuddy
         {
             try
             {
+                if (spell.DrawType == DrawType.NumberLine)
+                    DrawKappa(spell);
+
                 DrawLine(spell);
             }
             catch (Exception e)
@@ -263,7 +269,7 @@ namespace TimerBuddy
 
                 var hero = spell.Caster;
 
-                if (!hero.VisibleOnScreen || !hero.IsHPBarRendered)
+                if (!hero.VisibleOnScreen || !hero.IsHPBarRendered || !hero.IsHero())
                     return;
 
                 var mainpos = hero.HPBarPosition;
@@ -363,7 +369,7 @@ namespace TimerBuddy
         public static void DrawKappa(Spell spell)
         {
             int s5 = Config.DebugMenu["s5"].Cast<Slider>().CurrentValue;
-            Vector2 centerpos = Drawing.WorldToScreen(spell.CastPosition) + new Vector2(0, s5);
+            Vector2 centerpos = Drawing.WorldToScreen(spell.GameObject ? spell.Object.Position : spell.Target.Position) + new Vector2(0, s5);
 
             //Drawing.DrawLine(centerpos + new Vector2(-500, 0), centerpos + new Vector2(500, 0), 1, System.Drawing.Color.Red);
             //Drawing.DrawLine(centerpos + new Vector2(0, -500), centerpos + new Vector2(0, 500), 1, System.Drawing.Color.Red);

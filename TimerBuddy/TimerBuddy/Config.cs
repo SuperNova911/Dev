@@ -23,6 +23,7 @@ namespace TimerBuddy
                 var itemList = SpellDatabase.Database.Where(i => i.SpellType == SpellType.Item).ToList();
                 var trapList = SpellDatabase.Database.Where(t => heroName.Contains(t.ChampionName) && t.SpellType == SpellType.Trap).ToList();
                 var spellList = SpellDatabase.Database.Where(s => heroName.Contains(s.ChampionName) && s.SpellType == SpellType.Spell).ToList();
+                
 
                 Menu = MainMenu.AddMenu("TimerBuddy", "TimerBuddy");
                 Menu.AddLabel(string.Format("Timer datas Loaded {0}", summonerList.Count + itemList.Count + trapList.Count + spellList.Count));

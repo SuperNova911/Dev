@@ -21,6 +21,18 @@ namespace TimerBuddy
             //Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
             //Obj_AI_Base.OnBuffUpdate += Obj_AI_Base_OnBuffUpdate;
             //Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
+            GameObject.OnCreate += GameObject_OnCreate;
+        }
+
+        private static void GameObject_OnCreate(GameObject sender, EventArgs args)
+        {
+            if (!sender.IsValid)
+                return;
+
+            if (sender.Name.Contains("Minion") || sender.GetType().Name == "MissileClient" || sender.Name.Contains("SRU") || sender.Name.Contains("FeelNoPain") || sender.Name.Contains("crystal_beam"))
+                return;
+            
+            Console.WriteLine("Add\tType: {0} | Name: {1} | NetID: {2} | objectName: {3}", sender.GetType().Name, sender.Name, sender.NetworkId, sender.BaseObjectName());
         }
 
         private static void Obj_AI_Base_OnBuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)

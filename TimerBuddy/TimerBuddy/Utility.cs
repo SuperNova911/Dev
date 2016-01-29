@@ -44,6 +44,8 @@ namespace TimerBuddy
         {
             try
             {
+                if (spell.GetFullTime() > 15000)
+                    return ((int)(spell.GetRemainTime() / 1000f) + 1).ToString();
                 return (spell.GetRemainTime() / 1000f).ToString("F1");
             }
             catch (Exception e)
@@ -89,7 +91,7 @@ namespace TimerBuddy
             {
                 if (spell.Buff)
                     return spell.BuffRemainTime();
-
+                
                 var remainTime = (spell.EndTime - TickCount);
 
                 return remainTime > 0 ? remainTime : 0f;
@@ -275,6 +277,13 @@ namespace TimerBuddy
                 Console.WriteLine(e);
                 Chat.Print("error: CODE CANCEL");
             }
+        }
+
+        public static bool IsHero(this Obj_AI_Base unit)
+        {
+            if (unit.IsMinion || unit.IsMonster || unit.IsWard())
+                return false;
+            return true;
         }
     }
 }

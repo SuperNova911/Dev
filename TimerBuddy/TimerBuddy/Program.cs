@@ -39,6 +39,7 @@ namespace TimerBuddy
                 Config.Initialize();
                 TextureDraw.Initialize();
                 ObjectDetector.Initialize();
+                //SpellDetector.Initialize();
                 Debug.Initialize();
 
                 Drawing.OnEndScene += Drawing_OnEndScene;
@@ -313,6 +314,8 @@ namespace TimerBuddy
                     DrawManager.DrawLine2();
                 if (Config.DebugMenu["c2"].Cast<CheckBox>().CurrentValue)
                     DrawManager.DrawKappa(); ;
+                if (Config.DebugMenu["c3"].Cast<CheckBox>().CurrentValue)
+                    Chat.Print("Kappa");
 
                 foreach (var list in SpellList.Where(l => l.Buff == true ? l.EndTime >= Game.Time : l.EndTime >= Utility.TickCount))
                 {
