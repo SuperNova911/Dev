@@ -21,7 +21,13 @@ namespace TimerBuddy
             //Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
             //Obj_AI_Base.OnBuffUpdate += Obj_AI_Base_OnBuffUpdate;
             //Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
+            Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
             GameObject.OnCreate += GameObject_OnCreate;
+        }
+
+        private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
+            Chat.Print(args.SData.Name);
         }
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
