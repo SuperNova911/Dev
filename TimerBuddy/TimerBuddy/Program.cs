@@ -95,14 +95,14 @@ namespace TimerBuddy
                         FullTime = args.Buff.EndTime * 1000 - args.Buff.StartTime * 1000,
                         EndTime = args.Buff.EndTime * 1000,
                         Name = database.Name,
-                        MenuString = database.MenuString,
+                        MenuCode = database.MenuCode,
                         SpellType = database.SpellType,
                         Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
                         Buff = database.Buff,
                         SpriteName = database.SpriteName,
                     });
 
-                    //Chat.Print("Buff " + args.Buff.DisplayName + " " + sender.BaseSkinName + " " + database.MenuString, System.Drawing.Color.LawnGreen);
+                    //Chat.Print("Buff " + args.Buff.DisplayName + " " + sender.BaseSkinName + " " + database.MenuCode, System.Drawing.Color.LawnGreen);
                 }
             }
             catch (Exception e)
@@ -160,7 +160,7 @@ namespace TimerBuddy
                         ChampionName = trapDatabase.ChampionName,
                         Name = sender.Name,
                         ObjectName = objectName,
-                        MenuString = trapDatabase.MenuString,
+                        MenuCode = trapDatabase.MenuCode,
                         EndTime = trapDatabase.EndTime + Utility.TickCount,
                         NetworkID = sender.NetworkId,
                         GameObject = trapDatabase.GameObject,
@@ -186,7 +186,7 @@ namespace TimerBuddy
                         CastPosition = sender.Position,
                         ChampionName = database.ChampionName,
                         Name = sender.Name,
-                        MenuString = database.MenuString,
+                        MenuCode = database.MenuCode,
                         EndTime = database.EndTime + Utility.TickCount,
                         NetworkID = sender.NetworkId,
                         GameObject = database.GameObject,
@@ -249,7 +249,7 @@ namespace TimerBuddy
                         CastPosition = args.End,
                         ChampionName = database.ChampionName,
                         Name = args.SData.Name,
-                        MenuString = database.MenuString,
+                        MenuCode = database.MenuCode,
                         EndTime = database.EndTime + Utility.TickCount,
                         NetworkID = sender.NetworkId,
                         GameObject = database.GameObject,
@@ -315,7 +315,10 @@ namespace TimerBuddy
                 if (Config.DebugMenu["c2"].Cast<CheckBox>().CurrentValue)
                     DrawManager.DrawKappa(); ;
                 if (Config.DebugMenu["c3"].Cast<CheckBox>().CurrentValue)
-                    Chat.Print("Kappa");
+                    new Geometry.Polygon.Sector(Game.CursorPos, Player.Instance.Position, 50 * (float)Math.PI / 180, 50)
+                        .Draw(System.Drawing.Color.Yellow);
+
+                Utility.CloneTracker();
 
                 foreach (var list in SpellList.Where(l => l.Buff == true ? l.EndTime >= Game.Time : l.EndTime >= Utility.TickCount))
                 {
@@ -332,6 +335,12 @@ namespace TimerBuddy
                             break;
                         case SpellType.Trap:
                             DrawManager.DrawTrap(list);
+                            break;
+                        case SpellType.Blink:
+                            DrawManager.DrawBlink(list);
+                            break;
+                        case SpellType.Ward:
+                            DrawManager.DrawWard(list);
                             break;
                         default:
                             Chat.Print("error CODE DRAW_TYPE");
