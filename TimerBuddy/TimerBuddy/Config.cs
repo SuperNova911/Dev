@@ -10,8 +10,21 @@ namespace TimerBuddy
 {
     internal class Config
     {
-        public static Menu Menu, DrawMenu, SpellMenu, DebugMenu, SummonerMenu, TrapMenu, ItemMenu;
+        public static Menu Menu, DrawMenu, SpellMenu, DebugMenu, SummonerMenu, TrapMenu, ItemMenu, WardMenu;
         public static List<string> MenuChecker = new List<string>();
+
+        private static readonly Slider _importance;
+        public static int ImportanceLevel
+        {
+            get { return _importance.CurrentValue; }
+        }
+
+        public static readonly string[] ImportanceLevelList =
+            {
+                "Low",
+                "Midium",
+                "High",
+            };
 
         static Config()
         {
@@ -21,17 +34,30 @@ namespace TimerBuddy
                 var heroName = hero.Select(h => h.BaseSkinName).ToArray();
                 var summonerList = SpellDatabase.Database.Where(i => i.SpellType == SpellType.SummonerSpell).ToList();
                 var itemList = SpellDatabase.Database.Where(i => i.SpellType == SpellType.Item).ToList();
+                var wardList = SpellDatabase.Database.Where(i => i.SpellType == SpellType.Ward).ToList();
                 var trapList = SpellDatabase.Database.Where(t => heroName.Contains(t.ChampionName) && t.SpellType == SpellType.Trap).ToList();
                 var spellList = SpellDatabase.Database.Where(s => heroName.Contains(s.ChampionName) && s.SpellType == SpellType.Spell).ToList();
-                
+
 
                 Menu = MainMenu.AddMenu("TimerBuddy", "TimerBuddy");
-                Menu.AddLabel(string.Format("Timer datas Loaded {0}", summonerList.Count + itemList.Count + trapList.Count + spellList.Count));
-                Menu.AddGroupLabel("TrackList");
-                Menu.Add("teleport", new CheckBox("Teleport", true));
-                Menu.Add("trap", new CheckBox("Trap", true));
-                Menu.Add("spell", new CheckBox("Spell", true));
-                Menu.Add("item", new CheckBox("Item", true));
+                //Menu.AddLabel(string.Format("Timer datas Loaded {0}", summonerList.Count + itemList.Count + trapList.Count + spellList.Count + wardList.Count));
+                Menu.AddGroupLabel("Spell Timer");
+
+                Menu.AddCheckBox("trackally", "Ally", true);
+                Menu.AddCheckBox("trackenemy", "Enemy", true);
+                Menu.AddSlider("maxList", "Maximum number of tracking list", 3, 1, 10);
+                _importance = new Slider("Minimum Importance Level: " + ImportanceLevelList[1], 1, 0, ImportanceLevelList.Length - 1);
+                _importance.OnValueChange += delegate { _importance.DisplayName = "Minimum Importance Level: " + ImportanceLevelList[_importance.CurrentValue]; };
+                Menu.Add("mode", _importance);
+                Menu.AddSeparator();
+                
+
+                Menu.AddCheckBox("spellTracker", "Spell Timer", true);
+                Menu.AddCheckBox("wardTracker", "Ward Timer", true);
+                Menu.AddCheckBox("cloneTracker", "Clone Tracker", true);
+                Menu.AddCheckBox("blinkTracker", "Blink Tracker", true);
+
+                
 
                 DrawMenu = Menu.AddSubMenu("Drawing");
                 DrawMenu.AddGroupLabel("Trap");
@@ -44,16 +70,17 @@ namespace TimerBuddy
                     SpellMenu = Menu.AddSubMenu("Spell List");
                     foreach (var s in spellList)
                     {
-                        if (MenuChecker.Contains(s.MenuString))
+                        if (MenuChecker.Contains(s.MenuCode))
                             continue;
 
-                        MenuChecker.Add(s.MenuString);
+                        MenuChecker.Add(s.MenuCode);
 
-                        SpellMenu.AddGroupLabel(s.MenuString);
-                        SpellMenu.Add(s.MenuString + "ally", new CheckBox("Ally"));
-                        SpellMenu.Add(s.MenuString + "enemy", new CheckBox("Enemy"));
-                        SpellMenu.Add(s.MenuString + "draw", new CheckBox("Draw"));
-                        SpellMenu.AddColorItem(s.MenuString + "color");
+                        SpellMenu.AddGroupLabel(s.MenuCode);
+                        SpellMenu.AddCheckBox(s.MenuCode + "draw", "Draw", true);
+                        SpellMenu.AddCheckBox(s.MenuCode + "onlyme", "Draw when " + s.ChampionName + " is me", s.OnlyMe);
+                        SpellMenu.AddImportanceItem(s.MenuCode + "importance", s.Importance.ToInt());
+                        SpellMenu.AddDrawTypeItem(s.MenuCode + "drawtype", s.DrawType.ToInt());
+                        SpellMenu.AddColorItem(s.MenuCode + "color");
                         SpellMenu.AddSeparator();
                     }
                 }
@@ -63,11 +90,15 @@ namespace TimerBuddy
                     SummonerMenu = Menu.AddSubMenu("SummonerSpell List");
                     foreach (var t in summonerList)
                     {
-                        SummonerMenu.AddGroupLabel(t.MenuString);
-                        SummonerMenu.Add(t.MenuString + "ally", new CheckBox("Ally"));
-                        SummonerMenu.Add(t.MenuString + "enemy", new CheckBox("Enemy"));
-                        SummonerMenu.Add(t.MenuString + "draw", new CheckBox("Draw"));
-                        SummonerMenu.AddColorItem(t.MenuString + "color");
+                        if (MenuChecker.Contains(t.MenuCode))
+                            continue;
+
+                        MenuChecker.Add(t.MenuCode);
+
+                        SummonerMenu.AddGroupLabel(t.MenuCode);
+                        SummonerMenu.Add(t.MenuCode + "draw", new CheckBox("Draw"));
+                        SummonerMenu.AddImportanceItem(t.MenuCode + "importance", t.Importance.ToInt());
+                        SummonerMenu.AddColorItem(t.MenuCode + "color");
                         SummonerMenu.AddSeparator();
                     }
                 }
@@ -77,11 +108,12 @@ namespace TimerBuddy
                     ItemMenu = Menu.AddSubMenu("Item List");
                     foreach (var i in itemList)
                     {
-                        ItemMenu.AddGroupLabel(i.MenuString);
-                        ItemMenu.Add(i.MenuString + "ally", new CheckBox("Ally"));
-                        ItemMenu.Add(i.MenuString + "enemy", new CheckBox("Enemy"));
-                        ItemMenu.Add(i.MenuString + "draw", new CheckBox("Draw"));
-                        ItemMenu.AddColorItem(i.MenuString + "color");
+                        ItemMenu.AddGroupLabel(i.MenuCode);
+                        ItemMenu.AddCheckBox(i.MenuCode + "draw", "Draw", true);
+                        ItemMenu.AddCheckBox(i.MenuCode + "ally", "Draw ally Item", true);
+                        ItemMenu.AddCheckBox(i.MenuCode + "enemy", "Draw enemy Item", true);
+                        ItemMenu.AddColorItem(i.MenuCode + "color");
+                        ItemMenu.AddDrawTypeItem(i.MenuCode + "drawtype", i.DrawType.ToInt());
                         ItemMenu.AddSeparator();
                     }
                 }
@@ -89,15 +121,34 @@ namespace TimerBuddy
                 if (trapList.Count > 0)
                 {
                     TrapMenu = Menu.AddSubMenu("Trap List");
+                    TrapMenu.AddGroupLabel("Trap Manager");
+                    TrapMenu.AddCheckBox("trapEnable", "Enable", true);
+                    TrapMenu.AddCheckBox("circleOnlyEnemy", "Draw circle only enemies trap", true);
+
                     foreach (var t in trapList)
                     {
-                        TrapMenu.AddGroupLabel(t.MenuString);
-                        TrapMenu.Add(t.MenuString + "ally", new CheckBox("Ally"));
-                        TrapMenu.Add(t.MenuString + "enemy", new CheckBox("Enemy"));
-                        TrapMenu.Add(t.MenuString + "draw", new CheckBox("Draw"));
-                        TrapMenu.Add(t.MenuString + "drawCircle", new CheckBox("Draw Circle"));
-                        TrapMenu.AddColorItem(t.MenuString + "color");
+                        TrapMenu.AddGroupLabel(t.MenuCode);
+                        TrapMenu.AddCheckBox(t.MenuCode + "draw", "Draw", true);
+                        TrapMenu.AddCheckBox(t.MenuCode + "ally", "Draw ally trap", true);
+                        TrapMenu.AddCheckBox(t.MenuCode + "drawCircle", "Draw circle", true);
+                        TrapMenu.AddCheckBox(t.MenuCode + "enemy", "Draw enemy trap", true);
+                        TrapMenu.AddColorItem(t.MenuCode + "color", 11);
                         TrapMenu.AddSeparator();
+                    }
+                }
+
+                if (wardList.Count > 0)
+                {
+                    WardMenu = Menu.AddSubMenu("Ward List");
+                    foreach (var w in wardList)
+                    {
+                        WardMenu.AddGroupLabel(w.MenuCode);
+                        WardMenu.AddCheckBox(w.MenuCode + "draw", "Draw", true);
+                        WardMenu.AddCheckBox(w.MenuCode + "ally", "Draw ally ward", true);
+                        WardMenu.AddCheckBox(w.MenuCode + "drawCircle", "Draw circle", true);
+                        WardMenu.AddCheckBox(w.MenuCode + "enemy", "Draw enemy ward", true);
+                        WardMenu.AddColorItem(w.MenuCode + "color", w.Color.ToInt());
+                        WardMenu.AddSeparator();
                     }
                 }
 
@@ -117,7 +168,7 @@ namespace TimerBuddy
                 Chat.Print("error: CODE MENU");
             }
         }
-
+        
         public static void Initialize()
         {
 
