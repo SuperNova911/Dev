@@ -40,38 +40,38 @@ namespace TimerBuddy
 
                 foreach (var list in summonerList)
                 {
-                    if (SpriteList.ContainsKey(list.MenuString))
+                    if (SpriteList.ContainsKey(list.MenuCode))
                         continue;
 
-                    TextureLoader.Load(list.MenuString, list.SpriteName);
-                    SpriteList.Add(list.MenuString, new Sprite(() => TextureLoader[list.MenuString]));
+                    TextureLoader.Load(list.MenuCode, list.SpriteName);
+                    SpriteList.Add(list.MenuCode, new Sprite(() => TextureLoader[list.MenuCode]));
                 }
 
                 foreach (var list in itemList)
                 {
-                    if (SpriteList.ContainsKey(list.MenuString))
+                    if (SpriteList.ContainsKey(list.MenuCode))
                         continue;
 
-                    TextureLoader.Load(list.MenuString, list.SpriteName);
-                    SpriteList.Add(list.MenuString, new Sprite(() => TextureLoader[list.MenuString]));
+                    TextureLoader.Load(list.MenuCode, list.SpriteName);
+                    SpriteList.Add(list.MenuCode, new Sprite(() => TextureLoader[list.MenuCode]));
                 }
 
                 foreach (var list in trapList)
                 {
-                    if (SpriteList.ContainsKey(list.MenuString))
+                    if (SpriteList.ContainsKey(list.MenuCode))
                         continue;
 
-                    TextureLoader.Load(list.MenuString, list.SpriteName);
-                    SpriteList.Add(list.MenuString, new Sprite(() => TextureLoader[list.MenuString]));
+                    TextureLoader.Load(list.MenuCode, list.SpriteName);
+                    SpriteList.Add(list.MenuCode, new Sprite(() => TextureLoader[list.MenuCode]));
                 }
 
                 foreach (var list in spellList)
                 {
-                    if (SpriteList.ContainsKey(list.MenuString))
+                    if (SpriteList.ContainsKey(list.MenuCode))
                         continue;
 
-                    TextureLoader.Load(list.MenuString, list.SpriteName);
-                    SpriteList.Add(list.MenuString, new Sprite(() => TextureLoader[list.MenuString]));
+                    TextureLoader.Load(list.MenuCode, list.SpriteName);
+                    SpriteList.Add(list.MenuCode, new Sprite(() => TextureLoader[list.MenuCode]));
                 }
             }
             catch (Exception e)
@@ -85,14 +85,14 @@ namespace TimerBuddy
         {
             try
             {
-                var sprite = SpriteList[spell.MenuString];
+                var sprite = SpriteList[spell.MenuCode];
 
                 sprite.Draw(pos);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW_SPRITE " + spell.MenuString);
+                Chat.Print("error: CODE DRAW_SPRITE " + spell.MenuCode);
             }
         }
 
