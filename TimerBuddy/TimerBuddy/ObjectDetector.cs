@@ -50,16 +50,18 @@ namespace TimerBuddy
                         SpellType = database.SpellType,
                         Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
                         DrawType = database.DrawType,
+                        Importance = database.Importance,
                         Caster = sender,
                         Target = sender,
                         CastPosition = sender.Position,
                         ChampionName = database.ChampionName,
                         Name = database.Name,
-                        MenuString = database.MenuString,
+                        MenuCode = database.MenuCode,
                         FullTime = args.Buff.EndTime - args.Buff.StartTime,
                         EndTime = args.Buff.EndTime,
                         NetworkID = sender.NetworkId,
                         Buff = database.Buff,
+                        OnlyMe = database.OnlyMe,
                         Color = database.Color,
                         SpriteName = database.SpriteName,
                     });
@@ -99,9 +101,11 @@ namespace TimerBuddy
                 if (!sender.IsValid)
                     return;
 
-                var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && d.ObjectName != null
+                WardDetector(sender, args);
+
+                var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && d.SpellType != SpellType.Ward && (d.ObjectName != null
                 ? d.Name == sender.Name && d.ObjectName == sender.BaseObjectName()
-                : d.Name == sender.Name);
+                : sender.Name.Contains(d.Name)));
 
                 if (database != null)
                 {
@@ -112,17 +116,20 @@ namespace TimerBuddy
                         SpellType = database.SpellType,
                         Team = caster.IsAlly ? Team.Ally : caster.IsEnemy ? Team.Enemy : Team.None,
                         Slot = database.Slot,
+                        DrawType = database.DrawType,
+                        Importance = database.Importance,
                         Caster = caster,
                         Object = sender,
                         CastPosition = sender.Position,
                         ChampionName = database.ChampionName,
                         Name = database.Name,
-                        ObjectName = sender.BaseObjectName(),
-                        MenuString = database.MenuString,
+                        ObjectName = database.ObjectName,
+                        MenuCode = database.MenuCode,
                         FullTime = database.EndTime,
                         EndTime = database.EndTime + Utility.TickCount,
                         NetworkID = sender.NetworkId,
                         GameObject = database.GameObject,
+                        OnlyMe = database.OnlyMe,
                         Color = database.Color,
                         SpriteName = database.SpriteName,
                     });
@@ -166,27 +173,32 @@ namespace TimerBuddy
 
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject == false && d.Buff == false && 
                 (d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot) ||
-                ((d.SpellType == SpellType.SummonerSpell || d.SpellType == SpellType.Item) && d.Name == args.SData.Name));
+                ((d.SpellType == SpellType.SummonerSpell || d.SpellType == SpellType.Item || d.SpellType == SpellType.Blink) && d.Name == args.SData.Name));
 
                 if (database != null)
                 {
                     var target = args.Target as Obj_AI_Base;
                     if (target == null)
-                        target = Player.Instance;
+                        target = sender;
 
                     Program.SpellList.Add(new Spell
                     {
                         SpellType = database.SpellType,
                         Team = sender.IsAlly ? Team.Ally : sender.IsEnemy ? Team.Enemy : Team.None,
                         Slot = database.Slot,
+                        DrawType = database.DrawType,
+                        Importance = database.Importance,
                         Caster = sender,
                         Target = target,
+                        StartPosition = args.Start,
                         CastPosition = database.SkillShot ? args.End : target.Position,
-                        MenuString = database.MenuString,
+                        MenuCode = database.MenuCode,
                         FullTime = database.EndTime,
                         EndTime = database.EndTime + Utility.TickCount,
                         NetworkID = sender.NetworkId,
                         SkillShot = database.SkillShot,
+                        Range = database.Range,
+                        OnlyMe = database.OnlyMe,
                         Color = database.Color,
                         SpriteName = database.SpriteName,
                     });
@@ -196,8 +208,8 @@ namespace TimerBuddy
                     return;
                 }
 
-                var objDatabase = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && d.SpellType == SpellType.Spell &&
-                d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot);
+                var objDatabase = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && 
+                ((d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot) || (d.SpellType == SpellType.Ward)));
 
                 if (objDatabase != null)
                 {
@@ -205,7 +217,8 @@ namespace TimerBuddy
                     {
                         Caster = sender,
                         Slot = objDatabase.Slot,
-                        EndTime = 2000 + Utility.TickCount
+                        EndTime = 2000 + Utility.TickCount,
+                        Name = args.SData.Name
                     });
 
                     return;
@@ -258,6 +271,50 @@ namespace TimerBuddy
             {
                 Console.WriteLine(e);
                 Chat.Print("<font color='#FF0000'>ERROR:</font> CODE OBJECT_DETECTOR", Color.LightBlue);
+            }
+        }
+
+        public static void WardDetector(GameObject sender, EventArgs args)
+        {
+            try
+            {
+                var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && d.SpellType == SpellType.Ward &&
+                d.Name == sender.Name && d.ObjectName == sender.BaseObjectName());
+                
+                if (database != null)
+                {
+                    var caster = sender.FindCasterWard(database);
+
+                    Program.SpellList.Add(new Spell
+                    {
+                        SpellType = database.SpellType,
+                        Team = caster.IsAlly ? Team.Ally : caster.IsEnemy ? Team.Enemy : Team.None,  //sender.Team.IsAlly() ? Team.Ally : sender.Team.IsEnemy() ? Team.Enemy : Team.None,
+                        Object = sender,
+                        DrawType = database.DrawType,
+                        Caster = caster,
+                        StartPosition = caster.Position,
+                        CastPosition = sender.Position,
+                        ChampionName = caster.BaseSkinName,
+                        Name = database.Name,
+                        ObjectName = database.ObjectName,
+                        MenuCode = database.MenuCode,
+                        FullTime = database.EndTime,
+                        EndTime = database.EndTime + Utility.TickCount,
+                        NetworkID = sender.NetworkId,
+                        GameObject = database.GameObject,
+                        Color = database.Color,
+                        SpriteName = database.SpriteName,
+                    });
+
+                    Chat.Print("Ward " + sender.BaseObjectName() + " " + caster.BaseSkinName, Color.LawnGreen);
+
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE WARD_DETECT", Color.LightBlue);
             }
         }
     }
