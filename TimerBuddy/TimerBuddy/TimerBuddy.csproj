@@ -1572,7 +1572,7 @@
     <None Include="Resources\EliseSpiderW.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\EliseSpiderEInitial.png" />
+    <None Include="Resources\EliseSpiderE.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\EliseR.png" />
@@ -2035,6 +2035,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DianaP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warding Totem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sightstone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sweeping Lens.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Farsight Totem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vision Ward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GalioR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GalioW.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
