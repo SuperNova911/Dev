@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace TimerBuddy
 {
-    class DrawManager
+    public static class DrawManager
     {
         static Font TeleportFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 17));
         static Font TrapFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 15));
@@ -102,7 +102,7 @@ namespace TimerBuddy
                         Color = System.Drawing.Color.Red,
                         BorderWidth = 4,
                         Radius = 50,
-                    }.Draw(list.CastPosition);
+                    }.Draw(list.Object.Position);
             }
             catch (Exception e)
             {
@@ -395,6 +395,44 @@ namespace TimerBuddy
 
             Drawing.DrawLine(linestart - new Vector2(1, 0), lineend + new Vector2(1, 0), 6, System.Drawing.Color.Black);
             Drawing.DrawLine(linestart, lineend, 4, barColor);
+        }
+
+        public static void DrawBlink(this Spell spell)
+        {
+            try
+            {
+                Vector3 startpos = spell.StartPosition;
+                Vector3 endpos = spell.KappaRoss(); 
+
+                Drawing.DrawLine(Drawing.WorldToScreen(startpos), Drawing.WorldToScreen(endpos), 2, spell.Color.ConvertColor());
+                new Circle { Color = spell.Color.ConvertColor(), Radius = 30f, BorderWidth = 1 }.Draw(endpos);
+                //new Geometry.Polygon.Line(startpos, endpos).Draw(spell.Color);
+                //new Geometry.Polygon.Sector(endpos, startpos, 50 * (float)Math.PI / 180, 50).Draw(spell.Color);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_BLINK " + spell.Name, Color.LightBlue);
+            }
+        }
+
+        public static void DrawWard(this Spell spell)
+        {
+            try
+            {
+                if (spell.FullTime != 77777777)
+                    DrawText(spell.GetRemainTimeString(), spell.Object.Position + new Vector3(-15, 0, 0), spell.GetColor(), SpellType.Trap);
+                
+                if (spell.Team != Team.Enemy)
+                {
+                    new Circle { Color = spell.Color.ConvertColor(), Radius = 50f, BorderWidth = 2 }.Draw(spell.Object.Position);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_BLINK " + spell.Name, Color.LightBlue);
+            }
         }
 
         /*
