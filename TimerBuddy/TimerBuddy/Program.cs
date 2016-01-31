@@ -18,7 +18,8 @@ namespace TimerBuddy
     {
         public static List<Spell> SpellList = new List<Spell>();
         public static List<SpellCaster> CasterList = new List<SpellCaster>();
-        
+        public static List<SC2Timer> SC2TimerList = new List<SC2Timer>();
+
         static void Main(string[] args)
         {
             try
@@ -42,6 +43,7 @@ namespace TimerBuddy
                 //SpellDetector.Initialize();
                 Debug.Initialize();
 
+                Drawing.OnDraw += Drawing_OnDraw;
                 Drawing.OnEndScene += Drawing_OnEndScene;
                 //Game.OnTick += Game_OnTick;
                 //Game.OnUpdate += Game_OnUpdate;
@@ -306,14 +308,20 @@ namespace TimerBuddy
             }
         }
 
+        private static void Drawing_OnDraw(EventArgs args)
+        {
+            if (Config.DebugMenu["c1"].Cast<CheckBox>().CurrentValue)
+                DrawManager.Test();
+        }
+
         private static void Drawing_OnEndScene(EventArgs args)
         {
             try
             {
                 if (Config.DebugMenu["c1"].Cast<CheckBox>().CurrentValue)
-                    DrawManager.DrawLine2();
+                    ;
                 if (Config.DebugMenu["c2"].Cast<CheckBox>().CurrentValue)
-                    DrawManager.DrawKappa(); ;
+                    DrawManager.Test2();
                 if (Config.DebugMenu["c3"].Cast<CheckBox>().CurrentValue)
                     new Geometry.Polygon.Sector(Game.CursorPos, Player.Instance.Position, 50 * (float)Math.PI / 180, 50)
                         .Draw(System.Drawing.Color.Yellow);

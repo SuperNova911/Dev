@@ -170,6 +170,7 @@ namespace TimerBuddy
                     return;
 
                 Utility.ShacoBoxActive(sender, args);
+                SC2TimerManager.SC2TimerDetector(sender, args);
 
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject == false && d.Buff == false && 
                 (d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot) ||
@@ -242,6 +243,8 @@ namespace TimerBuddy
 
                 if (Program.CasterList.Count > 0)
                     Program.CasterList.RemoveAll(d => d.EndTime < Utility.TickCount);
+
+                SC2TimerManager.SC2TimerRemover();
 
                 foreach (var hero in EntityManager.Heroes.AllHeroes.Where(h => h.IsValid() && h.VisibleOnScreen))
                 {
