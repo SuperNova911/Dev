@@ -21,7 +21,7 @@ namespace TimerBuddy
 {
     public enum Team
     {
-        Ally, Enemy, None
+        None, Ally, Enemy, Neutral
     }
 
     public enum Importance
