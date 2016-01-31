@@ -70,6 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SC2Timer.cs" />
     <Compile Include="SpellDetector.cs" />
     <Compile Include="TextureDraw.cs" />
     <Compile Include="Utility.cs" />
@@ -1833,9 +1834,6 @@
     <None Include="Resources\AatroxW.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AatroxR.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\AatroxQ.png" />
   </ItemGroup>
   <ItemGroup>
@@ -2060,6 +2058,198 @@
   <ItemGroup>
     <None Include="Resources\GalioW.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AatroxR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\SC2\HUD\SC2Blue.png" />
+    <Content Include="Resources\SC2\HUD\SC2Orange.png" />
+    <Content Include="Resources\SC2\HUD\SC2Red.png" />
+    <Content Include="Resources\SC2\Item\Bilgewater Cutlass_BIG.png" />
+    <Content Include="Resources\SC2\Item\Blade of the Ruined King_BIG.png" />
+    <Content Include="Resources\SC2\Item\Corrupting Potion_BIG.png" />
+    <Content Include="Resources\SC2\Item\Elixir of Iron_BIG.png" />
+    <Content Include="Resources\SC2\Item\Elixir of Sorcery_BIG.png" />
+    <Content Include="Resources\SC2\Item\Elixir of Wrath_BIG.png" />
+    <Content Include="Resources\SC2\Item\Face of the Mountain_BIG.png" />
+    <Content Include="Resources\SC2\Item\Frost Queen%27s Claim_BIG.png" />
+    <Content Include="Resources\SC2\Item\Guardian Ange_BIG.png" />
+    <Content Include="Resources\SC2\Item\Health Potion_BIG.png" />
+    <Content Include="Resources\SC2\Item\Hexdrinker_BIG.png" />
+    <Content Include="Resources\SC2\Item\Hunter%27s Potion_BIG.png" />
+    <Content Include="Resources\SC2\Item\Iceborn Gauntlet_BIG.png" />
+    <Content Include="Resources\SC2\Item\Locket of the Iron Solari_BIG.png" />
+    <Content Include="Resources\SC2\Item\Maw of Malmortius_BIG.png" />
+    <Content Include="Resources\SC2\Item\Oracle Alteration_BIG.png" />
+    <Content Include="Resources\SC2\Item\Randuin%27s Omen_BIG.png" />
+    <Content Include="Resources\SC2\Item\Refillable Potion_BIG.png" />
+    <Content Include="Resources\SC2\Item\Sweeping Lens %28Trinket%29_BIG.png" />
+    <Content Include="Resources\SC2\Item\Talisman of Ascension_BIG.png" />
+    <Content Include="Resources\SC2\Item\Tear of the Goddess_BIG.png" />
+    <Content Include="Resources\SC2\Item\Total Biscuit of Rejuvenation_BIG.png" />
+    <Content Include="Resources\SC2\Item\Youmuu%27s Ghostblade_BIG.png" />
+    <Content Include="Resources\SC2\Item\Zhonya%27s Hourglass_BIG.png" />
+    <Content Include="Resources\SC2\DravenR_BIG.png" />
+    <Content Include="Resources\SC2\GalioR_BIG.png" />
+    <Content Include="Resources\SC2\GragasR_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Ancient Krug_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Baron Nashor_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Blue Sentinel Mini_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Blue Sentinel_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Crimson Raptor_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Dragon_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Greater Murk Wolf_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Gromp_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\KrugSquare_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\MurkwolfSquare_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\RazorbeakSquare_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Red Brambleback Mini_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Red Brambleback_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Rift Herald_BIG.png" />
+    <Content Include="Resources\SC2\JungleMonster\Rift Scuttler_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Barrier_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Clairvoyance_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Clarity_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Cleanse_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Dash_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Exhaust_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Flash_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Haste_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Heal_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Ignite_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Mark_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Recall_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Revive_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Smite_BIG.png" />
+    <Content Include="Resources\SC2\SummonerSpell\Teleport_BIG.png" />
+    <None Include="Resources\DravenR_BIG.png" />
+    <Content Include="Resources\SC2\AatroxR_BIG.png" />
+    <Content Include="Resources\SC2\AhriR_BIG.png" />
+    <Content Include="Resources\SC2\AkaliR_BIG.png" />
+    <Content Include="Resources\SC2\AlistarR_BIG.png" />
+    <Content Include="Resources\SC2\AmumuR_BIG.png" />
+    <Content Include="Resources\SC2\AniviaR_BIG.png" />
+    <Content Include="Resources\SC2\AnnieR_BIG.png" />
+    <Content Include="Resources\SC2\AsheR_BIG.png" />
+    <Content Include="Resources\SC2\AzirR_BIG.png" />
+    <Content Include="Resources\SC2\BardR_BIG.png" />
+    <Content Include="Resources\SC2\BlitzcrankR_BIG.png" />
+    <Content Include="Resources\SC2\BrandR_BIG.png" />
+    <Content Include="Resources\SC2\BraumR_BIG.png" />
+    <Content Include="Resources\SC2\CaitlynR_BIG.png" />
+    <Content Include="Resources\SC2\CassiopeiaR_BIG.png" />
+    <Content Include="Resources\SC2\DariusR_BIG.png" />
+    <Content Include="Resources\SC2\DianaR_BIG.png" />
+    <Content Include="Resources\SC2\DrMundoR_BIG.png" />
+    <Content Include="Resources\SC2\EkkoR_BIG.png" />
+    <Content Include="Resources\SC2\EliseR_BIG.png" />
+    <Content Include="Resources\SC2\EvelynnR_BIG.png" />
+    <Content Include="Resources\SC2\EzrealR_BIG.png" />
+    <Content Include="Resources\SC2\FiddlesticksR_BIG.png" />
+    <Content Include="Resources\SC2\FioraR_BIG.png" />
+    <Content Include="Resources\SC2\FizzR_BIG.png" />
+    <Content Include="Resources\SC2\GangplankR_BIG.png" />
+    <Content Include="Resources\SC2\GarenR_BIG.png" />
+    <Content Include="Resources\SC2\GnarR_BIG.png" />
+    <Content Include="Resources\SC2\GravesR_BIG.png" />
+    <Content Include="Resources\SC2\HecarimR_BIG.png" />
+    <Content Include="Resources\SC2\HeimerdingerR_BIG.png" />
+    <Content Include="Resources\SC2\IllaoiR_BIG.png" />
+    <Content Include="Resources\SC2\IreliaR_BIG.png" />
+    <Content Include="Resources\SC2\JannaR_BIG.png" />
+    <Content Include="Resources\SC2\JarvanR_BIG.png" />
+    <Content Include="Resources\SC2\JaxR_BIG.png" />
+    <Content Include="Resources\SC2\JayceCannonR_BIG.png" />
+    <Content Include="Resources\SC2\JayceHammerR_BIG.png" />
+    <Content Include="Resources\SC2\JhinR_BIG.png" />
+    <Content Include="Resources\SC2\JinxR_BIG.png" />
+    <Content Include="Resources\SC2\KalistaR_BIG.png" />
+    <Content Include="Resources\SC2\KarmaR_BIG.png" />
+    <Content Include="Resources\SC2\KarthusR_BIG.png" />
+    <Content Include="Resources\SC2\KassadinR_BIG.png" />
+    <Content Include="Resources\SC2\KatarinaR_BIG.png" />
+    <Content Include="Resources\SC2\KayleR_BIG.png" />
+    <Content Include="Resources\SC2\KennenR_BIG.png" />
+    <Content Include="Resources\SC2\KhazixR_BIG.png" />
+    <Content Include="Resources\SC2\KindredR_BIG.png" />
+    <Content Include="Resources\SC2\KogMawR_BIG.png" />
+    <Content Include="Resources\SC2\LeBlancR_BIG.png" />
+    <Content Include="Resources\SC2\LeeSinR_BIG.png" />
+    <Content Include="Resources\SC2\LeonaR_BIG.png" />
+    <Content Include="Resources\SC2\LissandraR_BIG.png" />
+    <Content Include="Resources\SC2\LucianR_BIG.png" />
+    <Content Include="Resources\SC2\LuluR_BIG.png" />
+    <Content Include="Resources\SC2\LuxR_BIG.png" />
+    <Content Include="Resources\SC2\MalphiteR_BIG.png" />
+    <Content Include="Resources\SC2\MalzaharR_BIG.png" />
+    <Content Include="Resources\SC2\MaokaiR_BIG.png" />
+    <Content Include="Resources\SC2\MasterYiR_BIG.png" />
+    <Content Include="Resources\SC2\MissFortuneR_BIG.png" />
+    <Content Include="Resources\SC2\MordekaiserR_BIG.png" />
+    <Content Include="Resources\SC2\MorganaR_BIG.png" />
+    <Content Include="Resources\SC2\NamiR_BIG.png" />
+    <Content Include="Resources\SC2\NasusR_BIG.png" />
+    <Content Include="Resources\SC2\NautilusR_BIG.png" />
+    <Content Include="Resources\SC2\NidaleeR_BIG.png" />
+    <Content Include="Resources\SC2\NocturneR_BIG.png" />
+    <Content Include="Resources\SC2\NunuR_BIG.png" />
+    <Content Include="Resources\SC2\OlafR_BIG.png" />
+    <Content Include="Resources\SC2\OriannaR_BIG.png" />
+    <Content Include="Resources\SC2\PantheonR_BIG.png" />
+    <Content Include="Resources\SC2\PoppyR_BIG.png" />
+    <Content Include="Resources\SC2\QuinnR_BIG.png" />
+    <Content Include="Resources\SC2\RammusR_BIG.png" />
+    <Content Include="Resources\SC2\RekSaiR_BIG.png" />
+    <Content Include="Resources\SC2\RenektonR_BIG.png" />
+    <Content Include="Resources\SC2\RengarR_BIG.png" />
+    <Content Include="Resources\SC2\RivenR_BIG.png" />
+    <Content Include="Resources\SC2\RumbleR_BIG.png" />
+    <Content Include="Resources\SC2\RyzeR_BIG.png" />
+    <Content Include="Resources\SC2\SejuaniR_BIG.png" />
+    <Content Include="Resources\SC2\ShacoR_BIG.png" />
+    <Content Include="Resources\SC2\ShenR_BIG.png" />
+    <Content Include="Resources\SC2\ShyvanaR_BIG.png" />
+    <Content Include="Resources\SC2\SingedR_BIG.png" />
+    <Content Include="Resources\SC2\SionR_BIG.png" />
+    <Content Include="Resources\SC2\SivirR_BIG.png" />
+    <Content Include="Resources\SC2\SkarnerR_BIG.png" />
+    <Content Include="Resources\SC2\SonaR_BIG.png" />
+    <Content Include="Resources\SC2\SorakaR_BIG.png" />
+    <Content Include="Resources\SC2\SwainR_BIG.png" />
+    <Content Include="Resources\SC2\SyndraR_BIG.png" />
+    <Content Include="Resources\SC2\TahmKenchR_BIG.png" />
+    <Content Include="Resources\SC2\TalonR_BIG.png" />
+    <Content Include="Resources\SC2\TaricR_BIG.png" />
+    <Content Include="Resources\SC2\TeemoR_BIG.png" />
+    <Content Include="Resources\SC2\ThreshR_BIG.png" />
+    <Content Include="Resources\SC2\TristanaR_BIG.png" />
+    <Content Include="Resources\SC2\TrundleR_BIG.png" />
+    <Content Include="Resources\SC2\TryndamereR_BIG.png" />
+    <Content Include="Resources\SC2\TwistedFateR_BIG.png" />
+    <Content Include="Resources\SC2\TwitchR_BIG.png" />
+    <Content Include="Resources\SC2\UdyrR_BIG.png" />
+    <Content Include="Resources\SC2\UrgotR_BIG.png" />
+    <Content Include="Resources\SC2\VarusR_BIG.png" />
+    <Content Include="Resources\SC2\VayneR_BIG.png" />
+    <Content Include="Resources\SC2\VeigarR_BIG.png" />
+    <Content Include="Resources\SC2\VelkozR_BIG.png" />
+    <Content Include="Resources\SC2\ViktorR_BIG.png" />
+    <Content Include="Resources\SC2\ViR_BIG.png" />
+    <Content Include="Resources\SC2\VladimirR_BIG.png" />
+    <Content Include="Resources\SC2\VolibearR_BIG.png" />
+    <Content Include="Resources\SC2\WarwickR_BIG.png" />
+    <Content Include="Resources\SC2\WukongR_BIG.png" />
+    <Content Include="Resources\SC2\XerathR_BIG.png" />
+    <Content Include="Resources\SC2\XinZhaoR_BIG.png" />
+    <Content Include="Resources\SC2\YasuoR_BIG.png" />
+    <Content Include="Resources\SC2\YorickR_BIG.png" />
+    <Content Include="Resources\SC2\ZacR_BIG.png" />
+    <Content Include="Resources\SC2\ZedR_BIG.png" />
+    <Content Include="Resources\SC2\ZiggsR_BIG.png" />
+    <Content Include="Resources\SC2\ZileanR_BIG.png" />
+    <Content Include="Resources\SC2\ZyraR_BIG.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

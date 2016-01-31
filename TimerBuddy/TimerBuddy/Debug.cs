@@ -23,11 +23,25 @@ namespace TimerBuddy
             //Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
             GameObject.OnCreate += GameObject_OnCreate;
+            GameObject.OnDelete += GameObject_OnDelete;
+        }
+
+        private static void GameObject_OnDelete(GameObject sender, EventArgs args)
+        {
+            if (!sender.IsValid || sender.Distance(Player.Instance) > 1000)
+                return;
+
+            if (sender.Name.Contains("NAV") || sender.Name.Contains("Odin") || sender.Name.Contains("Shopkeeper") || 
+                sender.GetType().Name == "MissileClient" || sender.GetType().Name == "DrawFX" || sender.Name.Contains("empty.troy") || sender.Name.Contains("LevelProp")
+                 || sender.Name.Contains("FeelNoPain") || sender.Name.Contains("LaserSight"))
+                return;
+
+            Console.WriteLine("Delete\tType: {0} | Name: {1}", sender.GetType().Name, sender.Name);
         }
 
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            Chat.Print(args.SData.Name);
+
         }
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
