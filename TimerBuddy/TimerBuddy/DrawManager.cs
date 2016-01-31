@@ -14,8 +14,10 @@ namespace TimerBuddy
 {
     public static class DrawManager
     {
-        static Font TeleportFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 17));
-        static Font TrapFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 15));
+        public static Font TeleportFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 17));
+        public static Font TrapFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 15));
+        public static Font TestFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Arial", 15));
+        public static Font TestFont2 = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Arial", 30));
 
         public static void DrawTeleport(Spell list)
         {
@@ -274,7 +276,7 @@ namespace TimerBuddy
 
                 var mainpos = hero.HPBarPosition;
                 //var mainpos = hero.Position.WorldToScreen();
-                var startpos = hero.IsMe ? mainpos + new Vector2(s1, s2) : mainpos + new Vector2(3, 32);
+                var startpos = hero.IsMe ? mainpos + new Vector2(25, 25) : mainpos + new Vector2(3, 32);
                 //var startpos = mainpos + new Vector2(-50, 45);
 
                 float length = spell.Buff == true
@@ -469,5 +471,53 @@ namespace TimerBuddy
             }
         }
         */
+
+        public static void Test()
+        {
+            var s1 = Config.DebugMenu["s1"].Cast<Slider>().CurrentValue;
+            var s2 = Config.DebugMenu["s2"].Cast<Slider>().CurrentValue;
+            var s3 = Config.DebugMenu["s3"].Cast<Slider>().CurrentValue;
+            var s4 = Config.DebugMenu["s4"].Cast<Slider>().CurrentValue;
+            var s5 = Config.DebugMenu["s5"].Cast<Slider>().CurrentValue;
+
+            //var centerpos = new Vector2(Drawing.Width, Drawing.Height / 2) + new Vector2(-s1, -s2);
+            var centerpos = Game.CursorPos2D + new Vector2(-500, -200);
+
+            Drawing.DrawLine(centerpos + new Vector2(-500, 0), centerpos + new Vector2(500, 0), 1, System.Drawing.Color.Red);
+            Drawing.DrawLine(centerpos + new Vector2(0, -500), centerpos + new Vector2(0, 500), 1, System.Drawing.Color.Red);
+
+            var sprite1 = TextureDraw.SpriteList["ABLUE"];
+            sprite1.Draw(centerpos);
+
+
+            var iconpos = centerpos + new Vector2(25, 25);
+            var sprite2 = TextureDraw.SpriteList["AAICON"];
+            sprite2.Draw(iconpos);
+            
+        }
+
+        public static void Test2()
+        {
+            var s1 = Config.DebugMenu["s1"].Cast<Slider>().CurrentValue;
+            var s2 = Config.DebugMenu["s2"].Cast<Slider>().CurrentValue;
+            var s3 = Config.DebugMenu["s3"].Cast<Slider>().CurrentValue;
+            var s4 = Config.DebugMenu["s4"].Cast<Slider>().CurrentValue;
+            var s5 = Config.DebugMenu["s5"].Cast<Slider>().CurrentValue;
+
+            //var centerpos = new Vector2(Drawing.Width, Drawing.Height / 2) + new Vector2(-s1, -s2);
+            var centerpos = Game.CursorPos2D + new Vector2(-500, -200);
+
+
+            var namepos = centerpos + new Vector2(24, 1);
+            var name = "Summoner Flash";
+            TestFont.DrawText(null, name, (int)(namepos).X, (int)(namepos).Y, Color.White);
+
+            var timerpos = centerpos + new Vector2(85, 21);
+            var timer = 8.1f.ToString();
+            TestFont2.DrawText(null, timer, (int)(timerpos).X, (int)(timerpos).Y, Color.White);
+
+            var length = 200f / 200f * s5;
+            Drawing.DrawLine(centerpos + new Vector2(s1, s2), centerpos + new Vector2(s1 + length, s2), s3, System.Drawing.Color.Aqua);
+        }
     }
 }
