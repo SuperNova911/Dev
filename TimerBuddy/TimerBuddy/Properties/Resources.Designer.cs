@@ -103,6 +103,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap AatroxR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("AatroxR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap AatroxW {
             get {
                 object obj = ResourceManager.GetObject("AatroxW", resourceCulture);
@@ -146,6 +156,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap AhriR {
             get {
                 object obj = ResourceManager.GetObject("AhriR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap AhriR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("AhriR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,6 +223,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap AkaliR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("AkaliR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap AkaliW {
             get {
                 object obj = ResourceManager.GetObject("AkaliW", resourceCulture);
@@ -246,6 +276,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap AlistarR {
             get {
                 object obj = ResourceManager.GetObject("AlistarR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap AlistarR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("AlistarR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,9 +343,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap AmumuR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("AmumuR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap AmumuW {
             get {
                 object obj = ResourceManager.GetObject("AmumuW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ancient_Krug_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Ancient_Krug_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -346,6 +406,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap AniviaR {
             get {
                 object obj = ResourceManager.GetObject("AniviaR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap AniviaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("AniviaR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -403,6 +473,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap AnnieR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("AnnieR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap AnnieW {
             get {
                 object obj = ResourceManager.GetObject("AnnieW", resourceCulture);
@@ -446,6 +526,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap AsheR {
             get {
                 object obj = ResourceManager.GetObject("AsheR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap AsheR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("AsheR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -503,6 +593,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap AzirR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("AzirR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap AzirW {
             get {
                 object obj = ResourceManager.GetObject("AzirW", resourceCulture);
@@ -553,9 +653,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap BardR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("BardR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap BardW {
             get {
                 object obj = ResourceManager.GetObject("BardW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Baron_Nashor_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Baron_Nashor_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -573,6 +693,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Barrier_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Barrier_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Bilgewater_Cutlass {
             get {
                 object obj = ResourceManager.GetObject("Bilgewater_Cutlass", resourceCulture);
@@ -583,9 +713,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Bilgewater_Cutlass_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Bilgewater_Cutlass_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Blade_of_the_Ruined_King {
             get {
                 object obj = ResourceManager.GetObject("Blade_of_the_Ruined_King", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Blade_of_the_Ruined_King_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Blade_of_the_Ruined_King_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -633,9 +783,39 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap BlitzcrankR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("BlitzcrankR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap BlitzcrankW {
             get {
                 object obj = ResourceManager.GetObject("BlitzcrankW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Blue_Sentinel_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Blue_Sentinel_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Blue_Sentinel_Mini_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Blue_Sentinel_Mini_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -676,6 +856,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap BrandR {
             get {
                 object obj = ResourceManager.GetObject("BrandR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap BrandR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("BrandR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -733,6 +923,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap BraumR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("BraumR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap BraumW {
             get {
                 object obj = ResourceManager.GetObject("BraumW", resourceCulture);
@@ -776,6 +976,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap CaitlynR {
             get {
                 object obj = ResourceManager.GetObject("CaitlynR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap CaitlynR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("CaitlynR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -833,6 +1043,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap CassiopeiaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("CassiopeiaR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap CassiopeiaW {
             get {
                 object obj = ResourceManager.GetObject("CassiopeiaW", resourceCulture);
@@ -843,9 +1063,39 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Clairvoyance_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Clairvoyance_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Clarity_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Clarity_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Cleanse {
             get {
                 object obj = ResourceManager.GetObject("Cleanse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Cleanse_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Cleanse_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -903,6 +1153,26 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Corrupting_Potion_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Corrupting_Potion_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Crimson_Raptor_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Crimson_Raptor_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap DariusPassive {
             get {
                 object obj = ResourceManager.GetObject("DariusPassive", resourceCulture);
@@ -923,9 +1193,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap DariusR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("DariusR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap DariusW {
             get {
                 object obj = ResourceManager.GetObject("DariusW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Dash_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -953,6 +1243,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap DianaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("DianaR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap DianaW {
             get {
                 object obj = ResourceManager.GetObject("DianaW", resourceCulture);
@@ -963,9 +1263,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Dragon_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Dragon_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap DravenQ {
             get {
                 object obj = ResourceManager.GetObject("DravenQ", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap DravenR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("DravenR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -986,6 +1306,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap DrMundoR {
             get {
                 object obj = ResourceManager.GetObject("DrMundoR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap DrMundoR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("DrMundoR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1033,6 +1363,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap EkkoR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("EkkoR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap EkkoW {
             get {
                 object obj = ResourceManager.GetObject("EkkoW", resourceCulture);
@@ -1046,6 +1386,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap EliseR {
             get {
                 object obj = ResourceManager.GetObject("EliseR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap EliseR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("EliseR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1083,6 +1433,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Elixir_of_Iron_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Elixir_of_Iron_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Elixir_of_Sorcery {
             get {
                 object obj = ResourceManager.GetObject("Elixir_of_Sorcery", resourceCulture);
@@ -1093,9 +1453,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Elixir_of_Sorcery_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Elixir_of_Sorcery_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Elixir_of_Wrath {
             get {
                 object obj = ResourceManager.GetObject("Elixir_of_Wrath", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Elixir_of_Wrath_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Elixir_of_Wrath_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1143,6 +1523,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap EvelynnR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("EvelynnR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap EvelynnW {
             get {
                 object obj = ResourceManager.GetObject("EvelynnW", resourceCulture);
@@ -1156,6 +1546,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Exhaust {
             get {
                 object obj = ResourceManager.GetObject("Exhaust", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Exhaust_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Exhaust_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1203,6 +1603,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap EzrealR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("EzrealR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap EzrealW {
             get {
                 object obj = ResourceManager.GetObject("EzrealW", resourceCulture);
@@ -1216,6 +1626,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Face_of_the_Mountain {
             get {
                 object obj = ResourceManager.GetObject("Face_of_the_Mountain", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Face_of_the_Mountain_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Face_of_the_Mountain_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1273,6 +1693,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap FiddlesticksR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("FiddlesticksR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap FiddlesticksW {
             get {
                 object obj = ResourceManager.GetObject("FiddlesticksW", resourceCulture);
@@ -1316,6 +1746,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap FioraR {
             get {
                 object obj = ResourceManager.GetObject("FioraR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap FioraR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("FioraR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1373,6 +1813,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap FizzR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("FizzR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap FizzW {
             get {
                 object obj = ResourceManager.GetObject("FizzW", resourceCulture);
@@ -1393,6 +1843,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Flash_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Flash_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Frost_Queen_s_Claim {
             get {
                 object obj = ResourceManager.GetObject("Frost_Queen_s_Claim", resourceCulture);
@@ -1403,9 +1863,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Frost_Queen_s_Claim_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Frost_Queen_s_Claim_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap GalioR {
             get {
                 object obj = ResourceManager.GetObject("GalioR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap GalioR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("GalioR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1473,6 +1953,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap GangplankR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("GangplankR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap GarenE {
             get {
                 object obj = ResourceManager.GetObject("GarenE", resourceCulture);
@@ -1493,6 +1983,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap GarenR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("GarenR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap GarenW {
             get {
                 object obj = ResourceManager.GetObject("GarenW", resourceCulture);
@@ -1506,6 +2006,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap GnarMega {
             get {
                 object obj = ResourceManager.GetObject("GnarMega", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap GnarR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("GnarR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1573,6 +2083,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap GragasR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("GragasR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap GragasW {
             get {
                 object obj = ResourceManager.GetObject("GragasW", resourceCulture);
@@ -1593,9 +2113,39 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap GravesR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("GravesR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap GravesW {
             get {
                 object obj = ResourceManager.GetObject("GravesW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Greater_Murk_Wolf_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Greater_Murk_Wolf_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gromp_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Gromp_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1613,9 +2163,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Guardian_Ange_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Guardian_Ange_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Haste {
             get {
                 object obj = ResourceManager.GetObject("Haste", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Haste_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Haste_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1633,9 +2203,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Heal_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Heal_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Health_Potion {
             get {
                 object obj = ResourceManager.GetObject("Health_Potion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Health_Potion_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Health_Potion_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1676,6 +2266,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap HecarimR {
             get {
                 object obj = ResourceManager.GetObject("HecarimR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap HecarimR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("HecarimR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1733,6 +2333,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap HeimerdingerR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("HeimerdingerR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap HeimerdingerW {
             get {
                 object obj = ResourceManager.GetObject("HeimerdingerW", resourceCulture);
@@ -1753,9 +2363,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Hexdrinker_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Hexdrinker_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Hunter_s_Potion {
             get {
                 object obj = ResourceManager.GetObject("Hunter_s_Potion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Hunter_s_Potion_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Hunter_s_Potion_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1773,9 +2403,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Iceborn_Gauntlet_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Iceborn_Gauntlet_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Ignite {
             get {
                 object obj = ResourceManager.GetObject("Ignite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ignite_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Ignite_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1816,6 +2466,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap IllaoiR {
             get {
                 object obj = ResourceManager.GetObject("IllaoiR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap IllaoiR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("IllaoiR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1873,6 +2533,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap IreliaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("IreliaR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap IreliaRR {
             get {
                 object obj = ResourceManager.GetObject("IreliaRR", resourceCulture);
@@ -1916,6 +2586,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap JannaR {
             get {
                 object obj = ResourceManager.GetObject("JannaR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap JannaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("JannaR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1973,6 +2653,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap JarvanR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("JarvanR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap JarvanW {
             get {
                 object obj = ResourceManager.GetObject("JarvanW", resourceCulture);
@@ -2023,6 +2713,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap JaxR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("JaxR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap JaxW {
             get {
                 object obj = ResourceManager.GetObject("JaxW", resourceCulture);
@@ -2056,6 +2756,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap JayceCannonR {
             get {
                 object obj = ResourceManager.GetObject("JayceCannonR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap JayceCannonR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("JayceCannonR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2103,6 +2813,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap JayceHammerR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("JayceHammerR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap JayceHammerW {
             get {
                 object obj = ResourceManager.GetObject("JayceHammerW", resourceCulture);
@@ -2116,6 +2836,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap JaycePassive {
             get {
                 object obj = ResourceManager.GetObject("JaycePassive", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap JhinR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("JhinR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2156,6 +2886,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap JinxR {
             get {
                 object obj = ResourceManager.GetObject("JinxR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap JinxR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("JinxR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2213,6 +2953,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap KalistaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KalistaR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap KalistaW {
             get {
                 object obj = ResourceManager.GetObject("KalistaW", resourceCulture);
@@ -2256,6 +3006,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap KarmaR {
             get {
                 object obj = ResourceManager.GetObject("KarmaR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap KarmaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KarmaR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2313,6 +3073,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap KarthusR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KarthusR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap KarthusW {
             get {
                 object obj = ResourceManager.GetObject("KarthusW", resourceCulture);
@@ -2346,6 +3116,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap KassadinR {
             get {
                 object obj = ResourceManager.GetObject("KassadinR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap KassadinR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KassadinR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2403,6 +3183,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap KatarinaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KatarinaR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap KatarinaW {
             get {
                 object obj = ResourceManager.GetObject("KatarinaW", resourceCulture);
@@ -2446,6 +3236,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap KayleR {
             get {
                 object obj = ResourceManager.GetObject("KayleR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap KayleR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KayleR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2503,6 +3303,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap KennenR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KennenR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap KennenW {
             get {
                 object obj = ResourceManager.GetObject("KennenW", resourceCulture);
@@ -2546,6 +3356,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap KhazixR {
             get {
                 object obj = ResourceManager.GetObject("KhazixR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap KhazixR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KhazixR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2603,6 +3423,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap KindredR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KindredR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap KindredW {
             get {
                 object obj = ResourceManager.GetObject("KindredW", resourceCulture);
@@ -2653,9 +3483,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap KogMawR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KogMawR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap KogMawW {
             get {
                 object obj = ResourceManager.GetObject("KogMawW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap KrugSquare_BIG {
+            get {
+                object obj = ResourceManager.GetObject("KrugSquare_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2696,6 +3546,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap LeBlancR {
             get {
                 object obj = ResourceManager.GetObject("LeBlancR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap LeBlancR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("LeBlancR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2773,6 +3633,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap LeeSinR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("LeeSinR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap LeeSinW {
             get {
                 object obj = ResourceManager.GetObject("LeeSinW", resourceCulture);
@@ -2833,6 +3703,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap LeonaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("LeonaR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap LeonaW {
             get {
                 object obj = ResourceManager.GetObject("LeonaW", resourceCulture);
@@ -2883,6 +3763,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap LissandraR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("LissandraR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap LissandraW {
             get {
                 object obj = ResourceManager.GetObject("LissandraW", resourceCulture);
@@ -2896,6 +3786,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Locket_of_the_Iron_Solari {
             get {
                 object obj = ResourceManager.GetObject("Locket_of_the_Iron_Solari", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Locket_of_the_Iron_Solari_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Locket_of_the_Iron_Solari_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2936,6 +3836,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap LucianR {
             get {
                 object obj = ResourceManager.GetObject("LucianR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap LucianR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("LucianR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2993,6 +3903,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap LuluR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("LuluR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap LuluW {
             get {
                 object obj = ResourceManager.GetObject("LuluW", resourceCulture);
@@ -3043,6 +3963,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap LuxR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("LuxR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap LuxW {
             get {
                 object obj = ResourceManager.GetObject("LuxW", resourceCulture);
@@ -3076,6 +4006,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap MalphiteQ {
             get {
                 object obj = ResourceManager.GetObject("MalphiteQ", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap MalphiteR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("MalphiteR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3133,6 +4073,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap MalzaharR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("MalzaharR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap MalzaharW {
             get {
                 object obj = ResourceManager.GetObject("MalzaharW", resourceCulture);
@@ -3183,9 +4133,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap MaokaiR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("MaokaiR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap MaokaiW {
             get {
                 object obj = ResourceManager.GetObject("MaokaiW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Mark_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Mark_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3233,6 +4203,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap MasterYiR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("MasterYiR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap MasterYiW {
             get {
                 object obj = ResourceManager.GetObject("MasterYiW", resourceCulture);
@@ -3246,6 +4226,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Maw_of_Malmortius {
             get {
                 object obj = ResourceManager.GetObject("Maw_of_Malmortius", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Maw_of_Malmortius_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Maw_of_Malmortius_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3286,6 +4276,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap MissFortuneR {
             get {
                 object obj = ResourceManager.GetObject("MissFortuneR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap MissFortuneR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("MissFortuneR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3343,6 +4343,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap MordekaiserR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("MordekaiserR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap MordekaiserW {
             get {
                 object obj = ResourceManager.GetObject("MordekaiserW", resourceCulture);
@@ -3393,9 +4403,29 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap MorganaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("MorganaR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap MorganaW {
             get {
                 object obj = ResourceManager.GetObject("MorganaW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap MurkwolfSquare_BIG {
+            get {
+                object obj = ResourceManager.GetObject("MurkwolfSquare_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3436,6 +4466,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap NamiR {
             get {
                 object obj = ResourceManager.GetObject("NamiR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap NamiR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("NamiR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3493,6 +4533,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap NasusR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("NasusR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap NasusW {
             get {
                 object obj = ResourceManager.GetObject("NasusW", resourceCulture);
@@ -3536,6 +4586,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap NautilusR {
             get {
                 object obj = ResourceManager.GetObject("NautilusR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap NautilusR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("NautilusR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3633,6 +4693,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap NidaleeR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("NidaleeR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap NocturneE {
             get {
                 object obj = ResourceManager.GetObject("NocturneE", resourceCulture);
@@ -3666,6 +4736,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap NocturneR {
             get {
                 object obj = ResourceManager.GetObject("NocturneR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap NocturneR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("NocturneR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3723,6 +4803,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap NunuR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("NunuR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap NunuW {
             get {
                 object obj = ResourceManager.GetObject("NunuW", resourceCulture);
@@ -3773,6 +4863,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap OlafR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("OlafR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap OlafW {
             get {
                 object obj = ResourceManager.GetObject("OlafW", resourceCulture);
@@ -3786,6 +4886,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Oracle_Alteration {
             get {
                 object obj = ResourceManager.GetObject("Oracle_Alteration", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Oracle_Alteration_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Oracle_Alteration_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3826,6 +4936,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap OriannaR {
             get {
                 object obj = ResourceManager.GetObject("OriannaR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap OriannaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("OriannaR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3883,6 +5003,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap PantheonR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("PantheonR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap PantheonW {
             get {
                 object obj = ResourceManager.GetObject("PantheonW", resourceCulture);
@@ -3926,6 +5056,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap PoppyR {
             get {
                 object obj = ResourceManager.GetObject("PoppyR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap PoppyR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("PoppyR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3983,6 +5123,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap QuinnR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("QuinnR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap QuinnW {
             get {
                 object obj = ResourceManager.GetObject("QuinnW", resourceCulture);
@@ -4033,6 +5183,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap RammusR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("RammusR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap RammusW {
             get {
                 object obj = ResourceManager.GetObject("RammusW", resourceCulture);
@@ -4053,6 +5213,26 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Randuin_s_Omen_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Randuin_s_Omen_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap RazorbeakSquare_BIG {
+            get {
+                object obj = ResourceManager.GetObject("RazorbeakSquare_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Recall {
             get {
                 object obj = ResourceManager.GetObject("Recall", resourceCulture);
@@ -4063,9 +5243,49 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Recall_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Recall_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Red_Brambleback_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Red_Brambleback_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Red_Brambleback_Mini_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Red_Brambleback_Mini_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Refillable_Potion {
             get {
                 object obj = ResourceManager.GetObject("Refillable_Potion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Refillable_Potion_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Refillable_Potion_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4106,6 +5326,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap RekSaiR {
             get {
                 object obj = ResourceManager.GetObject("RekSaiR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap RekSaiR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("RekSaiR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4163,6 +5393,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap RenektonR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("RenektonR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap RenektonW {
             get {
                 object obj = ResourceManager.GetObject("RenektonW", resourceCulture);
@@ -4213,9 +5453,49 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap RengarR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("RengarR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap RengarW {
             get {
                 object obj = ResourceManager.GetObject("RengarW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Revive_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Revive_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Rift_Herald_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Rift_Herald_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Rift_Scuttler_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Rift_Scuttler_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4256,6 +5536,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap RivenR {
             get {
                 object obj = ResourceManager.GetObject("RivenR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap RivenR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("RivenR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4313,6 +5603,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap RumbleR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("RumbleR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap RumbleW {
             get {
                 object obj = ResourceManager.GetObject("RumbleW", resourceCulture);
@@ -4363,9 +5663,49 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap RyzeR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("RyzeR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap RyzeW {
             get {
                 object obj = ResourceManager.GetObject("RyzeW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap SC2Blue {
+            get {
+                object obj = ResourceManager.GetObject("SC2Blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap SC2Orange {
+            get {
+                object obj = ResourceManager.GetObject("SC2Orange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap SC2Red {
+            get {
+                object obj = ResourceManager.GetObject("SC2Red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4406,6 +5746,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap SejuaniR {
             get {
                 object obj = ResourceManager.GetObject("SejuaniR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap SejuaniR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("SejuaniR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4463,6 +5813,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ShacoR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ShacoR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap ShacoW {
             get {
                 object obj = ResourceManager.GetObject("ShacoW", resourceCulture);
@@ -4513,6 +5873,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ShenR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ShenR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap ShenW {
             get {
                 object obj = ResourceManager.GetObject("ShenW", resourceCulture);
@@ -4556,6 +5926,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap ShyvanaR {
             get {
                 object obj = ResourceManager.GetObject("ShyvanaR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShyvanaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ShyvanaR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4623,6 +6003,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap SingedR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("SingedR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap SingedW {
             get {
                 object obj = ResourceManager.GetObject("SingedW", resourceCulture);
@@ -4666,6 +6056,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap SionR {
             get {
                 object obj = ResourceManager.GetObject("SionR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap SionR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("SionR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4723,6 +6123,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap SivirR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("SivirR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap SivirW {
             get {
                 object obj = ResourceManager.GetObject("SivirW", resourceCulture);
@@ -4773,6 +6183,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap SkarnerR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("SkarnerR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap SkarnerW {
             get {
                 object obj = ResourceManager.GetObject("SkarnerW", resourceCulture);
@@ -4786,6 +6206,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Smite {
             get {
                 object obj = ResourceManager.GetObject("Smite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Smite_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Smite_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4826,6 +6256,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap SonaR {
             get {
                 object obj = ResourceManager.GetObject("SonaR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap SonaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("SonaR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4883,6 +6323,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap SorakaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("SorakaR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap SorakaW {
             get {
                 object obj = ResourceManager.GetObject("SorakaW", resourceCulture);
@@ -4933,6 +6383,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap SwainR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("SwainR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap SwainW {
             get {
                 object obj = ResourceManager.GetObject("SwainW", resourceCulture);
@@ -4956,6 +6416,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Sweeping_Lens__Trinket_ {
             get {
                 object obj = ResourceManager.GetObject("Sweeping_Lens__Trinket_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sweeping_Lens__Trinket__BIG {
+            get {
+                object obj = ResourceManager.GetObject("Sweeping_Lens__Trinket__BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4996,6 +6466,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap SyndraR {
             get {
                 object obj = ResourceManager.GetObject("SyndraR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap SyndraR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("SyndraR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5053,6 +6533,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap TahmKenchR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("TahmKenchR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap TahmKenchW {
             get {
                 object obj = ResourceManager.GetObject("TahmKenchW", resourceCulture);
@@ -5066,6 +6556,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Talisman_of_Ascension {
             get {
                 object obj = ResourceManager.GetObject("Talisman_of_Ascension", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Talisman_of_Ascension_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Talisman_of_Ascension_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5106,6 +6606,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap TalonR {
             get {
                 object obj = ResourceManager.GetObject("TalonR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap TalonR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("TalonR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5163,6 +6673,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap TaricR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("TaricR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap TaricW {
             get {
                 object obj = ResourceManager.GetObject("TaricW", resourceCulture);
@@ -5176,6 +6696,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Tear_of_the_Goddess {
             get {
                 object obj = ResourceManager.GetObject("Tear_of_the_Goddess", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tear_of_the_Goddess_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Tear_of_the_Goddess_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5223,6 +6753,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap TeemoR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("TeemoR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap TeemoW {
             get {
                 object obj = ResourceManager.GetObject("TeemoW", resourceCulture);
@@ -5236,6 +6776,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Teleport {
             get {
                 object obj = ResourceManager.GetObject("Teleport", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Teleport_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Teleport_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5283,6 +6833,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ThreshR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ThreshR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap ThreshW {
             get {
                 object obj = ResourceManager.GetObject("ThreshW", resourceCulture);
@@ -5296,6 +6856,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Total_Biscuit_of_Rejuvenation {
             get {
                 object obj = ResourceManager.GetObject("Total_Biscuit_of_Rejuvenation", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Total_Biscuit_of_Rejuvenation_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Total_Biscuit_of_Rejuvenation_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5336,6 +6906,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap TristanaR {
             get {
                 object obj = ResourceManager.GetObject("TristanaR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap TristanaR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("TristanaR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5393,6 +6973,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap TrundleR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("TrundleR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap TrundleW {
             get {
                 object obj = ResourceManager.GetObject("TrundleW", resourceCulture);
@@ -5436,6 +7026,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap TryndamereR {
             get {
                 object obj = ResourceManager.GetObject("TryndamereR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap TryndamereR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("TryndamereR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5493,6 +7093,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap TwistedFateR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("TwistedFateR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap TwistedFateW {
             get {
                 object obj = ResourceManager.GetObject("TwistedFateW", resourceCulture);
@@ -5536,6 +7146,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap TwitchR {
             get {
                 object obj = ResourceManager.GetObject("TwitchR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap TwitchR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("TwitchR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5593,6 +7213,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap UdyrR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("UdyrR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap UdyrW {
             get {
                 object obj = ResourceManager.GetObject("UdyrW", resourceCulture);
@@ -5636,6 +7266,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap UrgotR {
             get {
                 object obj = ResourceManager.GetObject("UrgotR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap UrgotR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("UrgotR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5693,6 +7333,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap VarusR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("VarusR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap VarusW {
             get {
                 object obj = ResourceManager.GetObject("VarusW", resourceCulture);
@@ -5736,6 +7386,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap VayneR {
             get {
                 object obj = ResourceManager.GetObject("VayneR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap VayneR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("VayneR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5793,6 +7453,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap VeigarR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("VeigarR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap VeigarW {
             get {
                 object obj = ResourceManager.GetObject("VeigarW", resourceCulture);
@@ -5836,6 +7506,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap VelkozR {
             get {
                 object obj = ResourceManager.GetObject("VelkozR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap VelkozR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("VelkozR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5913,6 +7593,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ViktorR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ViktorR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap ViktorW {
             get {
                 object obj = ResourceManager.GetObject("ViktorW", resourceCulture);
@@ -5946,6 +7636,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap ViR {
             get {
                 object obj = ResourceManager.GetObject("ViR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ViR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ViR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -6013,6 +7713,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap VladimirR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("VladimirR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap VladimirW {
             get {
                 object obj = ResourceManager.GetObject("VladimirW", resourceCulture);
@@ -6056,6 +7766,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap VolibearR {
             get {
                 object obj = ResourceManager.GetObject("VolibearR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap VolibearR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("VolibearR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -6123,6 +7843,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap WarwickR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("WarwickR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap WarwickW {
             get {
                 object obj = ResourceManager.GetObject("WarwickW", resourceCulture);
@@ -6166,6 +7896,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap WukongR {
             get {
                 object obj = ResourceManager.GetObject("WukongR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap WukongR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("WukongR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -6223,6 +7963,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap XerathR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("XerathR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap XerathW {
             get {
                 object obj = ResourceManager.GetObject("XerathW", resourceCulture);
@@ -6266,6 +8016,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap XinZhaoR {
             get {
                 object obj = ResourceManager.GetObject("XinZhaoR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap XinZhaoR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("XinZhaoR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -6323,6 +8083,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap YasuoR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("YasuoR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap YasuoW {
             get {
                 object obj = ResourceManager.GetObject("YasuoW", resourceCulture);
@@ -6373,6 +8143,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap YorickR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("YorickR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap YorickW {
             get {
                 object obj = ResourceManager.GetObject("YorickW", resourceCulture);
@@ -6386,6 +8166,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Youmuu_s_Ghostblade {
             get {
                 object obj = ResourceManager.GetObject("Youmuu_s_Ghostblade", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Youmuu_s_Ghostblade_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Youmuu_s_Ghostblade_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -6426,6 +8216,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap ZacR {
             get {
                 object obj = ResourceManager.GetObject("ZacR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ZacR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ZacR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -6483,6 +8283,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ZedR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ZedR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap ZedW {
             get {
                 object obj = ResourceManager.GetObject("ZedW", resourceCulture);
@@ -6496,6 +8306,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap Zhonya_s_Hourglass {
             get {
                 object obj = ResourceManager.GetObject("Zhonya_s_Hourglass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Zhonya_s_Hourglass_BIG {
+            get {
+                object obj = ResourceManager.GetObject("Zhonya_s_Hourglass_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -6536,6 +8356,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap ZiggsR {
             get {
                 object obj = ResourceManager.GetObject("ZiggsR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ZiggsR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ZiggsR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -6593,6 +8423,16 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ZileanR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ZileanR_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap ZileanW {
             get {
                 object obj = ResourceManager.GetObject("ZileanW", resourceCulture);
@@ -6636,6 +8476,16 @@ namespace TimerBuddy.Properties {
         internal static System.Drawing.Bitmap ZyraR {
             get {
                 object obj = ResourceManager.GetObject("ZyraR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ZyraR_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ZyraR_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
