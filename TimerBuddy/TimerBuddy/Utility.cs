@@ -473,5 +473,62 @@ namespace TimerBuddy
                 return 0;
             }
         }
+
+        public static Team GetTeam(this Obj_AI_Base unit)
+        {
+            try
+            {
+                return unit.IsAlly ? Team.Ally : unit.IsEnemy ? Team.Enemy : unit.IsMonster ? Team.Neutral : Team.None;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE GET_TEAM " + unit.BaseSkinName, Color.LightBlue);
+                return 0;
+            }
+        }
+
+        public static string GetMenuCode(this SC2Timer sc2)
+        {
+            try
+            {
+                switch (sc2.SC2Type)
+                {
+                    case SC2Type.Spell:
+                        return "sc2" + sc2.ChampionName + sc2.Slot.ToString();
+                    case SC2Type.SummonerSpell:
+                        return "sc2" + sc2.DisplayName;
+                    case SC2Type.Jungle:
+                        return "sc2" + sc2.DisplayName;
+                }
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE GET_MENU_CODE2 " + sc2.SpriteName.ToString(), Color.LightBlue);
+                return "sc2" + sc2.DisplayName;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE GET_MENU_CODE " + sc2.SpriteName.ToString(), Color.LightBlue);
+                return "sc2" + sc2.DisplayName;
+            }
+        }
+
+        public static string GetDisplayName(this SC2Timer sc2)
+        {
+            try
+            {
+                switch (sc2.SC2Type)
+                {
+                    case SC2Type.Spell:
+                        return sc2.ChampionName + " " + sc2.Slot.ToString();
+                }
+                return sc2.DisplayName;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE GET_MENU_CODE " + sc2.SpriteName.ToString(), Color.LightBlue);
+                return sc2.DisplayName;
+            }
+        }
     }
 }
