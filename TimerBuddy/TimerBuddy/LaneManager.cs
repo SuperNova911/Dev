@@ -13,12 +13,19 @@ using System.Linq;
 
 namespace TimerBuddy
 {
+    public enum Lane
+    {
+        Top, Mid, Jungle, Bottom
+    }
+
     public static class LaneManager
     {
         public static List<AIHeroClient> Top = new List<AIHeroClient>();
         public static List<AIHeroClient> Mid = new List<AIHeroClient>();
         public static List<AIHeroClient> Jungle = new List<AIHeroClient>();
         public static List<AIHeroClient> Bottom = new List<AIHeroClient>();
+
+        public static Lane MyLane;
 
         public static Vector3 toppos = new Vector3(2139, 12576, 53);
         public static Vector3 midpos = new Vector3(7469, 7469, 54);
@@ -42,6 +49,8 @@ namespace TimerBuddy
                 if (hero.HasSmite() && Jungle.Count < 2)
                 {
                     Jungle.Add(hero);
+                    if (hero.IsMe)
+                        MyLane = Lane.Jungle;
                     continue;
                 }
 
@@ -91,13 +100,25 @@ namespace TimerBuddy
             var bot = unit.Distance(botpos);
 
             if (top <= mid && top <= bot)
+            {
                 Top.Add(unit);
+                if (unit.IsMe)
+                    MyLane = Lane.Top;
+            }
 
             if (mid <= top && mid <= bot)
+            {
                 Mid.Add(unit);
+                if (unit.IsMe)
+                    MyLane = Lane.Mid;
+            }
 
             if (bot <= top && bot <= mid)
+            {
                 Bottom.Add(unit);
+                if (unit.IsMe)
+                    MyLane = Lane.Mid;
+            }
         }
 
 
@@ -118,6 +139,26 @@ namespace TimerBuddy
                 Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_LANE " + unit.BaseSkinName, Color.LightBlue);
                 return false;
             }
+        }
+
+        public static List<AIHeroClient> MyLaneMember()
+        {
+            switch (MyLane)
+            {
+                case Lane.Top:
+                    return Top;
+
+                case Lane.Mid:
+                    return Mid;
+
+                case Lane.Jungle:
+                    return Jungle;
+
+                case Lane.Bottom:
+                    return Bottom;
+            }
+
+            return Top;
         }
 
         public static void Initialize()
