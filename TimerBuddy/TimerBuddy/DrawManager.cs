@@ -371,7 +371,7 @@ namespace TimerBuddy
         public static void DrawKappa(Spell spell)
         {
             int s5 = Config.DebugMenu["s5"].Cast<Slider>().CurrentValue;
-            Vector2 centerpos = Drawing.WorldToScreen(spell.GameObject ? spell.Object.Position : spell.Target.Position) + new Vector2(0, s5);
+            Vector2 centerpos = Drawing.WorldToScreen(spell.GameObject ? spell.Object.Position : spell.SkillShot ? spell.CastPosition : spell.Target.Position) + new Vector2(0, s5);
 
             //Drawing.DrawLine(centerpos + new Vector2(-500, 0), centerpos + new Vector2(500, 0), 1, System.Drawing.Color.Red);
             //Drawing.DrawLine(centerpos + new Vector2(0, -500), centerpos + new Vector2(0, 500), 1, System.Drawing.Color.Red);
@@ -408,6 +408,7 @@ namespace TimerBuddy
 
                 Drawing.DrawLine(Drawing.WorldToScreen(startpos), Drawing.WorldToScreen(endpos), 2, spell.Color.ConvertColor());
                 new Circle { Color = spell.Color.ConvertColor(), Radius = 30f, BorderWidth = 1 }.Draw(endpos);
+                Drawing.DrawText(Drawing.WorldToScreen(endpos) + new Vector2(-20, 15), System.Drawing.Color.White, spell.Caster.BaseSkinName, 10);
                 //new Geometry.Polygon.Line(startpos, endpos).Draw(spell.Color);
                 //new Geometry.Polygon.Sector(endpos, startpos, 50 * (float)Math.PI / 180, 50).Draw(spell.Color);
             }
