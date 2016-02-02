@@ -37,7 +37,7 @@ namespace TimerBuddy
                 var itemList = SpellDatabase.Database.Where(i => i.SpellType == SpellType.Item).ToList();
                 var trapList = SpellDatabase.Database.Where(t => heroName.Contains(t.ChampionName) && t.SpellType == SpellType.Trap).ToList();
                 var spellList = SpellDatabase.Database.Where(s => heroName.Contains(s.ChampionName) && s.SpellType == SpellType.Spell).ToList();
-                var sc2List = SC2TimerDatabase.Database.Where(d => (heroName.Contains(d.ChampionName) && d.SC2Type == SC2Type.Spell) || (d.SC2Type == SC2Type.SummonerSpell)).ToList();
+                var sc2List = SC2TimerDatabase.Database.Where(d => (heroName.Contains(d.ChampionName) && d.SC2Type == SC2Type.Spell) || (d.SC2Type != SC2Type.Spell)).ToList();
 
                 foreach (var list in summonerList)
                 {
@@ -77,10 +77,7 @@ namespace TimerBuddy
 
                 foreach (var list in sc2List)
                 {
-                    var menucode = list.SC2Type ==
-                        SC2Type.SummonerSpell ? "sc2" + list.DisplayName : 
-                        list.SC2Type == SC2Type.Spell ? "sc2" + list.ChampionName + list.Slot.ToString() : 
-                        list.DisplayName;
+                    var menucode = list.GetMenuCode();
 
                     if (SpriteList.ContainsKey(menucode))
                         continue;
