@@ -61,6 +61,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="DrawManager.cs" />
+    <Compile Include="LaneManager.cs" />
     <Compile Include="ObjectDetector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -644,21 +645,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ShyvanaE.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ShenW.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ShenR.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ShenQ.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ShenP.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ShenE.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ShacoW.png" />
@@ -2122,6 +2108,12 @@
     <Content Include="Resources\SC2\SummonerSpell\Revive_BIG.png" />
     <Content Include="Resources\SC2\SummonerSpell\Smite_BIG.png" />
     <Content Include="Resources\SC2\SummonerSpell\Teleport_BIG.png" />
+    <None Include="Resources\ShenR_BIG.png" />
+    <None Include="Resources\ShenE.png" />
+    <None Include="Resources\ShenW.png" />
+    <None Include="Resources\ShenR.png" />
+    <None Include="Resources\ShenQ.png" />
+    <None Include="Resources\ShenP.png" />
     <None Include="Resources\DravenR_BIG.png" />
     <Content Include="Resources\SC2\AatroxR_BIG.png" />
     <Content Include="Resources\SC2\AhriR_BIG.png" />

@@ -1354,21 +1354,6 @@
   <data name="ShacoW" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ShacoW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ShenE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ShenE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ShenP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ShenP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ShenQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ShenQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ShenR" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ShenR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ShenW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ShenW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ShyvanaE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ShyvanaE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -2503,9 +2488,6 @@
   <data name="ShacoR_BIG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\sc2\shacor_big.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ShenR_BIG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\sc2\shenr_big.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ShyvanaR_BIG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\sc2\shyvanar_big.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -2649,5 +2631,23 @@
   </data>
   <data name="ZyraR_BIG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\sc2\zyrar_big.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShenE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShenE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShenP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShenP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShenQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShenQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShenR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShenR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShenR_BIG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShenR_BIG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShenW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShenW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
