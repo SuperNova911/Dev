@@ -32,7 +32,7 @@ namespace TimerBuddy
                 return;
 
             if (sender.Name.Contains("NAV") || sender.Name.Contains("Odin") || sender.Name.Contains("Shopkeeper") || 
-                sender.GetType().Name == "MissileClient" || sender.GetType().Name == "DrawFX" || sender.Name.Contains("empty.troy") || sender.Name.Contains("LevelProp")
+                sender.GetType().Name == "MissileClient" || sender.GetType().Name == "DrawFX" || sender.Name.Contains("SRU") || sender.Name.Contains("empty.troy") || sender.Name.Contains("LevelProp")
                  || sender.Name.Contains("FeelNoPain") || sender.Name.Contains("LaserSight"))
                 return;
 
@@ -41,12 +41,12 @@ namespace TimerBuddy
 
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-
+            //Chat.Print(sender.BaseSkinName + " | " + args.Slot.ToString(), System.Drawing.Color.IndianRed);
         }
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
         {
-            if (!sender.IsValid)
+            if (!sender.IsValid/* || sender.Distance(Player.Instance) > 1000*/)
                 return;
 
             if (sender.Name.Contains("Minion") || sender.GetType().Name == "MissileClient" || sender.Name.Contains("SRU") || sender.Name.Contains("FeelNoPain") || sender.Name.Contains("crystal_beam"))
