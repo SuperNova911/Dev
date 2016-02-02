@@ -134,7 +134,7 @@ namespace TimerBuddy
                         SpriteName = database.SpriteName,
                     });
 
-                    Chat.Print("GameObject " + sender.Name + " " + sender.FIndCaster(database).BaseSkinName, Color.LawnGreen);
+                    Chat.Print("GameObject " + sender.Name + " " + caster.BaseSkinName, Color.LawnGreen);
 
                     return;
                 }
@@ -152,6 +152,8 @@ namespace TimerBuddy
             {
                 if (!sender.IsValid)
                     return;
+                SC2TimerManager.SC2JungleDetector(sender, args);
+
 
                 Program.SpellList.RemoveAll(d => d.GameObject && d.NetworkID == sender.NetworkId/* && d.Name == sender.Name && d.ObjectName == sender.BaseObjectName()*/);
             }
@@ -170,7 +172,8 @@ namespace TimerBuddy
                     return;
 
                 Utility.ShacoBoxActive(sender, args);
-                SC2TimerManager.SC2TimerDetector(sender, args);
+
+                Core.DelayAction(() => SC2TimerManager.SC2TimerDetector(sender, args), 1000);
 
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject == false && d.Buff == false && 
                 (d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot) ||
@@ -209,19 +212,32 @@ namespace TimerBuddy
                     return;
                 }
 
-                var objDatabase = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && 
-                ((d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot) || (d.SpellType == SpellType.Ward)));
+                var spellDatabase = SpellDatabase.Database.FirstOrDefault(d => 
+                (d.GameObject && d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot));
 
-                if (objDatabase != null)
+                if (spellDatabase != null)
                 {
                     Program.CasterList.Add(new SpellCaster
                     {
                         Caster = sender,
-                        Slot = objDatabase.Slot,
-                        EndTime = 2000 + Utility.TickCount,
-                        Name = args.SData.Name
+                        Slot = spellDatabase.Slot,
+                        EndTime = 10000 + Utility.TickCount,
                     });
+                    //Chat.Print("CasterList " + sender.BaseSkinName + " | " + spellDatabase.Slot.ToString(), Color.Red);
+                    return;
+                }
 
+                var wardDatabase = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && d.SpellType == SpellType.Ward && d.Name == args.SData.Name);
+
+                if (wardDatabase != null)
+                {
+                    Program.WardCasterList.Add(new WardCaster
+                    {
+                        Caster = sender,
+                        Name = wardDatabase.Name,
+                        EndTime = 2000 + Utility.TickCount,
+                    });
+                    //Chat.Print("WardCasterList " + sender.BaseSkinName + " | " + wardDatabase.ObjectName, Color.Red);
                     return;
                 }
             }
@@ -243,6 +259,8 @@ namespace TimerBuddy
 
                 if (Program.CasterList.Count > 0)
                     Program.CasterList.RemoveAll(d => d.EndTime < Utility.TickCount);
+                if (Program.WardCasterList.Count > 0)
+                    Program.WardCasterList.RemoveAll(d => d.EndTime < Utility.TickCount);
 
                 SC2TimerManager.SC2TimerRemover();
 
@@ -282,7 +300,7 @@ namespace TimerBuddy
             try
             {
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && d.SpellType == SpellType.Ward &&
-                d.Name == sender.Name && d.ObjectName == sender.BaseObjectName());
+                d.ObjectName == sender.BaseObjectName());
                 
                 if (database != null)
                 {
@@ -301,8 +319,8 @@ namespace TimerBuddy
                         Name = database.Name,
                         ObjectName = database.ObjectName,
                         MenuCode = database.MenuCode,
-                        FullTime = database.EndTime,
-                        EndTime = database.EndTime + Utility.TickCount,
+                        FullTime = sender.BaseObjectName() == "YellowTrinket" ? caster.YellowTrinketRemaintime() : database.EndTime,
+                        EndTime = sender.BaseObjectName() == "YellowTrinket" ? caster.YellowTrinketRemaintime() + Utility.TickCount : database.EndTime + Utility.TickCount,
                         NetworkID = sender.NetworkId,
                         GameObject = database.GameObject,
                         Color = database.Color,

@@ -221,22 +221,40 @@ namespace TimerBuddy
         {
             try
             {
+                Chat.Print("FINDING CASTER....", System.Drawing.Color.LightBlue);
+
+                Obj_AI_Base result;
+
                 if (database.GameObject == true)
                 {
-                    var name = database.ChampionName;
-
                     var heroList = EntityManager.Heroes.AllHeroes.Where(h => h.BaseSkinName == database.ChampionName).ToList();
 
                     if (heroList.Count == 1)
                     {
-                        return heroList.First();
+                        result = heroList.First();
+                        Program.CasterList.Remove(Program.CasterList.FirstOrDefault(d => d.Caster.BaseSkinName == database.ChampionName && d.Slot == database.Slot));
+                        return result;
                     }
 
                     var caster = Program.CasterList.FirstOrDefault(c => c.Caster.BaseSkinName == database.ChampionName && c.Slot == database.Slot);
 
                     if (caster != null)
+                    {
+                        Chat.Print("Caster " + caster.Caster.BaseSkinName, System.Drawing.Color.Red);
+                        result = caster.Caster;
+                        Program.CasterList.Remove(caster);
                         return caster.Caster;
+                    }
                 }
+                result = EntityManager.Heroes.AllHeroes.Where(d => d.BaseSkinName == database.ChampionName).OrderBy(d => d.Distance(sender.Position)).FirstOrDefault();
+                if (result != null)
+                {
+                    Chat.Print("Caster Near " + result.BaseSkinName, System.Drawing.Color.Purple);
+                    return result;
+                }
+
+                Chat.Print("Failed to find caster " + database.Name);
+                Chat.Print("Caster " + Player.Instance.BaseSkinName, System.Drawing.Color.Red);
                 return Player.Instance;
             }
             catch (Exception e)
@@ -251,29 +269,29 @@ namespace TimerBuddy
         {
             try
             {
-                SpellCaster caster;
+                WardCaster caster;
                 switch (database.ObjectName)
                 {
                     case "YellowTrinket":
-                        caster = Program.CasterList.FirstOrDefault(d => d.Name == "TrinketTotemLvl1");
+                        caster = Program.WardCasterList.FirstOrDefault(d => d.Name == "TrinketTotemLvl1");
 
                         if (caster != null)
                             return caster.Caster;
                         break;
                     case "SightWard":
-                        caster = Program.CasterList.FirstOrDefault(d => d.Name == "ItemGhostWard");
+                        caster = Program.WardCasterList.FirstOrDefault(d => d.Name == "ItemGhostWard");
 
                         if (caster != null)
                             return caster.Caster;
                         break;
                     case "BlueTrinket":
-                        caster = Program.CasterList.FirstOrDefault(d => d.Name == "TrinketOrbLvl3");
+                        caster = Program.WardCasterList.FirstOrDefault(d => d.Name == "TrinketOrbLvl3");
 
                         if (caster != null)
                             return caster.Caster;
                         break;
                     case "VisionWard":
-                        caster = Program.CasterList.FirstOrDefault(d => d.Name == "VisionWard");
+                        caster = Program.WardCasterList.FirstOrDefault(d => d.Name == "VisionWard");
 
                         if (caster != null)
                             return caster.Caster;
@@ -528,6 +546,38 @@ namespace TimerBuddy
                 Console.WriteLine(e);
                 Chat.Print("<font color='#FF0000'>ERROR:</font> CODE GET_MENU_CODE " + sc2.SpriteName.ToString(), Color.LightBlue);
                 return sc2.DisplayName;
+            }
+        }
+
+        public static float YellowTrinketRemaintime(this Obj_AI_Base unit)
+        {
+            try
+            {
+                var Kappa = unit as AIHeroClient;
+                return 60000f + 3.5f * (Kappa.Level - 1) * 1000f;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE YELLOW_TRINKET_REMAIN_TIME " + unit.BaseSkinName, Color.LightBlue);
+                return 60000f + 3.5f * (Player.Instance.Level - 1) * 1000f;
+            }
+        }
+        
+        public static bool HasSmite(this AIHeroClient unit)
+        {
+            try
+            {
+                if (unit.Spellbook.Spells.Where(s => s.Name.Contains("summonerflash")).Any())
+                    return true;
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE HAS_SMITE " + unit.BaseSkinName, Color.LightBlue);
+                return false;
             }
         }
     }
