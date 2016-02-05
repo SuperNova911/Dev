@@ -88,6 +88,8 @@ namespace TimerBuddy
 
                 if (true)
                 {
+                    TextureLoader.Load("SC2Green", Resources.SC2Green);
+                    SpriteList.Add("SC2Green", new Sprite(() => TextureLoader["SC2Green"]));
                     TextureLoader.Load("SC2Blue", Resources.SC2Blue);
                     SpriteList.Add("SC2Blue", new Sprite(() => TextureLoader["SC2Blue"]));
                     TextureLoader.Load("SC2Orange", Resources.SC2Orange);
@@ -125,19 +127,27 @@ namespace TimerBuddy
             sprite.Draw(vector2 + new Vector2(-18, 0));
         }
 
-        public static void DrawSC2Hud(Team team, Vector2 position)
+        public static void DrawSC2Hud(SC2Timer sc2, Vector2 position)
         {
-            switch (team)
+            if (sc2.Caster.IsMe)
+            {
+                SpriteList["SC2Green"].Draw(position);
+                return;
+            }
+
+            switch (sc2.Team)
             {
                 case Team.Ally:
                     SpriteList["SC2Blue"].Draw(position);
-                    break;
+                    return;
+
                 case Team.Enemy:
                     SpriteList["SC2Red"].Draw(position);
-                    break;
+                    return;
+
                 case Team.Neutral:
                     SpriteList["SC2Orange"].Draw(position);
-                    break;
+                    return;
             }
         }
         

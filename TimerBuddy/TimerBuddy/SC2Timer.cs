@@ -168,6 +168,7 @@ namespace TimerBuddy
                 new SC2Timer { SC2Type = SC2Type.SummonerSpell, Name = "summonerdot", DisplayName = "Summoner Ignite", SpriteName = Resources.Ignite_BIG },
                 new SC2Timer { SC2Type = SC2Type.SummonerSpell, Name = "summonerflash", DisplayName = "Summoner Flash", SpriteName = Resources.Flash_BIG },
                 new SC2Timer { SC2Type = SC2Type.SummonerSpell, Name = "summonerexhaust", DisplayName = "Summoner Exhaust", SpriteName = Resources.Exhaust_BIG },
+                new SC2Timer { SC2Type = SC2Type.SummonerSpell, Name = "summonermana", DisplayName = "Summoner Clarity", SpriteName = Resources.Clarity_BIG },
 
 
                 //new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_Red", FullTime = 300000, DisplayName = "Red Brambleback", SpriteName = Resources.Red_Brambleback_BIG },
@@ -316,7 +317,7 @@ namespace TimerBuddy
 
             return false;
         }
-
+        
         public static bool CheckArea(this SC2Timer sc2)
         {
             try
@@ -341,7 +342,7 @@ namespace TimerBuddy
                     if (sc2.Global && menuGlobal)
                         return true;
 
-                    if (LaneManager.MyLaneMember().Contains(sc2.Caster) && menuLane)
+                    if (Player.Instance.Distance(sc2.Caster) < 5000)
                         return true;
                 }
 
@@ -393,9 +394,9 @@ namespace TimerBuddy
             }
 
 
-            Drawing.DrawLine(centerpos + new Vector2(0, 26), centerpos + new Vector2(240, 26), 82, System.Drawing.Color.Black);
+            Drawing.DrawLine(centerpos + new Vector2(0, 41), centerpos + new Vector2(240, 41), 82, System.Drawing.Color.Black);
 
-            TextureDraw.DrawSC2Hud(sc2.Team, centerpos);
+            TextureDraw.DrawSC2Hud(sc2, centerpos);
         }
 
         public static void SC2HudText(this SC2Slot slot)
@@ -441,9 +442,9 @@ namespace TimerBuddy
 
                     if (barlength > 129)
                         barlength = 129;
-                    var barpos = centerpos + new Vector2(89, 54);
+                    var barpos = centerpos + new Vector2(89, 69);
                     Drawing.DrawLine(barpos, barpos + new Vector2(barlength, 0), 7,
-                    sc2.Team == Team.Ally ? System.Drawing.Color.DarkCyan : sc2.Team == Team.Enemy ? System.Drawing.Color.Red : System.Drawing.Color.Orange);
+                    sc2.Caster.IsMe ? System.Drawing.Color.Lime : sc2.Team == Team.Ally ? System.Drawing.Color.DarkCyan : sc2.Team == Team.Enemy ? System.Drawing.Color.Red : System.Drawing.Color.Orange);
 
                     var iconpos = centerpos + new Vector2(25, 25);
                     TextureDraw.SpriteList[sc2.MenuCode].Draw(iconpos);
