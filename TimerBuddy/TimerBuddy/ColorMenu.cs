@@ -52,7 +52,7 @@ namespace TimerBuddy
             a.OnValueChange += delegate 
             {
                 var t = 2000 + Utility.TickCount;
-                a.DisplayName = "Colour Picker: " + ColorsName[a.CurrentValue];
+                a.DisplayName = "Color Picker: " + ColorsName[a.CurrentValue];
                 var color = menu.GetColor(uniqueId).ConvertColor();
                 Drawing.OnEndScene += delegate
                 {
@@ -84,22 +84,17 @@ namespace TimerBuddy
 
         private static readonly string[] DrawTypeName =
         {
-            "Default", "Under HP bar", "Counter at position", "Counter and Bar at position"
+            "Default", "Under HP bar", "Timer at position", "Timer and TimeBar at position"
         };
 
         public static void AddDrawTypeItem(this Menu menu, string uniqueId, int defaultLevel = 0)
         {
-            var a = menu.Add(uniqueId, new Slider("Drawing Style: ", defaultLevel, 0, DrawTypeList.Count() - 1));
-            a.DisplayName = "Drawing Style: " + DrawTypeName[a.CurrentValue];
-            a.OnValueChange += delegate
-            {
-                a.DisplayName = "Drawing Style: " + DrawTypeName[a.CurrentValue];
-            };
+            var a = menu.Add(uniqueId, new ComboBox("Drawing Style: ", defaultLevel, DrawTypeName));
         }
 
         public static DrawType GetDrawType(this Menu m, string id)
         {
-            var number = m[id].Cast<Slider>();
+            var number = m[id].Cast<ComboBox>();
             if (number != null)
             {
                 return DrawTypeList[number.CurrentValue];
@@ -120,17 +115,12 @@ namespace TimerBuddy
 
         public static void AddImportanceItem(this Menu menu, string uniqueId, int defaultLevel = 1)
         {
-            var a = menu.Add(uniqueId, new Slider("Importance Level: ", defaultLevel, 0, ImportanceList.Count() - 1));
-            a.DisplayName = "Importance Level: " + ImportanceName[a.CurrentValue];
-            a.OnValueChange += delegate
-            {
-                a.DisplayName = "Importance Level: " + ImportanceName[a.CurrentValue];
-            };
+            var a = menu.Add(uniqueId, new ComboBox("Importance Level: ", defaultLevel, ImportanceName));
         }
 
         public static Importance GetImportance(this Menu m, string id)
         {
-            var number = m[id].Cast<Slider>();
+            var number = m[id].Cast<ComboBox>();
             if (number != null)
             {
                 return ImportanceList[number.CurrentValue];
