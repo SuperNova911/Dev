@@ -91,19 +91,48 @@ namespace TimerBuddy
         {
             Database = new List<Spell>
             {
+                #region Item
+                new Spell { SpellType = SpellType.Item, Name = "ZhonyasHourglass", EndTime = 2500, MenuCode = "Zhonyas Hourglass", SpriteName = Resources.Zhonya_s_Hourglass, Importance = Importance.High },
+                new Spell { SpellType = SpellType.Item, Name = "shurelyascrest", EndTime = 3000, MenuCode = "Talisman of Ascension", SpriteName = Resources.Talisman_of_Ascension },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "HealthBomb", MenuCode = "Face of the Mountain", SpriteName = Resources.Face_of_the_Mountain },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "IronStylusBuff", MenuCode = "Locket of the Iron Solari", SpriteName = Resources.Locket_of_the_Iron_Solari },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "SpectralFury", MenuCode = "Youmuu's Ghostblade", SpriteName = Resources.Youmuu_s_Ghostblade },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "HexdrunkEmpowered", MenuCode = "Hexdrinker", SpriteName = Resources.Hexdrinker },
+                new Spell { SpellType = SpellType.Item, GameObject = true, Name = "LifeAura.troy", EndTime = 4000, MenuCode = "Guardian Angel", SpriteName = Resources.Guardian_Ange, Importance = Importance.High },
+
+                new Spell { SpellType = SpellType.Item, GameObject = true, Name = "Global_Trinket_Spotter.troy", EndTime = 6000, MenuCode = "Sweeping Lens", SpriteName = Resources.Sweeping_Lens__Trinket_ },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "TrinketSweeperLvl3", MenuCode = "Oracle Alteration", SpriteName = Resources.Oracle_Alteration },
+
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "Health Potion", MenuCode = "Health Potion", SpriteName = Resources.Health_Potion },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ItemMiniRegenPotion", MenuCode = "Biscuit", SpriteName = Resources.Total_Biscuit_of_Rejuvenation },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ItemCrystalFlask", MenuCode = "Refillable_Potion", SpriteName = Resources.Refillable_Potion },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ItemCrystalFlaskJungle", MenuCode = "Hunter's Potion", SpriteName = Resources.Hunter_s_Potion },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ItemDarkCrystalFlask", MenuCode = "Corrupting Potion", SpriteName = Resources.Corrupting_Potion },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ElixirOfWrath", MenuCode = "Elixir of Wrath", SpriteName = Resources.Elixir_of_Wrath, Importance = Importance.Low },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ElixirOfSorcery", MenuCode = "Elixir of Sorcery", SpriteName = Resources.Elixir_of_Sorcery, Importance = Importance.Low },
+                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ElixirOfIron", MenuCode = "Elixir of Iron", SpriteName = Resources.Elixir_of_Iron, Importance = Importance.Low },
+                #endregion
+
+                #region Summoner Spell
+                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Recall", MenuCode = "Recall", SpriteName = Resources.Recall, Importance = Importance.High },
+                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Teleport", MenuCode = "Summoner Teleport", SpriteName = Resources.Teleport, Importance = Importance.High },
+                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerIgnite", MenuCode = "Summoner Ignite", SpriteName = Resources.Ignite, Importance = Importance.High },
+                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerExhaustDebuff", MenuCode = "Summoner Exhaust", SpriteName = Resources.Exhaust, Importance = Importance.High },
+                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerBarrier", MenuCode = "Summoner Barrier", SpriteName = Resources.Barrier, Importance = Importance.High },
+                new Spell { SpellType = SpellType.SummonerSpell, Name = "summonerheal", EndTime = 1000, MenuCode = "Summoner Heal", SpriteName = Resources.Heal },
+                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "S4SpawnLockSpeed", MenuCode = "Summoner Haste", SpriteName = Resources.Haste },
+                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SRHomeguardSpeed", MenuCode = "Summoner Haste", SpriteName = Resources.Haste },
+                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Haste", MenuCode = "Summoner Haste", SpriteName = Resources.Haste },
+                new Spell { SpellType = SpellType.SummonerSpell, Name = "summonerboost", EndTime = 3000, MenuCode = "Summoner Cleanse", SpriteName = Resources.Cleanse },
+                #endregion
+
+
                 //SRU_RiftHerald_Relic_PickUp.troy   Add     Type: Obj_AI_Minion | Name: Rift Herald Relic | NetID: 1073745760 | objectName: SRU_RiftHerald_Relic
                 //new Spell { SpellType = SpellType.SummonerSpell, Name = "summonerteleport", EndTime = 3500, MenuCode = "Summoner Teleport", SpriteName = Resources.Teleport },
-                new Spell { SpellType = SpellType.SummonerSpell, Name = "summonerheal", EndTime = 1000, MenuCode = "Summoner Heal", SpriteName = Resources.Heal, },
-                new Spell { SpellType = SpellType.SummonerSpell, Name = "summonerboost", EndTime = 3000, MenuCode = "Summoner Cleanse", SpriteName = Resources.Cleanse },
 
                 new Spell { SpellType = SpellType.Blink, Name = "summonerflash", EndTime = 2000, Range = 425, SkillShot = true, MenuCode = "Summoner Flash", SpriteName = Resources.Flash, Color = Color.Yellow },
                 new Spell { SpellType = SpellType.Blink, Name = "RiftWalk", EndTime = 2000, Range = 500, SkillShot = true, MenuCode = "Kassadin R", SpriteName = Resources.KassadinR, Color = Color.HotPink },
                 new Spell { SpellType = SpellType.Blink, Name = "Deceive", EndTime = 2000, Range = 400, SkillShot = true, MenuCode = "Shaco Q", SpriteName = Resources.ShacoQ, Color = Color.Red },
-
-                new Spell { SpellType = SpellType.Item, Name = "ZhonyasHourglass", EndTime = 2500, MenuCode = "Zhonyas Hourglass", SpriteName = Resources.Zhonya_s_Hourglass, Importance = Importance.High },
-                new Spell { SpellType = SpellType.Item, Name = "shurelyascrest", EndTime = 3000, MenuCode = "Talisman of Ascension", SpriteName = Resources.Talisman_of_Ascension },
-                new Spell { SpellType = SpellType.Item, GameObject = true, Name = "LifeAura.troy", EndTime = 4000, MenuCode = "Guardian Angel", SpriteName = Resources.Guardian_Ange, Importance = Importance.High },
-                new Spell { SpellType = SpellType.Item, GameObject = true, Name = "Global_Trinket_Spotter.troy", EndTime = 6000, MenuCode = "Sweeping Lens", SpriteName = Resources.Sweeping_Lens__Trinket_ },
 
                 new Spell { SpellType = SpellType.Ward, GameObject = true, Name = "TrinketTotemLvl1", ObjectName = "YellowTrinket", EndTime = 60000, MenuCode = "Warding Totem", SpriteName = Resources.Warding_Totem, Color = Color.Yellow },
                 new Spell { SpellType = SpellType.Ward, GameObject = true, Name = "ItemGhostWard", ObjectName = "SightWard", EndTime = 150000, MenuCode = "Sightstone", SpriteName = Resources.Sightstone, Color = Color.LawnGreen },
@@ -272,29 +301,8 @@ namespace TimerBuddy
                 //new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerBarrier", MenuCode = "Summoner Barrier" },
                 //new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Teleport", MenuCode = "Summoner Teleport" },
                 //new Spell { SpellType = SpellType.Item, Buff = true, Name = "Zhonyas Ring", MenuCode = "Zhonyas Hourglass" },
-                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Recall", MenuCode = "Recall", SpriteName = Resources.Recall, Importance = Importance.High },
-                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerBarrier", MenuCode = "Summoner Barrier", SpriteName = Resources.Barrier, Importance = Importance.High },
-                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "S4SpawnLockSpeed", MenuCode = "Summoner Haste", SpriteName = Resources.Haste },
-                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SRHomeguardSpeed", MenuCode = "Summoner Haste", SpriteName = Resources.Haste },
-                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Haste", MenuCode = "Summoner Haste", SpriteName = Resources.Haste },
-                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Teleport", MenuCode = "Summoner Teleport", SpriteName = Resources.Teleport, Importance = Importance.High },
-                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerIgnite", MenuCode = "Summoner Ignite", SpriteName = Resources.Ignite, Importance = Importance.High },
-                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerExhaustDebuff", MenuCode = "Summoner Exhaust", SpriteName = Resources.Exhaust, Importance = Importance.High },
-
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "TrinketSweeperLvl3", MenuCode = "Oracle Alteration", SpriteName = Resources.Oracle_Alteration },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "HealthBomb", MenuCode = "Face of the Mountain", SpriteName = Resources.Face_of_the_Mountain },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "IronStylusBuff", MenuCode = "Locket of the Iron Solari", SpriteName = Resources.Locket_of_the_Iron_Solari },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "SpectralFury", MenuCode = "Youmuu's Ghostblade", SpriteName = Resources.Youmuu_s_Ghostblade },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "Health Potion", MenuCode = "Health Potion", SpriteName = Resources.Health_Potion },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ItemMiniRegenPotion", MenuCode = "Biscuit", SpriteName = Resources.Total_Biscuit_of_Rejuvenation },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ItemCrystalFlask", MenuCode = "Refillable_Potion", SpriteName = Resources.Refillable_Potion },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ItemCrystalFlaskJungle", MenuCode = "Hunter's Potion", SpriteName = Resources.Hunter_s_Potion },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ItemDarkCrystalFlask", MenuCode = "Corrupting Potion", SpriteName = Resources.Corrupting_Potion },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ElixirOfWrath", MenuCode = "Elixir of Wrath", SpriteName = Resources.Elixir_of_Wrath, Importance = Importance.Low },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ElixirOfSorcery", MenuCode = "Elixir of Sorcery", SpriteName = Resources.Elixir_of_Sorcery, Importance = Importance.Low },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "ElixirOfIron", MenuCode = "Elixir of Iron", SpriteName = Resources.Elixir_of_Iron, Importance = Importance.Low },
-                new Spell { SpellType = SpellType.Item, Buff = true, Name = "HexdrunkEmpowered", MenuCode = "Hexdrinker", SpriteName = Resources.Hexdrinker },
-
+                
+                
 
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Garen", Name = "GarenQBuff", MenuCode = "Garen Q", SpriteName = Resources.GarenQ, Importance = Importance.High },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Garen", Name = "GarenE", MenuCode = "Garen E", SpriteName = Resources.GarenE, Importance = Importance.High },
