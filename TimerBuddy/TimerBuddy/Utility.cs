@@ -107,15 +107,16 @@ namespace TimerBuddy
                 return 4444;
             }
         }
-
-        public static int TickCount
+        
+        public static float TickCount
         {
             get
             {
-                return Environment.TickCount & int.MaxValue;
+                //return Environment.TickCount & int.MaxValue;
+                return Game.Time * 1000;
             }
         }
-
+        
         public static float BuffRemainTime(this Spell spell)
         {
             try
@@ -421,6 +422,51 @@ namespace TimerBuddy
             }
         }
 
+        public static void AddBlank(this Menu menu, string uid)
+        {
+            try
+            {
+                menu.Add(uid, new CheckBox("Blank"));
+                menu[uid].Cast<CheckBox>().IsVisible = false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ADD_BLANK " + uid, Color.LightBlue);
+            }
+        }
+
+        public static bool CheckboxValue(this Menu menu, string uid)
+        {
+            try
+            {
+                if (menu[uid].Cast<CheckBox>().CurrentValue)
+                    return true;
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE CHECKBOX_VALUE " + uid, Color.LightBlue);
+                return false;
+            }
+        }
+
+        public static int SliderValue(this Menu menu, string uid)
+        {
+            try
+            {
+                return menu[uid].Cast<Slider>().CurrentValue;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE CHECKBOX_VALUE " + uid, Color.LightBlue);
+                return 0;
+            }
+        }
+
         public static int ToInt(this DrawType type)
         {
             try
@@ -568,7 +614,7 @@ namespace TimerBuddy
         {
             try
             {
-                if (unit.Spellbook.Spells.Where(s => s.Name.Contains("summonerflash")).Any())
+                if (unit.Spellbook.Spells.Where(s => s.Name.Contains("summonersmite")).Any())
                     return true;
 
                 return false;
