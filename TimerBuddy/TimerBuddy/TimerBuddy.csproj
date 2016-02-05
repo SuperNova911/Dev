@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -2049,6 +2049,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\SC2\HUD\SC2Blue.png" />
+    <Content Include="Resources\SC2\HUD\SC2Green.png" />
     <Content Include="Resources\SC2\HUD\SC2Orange.png" />
     <Content Include="Resources\SC2\HUD\SC2Red.png" />
     <Content Include="Resources\SC2\Item\Bilgewater Cutlass_BIG.png" />

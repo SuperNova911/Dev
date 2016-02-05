@@ -24,6 +24,18 @@ namespace TimerBuddy
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
             GameObject.OnCreate += GameObject_OnCreate;
             GameObject.OnDelete += GameObject_OnDelete;
+            Drawing.OnEndScene += Drawing_OnEndScene;
+            Drawing.OnDraw += Drawing_OnDraw;
+        }
+
+        private static void Drawing_OnDraw(EventArgs args)
+        {
+            //DrawManager.Test();
+        }
+
+        private static void Drawing_OnEndScene(EventArgs args)
+        {
+            //DrawManager.Test2();
         }
 
         private static void GameObject_OnDelete(GameObject sender, EventArgs args)
@@ -41,7 +53,7 @@ namespace TimerBuddy
 
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            //Chat.Print(sender.BaseSkinName + " | " + args.Slot.ToString(), System.Drawing.Color.IndianRed);
+            Chat.Print(sender.BaseSkinName + " | " + args.Slot.ToString() + " | " + args.SData.Name, System.Drawing.Color.IndianRed);
         }
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)

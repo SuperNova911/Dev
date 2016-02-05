@@ -79,17 +79,19 @@ namespace TimerBuddy
         {
             try
             {
+                var s1 = Config.DebugMenu["s1"].Cast<Slider>().CurrentValue;
                 if (Config.DebugMenu["c1"].Cast<CheckBox>().CurrentValue)
                 {
                     Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, ((int)Game.Time / 60) + ":" + ((int)Game.Time % 60), 10);
                 }
                 if (Config.DebugMenu["c2"].Cast<CheckBox>().CurrentValue)
                 {
-                    new Circle { Color = System.Drawing.Color.Red, Radius = 5500 }.Draw(new Vector3(394, 461, 171));
+                    //Drawing.DrawLine(Game.CursorPos2D, Drawing.WorldToScreen(Player.Instance.Position), 3, System.Drawing.Color.Yellow);
+                    Drawing.DrawLine(Drawing.WorldToScreen(Player.Instance.Position), Drawing.WorldToScreen(Player.Instance.Position), 3, System.Drawing.Color.Yellow);
                 }
                 if (Config.DebugMenu["c3"].Cast<CheckBox>().CurrentValue)
                 {
-                    Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, Player.Instance.Distance(new Vector3(394, 461, 171)).ToString(), 10);
+                    Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, (Utility.TickCount).ToString(), 10);
                 }
                
 
