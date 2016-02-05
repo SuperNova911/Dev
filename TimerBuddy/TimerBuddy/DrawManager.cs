@@ -392,8 +392,9 @@ namespace TimerBuddy
             // -15, -13
             var barColor = spell.Team == Team.Ally ? System.Drawing.Color.LawnGreen : spell.Team == Team.Enemy ? System.Drawing.Color.Red : System.Drawing.Color.Orange;
 
-            var linestart = centerpos - new Vector2(length, 0);
-            var lineend = centerpos + new Vector2(length, 0);
+            var linepos = centerpos + new Vector2(0, 15);
+            var linestart = linepos - new Vector2(length, 0);
+            var lineend = linepos + new Vector2(length, 0);
 
             Drawing.DrawLine(linestart - new Vector2(1, 0), lineend + new Vector2(1, 0), 6, System.Drawing.Color.Black);
             Drawing.DrawLine(linestart, lineend, 4, barColor);
@@ -486,15 +487,10 @@ namespace TimerBuddy
 
             Drawing.DrawLine(centerpos + new Vector2(-500, 0), centerpos + new Vector2(500, 0), 1, System.Drawing.Color.Red);
             Drawing.DrawLine(centerpos + new Vector2(0, -500), centerpos + new Vector2(0, 500), 1, System.Drawing.Color.Red);
-
-            var sprite1 = TextureDraw.SpriteList["ABLUE"];
+            Drawing.DrawLine(centerpos + new Vector2(0, 41), centerpos + new Vector2(240, 41), 82, System.Drawing.Color.Black);
+            var sprite1 = TextureDraw.SpriteList["SC2Blue"];
             sprite1.Draw(centerpos);
 
-
-            var iconpos = centerpos + new Vector2(25, 25);
-            var sprite2 = TextureDraw.SpriteList["AAICON"];
-            sprite2.Draw(iconpos);
-            
         }
 
         public static void Test2()
@@ -517,8 +513,12 @@ namespace TimerBuddy
             var timer = 8.1f.ToString();
             TestFont2.DrawText(null, timer, (int)(timerpos).X, (int)(timerpos).Y, Color.White);
 
+            var iconpos = centerpos + new Vector2(25, 25);
+            var sprite2 = TextureDraw.SpriteList["sc2TwitchR"];
+            sprite2.Draw(iconpos);
+
             var length = 200f / 200f * s5;
-            Drawing.DrawLine(centerpos + new Vector2(s1, s2), centerpos + new Vector2(s1 + length, s2), s3, System.Drawing.Color.Aqua);
+            Drawing.DrawLine(centerpos + new Vector2(s1, s2), centerpos + new Vector2(s1 + length, s2), s3, System.Drawing.Color.DarkCyan);
         }
     }
 }
