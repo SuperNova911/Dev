@@ -48,7 +48,7 @@ namespace TimerBuddy
                 Drawing.OnEndScene += Drawing_OnEndScene;
                 //Game.OnTick += Game_OnTick;
 
-
+                DrawManager.Initialize();
             }
             catch (Exception e)
             {
@@ -102,42 +102,8 @@ namespace TimerBuddy
                 {
                     Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, (Game.Time).ToString(), 10);
                 }
-               
 
                 Utility.CloneTracker();
-
-                foreach (var list in SpellList.Where(l => l.Buff == true ? l.EndTime >= Game.Time : l.EndTime >= Utility.TickCount))
-                {
-                    switch (list.SpellType)
-                    {
-                        case SpellType.SummonerSpell:
-                            DrawManager.DrawSummoner(list);
-                            break;
-                        case SpellType.Item:
-                            DrawManager.DrawItem(list);
-                            break;
-                        case SpellType.Spell:
-                            DrawManager.DrawSpell(list);
-                            break;
-                        case SpellType.Trap:
-                            DrawManager.DrawTrap(list);
-                            break;
-                        case SpellType.Blink:
-                            DrawManager.DrawBlink(list);
-                            break;
-                        case SpellType.Ward:
-                            DrawManager.DrawWard(list);
-                            break;
-                        default:
-                            Chat.Print("error CODE DRAW_TYPE");
-                            break;
-                    }
-                }
-
-                foreach (var list in SpellList.Where(l => l.Buff == true))
-                {
-                    DrawManager.DrawBuff(list);
-                }
             }
             catch (Exception e)
             {

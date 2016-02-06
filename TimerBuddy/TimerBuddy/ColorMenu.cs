@@ -84,7 +84,7 @@ namespace TimerBuddy
 
         private static readonly string[] DrawTypeName =
         {
-            "Default", "Under HP bar", "Timer at position", "Timer and TimeBar at position"
+            "Default", "Simple Line under HP bar", "Timer at position", "Timer and TimeBar at position"
         };
 
         public static void AddDrawTypeItem(this Menu menu, string uniqueId, int defaultLevel = 0)
@@ -105,12 +105,12 @@ namespace TimerBuddy
 
         private static readonly Importance[] ImportanceList =
         {
-            Importance.Low, Importance.Medium, Importance.High
+            Importance.Low, Importance.Medium, Importance.High, Importance.VeryHigh
         };
 
         private static readonly string[] ImportanceName =
         {
-            "Low", "Medium", "High"
+            "Low", "Medium", "High", "Very High"
         };
 
         public static void AddImportanceItem(this Menu menu, string uniqueId, int defaultLevel = 1)

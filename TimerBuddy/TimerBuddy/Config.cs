@@ -98,6 +98,7 @@ namespace TimerBuddy
                         SummonerMenu.AddGroupLabel(t.MenuCode);
                         SummonerMenu.Add(t.MenuCode + "draw", new CheckBox("Draw"));
                         SummonerMenu.AddImportanceItem(t.MenuCode + "importance", t.Importance.ToInt());
+                        SummonerMenu.AddDrawTypeItem(t.MenuCode + "drawtype", t.DrawType.ToInt());
                         SummonerMenu.AddColorItem(t.MenuCode + "color");
                         SummonerMenu.AddSeparator();
                     }

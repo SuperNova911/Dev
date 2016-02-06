@@ -86,6 +86,9 @@ namespace TimerBuddy
                     return;
 
                 Program.SpellList.RemoveAll(d => d.Buff && d.Target == sender && (d.Name == args.Buff.DisplayName || d.Name == args.Buff.Name));
+                DrawManager.Line.RemoveAll(d => d.Buff && d.Target == sender && (d.Name == args.Buff.DisplayName || d.Name == args.Buff.Name));
+                DrawManager.Timer.RemoveAll(d => d.Buff && d.Target == sender && (d.Name == args.Buff.DisplayName || d.Name == args.Buff.Name));
+                DrawManager.TimerLine.RemoveAll(d => d.Buff && d.Target == sender && (d.Name == args.Buff.DisplayName || d.Name == args.Buff.Name));
             }
             catch (Exception e)
             {
@@ -156,6 +159,9 @@ namespace TimerBuddy
 
 
                 Program.SpellList.RemoveAll(d => d.GameObject && d.NetworkID == sender.NetworkId/* && d.Name == sender.Name && d.ObjectName == sender.BaseObjectName()*/);
+                DrawManager.Line.RemoveAll(d => d.GameObject && d.NetworkID == sender.NetworkId);
+                DrawManager.Timer.RemoveAll(d => d.GameObject && d.NetworkID == sender.NetworkId);
+                DrawManager.TimerLine.RemoveAll(d => d.GameObject && d.NetworkID == sender.NetworkId);
             }
             catch (Exception e)
             {

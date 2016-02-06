@@ -155,7 +155,33 @@ namespace TimerBuddy
             }
         }
 
-        public static SharpDX.Color GetColor(this Spell spell)
+        public static DrawType GetDrawType(this Spell spell)
+        {
+            try
+            {
+                switch (spell.SpellType)
+                {
+                    case SpellType.Item:
+                        return Config.ItemMenu.GetDrawType(spell.MenuCode + "drawtype");
+
+                    case SpellType.Spell:
+                        return Config.SpellMenu.GetDrawType(spell.MenuCode + "drawtype");
+
+                    case SpellType.SummonerSpell:
+                        return Config.SummonerMenu.GetDrawType(spell.MenuCode + "drawtype");
+                }
+
+                return DrawType.Default;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("error CODE GET_DRAW_TYPE " + spell.Name);
+                return DrawType.Default;
+            }
+        }
+
+        public static Color GetColor(this Spell spell)
         {
             try
             {
@@ -170,17 +196,17 @@ namespace TimerBuddy
                     case SpellType.Item:
                         return Config.ItemMenu.GetColor(spell.MenuCode + "color");
                 }
-                return SharpDX.Color.White;
+                return Color.White;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 Chat.Print("error CODE GET_COLOR " + spell.Name);
-                return SharpDX.Color.White;
+                return Color.White;
             }
         }
 
-        public static System.Drawing.Color ConvertColor(this SharpDX.Color color)
+        public static System.Drawing.Color ConvertColor(this Color color)
         {
             return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
         }
@@ -392,7 +418,7 @@ namespace TimerBuddy
             foreach (var enemy in EntityManager.Heroes.AllHeroes.Where(d => !d.IsDead && d.VisibleOnScreen &&
             (d.BaseSkinName == "Leblanc" || d.BaseSkinName == "Shaco" || d.BaseSkinName == "MonkeyKing" || d.BaseSkinName == "Yorick")))
             {
-                new Circle { Color = System.Drawing.Color.Gold, Radius = enemy.BoundingRadius, BorderWidth = 2 }.Draw(enemy.Position);
+                new Circle { Color = System.Drawing.Color.Gold, Radius = enemy.BoundingRadius, BorderWidth = 4 }.Draw(enemy.Position);
             }
         }
 
@@ -462,7 +488,21 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE CHECKBOX_VALUE " + uid, Color.LightBlue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE SLIDER_VALUE " + uid, Color.LightBlue);
+                return 0;
+            }
+        }
+
+        public static int ComboBoxValue(this Menu menu, string uid)
+        {
+            try
+            {
+                return menu[uid].Cast<ComboBox>().CurrentValue;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE COMBOBOX_VALUE " + uid, Color.LightBlue);
                 return 0;
             }
         }
