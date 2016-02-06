@@ -48,7 +48,6 @@ namespace TimerBuddy
         {
             Database = new List<SC2Timer>
             {
-                new SC2Timer { ChampionName = "Gragas", Slot = SpellSlot.E, SpriteName = Resources.BraumR_BIG },
                 new SC2Timer { ChampionName = "Aatrox", Slot = SpellSlot.R, SpriteName = Resources.AatroxR_BIG },
                 new SC2Timer { ChampionName = "Ahri", Slot = SpellSlot.R, SpriteName = Resources.AhriR_BIG },
                 new SC2Timer { ChampionName = "Alistar", Slot = SpellSlot.R, SpriteName = Resources.AlistarR_BIG },
@@ -213,8 +212,16 @@ namespace TimerBuddy
         }
     }
 
+    public class HeroList
+    {
+        public Obj_AI_Base Hero;
+        public float Endtime;
+    }
+
     public static class SC2TimerManager
     {
+        public static List<HeroList> HeroList = new List<HeroList>();
+
         static SC2TimerManager()
         {
             Game.OnTick += Game_OnTick;
@@ -224,7 +231,8 @@ namespace TimerBuddy
         
         private static void Game_OnTick(EventArgs args)
         {
-            ListControl();           
+            ListControl();
+            HeroListManager();
         }
 
         public static void ListControl()
@@ -323,7 +331,6 @@ namespace TimerBuddy
             try
             {
                 bool menuGlobal = true;
-                bool menuLane = true;
                 bool menuMe = true;
                 bool menuSS = true;
                 bool menuJungle = true;
@@ -342,7 +349,7 @@ namespace TimerBuddy
                     if (sc2.Global && menuGlobal)
                         return true;
 
-                    if (Player.Instance.Distance(sc2.Caster) < 5000)
+                    if (HeroList.FirstOrDefault(d => d.Hero == sc2.Caster) != null)
                         return true;
                 }
 
@@ -353,6 +360,38 @@ namespace TimerBuddy
                 Console.WriteLine(e);
                 Chat.Print("<font color='#FF0000'>ERROR:</font> CODE CHECK_AREA " + sc2.Caster.BaseSkinName, System.Drawing.Color.LightBlue);
                 return false;
+            }
+        }
+
+        private static void HeroListManager()
+        {
+            if (HeroList.Count < 4)
+            {
+                foreach (var hero in EntityManager.Heroes.AllHeroes.Where(d => d.Position.Distance(Player.Instance.Position) < 3500).OrderBy(d => d.Distance(Player.Instance)))
+                {
+                    int ally = 0;
+                    int enemy = 0;
+                    foreach (var a in HeroList.Where(d => d.Hero.IsAlly))
+                        ally++;
+                    foreach (var a in HeroList.Where(d => d.Hero.IsEnemy))
+                        enemy++;
+
+                    var database = HeroList.FirstOrDefault(d => d.Hero == hero);
+                    if (database == null && HeroList.Count < 4 && ((hero.IsAlly && ally < 2) || (hero.IsEnemy && enemy < 2)))
+                        HeroList.Add(new HeroList
+                        {
+                            Hero = hero,
+                            Endtime = 60000 + Utility.TickCount
+                        });
+                }
+            }
+
+            if (HeroList.Count > 0)
+            {
+                var database = HeroList.FirstOrDefault(d => d.Endtime < Utility.TickCount);
+
+                if (database != null)
+                    HeroList.Remove(database);
             }
         }
         
@@ -478,12 +517,12 @@ namespace TimerBuddy
 
             if (database != null)
             {
-                var cooldown = database.SC2Type == SC2Type.Spell ? sender.Spellbook.GetSpell(args.Slot).Cooldown * 1000
-                    : args.SData.CooldownTime * 1000;
+                var cooldown = (sender.Spellbook.GetSpell(args.Slot).CooldownExpires - Game.Time) * 1000f;
 
                 Program.SC2TimerList.Add(new SC2Timer
                 {
                     SC2Type = database.SC2Type,
+                    Slot = args.Slot,
                     Team = sender.GetTeam(),
                     Caster = sender,
                     ChampionName = sender.BaseSkinName,
@@ -491,15 +530,15 @@ namespace TimerBuddy
                     MenuCode = database.GetMenuCode(),
                     DisplayName = database.GetDisplayName(),
                     FullTime = cooldown,
-                    StartTime = Utility.TickCount - 1000,
-                    EndTime = cooldown + Utility.TickCount - 1000,
+                    StartTime = Utility.TickCount,
+                    EndTime = cooldown + Utility.TickCount,
                     Cancel = false,
                     Global = database.Global,
                     SpriteName = database.SpriteName,
                 });
                 return;
             }
-        }
+        }        
 
         public static void SC2JungleDetector(GameObject sender, EventArgs args)
         {

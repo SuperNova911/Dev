@@ -78,6 +78,11 @@ namespace TimerBuddy
             try
             {
                 //DrawText(list.GetRemainTime(), list.CastPosition + new Vector3(-15, -10, 0), list.GetColor(), list.SpellType);
+                if (list.DrawType == DrawType.NumberLine)
+                {
+                    DrawKappa(list);
+                    return;
+                }
                 if (list.GameObject == true)
                 {
                     DrawKappa(list);
@@ -118,7 +123,10 @@ namespace TimerBuddy
             try
             {
                 if (spell.DrawType == DrawType.NumberLine)
+                {
                     DrawKappa(spell);
+                    return;
+                }
 
                 if (spell.GameObject || spell.SkillShot)
                 {
@@ -225,7 +233,11 @@ namespace TimerBuddy
             try
             {
                 if (spell.DrawType == DrawType.NumberLine)
+                {
                     DrawKappa(spell);
+                    return;
+                }
+                    
 
                 DrawLine(spell);
             }
@@ -427,7 +439,7 @@ namespace TimerBuddy
                 if (spell.FullTime != 77777777)
                     DrawText(spell.GetRemainTimeString(), spell.Object.Position + new Vector3(-15, 0, 0), spell.GetColor(), SpellType.Trap);
                 
-                if (spell.Team != Team.Enemy)
+                if (spell.Team == Team.Enemy)
                 {
                     new Circle { Color = spell.Color.ConvertColor(), Radius = 50f, BorderWidth = 2 }.Draw(spell.Object.Position);
                 }

@@ -305,7 +305,9 @@ namespace TimerBuddy
                 if (database != null)
                 {
                     var caster = sender.FindCasterWard(database);
+                    bool limited = (sender.BaseObjectName() == "YellowTrinket" || sender.BaseObjectName() == "SightWard");
 
+                    Core.DelayAction(() =>
                     Program.SpellList.Add(new Spell
                     {
                         SpellType = database.SpellType,
@@ -319,14 +321,14 @@ namespace TimerBuddy
                         Name = database.Name,
                         ObjectName = database.ObjectName,
                         MenuCode = database.MenuCode,
-                        FullTime = sender.BaseObjectName() == "YellowTrinket" ? caster.YellowTrinketRemaintime() : database.EndTime,
-                        EndTime = sender.BaseObjectName() == "YellowTrinket" ? caster.YellowTrinketRemaintime() + Utility.TickCount : database.EndTime + Utility.TickCount,
+                        FullTime = limited ? (sender as Obj_AI_Base).Mana * 1000f : database.EndTime,
+                        EndTime = limited ? (sender as Obj_AI_Base).Mana * 1000f + Utility.TickCount - 500 : database.EndTime + Utility.TickCount - 500,
                         NetworkID = sender.NetworkId,
                         GameObject = database.GameObject,
                         Color = database.Color,
                         SpriteName = database.SpriteName,
-                    });
-
+                    })
+                    , 500);
                     Chat.Print("Ward " + sender.BaseObjectName() + " " + caster.BaseSkinName, Color.LawnGreen);
 
                     return;

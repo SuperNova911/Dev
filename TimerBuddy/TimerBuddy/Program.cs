@@ -43,7 +43,7 @@ namespace TimerBuddy
                 ObjectDetector.Initialize();
                 //SpellDetector.Initialize();
                 Debug.Initialize();
-                LaneManager.Initialize();
+                //LaneManager.Initialize();
                 Drawing.OnDraw += Drawing_OnDraw;
                 Drawing.OnEndScene += Drawing_OnEndScene;
                 //Game.OnTick += Game_OnTick;
@@ -82,16 +82,25 @@ namespace TimerBuddy
                 var s1 = Config.DebugMenu["s1"].Cast<Slider>().CurrentValue;
                 if (Config.DebugMenu["c1"].Cast<CheckBox>().CurrentValue)
                 {
-                    Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, ((int)Game.Time / 60) + ":" + ((int)Game.Time % 60), 10);
+                    //Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, ((int)Game.Time / 60) + ":" + ((int)Game.Time % 60), 10);
+                    var gap = 20;
+                    foreach (var list in SC2TimerManager.HeroList)
+                    {
+                        Drawing.DrawText(Drawing.WorldToScreen(Player.Instance.Position) + new Vector2(0, gap), System.Drawing.Color.Orange, list.Hero.BaseSkinName, 10);
+                        gap += 20;
+                    }
+                        
                 }
                 if (Config.DebugMenu["c2"].Cast<CheckBox>().CurrentValue)
                 {
                     //Drawing.DrawLine(Game.CursorPos2D, Drawing.WorldToScreen(Player.Instance.Position), 3, System.Drawing.Color.Yellow);
-                    Drawing.DrawLine(Drawing.WorldToScreen(Player.Instance.Position), Drawing.WorldToScreen(Player.Instance.Position), 3, System.Drawing.Color.Yellow);
+                    //Drawing.DrawLine(Drawing.WorldToScreen(Player.Instance.Position), Drawing.WorldToScreen(Player.Instance.Position), 3, System.Drawing.Color.Yellow);
+                    Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, (Player.Instance.Spellbook.GetSpell(SpellSlot.Summoner1).CooldownExpires).ToString(), 10);
+                    var gap = 20;
                 }
                 if (Config.DebugMenu["c3"].Cast<CheckBox>().CurrentValue)
                 {
-                    Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, (Utility.TickCount).ToString(), 10);
+                    Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, (Game.Time).ToString(), 10);
                 }
                
 

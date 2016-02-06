@@ -31,6 +31,7 @@ namespace TimerBuddy
         private static void Drawing_OnDraw(EventArgs args)
         {
             //DrawManager.Test();
+            //new Circle { Color = System.Drawing.Color.AliceBlue, Radius = 3500 }.Draw(Player.Instance.Position);
         }
 
         private static void Drawing_OnEndScene(EventArgs args)
@@ -53,7 +54,7 @@ namespace TimerBuddy
 
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            Chat.Print(sender.BaseSkinName + " | " + args.Slot.ToString() + " | " + args.SData.Name, System.Drawing.Color.IndianRed);
+            Chat.Print(sender.BaseSkinName + " | " + args.Slot.ToString() + " | " + (sender.Spellbook.GetSpell(args.Slot).CooldownExpires - Game.Time) + " " + sender.Spellbook.GetSpell(args.Slot).Cooldown, System.Drawing.Color.IndianRed);
         }
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)

@@ -61,7 +61,6 @@
     <Compile Include="Config.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="DrawManager.cs" />
-    <Compile Include="LaneManager.cs" />
     <Compile Include="ObjectDetector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
