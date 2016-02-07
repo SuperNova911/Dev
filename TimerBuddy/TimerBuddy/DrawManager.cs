@@ -23,9 +23,11 @@ namespace TimerBuddy
     {
         public static Font TeleportFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 17));
         public static Font SpellFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 17));
-        public static Font TrapFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 15));
+        public static Font TrapFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 13));
+        public static Font LineFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 10));
         public static Font TestFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Arial", 15));
         public static Font TestFont2 = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Arial", 30));
+        public static Font TrapFont2 = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 17));
 
         public static List<Spell> Line = new List<Spell>();
         public static List<Spell> Timer = new List<Spell>();
@@ -319,13 +321,14 @@ namespace TimerBuddy
                 Vector2 endpos2 = endpos + new Vector2(0, 6);
 
                 Color lineColor = spell.GetColor().ConvertColor();
-                Color textColor = lineColor;
+                SharpDX.Color textColor = spell.GetColor();
 
                 Drawing.DrawLine(startpos, endpos, 1f, lineColor);
                 Drawing.DrawLine(endpos, endpos2, 1f, lineColor);
 
-                Vector2 textpos = endpos2 + new Vector2(10, 0);
-                Drawing.DrawText(textpos, textColor, spell.GetRemainTimeString(), 10);
+                Vector2 textpos = endpos2 + new Vector2(10, 3);
+                //Drawing.DrawText(textpos, textColor, spell.GetRemainTimeString(), 10);
+                LineFont.DrawText(null, spell.GetRemainTimeString(), (int)textpos.X, (int)textpos.Y, textColor);
                 Vector2 spritepos = textpos + new Vector2(-18, 0);
                 TextureDraw.DrawSprite(spritepos, spell);
             }
