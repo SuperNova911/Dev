@@ -129,7 +129,7 @@ namespace TimerBuddy
 
         public static void DrawSC2Hud(SC2Timer sc2, Vector2 position)
         {
-            if (sc2.Caster.IsMe)
+            if (sc2.Caster != null && sc2.Caster.IsMe)
             {
                 SpriteList["SC2Green"].Draw(position);
                 return;

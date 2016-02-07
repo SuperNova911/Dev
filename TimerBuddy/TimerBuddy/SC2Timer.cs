@@ -483,10 +483,10 @@ namespace TimerBuddy
                         barlength = 129;
                     var barpos = centerpos + new Vector2(89, 69);
                     Drawing.DrawLine(barpos, barpos + new Vector2(barlength, 0), 7,
-                    sc2.Caster.IsMe ? System.Drawing.Color.Lime : sc2.Team == Team.Ally ? System.Drawing.Color.DarkCyan : sc2.Team == Team.Enemy ? System.Drawing.Color.Red : System.Drawing.Color.Orange);
+                    sc2.Caster != null && sc2.Caster.IsMe ? System.Drawing.Color.Lime : sc2.Team == Team.Ally ? System.Drawing.Color.DarkCyan : sc2.Team == Team.Enemy ? System.Drawing.Color.Red : System.Drawing.Color.Orange);
 
                     var iconpos = centerpos + new Vector2(25, 25);
-                    TextureDraw.SpriteList[sc2.MenuCode].Draw(iconpos);
+                    TextureDraw.SpriteList[sc2.GetMenuCode()].Draw(iconpos);
 
                     DrawManager.TestFont.DrawText(null, name, (int)(namepos).X, (int)(namepos).Y, SharpDX.Color.White);
                     DrawManager.TestFont2.DrawText(null, timer, (int)(timerpos).X, (int)(timerpos).Y, SharpDX.Color.White);
