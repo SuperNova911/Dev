@@ -87,9 +87,9 @@ namespace TimerBuddy
             "Default", "Simple Line under HP bar", "Timer at position", "Timer and TimeBar at position"
         };
 
-        public static void AddDrawTypeItem(this Menu menu, string uniqueId, int defaultLevel = 0)
+        public static void AddDrawTypeItem(this Menu menu, string uniqueId, string showName, int defaultLevel = 0)
         {
-            var a = menu.Add(uniqueId, new ComboBox("Drawing Style: ", defaultLevel, DrawTypeName));
+            var a = menu.Add(uniqueId, new ComboBox(showName, defaultLevel, DrawTypeName));
         }
 
         public static DrawType GetDrawType(this Menu m, string id)
@@ -101,7 +101,7 @@ namespace TimerBuddy
             }
             return DrawType.Default;
         }
-
+        
 
         private static readonly Importance[] ImportanceList =
         {
@@ -113,9 +113,9 @@ namespace TimerBuddy
             "Low", "Medium", "High", "Very High"
         };
 
-        public static void AddImportanceItem(this Menu menu, string uniqueId, int defaultLevel = 1)
+        public static void AddImportanceItem(this Menu menu, string uniqueId, string showName, int defaultLevel = 1)
         {
-            var a = menu.Add(uniqueId, new ComboBox("Importance Level: ", defaultLevel, ImportanceName));
+            var a = menu.Add(uniqueId, new ComboBox(showName, defaultLevel, ImportanceName));
         }
 
         public static Importance GetImportance(this Menu m, string id)
