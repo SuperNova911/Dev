@@ -28,31 +28,41 @@ namespace TimerBuddy
 
 
                 Menu = MainMenu.AddMenu("TimerBuddy", "TimerBuddy");
-                //Menu.AddLabel(string.Format("Timer datas Loaded {0}", summonerList.Count + itemList.Count + trapList.Count + spellList.Count + wardList.Count));
-                Menu.AddGroupLabel("Spell Timer");
+                Menu.AddGroupLabel("Welcome to TimerBuddy xD");
+                Menu.AddLabel(string.Format("{0} datas Loaded", summonerList.Count + itemList.Count + trapList.Count + spellList.Count + wardList.Count));
+                Menu.AddGroupLabel("General Settings");
+                Menu.AddImportanceItem("minImportance", "Minimum Importance Level to draw: ");
 
-                Menu.AddCheckBox("trackally", "Ally", true);
-                Menu.AddCheckBox("trackenemy", "Enemy", true);
-                Menu.AddSlider("maxList", "Maximum number of tracking list", 3, 1, 10);
-                Menu.AddImportanceItem("minImportance", 1);
+                //Menu.AddGroupLabel("Spell Timer");
+                Menu.AddCheckBox("sTimer", "Spell Timer", true);
+                Menu.AddCheckBox("ssTimer", "Summoner Spell Timer", true);
+                Menu.AddCheckBox("itemTimer", "Item Timer", true);
+                Menu.AddBlank("mainBlank");
+                Menu.AddCheckBox("trapTimer", "Trap Timer", true);
+                Menu.AddCheckBox("wardTimer", "Ward Timer", true);
                 Menu.AddSeparator();
-                
 
-                Menu.AddCheckBox("spellTracker", "Spell Timer", true);
-                Menu.AddCheckBox("wardTracker", "Ward Timer", true);
-                Menu.AddCheckBox("cloneTracker", "Clone Tracker", true);
+                Menu.AddGroupLabel("Additional Features");
                 Menu.AddCheckBox("blinkTracker", "Blink Tracker", true);
+                Menu.AddCheckBox("cloneTracker", "Clone Tracker", true);
+                Menu.AddSeparator();
+
+                Menu.AddGroupLabel("Credits");
+                Menu.AddLabel("Tychus   - Addon Developer");
+                Menu.AddLabel("Hellsing - Dev-a-lot");
+                Menu.AddLabel("and Developing forum buddies");
 
                 SC2Menu = Menu.AddSubMenu("Notification");
                 SC2Menu.AddGroupLabel("Dragon, Baron Nashor Spawn Time");
-                SC2Menu.AddCheckBox("jungle", "Notification when 10 seconds left", true);
                 SC2Menu.AddCheckBox("jungleEnable", "Enable", true);
+                SC2Menu.AddBlank("blank");
+                SC2Menu.AddCheckBox("jungle", "Notification when 10 seconds left", true);
                 SC2Menu.AddCheckBox("jungle1min", "Notification when 1 minute left", true);
                 SC2Menu.AddSeparator();
                 SC2Menu.AddGroupLabel("Spell Cooldown");
-                SC2Menu.AddCheckBox("ult", "Ultimate", true);
+                SC2Menu.AddCheckBox("ult", "Ultimate (Near heros)", true);
                 SC2Menu.AddCheckBox("globalUlt", "Global Ultimate", true);
-                SC2Menu.AddCheckBox("ss", "Summoner Spell (Pla)", true);
+                SC2Menu.AddCheckBox("ss", "Summoner Spell (Player Only)", true);
                 SC2Menu.AddGroupLabel("Global Notification");
                 foreach (var database in SC2TimerDatabase.Database.Where(d => heroName.Contains(d.ChampionName) && d.SC2Type == SC2Type.Spell))
                     SC2Menu.AddCheckBox("sc2global" + database.ChampionName, database.ChampionName + " " + database.Slot.ToString(), database.Global);
@@ -77,9 +87,9 @@ namespace TimerBuddy
 
                         SpellMenu.AddGroupLabel(s.MenuCode);
                         SpellMenu.AddCheckBox(s.MenuCode + "draw", "Draw", true);
-                        SpellMenu.AddCheckBox(s.MenuCode + "onlyme", "Draw only Player is " + s.ChampionName, s.OnlyMe);
-                        SpellMenu.AddImportanceItem(s.MenuCode + "importance", s.Importance.ToInt());
-                        SpellMenu.AddDrawTypeItem(s.MenuCode + "drawtype", s.DrawType.ToInt());
+                        SpellMenu.AddCheckBox(s.MenuCode + "onlyme", "Drawing only Player is " + s.ChampionName, s.OnlyMe);
+                        SpellMenu.AddImportanceItem(s.MenuCode + "importance", "Importance Level: ", s.Importance.ToInt());
+                        SpellMenu.AddDrawTypeItem(s.MenuCode + "drawtype", "Drawing Style: ", s.DrawType.ToInt());
                         SpellMenu.AddColorItem(s.MenuCode + "color");
                         SpellMenu.AddSeparator();
                     }
@@ -97,8 +107,8 @@ namespace TimerBuddy
 
                         SummonerMenu.AddGroupLabel(t.MenuCode);
                         SummonerMenu.Add(t.MenuCode + "draw", new CheckBox("Draw"));
-                        SummonerMenu.AddImportanceItem(t.MenuCode + "importance", t.Importance.ToInt());
-                        SummonerMenu.AddDrawTypeItem(t.MenuCode + "drawtype", t.DrawType.ToInt());
+                        SummonerMenu.AddImportanceItem(t.MenuCode + "importance", "Importance Level: ", t.Importance.ToInt());
+                        SummonerMenu.AddDrawTypeItem(t.MenuCode + "drawtype", "Drawing Style: ", t.DrawType.ToInt());
                         SummonerMenu.AddColorItem(t.MenuCode + "color");
                         SummonerMenu.AddSeparator();
                     }
@@ -114,7 +124,7 @@ namespace TimerBuddy
                         ItemMenu.AddBlank(i.MenuCode + "blank");
                         ItemMenu.AddCheckBox(i.MenuCode + "ally", "Draw ally Item", true);
                         ItemMenu.AddCheckBox(i.MenuCode + "enemy", "Draw enemy Item", true);
-                        ItemMenu.AddDrawTypeItem(i.MenuCode + "drawtype", i.DrawType.ToInt());
+                        ItemMenu.AddDrawTypeItem(i.MenuCode + "drawtype", "Drawing Style: ", i.DrawType.ToInt());
                         ItemMenu.AddColorItem(i.MenuCode + "color");
                         ItemMenu.AddSeparator();
                     }
