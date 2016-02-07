@@ -9,6 +9,7 @@ using SharpDX;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Color = SharpDX.Color;
 
@@ -95,8 +96,7 @@ namespace TimerBuddy
                 {
                     //Drawing.DrawLine(Game.CursorPos2D, Drawing.WorldToScreen(Player.Instance.Position), 3, System.Drawing.Color.Yellow);
                     //Drawing.DrawLine(Drawing.WorldToScreen(Player.Instance.Position), Drawing.WorldToScreen(Player.Instance.Position), 3, System.Drawing.Color.Yellow);
-                    Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, (Player.Instance.Spellbook.GetSpell(SpellSlot.Summoner1).CooldownExpires).ToString(), 10);
-                    var gap = 20;
+                    DrawManager.TrapFont2.DrawText(null, "36", (int)Game.CursorPos2D.X + 30, (int)Game.CursorPos2D.Y + 30, SharpDX.Color.White);
                 }
                 if (Config.DebugMenu["c3"].Cast<CheckBox>().CurrentValue)
                 {
