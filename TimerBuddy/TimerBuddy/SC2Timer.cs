@@ -272,8 +272,8 @@ namespace TimerBuddy
                 switch (sc2.SC2Type)
                 {
                     case SC2Type.Jungle:
-                        menu1 = true;
-                        menu2 = true;
+                        menu1 = Config.SC2Menu.CheckboxValue("jungle");
+                        menu2 = Config.SC2Menu.CheckboxValue("jungle1min");
                         timer1 = 10000;
                         timer2 = 61000;
 
@@ -285,7 +285,7 @@ namespace TimerBuddy
                         break;
 
                     case SC2Type.Spell:
-                        menu1 = true;
+                        menu1 = Config.SC2Menu.CheckboxValue("ult");
                         timer1 = 10000;
 
                         if (timer1 - 2000 < time && time <= timer1 && menu1)  // 10초 전
@@ -293,7 +293,7 @@ namespace TimerBuddy
                         break;
 
                     case SC2Type.SummonerSpell:
-                        menu1 = true;
+                        menu1 = Config.SC2Menu.CheckboxValue("ss");
                         timer1 = 10000;
 
                         if (timer1 - 2000 < time && time <= timer1 && menu1)  // 10초 전
@@ -330,10 +330,10 @@ namespace TimerBuddy
         {
             try
             {
-                bool menuGlobal = true;
+                bool menuGlobal = Config.SC2Menu.CheckboxValue("sc2global" + sc2.ChampionName);
                 bool menuMe = true;
-                bool menuSS = true;
-                bool menuJungle = true;
+                bool menuSS = Config.SC2Menu.CheckboxValue("ss");
+                bool menuJungle = Config.SC2Menu.CheckboxValue("jungleEnable");
 
                 if (sc2.SC2Type == SC2Type.SummonerSpell && menuSS)
                     return true;
@@ -397,7 +397,7 @@ namespace TimerBuddy
         
         private static void Drawing_OnDraw(EventArgs args)
         {
-            var maxSlot = 5;
+            var maxSlot = Config.SC2Menu.SliderValue("maxSlot");
 
             foreach (var sc2slot in SC2SlotManager.SC2SlotList.Where(d => d.Slot < maxSlot))
             {
@@ -407,7 +407,7 @@ namespace TimerBuddy
 
         private static void Drawing_OnEndScene(EventArgs args)
         {
-            var maxSlot = 5;
+            var maxSlot = Config.SC2Menu.SliderValue("maxSlot");
 
             foreach (var sc2slot in SC2SlotManager.SC2SlotList.Where(d => d.Slot < maxSlot))
             {
@@ -510,11 +510,26 @@ namespace TimerBuddy
         {
             if (!sender.IsValid)
                 return;
-            
+
+            var check = Program.SC2TimerList.FirstOrDefault(d => d.Caster == sender && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot);
+
+            if (check != null)
+            {
+                var cooldown = (sender.Spellbook.GetSpell(args.Slot).CooldownExpires - Game.Time) * 1000f;
+
+                check.FullTime = cooldown;
+                check.StartTime = Utility.TickCount;
+                check.StartTime = Utility.TickCount;
+                check.EndTime = cooldown + Utility.TickCount;
+
+                return;
+            }
+
+
             var database = SC2TimerDatabase.Database.FirstOrDefault(d => 
             ((d.SC2Type == SC2Type.SummonerSpell && d.Name == args.SData.Name) ||
             (d.SC2Type == SC2Type.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot)));
-
+            
             if (database != null)
             {
                 var cooldown = (sender.Spellbook.GetSpell(args.Slot).CooldownExpires - Game.Time) * 1000f;
@@ -542,6 +557,9 @@ namespace TimerBuddy
 
         public static void SC2JungleDetector(GameObject sender, EventArgs args)
         {
+            if (!Config.SC2Menu.CheckboxValue("jungleEnable"))
+                return;
+
             var database = SC2TimerDatabase.Database.FirstOrDefault(d => d.SC2Type == SC2Type.Jungle && d.Name == sender.BaseObjectName());
 
             if (database != null)
