@@ -27,7 +27,7 @@ namespace TimerBuddy
                 var spellList = SpellDatabase.Database.Where(s => heroName.Contains(s.ChampionName) && s.SpellType == SpellType.Spell).ToList();
 
 
-                Menu = MainMenu.AddMenu("TimerBuddy", "TimerBuddy");
+                Menu = MainMenu.AddMenu("TimerBuddy", "TimerBuddy", "TimerBuddy - Life is about Timing!");
                 Menu.AddGroupLabel("Welcome to TimerBuddy xD");
                 Menu.AddLabel(string.Format("{0} datas Loaded", summonerList.Count + itemList.Count + trapList.Count + spellList.Count + wardList.Count));
                 Menu.AddGroupLabel("General Settings");
@@ -44,7 +44,7 @@ namespace TimerBuddy
 
                 Menu.AddGroupLabel("Additional Features");
                 Menu.AddCheckBox("blinkTracker", "Blink Tracker", true);
-                Menu.AddCheckBox("cloneTracker", "Clone Tracker", true);
+                Menu.AddCheckBox("cloneTracker", "Clone Tracker", false);
                 Menu.AddSeparator();
 
                 Menu.AddGroupLabel("Credits");
@@ -52,24 +52,25 @@ namespace TimerBuddy
                 Menu.AddLabel("Hellsing - Dev-a-lot");
                 Menu.AddLabel("and Developing forum buddies");
 
-                SC2Menu = Menu.AddSubMenu("Notification");
+                SC2Menu = Menu.AddSubMenu("Notifications");
                 SC2Menu.AddGroupLabel("Dragon, Baron Nashor Spawn Time");
                 SC2Menu.AddCheckBox("jungleEnable", "Enable", true);
                 SC2Menu.AddBlank("blank");
-                SC2Menu.AddCheckBox("jungle", "Notification when 10 seconds left", true);
-                SC2Menu.AddCheckBox("jungle1min", "Notification when 1 minute left", true);
+                SC2Menu.AddCheckBox("jungle", "Notifications when 10 seconds left", true);
+                SC2Menu.AddCheckBox("jungle1min", "Notifications when 1 minute left", true);
                 SC2Menu.AddSeparator();
                 SC2Menu.AddGroupLabel("Spell Cooldown");
                 SC2Menu.AddCheckBox("ult", "Ultimate (Near heros)", true);
                 SC2Menu.AddCheckBox("globalUlt", "Global Ultimate", true);
                 SC2Menu.AddCheckBox("ss", "Summoner Spell (Player Only)", true);
+                SC2Menu.AddSeparator();
                 SC2Menu.AddGroupLabel("Global Notification");
                 foreach (var database in SC2TimerDatabase.Database.Where(d => heroName.Contains(d.ChampionName) && d.SC2Type == SC2Type.Spell))
                     SC2Menu.AddCheckBox("sc2global" + database.ChampionName, database.ChampionName + " " + database.Slot.ToString(), database.Global);
-
-                SC2Menu.AddSlider("duration", "a", 10, 2, 20);
-                SC2Menu.AddSlider("duration1min", "a", 5, 2, 20);
-                SC2Menu.AddSlider("maxSlot", "Maximum notification number", 5, 2, 8);
+                SC2Menu.AddSeparator();
+                SC2Menu.AddGroupLabel("Misc settings");
+                //SC2Menu.AddSlider("duration", "Notifications duration time", 10, 2, 20);
+                SC2Menu.AddSlider("maxSlot", "Maximum notifications number", 5, 2, 8);
 
 
                 DrawMenu = Menu.AddSubMenu("Drawing");
@@ -95,7 +96,7 @@ namespace TimerBuddy
                     }
                 }
 
-                if (itemList.Count > 0)
+                if (summonerList.Count > 0)
                 {
                     SummonerMenu = Menu.AddSubMenu("SummonerSpell List");
                     foreach (var t in summonerList)
