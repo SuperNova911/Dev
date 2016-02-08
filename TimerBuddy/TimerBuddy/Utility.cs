@@ -195,6 +195,8 @@ namespace TimerBuddy
                         return Config.TrapMenu.GetColor(spell.MenuCode + "color");
                     case SpellType.Item:
                         return Config.ItemMenu.GetColor(spell.MenuCode + "color");
+                    case SpellType.Ward:
+                        return Config.WardMenu.GetColor(spell.MenuCode + "color");
                 }
                 return Color.White;
             }
@@ -415,10 +417,23 @@ namespace TimerBuddy
 
         public static void CloneTracker()
         {
-            foreach (var enemy in EntityManager.Heroes.AllHeroes.Where(d => !d.IsDead && d.VisibleOnScreen &&
-            (d.BaseSkinName == "Leblanc" || d.BaseSkinName == "Shaco" || d.BaseSkinName == "MonkeyKing" || d.BaseSkinName == "Yorick")))
+            try
             {
-                new Circle { Color = System.Drawing.Color.Gold, Radius = enemy.BoundingRadius, BorderWidth = 4 }.Draw(enemy.Position);
+                if (Config.Menu.CheckboxValue("cloneTracker"))
+                {
+                    foreach (var enemy in EntityManager.Heroes.AllHeroes.Where(d => !d.IsDead && d.VisibleOnScreen &&
+                    (d.BaseSkinName == "Leblanc" || d.BaseSkinName == "Shaco" || d.BaseSkinName == "MonkeyKing" || d.BaseSkinName == "Yorick")))
+                    {
+                        new Circle { Color = System.Drawing.Color.Gold, Radius = enemy.BoundingRadius, BorderWidth = 4 }.Draw(enemy.Position);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE CLONE_TRACKER", Color.Cyan);
+                Chat.Print("Disable Clone Tracker, Please report bugs with CODE", Color.Gold);
+                Config.Menu["cloneTracker"].Cast<CheckBox>().CurrentValue = false;
             }
         }
 
@@ -544,14 +559,16 @@ namespace TimerBuddy
                         return 1;
                     case Importance.High:
                         return 2;
+                    case Importance.VeryHigh:
+                        return 3;
                 }
-                return 0;
+                return 1;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 Chat.Print("<font color='#FF0000'>ERROR:</font> CODE IMPORTANCE_TO_INT " + type.ToString(), Color.LightBlue);
-                return 0;
+                return 1;
             }
         }
 
@@ -664,6 +681,20 @@ namespace TimerBuddy
                 Console.WriteLine(e);
                 Chat.Print("<font color='#FF0000'>ERROR:</font> CODE HAS_SMITE " + unit.BaseSkinName, Color.LightBlue);
                 return false;
+            }
+        }
+
+        public static string ClockStyle(this float seconds)
+        {
+            try
+            {
+                return seconds < 0 ? null : TimeSpan.FromSeconds(seconds).ToString(@"m\:ss");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE CLOCK_STYLE " + seconds, Color.LightBlue);
+                return seconds.ToString();
             }
         }
     }

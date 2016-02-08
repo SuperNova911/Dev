@@ -96,7 +96,7 @@ namespace TimerBuddy
                 {
                     //Drawing.DrawLine(Game.CursorPos2D, Drawing.WorldToScreen(Player.Instance.Position), 3, System.Drawing.Color.Yellow);
                     //Drawing.DrawLine(Drawing.WorldToScreen(Player.Instance.Position), Drawing.WorldToScreen(Player.Instance.Position), 3, System.Drawing.Color.Yellow);
-                    DrawManager.TrapFont2.DrawText(null, "36", (int)Game.CursorPos2D.X + 30, (int)Game.CursorPos2D.Y + 30, SharpDX.Color.White);
+                    Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, 123f.ClockStyle(), 10);
                 }
                 if (Config.DebugMenu["c3"].Cast<CheckBox>().CurrentValue)
                 {
