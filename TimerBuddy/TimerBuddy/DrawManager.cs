@@ -24,6 +24,7 @@ namespace TimerBuddy
         public static Font TeleportFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 17));
         public static Font SpellFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 17));
         public static Font TrapFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 13));
+        public static Font WardFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 11));
         public static Font LineFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 10));
         public static Font TestFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Arial", 15));
         public static Font TestFont2 = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Arial", 30));
@@ -34,6 +35,10 @@ namespace TimerBuddy
         public static List<Spell> TimerLine = new List<Spell>();
 
         public static List<TimerSlot> TimerSlot = new List<TimerSlot>();
+
+        public static bool DrawWardFix = false;
+        public static bool DrawTrapFix = false;
+        public static bool DrawBlinkFix = false;
 
         static DrawManager()
         {
@@ -89,21 +94,48 @@ namespace TimerBuddy
         {
             try
             {
+                if (spell.SpellType == SpellType.Spell && !Config.Menu.CheckboxValue("sTimer"))
+                    return;
+
+                if (spell.SpellType == SpellType.SummonerSpell && !Config.Menu.CheckboxValue("ssTimer"))
+                    return;
+
+                if (spell.SpellType == SpellType.Item && !Config.Menu.CheckboxValue("itemTimer"))
+                    return;
+
                 if (spell.SpellType == SpellType.Spell && Config.SpellMenu.CheckboxValue(spell.MenuCode + "onlyme") && Player.Instance.BaseSkinName != spell.ChampionName)
+                    return;
+
+                if (spell.SpellType == SpellType.Spell && !Config.SpellMenu.CheckboxValue(spell.MenuCode + "draw"))
+                    return;
+
+                if (spell.SpellType == SpellType.SummonerSpell && !Config.SummonerMenu.CheckboxValue(spell.MenuCode + "draw"))
+                    return;
+
+                if (spell.SpellType == SpellType.Item && !Config.ItemMenu.CheckboxValue(spell.MenuCode + "draw"))
+                    return;
+
+                if (spell.SpellType == SpellType.Item && !Config.ItemMenu.CheckboxValue(spell.MenuCode + "ally") && spell.Team == Team.Ally)
+                    return;
+
+                if (spell.SpellType == SpellType.Item && !Config.ItemMenu.CheckboxValue(spell.MenuCode + "enemy") && spell.Team == Team.Enemy)
                     return;
 
                 switch (spell.SpellType)
                 {
                     case SpellType.Blink:
-                        DrawBlink(spell);
+                        if (Config.Menu.CheckboxValue("blinkTracker"))
+                            DrawBlink(spell);
                         return;
 
                     case SpellType.Trap:
-                        DrawTrap(spell);
+                        if (Config.Menu.CheckboxValue("trapTimer"))
+                            DrawTrap(spell);
                         return;
 
                     case SpellType.Ward:
-                        DrawWard(spell);
+                        if (Config.Menu.CheckboxValue("wardTimer"))
+                            DrawWard(spell);
                         return;
                 }
 
@@ -150,7 +182,7 @@ namespace TimerBuddy
         {
             try
             {
-                int maxLine = 3;
+                //int maxLine = 3;
                 int minImportance = Config.Menu.ComboBoxValue("minImportance");
 
                 if (minImportance <= 3)
@@ -406,24 +438,43 @@ namespace TimerBuddy
         {
             try
             {
-                string text = spell.GetRemainTimeString();
+                if (!Config.TrapMenu.CheckboxValue(spell.MenuCode + "draw"))
+                    return;
+
+                if (!Config.TrapMenu.CheckboxValue(spell.MenuCode + "ally") && spell.Team == Team.Ally)
+                    return;
+
+                if (!Config.TrapMenu.CheckboxValue(spell.MenuCode + "enemy") && spell.Team == Team.Enemy)
+                    return;
+
+                string text = (spell.GetRemainTime() / 1000).ClockStyle();
                 Vector2 position = Drawing.WorldToScreen(spell.Object.Position) + new Vector2(-15, 0);
                 SharpDX.Color color = spell.GetColor();
 
                 TrapFont.DrawText(null, text, (int)position.X, (int)position.Y, color);
 
-                if (spell.Team == Team.Enemy)
-                    new Circle
-                    {
-                        Color = Color.Red,
-                        BorderWidth = 4,
-                        Radius = 50,
-                    }.Draw(spell.Object.Position);
+                if (Config.TrapMenu.CheckboxValue(spell.MenuCode + "drawCircle") && DrawTrapFix == false)
+                {
+                    if (spell.Team == Team.Ally && Config.TrapMenu.CheckboxValue("circleOnlyEnemy"))
+                        return;
+
+                    Circle.Draw(spell.GetColor(), spell.Object.BoundingRadius, 4, spell.Object.Position);
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_TRAP " + spell.Caster.BaseSkinName + " " + spell.Name, Color.LightBlue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_TRAP " + spell.Caster.BaseSkinName + " " + spell.Name, Color.Cyan);
+                if (DrawTrapFix == false)
+                {
+                    Chat.Print("Temporarily Fix Trap Timer", Color.Gold);
+                    DrawTrapFix = true;
+                }
+                else
+                {
+                    Chat.Print("Fixing failed, Disable Trap Timer, Please report bugs with CODE", Color.Gold);
+                    Config.Menu["trapTimer"].Cast<CheckBox>().CurrentValue = false;
+                }
             }
         }
 
@@ -435,13 +486,24 @@ namespace TimerBuddy
                 Vector3 endpos = spell.KappaRoss();
 
                 Drawing.DrawLine(Drawing.WorldToScreen(startpos), Drawing.WorldToScreen(endpos), 2, spell.Color.ConvertColor());
-                new Circle { Color = spell.Color.ConvertColor(), Radius = 30f, BorderWidth = 1 }.Draw(endpos);
                 Drawing.DrawText(Drawing.WorldToScreen(endpos) + new Vector2(-20, 15), Color.White, spell.Caster.BaseSkinName, 10);
+                if (DrawBlinkFix == false)
+                    new Circle { Color = spell.Color.ConvertColor(), Radius = 30f, BorderWidth = 1 }.Draw(endpos);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_BLINK " + spell.Caster.BaseSkinName, Color.LightBlue);
+                if (DrawBlinkFix == false)
+                {
+                    Chat.Print("Temporarily Fix Blink Tracker", Color.Gold);
+                    DrawBlinkFix = true;
+                }
+                else
+                {
+                    Chat.Print("Fixing failed, Disable Blink Tracker, Please report bugs with CODE", Color.Gold);
+                    Config.Menu["blinkTracker"].Cast<CheckBox>().CurrentValue = false;
+                }
             }
         }
 
@@ -449,24 +511,44 @@ namespace TimerBuddy
         {
             try
             {
+                if (!Config.WardMenu.CheckboxValue(spell.MenuCode + "draw"))
+                    return;
+
+                if (!Config.WardMenu.CheckboxValue(spell.MenuCode + "ally") && spell.Team == Team.Ally)
+                    return;
+
+                if (!Config.WardMenu.CheckboxValue(spell.MenuCode + "enemy") && spell.Team == Team.Enemy)
+                    return;
+
                 if (spell.FullTime != 77777777)
                 {
-                    string text = spell.GetRemainTimeString();
-                    Vector2 position = Drawing.WorldToScreen(spell.Object.Position) + new Vector2(-15, 0);
+                    string text = (spell.GetRemainTime() / 1000).ClockStyle();
+                    Vector2 position = Drawing.WorldToScreen(spell.Object.Position) + new Vector2(-12, 0);
                     SharpDX.Color color = spell.GetColor();
 
-                    TrapFont.DrawText(null, text, (int)position.X, (int)position.Y, color);
+                    WardFont.DrawText(null, text, (int)position.X, (int)position.Y, color);
                 }
 
-                if (spell.Team == Team.Enemy)
+                if (Config.WardMenu.CheckboxValue(spell.MenuCode + "drawCircle") && DrawWardFix == false)
                 {
-                    new Circle { Color = spell.Color.ConvertColor(), Radius = 50f, BorderWidth = 2 }.Draw(spell.Object.Position);
+                    Circle.Draw(spell.GetColor(), 50, 4, spell.Object.Position);
+                    //new Circle { Color = spell.Color.ConvertColor(), Radius = 50f, BorderWidth = 2 }.Draw(spell.Object.Position);
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_WARD " + spell.Caster.BaseSkinName + " " + spell.Name, Color.LightBlue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_WARD " + spell.Caster.BaseSkinName + " " + spell.Name, Color.Cyan);
+                if (DrawWardFix == false)
+                {
+                    Chat.Print("Temporarily Fix Ward Timer", Color.Gold);
+                    DrawWardFix = true;
+                }
+                else
+                {
+                    Chat.Print("Fixing failed, Disable Ward Timer, Please report bugs with CODE", Color.Gold);
+                    Config.Menu["wardTimer"].Cast<CheckBox>().CurrentValue = false;
+                }
             }
         }
 
