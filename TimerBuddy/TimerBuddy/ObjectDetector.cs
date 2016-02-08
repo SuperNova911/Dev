@@ -42,9 +42,14 @@ namespace TimerBuddy
                     return;
 
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.Buff && (d.Name == args.Buff.DisplayName || d.Name == args.Buff.Name));
-
+                
                 if (database != null)
                 {
+                    if ((database.SpellType == SpellType.Spell && !Config.Menu.CheckboxValue("sTimer")) ||
+                    (database.SpellType == SpellType.SummonerSpell && !Config.Menu.CheckboxValue("ssTimer")) ||
+                    (database.SpellType == SpellType.Item && !Config.Menu.CheckboxValue("itemTimer")))
+                        return;
+
                     Program.SpellList.Add(new Spell
                     {
                         SpellType = database.SpellType,
@@ -109,9 +114,15 @@ namespace TimerBuddy
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && d.SpellType != SpellType.Ward && (d.ObjectName != null
                 ? d.Name == sender.Name && d.ObjectName == sender.BaseObjectName()
                 : sender.Name.Contains(d.Name)));
-
+                
                 if (database != null)
                 {
+                    if ((database.SpellType == SpellType.Spell && !Config.Menu.CheckboxValue("sTimer")) ||
+                        (database.SpellType == SpellType.SummonerSpell && !Config.Menu.CheckboxValue("ssTimer")) ||
+                        (database.SpellType == SpellType.Item && !Config.Menu.CheckboxValue("itemTimer")) ||
+                        (database.SpellType == SpellType.Trap && !Config.Menu.CheckboxValue("trapTimer")))
+                        return;
+
                     var caster = sender.FIndCaster(database);
 
                     Program.SpellList.Add(new Spell
@@ -184,9 +195,15 @@ namespace TimerBuddy
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject == false && d.Buff == false && 
                 (d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot) ||
                 ((d.SpellType == SpellType.SummonerSpell || d.SpellType == SpellType.Item || d.SpellType == SpellType.Blink) && d.Name == args.SData.Name));
-
+                
                 if (database != null)
                 {
+                    if ((database.SpellType == SpellType.Spell && !Config.Menu.CheckboxValue("sTimer")) ||
+                        (database.SpellType == SpellType.SummonerSpell && !Config.Menu.CheckboxValue("ssTimer")) ||
+                        (database.SpellType == SpellType.Item && !Config.Menu.CheckboxValue("itemTimer")) ||
+                        (database.SpellType == SpellType.Blink && !Config.Menu.CheckboxValue("blinkTracker")))
+                        return;
+
                     var target = args.Target as Obj_AI_Base;
                     if (target == null)
                         target = sender;
@@ -305,6 +322,9 @@ namespace TimerBuddy
         {
             try
             {
+                if (!Config.Menu.CheckboxValue("wardTimer"))
+                    return;
+
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject && d.SpellType == SpellType.Ward &&
                 d.ObjectName == sender.BaseObjectName());
                 
@@ -334,7 +354,7 @@ namespace TimerBuddy
                         Color = database.Color,
                         SpriteName = database.SpriteName,
                     })
-                    , 500);
+                    , database.ObjectName == "YellowTrinket" ? 500 : 0);
                     Chat.Print("Ward " + sender.BaseObjectName() + " " + caster.BaseSkinName, Color.LawnGreen);
 
                     return;
