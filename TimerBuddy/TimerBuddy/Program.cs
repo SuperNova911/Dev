@@ -100,7 +100,8 @@ namespace TimerBuddy
                 }
                 if (Config.DebugMenu["c3"].Cast<CheckBox>().CurrentValue)
                 {
-                    Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, (Game.Time).ToString(), 10);
+                    //Drawing.DrawText(Game.CursorPos2D + new Vector2(-20, -15), System.Drawing.Color.White, (Game.Time).ToString(), 10);
+                    DrawManager.test();
                 }
 
                 Utility.CloneTracker();

@@ -135,7 +135,7 @@ namespace TimerBuddy
                         Caster = caster,
                         Object = sender,
                         CastPosition = sender.Position,
-                        ChampionName = database.ChampionName,
+                        ChampionName = database.ChampionName != null ? database.ChampionName : caster.BaseSkinName,
                         Name = database.Name,
                         ObjectName = database.ObjectName,
                         MenuCode = database.MenuCode,
@@ -144,6 +144,7 @@ namespace TimerBuddy
                         NetworkID = sender.NetworkId,
                         GameObject = database.GameObject,
                         OnlyMe = database.OnlyMe,
+                        Teleport = database.Teleport,
                         Color = database.Color,
                         SpriteName = database.SpriteName,
                     });
@@ -194,12 +195,11 @@ namespace TimerBuddy
 
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject == false && d.Buff == false && 
                 (d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot) ||
-                ((d.SpellType == SpellType.SummonerSpell || d.SpellType == SpellType.Item || d.SpellType == SpellType.Blink) && d.Name == args.SData.Name));
+                ((d.SpellType == SpellType.Item || d.SpellType == SpellType.Blink) && d.Name == args.SData.Name));
                 
                 if (database != null)
                 {
                     if ((database.SpellType == SpellType.Spell && !Config.Menu.CheckboxValue("sTimer")) ||
-                        (database.SpellType == SpellType.SummonerSpell && !Config.Menu.CheckboxValue("ssTimer")) ||
                         (database.SpellType == SpellType.Item && !Config.Menu.CheckboxValue("itemTimer")) ||
                         (database.SpellType == SpellType.Blink && !Config.Menu.CheckboxValue("blinkTracker")))
                         return;
@@ -236,16 +236,27 @@ namespace TimerBuddy
                 }
 
                 var spellDatabase = SpellDatabase.Database.FirstOrDefault(d => 
-                (d.GameObject && d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot));
+                (d.GameObject && d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot) ||
+                (d.GameObject && d.SpellType == SpellType.SummonerSpell && args.SData.Name == "summonerteleport"));
 
                 if (spellDatabase != null)
                 {
                     Program.CasterList.Add(new SpellCaster
                     {
                         Caster = sender,
+                        SpellType = spellDatabase.SpellType,
                         Slot = spellDatabase.Slot,
                         EndTime = 10000 + Utility.TickCount,
                     });
+
+                    if (spellDatabase.SpellType == SpellType.SummonerSpell)
+                        Program.CasterList.Add(new SpellCaster
+                        {
+                            Caster = sender,
+                            SpellType = spellDatabase.SpellType,
+                            Slot = spellDatabase.Slot,
+                            EndTime = 10000 + Utility.TickCount,
+                        });
                     //Chat.Print("CasterList " + sender.BaseSkinName + " | " + spellDatabase.Slot.ToString(), Color.Red);
                     return;
                 }

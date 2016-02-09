@@ -42,6 +42,7 @@ namespace TimerBuddy
     public class SpellCaster
     {
         public Obj_AI_Base Caster;
+        public SpellType SpellType;
         public SpellSlot Slot;
         public float EndTime;
     }
@@ -73,6 +74,7 @@ namespace TimerBuddy
         public float EndTime;
         public int NetworkID;
         public int Range;
+        public bool Teleport = false;
         public bool GameObject = false;
         public bool SkillShot = false;
         public bool Targeting = false;
@@ -94,7 +96,7 @@ namespace TimerBuddy
             {
                 #region Item
                 new Spell { SpellType = SpellType.Item, Name = "ZhonyasHourglass", EndTime = 2500, MenuCode = "Zhonyas Hourglass", SpriteName = Resources.Zhonya_s_Hourglass, Importance = Importance.VeryHigh, DrawType = DrawType.NumberLine },
-                new Spell { SpellType = SpellType.Item, Name = "shurelyascrest", EndTime = 3000, MenuCode = "Talisman of Ascension", SpriteName = Resources.Talisman_of_Ascension },
+                //new Spell { SpellType = SpellType.Item, Name = "shurelyascrest", EndTime = 3000, MenuCode = "Talisman of Ascension", SpriteName = Resources.Talisman_of_Ascension },
                 new Spell { SpellType = SpellType.Item, Buff = true, Name = "HealthBomb", MenuCode = "Face of the Mountain", SpriteName = Resources.Face_of_the_Mountain },
                 new Spell { SpellType = SpellType.Item, Buff = true, Name = "IronStylusBuff", MenuCode = "Locket of the Iron Solari", SpriteName = Resources.Locket_of_the_Iron_Solari },
                 new Spell { SpellType = SpellType.Item, Buff = true, Name = "SpectralFury", MenuCode = "Youmuu's Ghostblade", SpriteName = Resources.Youmuu_s_Ghostblade },
@@ -116,15 +118,18 @@ namespace TimerBuddy
 
                 #region Summoner Spell
                 new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Recall", MenuCode = "Recall", SpriteName = Resources.Recall, Importance = Importance.High },
-                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Teleport", MenuCode = "Summoner Teleport", SpriteName = Resources.Teleport, Importance = Importance.High },
+                new Spell { SpellType = SpellType.SummonerSpell, GameObject = true, Teleport = true, Name = "global_ss_teleport_blue.troy", EndTime = 3500, MenuCode = "Summoner Teleport", SpriteName = Resources.Teleport, Importance = Importance.High },
+                new Spell { SpellType = SpellType.SummonerSpell, GameObject = true, Teleport = true, Name = "global_ss_teleport_red.troy", EndTime = 3500, MenuCode = "Summoner Teleport", SpriteName = Resources.Teleport, Importance = Importance.High },
+                new Spell { SpellType = SpellType.SummonerSpell, GameObject = true, Teleport = true, Name = "global_ss_teleport_target_", EndTime = 3500, MenuCode = "Summoner Teleport", SpriteName = Resources.Teleport, Importance = Importance.High },
+                new Spell { SpellType = SpellType.SummonerSpell, GameObject = true, Teleport = true, Name = "global_ss_teleport_turret_", EndTime = 3500, MenuCode = "Summoner Teleport", SpriteName = Resources.Teleport, Importance = Importance.High },
                 new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerIgnite", MenuCode = "Summoner Ignite", SpriteName = Resources.Ignite, Importance = Importance.High },
                 new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerExhaustDebuff", MenuCode = "Summoner Exhaust", SpriteName = Resources.Exhaust, Importance = Importance.High },
                 new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerBarrier", MenuCode = "Summoner Barrier", SpriteName = Resources.Barrier, Importance = Importance.High },
-                new Spell { SpellType = SpellType.SummonerSpell, Name = "summonerheal", EndTime = 1000, MenuCode = "Summoner Heal", SpriteName = Resources.Heal },
+                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SummonerHeal", MenuCode = "Summoner Heal", SpriteName = Resources.Heal },
+                new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Cleanse", MenuCode = "Summoner Cleanse", SpriteName = Resources.Cleanse },
                 new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "S4SpawnLockSpeed", MenuCode = "Summoner Haste", SpriteName = Resources.Haste },
                 new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "SRHomeguardSpeed", MenuCode = "Summoner Haste", SpriteName = Resources.Haste },
                 new Spell { SpellType = SpellType.SummonerSpell, Buff = true, Name = "Haste", MenuCode = "Summoner Haste", SpriteName = Resources.Haste },
-                new Spell { SpellType = SpellType.SummonerSpell, Name = "summonerboost", EndTime = 3000, MenuCode = "Summoner Cleanse", SpriteName = Resources.Cleanse },
                 #endregion
 
                 #region Spell
@@ -195,7 +200,9 @@ namespace TimerBuddy
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Diana", Name = "DianaMoonlight", MenuCode = "Diana Q", SpriteName = Resources.DianaQ, Importance = Importance.High },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Diana", Name = "DianaOrbs", MenuCode = "Diana W", SpriteName = Resources.DianaW },
 
-                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.R, ChampionName = "DrMundo", EndTime = 12000, MenuCode = "DrMundo R", SpriteName = Resources.DrMundoR, Importance = Importance.High },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "DrMundo", Name = "InfectedCleaverDebuff", MenuCode = "DrMundo Q", SpriteName = Resources.DrMundoQ },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "DrMundo", Name = "Masochism", MenuCode = "DrMundo E", SpriteName = Resources.DrMundoE },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "DrMundo", Name = "Sadism", MenuCode = "DrMundo R", SpriteName = Resources.DrMundoR, Importance = Importance.High },
                 
                 //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Draven", Name = "", MenuCode = "Draven Q", SpriteName = Resources.DravenQ },
                 //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Draven", Name = "", MenuCode = "Draven W", SpriteName = Resources.DravenW, OnlyMe = true },
@@ -253,10 +260,11 @@ namespace TimerBuddy
 
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Graves", Name = "Graves_SmokeGrenade_Cloud_Team_", EndTime = 4000, MenuCode = "Graves W", SpriteName = Resources.GravesW },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Graves", Name = "GravesEGrit", MenuCode = "Graves E", SpriteName = Resources.GravesE, OnlyMe = true },
-                
-                //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Hecarim", Name = "", MenuCode = "Hecarim Q", SpriteName = Resources.HecarimQ },
-                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, ChampionName = "Hecarim", EndTime = 4000, MenuCode = "Hecarim W", SpriteName = Resources.HecarimW },
-                //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Hecarim", Name = "", MenuCode = "Hecarim E", SpriteName = Resources.HecarimE },
+
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Hecarim", Name = "HecarimRapidSlash2", MenuCode = "Hecarim Q", SpriteName = Resources.HecarimQ },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Hecarim", Name = "HecarimW", MenuCode = "Hecarim W", SpriteName = Resources.HecarimW },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Hecarim", Name = "HecarimRamp", MenuCode = "Hecarim E", SpriteName = Resources.HecarimE },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Hecarim", Name = "hecarimultmissilegrab", MenuCode = "Hecarim R", SpriteName = Resources.HecarimR, Importance = Importance.Low },
                 
                 //new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.Q, GameObject = true, ChampionName = "Heimerdinger", Name = "", EndTime = 8000, MenuCode = "Heimerdinger Q", SpriteName = Resources.HeimerdingerQ },
                 //new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.Q, GameObject = true, ChampionName = "Heimerdinger", Name = "", EndTime = 8000, MenuCode = "Heimerdinger Q", SpriteName = Resources.HeimerdingerQ },
@@ -320,7 +328,7 @@ namespace TimerBuddy
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Kayle", Name = "JudicatorDivineBlessing", MenuCode = "Kayle W", SpriteName = Resources.KayleW },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Kayle", Name = "JudicatorRighteousFury", MenuCode = "Kayle E", SpriteName = Resources.KayleE, Importance = Importance.High },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Kayle", Name = "JudicatorIntervention", MenuCode = "Kayle R", SpriteName = Resources.KayleR, Importance = Importance.VeryHigh },
-                
+
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Kennen", Name = "KennenMarkOfStorm", MenuCode = "Kennen Passive", SpriteName = Resources.KennenP },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Kennen", Name = "KennenLightningRush", MenuCode = "Kennen E", SpriteName = Resources.KennenE },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Kennen", Name = "KennenShurikenStorm", MenuCode = "Kennen R", SpriteName = Resources.KennenR, Importance = Importance.High },
@@ -476,11 +484,13 @@ namespace TimerBuddy
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Ryze", Name = "RyzePassiveCharged", MenuCode = "Ryze Passive Charge", SpriteName = Resources.RyzeP },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Ryze", Name = "RyzeR", MenuCode = "Ryze R", SpriteName = Resources.RyzeR, Importance = Importance.High },
                 
-                //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "", MenuCode = "Sejuani Passive", SpriteName = Resources.SejuaniP },
-                //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "", MenuCode = "Sejuani Q", SpriteName = Resources.SejuaniQ },
-                //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "", MenuCode = "Sejuani W", SpriteName = Resources.SejuaniW },
-                //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "", MenuCode = "Sejuani E", SpriteName = Resources.SejuaniE },
-                //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "", MenuCode = "Sejuani R", SpriteName = Resources.SejuaniR },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "SejuaniPassiveDisplay", MenuCode = "Sejuani Passive", SpriteName = Resources.SejuaniP, OnlyMe = true, Importance = Importance.Low },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "sejuaniarcticassaultchampion", MenuCode = "Sejuani Q", SpriteName = Resources.SejuaniQ },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "SejuaniNorthernWindsEnrage", MenuCode = "Sejuani W", SpriteName = Resources.SejuaniW },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "SejuaniNorthernWinds", MenuCode = "Sejuani W", SpriteName = Resources.SejuaniW },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "SejuaniFrost", MenuCode = "Sejuani E", SpriteName = Resources.SejuaniE, Importance = Importance.Low },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "SejuaniFrostArctic", MenuCode = "Sejuani E Debuff", SpriteName = Resources.SejuaniE },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Sejuani", Name = "SejuaniGlacialPrison", MenuCode = "Sejuani R", SpriteName = Resources.SejuaniR, Importance = Importance.High },
                 
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Shaco", Name = "Deceive", MenuCode = "Shaco Q", SpriteName = Resources.ShacoQ, Importance = Importance.High },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Shaco", Name = "Two Shiv Poison", MenuCode = "Shaco E", SpriteName = Resources.ShacoE, Importance = Importance.Low },
@@ -493,7 +503,7 @@ namespace TimerBuddy
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Shen", Name = "Shen_Base_W_Buf.troy", EndTime = 1750, MenuCode = "Shen W", SpriteName = Resources.ShenW },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Shen", Name = "ShenRTargetTracker", MenuCode = "Shen R", SpriteName = Resources.ShenR, DrawType = DrawType.NumberLine, Importance = Importance.VeryHigh },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Shen", Name = "shenrchannelbuffbar", MenuCode = "Shen R", SpriteName = Resources.ShenR, DrawType = DrawType.NumberLine, Importance = Importance.VeryHigh },
-                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Shen", Name = "ShenRShield", MenuCode = "Shen R Shield", SpriteName = Resources.ShenR, Importance = Importance.High },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Shen", Name = "ShenRShield", MenuCode = "Shen R Shield", SpriteName = Resources.ShenR, Importance = Importance.Low },
                 
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Shyvana", Name = "ShyvanaScorchedEarth", MenuCode = "Shyvana W", SpriteName = Resources.ShyvanaW },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Shyvana", Name = "ShyvanaFlameBreathDebuff", MenuCode = "Shyvana E", SpriteName = Resources.ShyvanaE },
@@ -548,7 +558,7 @@ namespace TimerBuddy
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Teemo", Name = "Noxious Trap Target", MenuCode = "Teemo R", SpriteName = Resources.TeemoR },
 
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Thresh", Name = "ThreshQ", MenuCode = "Thresh Q", SpriteName = Resources.ThreshQ, Importance = Importance.High },
-                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Thresh", Name = "Thresh_Base_Lantern.troy", EndTime = 6000, MenuCode = "Thresh W", SpriteName = Resources.ThreshW, Importance = Importance.High },
+                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Thresh", Name = "Thresh_Base_W_RingLarge.troy", EndTime = 6000, MenuCode = "Thresh W", SpriteName = Resources.ThreshW, Importance = Importance.High },
                 //new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.R, GameObject = true, ChampionName = "Thresh", Name = "Thresh_Base_R_wall.troy", EndTime = 4000, MenuCode = "Thresh R", SpriteName = Resources.ThreshR }, 수정 필요
                 
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.Q, ChampionName = "Tristana", EndTime = 5000, MenuCode = "Tristana Q", SpriteName = Resources.TristanaQ },
@@ -661,8 +671,8 @@ namespace TimerBuddy
 
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.Q, GameObject = true, ChampionName = "Zilean", Name = "Zilean_Base_Q_Indicator_", EndTime = 3000, MenuCode = "Zilean Q", SpriteName = Resources.ZileanQ, Importance = Importance.High },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Zilean", Name = "TimeWarp", MenuCode = "Zilean E", SpriteName = Resources.ZileanE },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Zilean", Name = "ChronoShift", MenuCode = "Zilean R", SpriteName = Resources.ZileanR, DrawType = DrawType.NumberLine, Importance = Importance.VeryHigh },
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.R, GameObject = true, ChampionName = "Zilean", Name = "ZileanBase_R_Buf.troy", EndTime = 3000, MenuCode = "Zilean R", SpriteName = Resources.ZileanR, DrawType = DrawType.NumberLine, Importance = Importance.VeryHigh },
-                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.R, ChampionName = "Zilean", EndTime = 5000, MenuCode = "Zilean R", SpriteName = Resources.ZileanR, Importance = Importance.VeryHigh },
                 
                 //new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.Unknown, GameObject = true, ChampionName = "Zyra", Name = "", EndTime = 2000, MenuCode = "Zyra Passive", SpriteName = Resources.ZyraP },
                 //new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.Q, GameObject = true, ChampionName = "Zyra", Name = "", EndTime = 10000, MenuCode = "Zyra Q", SpriteName = Resources.ZyraQ },

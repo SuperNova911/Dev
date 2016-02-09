@@ -137,10 +137,19 @@ namespace TimerBuddy
                         if (Config.Menu.CheckboxValue("wardTimer"))
                             DrawWard(spell);
                         return;
+
+                    case SpellType.SummonerSpell:
+                        if (spell.Teleport == true)
+                        {
+                            DrawTeleport(spell);
+                            return;
+                        }
+                        break;
                 }
 
                 if (Line.Contains(spell) || Timer.Contains(spell) || TimerLine.Contains(spell))
                     return;
+                    
                 
                 switch (spell.GetDrawType())
                 {
@@ -550,6 +559,59 @@ namespace TimerBuddy
                     Config.Menu["wardTimer"].Cast<CheckBox>().CurrentValue = false;
                 }
             }
+        }
+
+        public static void DrawTeleport(Spell spell)
+        {
+            try
+            {
+                Vector2 centerpos = Drawing.WorldToScreen(spell.Object.Position) + new Vector2(0, 25);
+                string text = spell.ChampionName;
+                Vector2 textpos = centerpos + new Vector2(-35, 18);
+                SharpDX.Color color = SharpDX.Color.Orange;
+                SpellFont.DrawText(null, text, (int)textpos.X, (int)textpos.Y, color);
+                DrawTimerLine(spell);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_TELEPORT " + spell.Caster.BaseSkinName + " " + spell.Name, Color.Cyan);
+            }
+        }
+
+        public static void test()
+        {
+            Vector2 centerpos = Drawing.WorldToScreen(Game.CursorPos) + new Vector2(0, 25);
+            string text1 = Player.Instance.BaseSkinName;
+            Vector2 textpos1 = centerpos + new Vector2(-35, 18);
+            SharpDX.Color color1 = SharpDX.Color.Orange;
+            SpellFont.DrawText(null, text1, (int)textpos1.X, (int)textpos1.Y, color1);
+            
+            float remain = 3000;
+            float full = 3500;
+            bool dynamic = full >= 3000 ? true : false;
+
+            float length = dynamic ? remain / full * 70f : remain / full * 55f;
+
+            if (3500 >= 3500 && full - remain <= 500)
+            {
+                float length2 = (full - remain) / 500f * length;
+                length = length2;
+            }
+
+            string text = "3.2";
+            Vector2 textpos = centerpos + new Vector2(-15, -13);
+            SharpDX.Color color = SharpDX.Color.White;
+            SpellFont.DrawText(null, text, (int)textpos.X, (int)textpos.Y, color);
+
+            Color barColor = Color.LawnGreen;
+
+            Vector2 linepos = centerpos + new Vector2(0, 15);
+            Vector2 linestart = linepos - new Vector2(length, 0);
+            Vector2 lineend = linepos + new Vector2(length, 0);
+
+            Drawing.DrawLine(linestart - new Vector2(1, 0), lineend + new Vector2(1, 0), 6, Color.Black);
+            Drawing.DrawLine(linestart, lineend, 4, barColor);
         }
 
         public static void Initialize()

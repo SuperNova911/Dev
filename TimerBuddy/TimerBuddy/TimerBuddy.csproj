@@ -2047,6 +2047,8 @@
     <None Include="Resources\AatroxR.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\DrMundoQ.png" />
+    <None Include="Resources\DrMundoE.png" />
     <Content Include="Resources\SC2\HUD\SC2Blue.png" />
     <Content Include="Resources\SC2\HUD\SC2Green.png" />
     <Content Include="Resources\SC2\HUD\SC2Orange.png" />

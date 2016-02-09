@@ -10,7 +10,7 @@ namespace TimerBuddy
 {
     internal class Config
     {
-        public static Menu Menu, DrawMenu, SpellMenu, DebugMenu, SummonerMenu, TrapMenu, ItemMenu, WardMenu, SC2Menu;
+        public static Menu Menu, SpellMenu, DebugMenu, SummonerMenu, TrapMenu, ItemMenu, WardMenu, SC2Menu, MiscMenu;
         public static List<string> MenuChecker = new List<string>();
         
 
@@ -26,7 +26,7 @@ namespace TimerBuddy
                 var trapList = SpellDatabase.Database.Where(t => heroName.Contains(t.ChampionName) && t.SpellType == SpellType.Trap).ToList();
                 var spellList = SpellDatabase.Database.Where(s => heroName.Contains(s.ChampionName) && s.SpellType == SpellType.Spell).ToList();
 
-
+                #region Main Menu
                 Menu = MainMenu.AddMenu("TimerBuddy", "TimerBuddy", "TimerBuddy - Life is about Timing!");
                 Menu.AddGroupLabel("Welcome to TimerBuddy xD");
                 Menu.AddLabel(string.Format("{0} datas Loaded", summonerList.Count + itemList.Count + trapList.Count + spellList.Count + wardList.Count));
@@ -51,7 +51,9 @@ namespace TimerBuddy
                 Menu.AddLabel("Tychus   - Addon Developer");
                 Menu.AddLabel("Hellsing - Dev-a-lot");
                 Menu.AddLabel("and Developing forum buddies");
+                #endregion
 
+                #region SC2Menu
                 SC2Menu = Menu.AddSubMenu("Notifications");
                 SC2Menu.AddGroupLabel("Dragon, Baron Nashor Spawn Time");
                 SC2Menu.AddCheckBox("jungleEnable", "Enable", true);
@@ -71,11 +73,9 @@ namespace TimerBuddy
                 SC2Menu.AddGroupLabel("Misc settings");
                 //SC2Menu.AddSlider("duration", "Notifications duration time", 10, 2, 20);
                 SC2Menu.AddSlider("maxSlot", "Maximum notifications number", 5, 2, 8);
+                #endregion
 
-
-                DrawMenu = Menu.AddSubMenu("Drawing");
-
-
+                #region SpellMenu
                 if (spellList.Count > 0)
                 {
                     SpellMenu = Menu.AddSubMenu("Spell List");
@@ -95,7 +95,9 @@ namespace TimerBuddy
                         SpellMenu.AddSeparator();
                     }
                 }
+                #endregion
 
+                #region SummonerMenu
                 if (summonerList.Count > 0)
                 {
                     SummonerMenu = Menu.AddSubMenu("SummonerSpell List");
@@ -114,7 +116,9 @@ namespace TimerBuddy
                         SummonerMenu.AddSeparator();
                     }
                 }
+                #endregion
 
+                #region ItemMenu
                 if (itemList.Count > 0)
                 {
                     ItemMenu = Menu.AddSubMenu("Item List");
@@ -130,7 +134,9 @@ namespace TimerBuddy
                         ItemMenu.AddSeparator();
                     }
                 }
+                #endregion
 
+                #region TrapMenu
                 if (trapList.Count > 0)
                 {
                     TrapMenu = Menu.AddSubMenu("Trap List");
@@ -148,7 +154,9 @@ namespace TimerBuddy
                     TrapMenu.AddGroupLabel("Misc");
                     TrapMenu.AddCheckBox("circleOnlyEnemy", "Draw circle only enemies trap", true);
                 }
+                #endregion
 
+                #region WardMenu
                 if (wardList.Count > 0)
                 {
                     WardMenu = Menu.AddSubMenu("Ward List");
@@ -163,6 +171,13 @@ namespace TimerBuddy
                         WardMenu.AddSeparator();
                     }
                 }
+                #endregion
+
+                #region MiscMenu
+                MiscMenu = Menu.AddSubMenu("Misc Settigns");
+                MiscMenu.AddGroupLabel("Drawing");
+                MiscMenu.AddCheckBox("error", "Show Error Message", true);
+                #endregion
 
                 DebugMenu = Menu.AddSubMenu("Debug");
                 DebugMenu.Add("s1", new Slider("Slider 1", 0, 0, 200));

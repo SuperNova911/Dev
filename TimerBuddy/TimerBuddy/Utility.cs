@@ -254,6 +254,28 @@ namespace TimerBuddy
 
                 Obj_AI_Base result;
 
+                if (database.SpellType == SpellType.Item)
+                {
+                    result = EntityManager.Heroes.AllHeroes.OrderBy(d => d.Position.Distance(sender.Position)).FirstOrDefault();
+                    if (result != null)
+                    {
+                        Chat.Print("Caster Item Near " + result.BaseSkinName, System.Drawing.Color.Purple);
+                        return result;
+                    }
+                }
+
+                if (database.SpellType == SpellType.SummonerSpell)
+                {
+                    var caster = Program.CasterList.FirstOrDefault(c => c.SpellType == SpellType.SummonerSpell);
+                    if (caster != null)
+                    {
+                        Chat.Print("Caster SS " + caster.Caster.BaseSkinName, System.Drawing.Color.Red);
+                        result = caster.Caster;
+                        Program.CasterList.Remove(caster);
+                        return caster.Caster;
+                    }
+                }
+
                 if (database.GameObject == true)
                 {
                     var heroList = EntityManager.Heroes.AllHeroes.Where(h => h.BaseSkinName == database.ChampionName).ToList();

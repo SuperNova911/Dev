@@ -330,7 +330,6 @@ namespace TimerBuddy
         {
             try
             {
-                bool menuGlobal = Config.SC2Menu.CheckboxValue("sc2global" + sc2.ChampionName);
                 bool menuMe = true;
                 bool menuSS = Config.SC2Menu.CheckboxValue("ss");
                 bool menuJungle = Config.SC2Menu.CheckboxValue("jungleEnable");
@@ -343,6 +342,8 @@ namespace TimerBuddy
 
                 if (sc2.SC2Type == SC2Type.Spell)
                 {
+                    bool menuGlobal = Config.SC2Menu.CheckboxValue("sc2global" + sc2.ChampionName);
+
                     if (sc2.Caster.IsMe && menuMe)
                         return true;
 

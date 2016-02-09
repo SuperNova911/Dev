@@ -54,7 +54,7 @@ namespace TimerBuddy
 
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            Chat.Print(sender.BaseSkinName + " | " + args.Slot.ToString(), System.Drawing.Color.IndianRed);
+            Chat.Print(sender.BaseSkinName + " | " + args.Slot.ToString() + " | " + args.SData.Name, System.Drawing.Color.IndianRed);
         }
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
