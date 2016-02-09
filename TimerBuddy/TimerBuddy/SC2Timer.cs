@@ -1,15 +1,10 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Menu.Values;
-using EloBuddy.SDK.Rendering;
 using SharpDX;
-using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TimerBuddy.Properties;
 
 namespace TimerBuddy
@@ -192,23 +187,37 @@ namespace TimerBuddy
 
         public static void AddOnSlot(this SC2Timer sc2, int duration)
         {
-            SC2SlotList.Add(new SC2Slot
+            try
             {
-                Timer = sc2,
-                Slot = SC2SlotList.Count,
-                Duration = duration,
-                StartTime = Utility.TickCount,
-            });
+                SC2SlotList.Add(new SC2Slot
+                {
+                    Timer = sc2,
+                    Slot = SC2SlotList.Count,
+                    Duration = duration,
+                    StartTime = Utility.TickCount,
+                });
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("ADD_ON_SLOT", sc2.DisplayName);
+            }
         }
 
         public static void RemoveOnSlot(this SC2Slot slot)
         {
-            foreach (var list in SC2SlotList.Where(d => d.Slot > slot.Slot))
+            try
             {
-                list.Slot--;
+                foreach (var list in SC2SlotList.Where(d => d.Slot > slot.Slot))
+                {
+                    list.Slot--;
+                }
+                slot.Timer.Drawing = false;
+                SC2SlotList.Remove(slot);
             }
-            slot.Timer.Drawing = false;
-            SC2SlotList.Remove(slot);
+            catch (Exception e)
+            {
+                e.ErrorMessage("REMOVE_ON_SLOT", slot.Timer.DisplayName);
+            }
         }
     }
 
@@ -224,18 +233,62 @@ namespace TimerBuddy
 
         static SC2TimerManager()
         {
-            Game.OnTick += Game_OnTick;
-            Drawing.OnDraw += Drawing_OnDraw;
-            Drawing.OnEndScene += Drawing_OnEndScene;
-        }
-        
-        private static void Game_OnTick(EventArgs args)
-        {
-            ListControl();
-            HeroListManager();
+            try
+            {
+                Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
+                GameObject.OnDelete += GameObject_OnDelete;
+                Game.OnTick += Game_OnTick;
+                Drawing.OnDraw += Drawing_OnDraw;
+                Drawing.OnEndScene += Drawing_OnEndScene;
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("SC2TIMER_MANAGER_INIT");
+            }            
         }
 
-        public static void ListControl()
+        private static void GameObject_OnDelete(GameObject sender, EventArgs args)
+        {
+            try
+            {
+                if (!sender.IsValid)
+                    return;
+
+                SC2JungleDetector(sender, args);
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("SC2TIMER_ONDELETE", sender.Name);
+            }
+        }
+
+        private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
+            try
+            {
+                Core.DelayAction(() => SC2TimerDetector(sender, args), 1000);
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("SC2TIMER_SPELLCAST", args.SData.Name);
+            }
+        }
+
+        private static void Game_OnTick(EventArgs args)
+        {
+            try
+            {
+                ListControl();
+                HeroListManager();
+                SC2TimerRemover();
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("SC2TIMER_ONTICK");
+            }
+        }
+
+        private static void ListControl()
         {
             try
             {
@@ -253,12 +306,11 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE LIST_CONTROL", System.Drawing.Color.LightBlue);
+                e.ErrorMessage("LIST_CONTROL");
             }
         }
 
-        public static bool ShowHudCheck(this SC2Timer sc2)
+        private static bool ShowHudCheck(this SC2Timer sc2)
         {
             try
             {
@@ -306,27 +358,34 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE SHOW_HUD_CHECK " + sc2.DisplayName, System.Drawing.Color.LightBlue);
+                e.ErrorMessage("SHOW_HUD_CHECK", sc2.DisplayName);
                 return false;
             }
         }
 
         private static bool OneMin(this SC2Timer sc2)
         {
-            if (sc2.SC2Type == SC2Type.Jungle)
+            try
             {
-                float time = sc2.EndTime - Utility.TickCount;
-                int timer = 61000;
+                if (sc2.SC2Type == SC2Type.Jungle)
+                {
+                    float time = sc2.EndTime - Utility.TickCount;
+                    int timer = 61000;
 
-                if (timer - 2000 < time && time < timer)
-                    return true;
+                    if (timer - 2000 < time && time < timer)
+                        return true;
+                }
+
+                return false;
             }
-
-            return false;
+            catch (Exception e)
+            {
+                e.ErrorMessage("ONE_MIN", sc2.DisplayName);
+                return false;
+            }
         }
         
-        public static bool CheckArea(this SC2Timer sc2)
+        private static bool CheckArea(this SC2Timer sc2)
         {
             try
             {
@@ -358,88 +417,115 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE CHECK_AREA " + sc2.Caster.BaseSkinName, System.Drawing.Color.LightBlue);
+                e.ErrorMessage("CHECK_AREA", sc2.Caster.BaseSkinName);
                 return false;
             }
         }
 
         private static void HeroListManager()
         {
-            if (HeroList.Count < 4)
+            try
             {
-                foreach (var hero in EntityManager.Heroes.AllHeroes.Where(d => d.Position.Distance(Player.Instance.Position) < 3500).OrderBy(d => d.Distance(Player.Instance)))
+                if (HeroList.Count < 4)
                 {
-                    int ally = 0;
-                    int enemy = 0;
-                    foreach (var a in HeroList.Where(d => d.Hero.IsAlly))
-                        ally++;
-                    foreach (var a in HeroList.Where(d => d.Hero.IsEnemy))
-                        enemy++;
+                    foreach (var hero in EntityManager.Heroes.AllHeroes.Where(d => d.Position.Distance(Player.Instance.Position) < 3500).OrderBy(d => d.Distance(Player.Instance)))
+                    {
+                        int ally = 0;
+                        int enemy = 0;
+                        foreach (var a in HeroList.Where(d => d.Hero.IsAlly))
+                            ally++;
+                        foreach (var a in HeroList.Where(d => d.Hero.IsEnemy))
+                            enemy++;
 
-                    var database = HeroList.FirstOrDefault(d => d.Hero == hero);
-                    if (database == null && HeroList.Count < 4 && ((hero.IsAlly && ally < 2) || (hero.IsEnemy && enemy < 2)))
-                        HeroList.Add(new HeroList
-                        {
-                            Hero = hero,
-                            Endtime = 60000 + Utility.TickCount
-                        });
+                        var database = HeroList.FirstOrDefault(d => d.Hero == hero);
+                        if (database == null && HeroList.Count < 4 && ((hero.IsAlly && ally < 2) || (hero.IsEnemy && enemy < 2)))
+                            HeroList.Add(new HeroList
+                            {
+                                Hero = hero,
+                                Endtime = 60000 + Utility.TickCount
+                            });
+                    }
+                }
+
+                if (HeroList.Count > 0)
+                {
+                    var database = HeroList.FirstOrDefault(d => d.Endtime < Utility.TickCount);
+
+                    if (database != null)
+                        HeroList.Remove(database);
                 }
             }
-
-            if (HeroList.Count > 0)
+            catch (Exception e)
             {
-                var database = HeroList.FirstOrDefault(d => d.Endtime < Utility.TickCount);
-
-                if (database != null)
-                    HeroList.Remove(database);
+                e.ErrorMessage("HERO_LIST_MANAGER");
             }
         }
         
         private static void Drawing_OnDraw(EventArgs args)
         {
-            var maxSlot = Config.SC2Menu.SliderValue("maxSlot");
-
-            foreach (var sc2slot in SC2SlotManager.SC2SlotList.Where(d => d.Slot < maxSlot))
+            try
             {
-                sc2slot.SC2HudSprite();
+                var maxSlot = Config.SC2Menu.SliderValue("maxSlot");
+
+                foreach (var sc2slot in SC2SlotManager.SC2SlotList.Where(d => d.Slot < maxSlot))
+                {
+                    sc2slot.SC2HudSprite();
+                }
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("SC2TIMER_ONDRAW");
             }
         }
 
         private static void Drawing_OnEndScene(EventArgs args)
         {
-            var maxSlot = Config.SC2Menu.SliderValue("maxSlot");
-
-            foreach (var sc2slot in SC2SlotManager.SC2SlotList.Where(d => d.Slot < maxSlot))
+            try
             {
-                sc2slot.SC2HudText();
+                var maxSlot = Config.SC2Menu.SliderValue("maxSlot");
+
+                foreach (var sc2slot in SC2SlotManager.SC2SlotList.Where(d => d.Slot < maxSlot))
+                {
+                    sc2slot.SC2HudText();
+                }
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("SC2TIMER_ONEND");
             }
         }
 
-        public static void SC2HudSprite(this SC2Slot slot)
+        private static void SC2HudSprite(this SC2Slot slot)
         {
-            var sc2 = slot.Timer;
-            var centerpos = new Vector2(Drawing.Width, Drawing.Height / 2) + new Vector2(-240, -slot.Slot * 90);
-            var moveTime = 1000;
-
-            if (slot.StartTime + moveTime >= Utility.TickCount)
+            try
             {
-                var kappa = (float)(Math.Pow(slot.StartTime + moveTime - Utility.TickCount, 3) / Math.Pow(moveTime, 3) * 240);
-                centerpos = centerpos + new Vector2(kappa, 0);
+                var sc2 = slot.Timer;
+                var centerpos = new Vector2(Drawing.Width, Drawing.Height / 2) + new Vector2(-240, -slot.Slot * 90);
+                var moveTime = 1000;
+
+                if (slot.StartTime + moveTime >= Utility.TickCount)
+                {
+                    var kappa = (float)(Math.Pow(slot.StartTime + moveTime - Utility.TickCount, 3) / Math.Pow(moveTime, 3) * 240);
+                    centerpos = centerpos + new Vector2(kappa, 0);
+                }
+                if (slot.StartTime + slot.Duration + 3000 - moveTime <= Utility.TickCount)
+                {
+                    var kappa = 240 - (float)(Math.Pow(Utility.TickCount - (slot.StartTime + slot.Duration + 3000 - moveTime), 3) / Math.Pow(moveTime, 3) * 240);
+                    centerpos = centerpos + new Vector2(240 - kappa, 0);
+                }
+
+
+                Drawing.DrawLine(centerpos + new Vector2(0, 41), centerpos + new Vector2(240, 41), 82, System.Drawing.Color.Black);
+
+                TextureDraw.DrawSC2Hud(sc2, centerpos);
             }
-            if (slot.StartTime + slot.Duration + 3000 - moveTime <= Utility.TickCount)
+            catch (Exception e)
             {
-                var kappa = 240 - (float)(Math.Pow(Utility.TickCount - (slot.StartTime + slot.Duration + 3000 - moveTime), 3) / Math.Pow(moveTime, 3) * 240);
-                centerpos = centerpos + new Vector2(240 - kappa, 0);
+                e.ErrorMessage("SC2_HUD_SPRITE", slot.Timer.DisplayName);
             }
-
-
-            Drawing.DrawLine(centerpos + new Vector2(0, 41), centerpos + new Vector2(240, 41), 82, System.Drawing.Color.Black);
-
-            TextureDraw.DrawSC2Hud(sc2, centerpos);
         }
 
-        public static void SC2HudText(this SC2Slot slot)
+        private static void SC2HudText(this SC2Slot slot)
         {
             try
             {
@@ -447,148 +533,151 @@ namespace TimerBuddy
                 var centerpos = new Vector2(Drawing.Width, Drawing.Height / 2) + new Vector2(-240, -slot.Slot * 90);
                 var moveTime = 1000f;
 
-                try
+                if (slot.StartTime + moveTime >= Utility.TickCount)
                 {
-                    if (slot.StartTime + moveTime >= Utility.TickCount)
-                    {
-                        var kappa = (float)(Math.Pow(slot.StartTime + moveTime - Utility.TickCount, 3) / Math.Pow(moveTime, 3) * 240);
-                        centerpos = centerpos + new Vector2(kappa, 0);
-                    }
-                    if (slot.StartTime + slot.Duration + 3000 - moveTime <= Utility.TickCount)
-                    {
-                        var kappa = 240 - (float)(Math.Pow(Utility.TickCount - (slot.StartTime + slot.Duration + 3000 - moveTime), 3) / Math.Pow(moveTime, 3) * 240);
-                        centerpos = centerpos + new Vector2(240 - kappa, 0);
-                    }
+                    var kappa = (float)(Math.Pow(slot.StartTime + moveTime - Utility.TickCount, 3) / Math.Pow(moveTime, 3) * 240);
+                    centerpos = centerpos + new Vector2(kappa, 0);
                 }
-                catch (Exception e)
+                if (slot.StartTime + slot.Duration + 3000 - moveTime <= Utility.TickCount)
                 {
-                    Console.WriteLine(e);
-                    Chat.Print("<font color='#FF0000'>ERROR:</font> CODE SC2_HUD_TEXT_DYNAMIC", System.Drawing.Color.LightBlue);
+                    var kappa = 240 - (float)(Math.Pow(Utility.TickCount - (slot.StartTime + slot.Duration + 3000 - moveTime), 3) / Math.Pow(moveTime, 3) * 240);
+                    centerpos = centerpos + new Vector2(240 - kappa, 0);
                 }
-                
-                try
-                {
-                    var namepos = centerpos + new Vector2(24, 1);
-                    var timerpos = centerpos + new Vector2(85, 21);
 
-                    var name = sc2.DisplayName;
-                    var remainTime = (sc2.EndTime - Utility.TickCount) / 1000f;
+                var namepos = centerpos + new Vector2(24, 1);
+                var timerpos = centerpos + new Vector2(85, 21);
 
-                    var timer = remainTime >= 10 ? Math.Truncate(remainTime).ToString() : remainTime >= 0 ? remainTime.ToString("F1") :
-                        sc2.SC2Type == SC2Type.Jungle ? "Spawn" : "Ready";
-                    var barlength = (sc2.EndTime - Utility.TickCount) <= slot.Duration
-                        ? (Utility.TickCount - slot.StartTime) / slot.Duration * 129
-                        : (Utility.TickCount - sc2.StartTime) / sc2.FullTime * 129;
+                var name = sc2.DisplayName;
+                var remainTime = (sc2.EndTime - Utility.TickCount) / 1000f;
 
-                    if (barlength > 129)
-                        barlength = 129;
-                    var barpos = centerpos + new Vector2(89, 69);
-                    Drawing.DrawLine(barpos, barpos + new Vector2(barlength, 0), 7,
-                    sc2.Caster != null && sc2.Caster.IsMe ? System.Drawing.Color.Lime : sc2.Team == Team.Ally ? System.Drawing.Color.DarkCyan : sc2.Team == Team.Enemy ? System.Drawing.Color.Red : System.Drawing.Color.Orange);
+                var timer = remainTime >= 10 ? Math.Truncate(remainTime).ToString() : remainTime >= 0 ? remainTime.ToString("F1") :
+                    sc2.SC2Type == SC2Type.Jungle ? "Spawn" : "Ready";
+                var barlength = (sc2.EndTime - Utility.TickCount) <= slot.Duration
+                    ? (Utility.TickCount - slot.StartTime) / slot.Duration * 129
+                    : (Utility.TickCount - sc2.StartTime) / sc2.FullTime * 129;
 
-                    var iconpos = centerpos + new Vector2(25, 25);
-                    TextureDraw.SpriteList[sc2.GetMenuCode()].Draw(iconpos);
+                if (barlength > 129)
+                    barlength = 129;
+                var barpos = centerpos + new Vector2(89, 69);
+                Drawing.DrawLine(barpos, barpos + new Vector2(barlength, 0), 7,
+                sc2.Caster != null && sc2.Caster.IsMe ? System.Drawing.Color.Lime : sc2.Team == Team.Ally ? System.Drawing.Color.DarkCyan : sc2.Team == Team.Enemy ? System.Drawing.Color.Red : System.Drawing.Color.Orange);
 
-                    DrawManager.TestFont.DrawText(null, name, (int)(namepos).X, (int)(namepos).Y, SharpDX.Color.White);
-                    DrawManager.TestFont2.DrawText(null, timer, (int)(timerpos).X, (int)(timerpos).Y, SharpDX.Color.White);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    Chat.Print("<font color='#FF0000'>ERROR:</font> CODE SC2_HUD_TEXT_BAR " + sc2.DisplayName, System.Drawing.Color.LightBlue);
-                }
-                
+                var iconpos = centerpos + new Vector2(25, 25);
+                TextureDraw.SpriteList[sc2.GetMenuCode()].Draw(iconpos);
+
+                DrawManager.SC2Font.DrawText(null, name, (int)(namepos).X, (int)(namepos).Y, SharpDX.Color.White);
+                DrawManager.SC2Font2.DrawText(null, timer, (int)(timerpos).X, (int)(timerpos).Y, SharpDX.Color.White);
+
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE SC2_HUD_TEXT " + slot.Timer.DisplayName, System.Drawing.Color.LightBlue);
-            }
-            
-        }
-
-        public static void SC2TimerDetector(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
-        {
-            if (!sender.IsValid)
-                return;
-
-            var check = Program.SC2TimerList.FirstOrDefault(d => d.Caster == sender && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot);
-
-            if (check != null)
-            {
-                var cooldown = (sender.Spellbook.GetSpell(args.Slot).CooldownExpires - Game.Time) * 1000f;
-
-                check.FullTime = cooldown;
-                check.StartTime = Utility.TickCount;
-                check.StartTime = Utility.TickCount;
-                check.EndTime = cooldown + Utility.TickCount;
-
-                return;
-            }
-
-
-            var database = SC2TimerDatabase.Database.FirstOrDefault(d => 
-            ((d.SC2Type == SC2Type.SummonerSpell && d.Name == args.SData.Name) ||
-            (d.SC2Type == SC2Type.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot)));
-            
-            if (database != null)
-            {
-                var cooldown = (sender.Spellbook.GetSpell(args.Slot).CooldownExpires - Game.Time) * 1000f;
-
-                Program.SC2TimerList.Add(new SC2Timer
-                {
-                    SC2Type = database.SC2Type,
-                    Slot = args.Slot,
-                    Team = sender.GetTeam(),
-                    Caster = sender,
-                    ChampionName = sender.BaseSkinName,
-                    Name = args.SData.Name,
-                    MenuCode = database.GetMenuCode(),
-                    DisplayName = database.GetDisplayName(),
-                    FullTime = cooldown,
-                    StartTime = Utility.TickCount,
-                    EndTime = cooldown + Utility.TickCount,
-                    Cancel = false,
-                    Global = database.Global,
-                    SpriteName = database.SpriteName,
-                });
-                return;
-            }
-        }        
-
-        public static void SC2JungleDetector(GameObject sender, EventArgs args)
-        {
-            if (!Config.SC2Menu.CheckboxValue("jungleEnable"))
-                return;
-
-            var database = SC2TimerDatabase.Database.FirstOrDefault(d => d.SC2Type == SC2Type.Jungle && d.Name == sender.BaseObjectName());
-
-            if (database != null)
-            {
-                Program.SC2TimerList.Add(new SC2Timer
-                {
-                    SC2Type = database.SC2Type,
-                    Team = Team.Neutral,
-                    Name = database.Name,
-                    MenuCode = database.GetMenuCode(),
-                    DisplayName = database.DisplayName,
-                    StartTime = Utility.TickCount,
-                    FullTime = database.FullTime,
-                    
-                    EndTime = database.FullTime + Utility.TickCount,
-                    Global = true,
-                    SpriteName = database.SpriteName,
-                });
-
-                Chat.Print("Jungle " + database.Name + " " + database.GetMenuCode(), System.Drawing.Color.LawnGreen);
+                e.ErrorMessage("SC2_HUD_TEXT", slot.Timer.DisplayName);
             }
         }
 
-        public static void SC2TimerRemover()
+        private static void SC2TimerDetector(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (Program.SC2TimerList.Count > 0)
+            try
             {
-                Program.SC2TimerList.RemoveAll(d => d.EndTime + 3500 < Utility.TickCount);
+                if (!sender.IsValid)
+                    return;
+
+                var check = Program.SC2TimerList.FirstOrDefault(d => d.Caster == sender && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot);
+
+                if (check != null)
+                {
+                    var cooldown = (sender.Spellbook.GetSpell(args.Slot).CooldownExpires - Game.Time) * 1000f;
+
+                    check.FullTime = cooldown;
+                    check.StartTime = Utility.TickCount;
+                    check.StartTime = Utility.TickCount;
+                    check.EndTime = cooldown + Utility.TickCount;
+
+                    return;
+                }
+
+
+                var database = SC2TimerDatabase.Database.FirstOrDefault(d =>
+                ((d.SC2Type == SC2Type.SummonerSpell && d.Name == args.SData.Name) ||
+                (d.SC2Type == SC2Type.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot)));
+
+                if (database != null)
+                {
+                    var cooldown = (sender.Spellbook.GetSpell(args.Slot).CooldownExpires - Game.Time) * 1000f;
+
+                    Program.SC2TimerList.Add(new SC2Timer
+                    {
+                        SC2Type = database.SC2Type,
+                        Slot = args.Slot,
+                        Team = sender.GetTeam(),
+                        Caster = sender,
+                        ChampionName = sender.BaseSkinName,
+                        Name = args.SData.Name,
+                        MenuCode = database.GetMenuCode(),
+                        DisplayName = database.GetDisplayName(),
+                        FullTime = cooldown,
+                        StartTime = Utility.TickCount,
+                        EndTime = cooldown + Utility.TickCount,
+                        Cancel = false,
+                        Global = database.Global,
+                        SpriteName = database.SpriteName,
+                    });
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("SC2TIMER_DETECTOR", args.SData.Name);
+            }
+        }
+
+        private static void SC2JungleDetector(GameObject sender, EventArgs args)
+        {
+            try
+            {
+                if (!Config.SC2Menu.CheckboxValue("jungleEnable"))
+                    return;
+
+                var database = SC2TimerDatabase.Database.FirstOrDefault(d => d.SC2Type == SC2Type.Jungle && d.Name == sender.BaseObjectName());
+
+                if (database != null)
+                {
+                    Program.SC2TimerList.Add(new SC2Timer
+                    {
+                        SC2Type = database.SC2Type,
+                        Team = Team.Neutral,
+                        Name = database.Name,
+                        MenuCode = database.GetMenuCode(),
+                        DisplayName = database.DisplayName,
+                        StartTime = Utility.TickCount,
+                        FullTime = database.FullTime,
+
+                        EndTime = database.FullTime + Utility.TickCount,
+                        Global = true,
+                        SpriteName = database.SpriteName,
+                    });
+
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("SC2TIMER_JUNGLE_DETECTOR", sender.Name);
+            }
+        }
+
+        private static void SC2TimerRemover()
+        {
+            try
+            {
+                if (Program.SC2TimerList.Count > 0)
+                {
+                    Program.SC2TimerList.RemoveAll(d => d.EndTime + 3500 < Utility.TickCount);
+                }
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("SC2TIMER_REMOVER");
             }
         }
     }

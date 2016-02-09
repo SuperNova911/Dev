@@ -7,8 +7,6 @@ using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Color = System.Drawing.Color;
 
 namespace TimerBuddy
@@ -26,8 +24,8 @@ namespace TimerBuddy
         public static Font TrapFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 13));
         public static Font WardFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 11));
         public static Font LineFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 10));
-        public static Font TestFont = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Arial", 15));
-        public static Font TestFont2 = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Arial", 30));
+        public static Font SC2Font = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Arial", 15));
+        public static Font SC2Font2 = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Arial", 30));
         public static Font TrapFont2 = new Font(Drawing.Direct3DDevice, new System.Drawing.Font("Gill Sans MT Pro", 17));
 
         public static List<Spell> Line = new List<Spell>();
@@ -36,36 +34,57 @@ namespace TimerBuddy
 
         public static List<TimerSlot> TimerSlot = new List<TimerSlot>();
 
-        public static bool DrawWardFix = false;
-        public static bool DrawTrapFix = false;
-        public static bool DrawBlinkFix = false;
+        private static bool DrawWardFix = false;
+        private static bool DrawTrapFix = false;
+        private static bool DrawBlinkFix = false;
 
         static DrawManager()
         {
-            ClearTimerSlot();
+            try
+            {
+                ClearTimerSlot();
 
-            Game.OnTick += Game_OnTick;
-            Drawing.OnEndScene += Drawing_OnEndScene;
+                Game.OnTick += Game_OnTick;
+                Drawing.OnEndScene += Drawing_OnEndScene;
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("DRAWMANAGER_INIT2");
+            }
         }
 
         private static void Game_OnTick(EventArgs args)
         {
-            if (Line.Count > 0)
-                Line.RemoveAll(d => d.EndTime < (d.Buff ? Game.Time : Utility.TickCount));
-            if (Timer.Count > 0)
-                Timer.RemoveAll(d => d.EndTime < (d.Buff ? Game.Time : Utility.TickCount));
-            if (TimerLine.Count > 0)
-                TimerLine.RemoveAll(d => d.EndTime < (d.Buff ? Game.Time : Utility.TickCount));
+            try
+            {
+                if (Line.Count > 0)
+                    Line.RemoveAll(d => d.EndTime < (d.Buff ? Game.Time : Utility.TickCount));
+                if (Timer.Count > 0)
+                    Timer.RemoveAll(d => d.EndTime < (d.Buff ? Game.Time : Utility.TickCount));
+                if (TimerLine.Count > 0)
+                    TimerLine.RemoveAll(d => d.EndTime < (d.Buff ? Game.Time : Utility.TickCount));
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("DRAWMANAGER_ONTICK");
+            }
         }
 
         private static void Drawing_OnEndScene(EventArgs args)
         {
-            foreach (var spell in Program.SpellList.Where(d => d.EndTime >= (d.Buff ? Game.Time : Utility.TickCount)))
-                DrawAssign(spell);
+            try
+            {
+                foreach (var spell in Program.SpellList.Where(d => d.EndTime >= (d.Buff ? Game.Time : Utility.TickCount)))
+                    DrawAssign(spell);
 
-            LineManager();
-            TimerManager();
-            TimerLineManager();
+                LineManager();
+                TimerManager();
+                TimerLineManager();
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("DRAWMANAGER_DRAW");
+            }
         }
 
         private static void ClearTimerSlot()
@@ -85,12 +104,11 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE CLEAR_TIMER_SLOT", Color.LightBlue);
+                e.ErrorMessage("CLEAR_TIMER_SLOT");
             }
         }
 
-        public static void DrawAssign(Spell spell)
+        private static void DrawAssign(Spell spell)
         {
             try
             {
@@ -182,8 +200,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_ASSIGN " + spell.Name + " " + spell.DrawType.ToString(), Color.LightBlue);
+                e.ErrorMessage("DRAW_ASSIGN", spell.Name + " " + spell.DrawType.ToString());
             }
         }
 
@@ -308,12 +325,11 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE LINE_MANAGER", Color.LightBlue);
+                e.ErrorMessage("LINE_MANAGER");
             }
         }
 
-        public static void TimerManager()
+        private static void TimerManager()
         {
             try
             {
@@ -324,12 +340,11 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE TIMER_MANAGER", Color.LightBlue);
+                e.ErrorMessage("TIMER_MANAGER");
             }
         }
 
-        public static void TimerLineManager()
+        private static void TimerLineManager()
         {
             try
             {
@@ -340,12 +355,11 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE TIMER_LINE_MANAGER", Color.LightBlue);
+                e.ErrorMessage("TIMER_LINE_MANAGER");
             }
         }
 
-        public static void DrawLine(Spell spell)
+        private static void DrawLine(Spell spell)
         {
             try
             {
@@ -375,12 +389,11 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_LINE " + spell.Caster.BaseSkinName + " " + spell.Name, Color.LightBlue);
+                e.ErrorMessage("DRAW_LINE" + spell.Caster.BaseSkinName + " " + spell.Name);
             }
         }
 
-        public static void DrawTimer(Spell spell)
+        private static void DrawTimer(Spell spell)
         {
             try
             {
@@ -399,12 +412,11 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_TIMER " + spell.Caster.BaseSkinName + " " + spell.Name, Color.LightBlue);
+                e.ErrorMessage("DRAW_TIMER", spell.Caster.BaseSkinName + " " + spell.Name);
             }
         }
 
-        public static void DrawTimerLine(Spell spell)
+        private static void DrawTimerLine(Spell spell)
         {
             try
             {
@@ -438,12 +450,11 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_TIMER_LINE " + spell.Caster.BaseSkinName + " " + spell.Name, Color.LightBlue);
+                e.ErrorMessage("DRAW_TIMER_LINE", spell.Caster.BaseSkinName + " " + spell.Name);
             }
         }
 
-        public static void DrawTrap(Spell spell)
+        private static void DrawTrap(Spell spell)
         {
             try
             {
@@ -473,7 +484,7 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_TRAP " + spell.Caster.BaseSkinName + " " + spell.Name, Color.Cyan);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_TRAP " + spell.Caster.BaseSkinName + " " + spell.Name, Color.SpringGreen);
                 if (DrawTrapFix == false)
                 {
                     Chat.Print("Temporarily Fix Trap Timer", Color.Gold);
@@ -487,10 +498,16 @@ namespace TimerBuddy
             }
         }
 
-        public static void DrawBlink(Spell spell)
+        private static void DrawBlink(Spell spell)
         {
             try
             {
+                if (!Config.MiscMenu.CheckboxValue("blinkAlly") && spell.Team == Team.Ally)
+                    return;
+
+                if (!Config.MiscMenu.CheckboxValue("blinkEnemy") && spell.Team == Team.Enemy)
+                    return;
+
                 Vector3 startpos = spell.StartPosition;
                 Vector3 endpos = spell.KappaRoss();
 
@@ -502,7 +519,7 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_BLINK " + spell.Caster.BaseSkinName, Color.LightBlue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_BLINK " + spell.Caster.BaseSkinName, Color.SpringGreen);
                 if (DrawBlinkFix == false)
                 {
                     Chat.Print("Temporarily Fix Blink Tracker", Color.Gold);
@@ -516,7 +533,7 @@ namespace TimerBuddy
             }
         }
 
-        public static void DrawWard(Spell spell)
+        private static void DrawWard(Spell spell)
         {
             try
             {
@@ -547,7 +564,7 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_WARD " + spell.Caster.BaseSkinName + " " + spell.Name, Color.Cyan);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_WARD " + spell.Caster.BaseSkinName + " " + spell.Name, Color.SpringGreen);
                 if (DrawWardFix == false)
                 {
                     Chat.Print("Temporarily Fix Ward Timer", Color.Gold);
@@ -561,7 +578,7 @@ namespace TimerBuddy
             }
         }
 
-        public static void DrawTeleport(Spell spell)
+        private static void DrawTeleport(Spell spell)
         {
             try
             {
@@ -574,316 +591,20 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_TELEPORT " + spell.Caster.BaseSkinName + " " + spell.Name, Color.Cyan);
+                e.ErrorMessage("DRAW_TELEPORT" + spell.Caster.BaseSkinName + " " + spell.Name);
             }
-        }
-
-        public static void test()
-        {
-            Vector2 centerpos = Drawing.WorldToScreen(Game.CursorPos) + new Vector2(0, 25);
-            string text1 = Player.Instance.BaseSkinName;
-            Vector2 textpos1 = centerpos + new Vector2(-35, 18);
-            SharpDX.Color color1 = SharpDX.Color.Orange;
-            SpellFont.DrawText(null, text1, (int)textpos1.X, (int)textpos1.Y, color1);
-            
-            float remain = 3000;
-            float full = 3500;
-            bool dynamic = full >= 3000 ? true : false;
-
-            float length = dynamic ? remain / full * 70f : remain / full * 55f;
-
-            if (3500 >= 3500 && full - remain <= 500)
-            {
-                float length2 = (full - remain) / 500f * length;
-                length = length2;
-            }
-
-            string text = "3.2";
-            Vector2 textpos = centerpos + new Vector2(-15, -13);
-            SharpDX.Color color = SharpDX.Color.White;
-            SpellFont.DrawText(null, text, (int)textpos.X, (int)textpos.Y, color);
-
-            Color barColor = Color.LawnGreen;
-
-            Vector2 linepos = centerpos + new Vector2(0, 15);
-            Vector2 linestart = linepos - new Vector2(length, 0);
-            Vector2 lineend = linepos + new Vector2(length, 0);
-
-            Drawing.DrawLine(linestart - new Vector2(1, 0), lineend + new Vector2(1, 0), 6, Color.Black);
-            Drawing.DrawLine(linestart, lineend, 4, barColor);
         }
 
         public static void Initialize()
         {
-
-        }
-
-
-        /*
-        public static void DrawLine()
-        {
-            var s1 = Config.DebugMenu["s1"].Cast<Slider>().CurrentValue;
-            var s2 = Config.DebugMenu["s2"].Cast<Slider>().CurrentValue;
-            var s3 = Config.DebugMenu["s3"].Cast<Slider>().CurrentValue;
-
-            foreach (var hero in EntityManager.Heroes.AllHeroes.Where(h => h.IsValid && h.VisibleOnScreen && h.IsHPBarRendered))
-            {
-                var mainpos = hero.HPBarPosition;
-                var startpos = hero.IsMe ? mainpos + new Vector2(29, 29) : mainpos + new Vector2(3, 32);   // 25, 37 / 3, 32 /me 29, 29
-
-                //float length = spell.GetRemainTimeFloat() / Utility.GetDatabase(spell).EndTime * s2;
-                var length = 100;
-                var endpos = startpos + new Vector2(length, 0);
-                var endpos2 = endpos + new Vector2(0, 6);
-
-                Drawing.DrawLine(startpos, endpos, 1f, System.Drawing.Color.White);
-                Drawing.DrawLine(endpos, endpos2, 1f, System.Drawing.Color.White);
-
-                var textpos = endpos2 + new Vector2(10, 0);
-                Drawing.DrawText(textpos, System.Drawing.Color.White, "3.7", 10);
-                TextureDraw.DrawTest(textpos);
-            }
-        }
-
-        public static void DrawLine23(Spell spell)
-        {
             try
             {
-                var s1 = Config.DebugMenu["s1"].Cast<Slider>().CurrentValue;
-                var s2 = Config.DebugMenu["s2"].Cast<Slider>().CurrentValue;
-                var s3 = Config.DebugMenu["s3"].Cast<Slider>().CurrentValue;
 
-                var hero = spell.Caster;
-
-                if (!hero.VisibleOnScreen || !hero.IsHPBarRendered || !hero.IsHero())
-                    return;
-
-                var mainpos = hero.HPBarPosition;
-                //var mainpos = hero.Position.WorldToScreen();
-                var startpos = hero.IsMe ? mainpos + new Vector2(25, 25) : mainpos + new Vector2(3, 32);
-                //var startpos = mainpos + new Vector2(-50, 45);
-
-                float length = spell.Buff == true
-                    ? spell.GetRemainTime() / spell.GetFullTime() * 100
-                    : spell.GetRemainTime() / spell.GetFullTime() * 100;
-                var endpos = startpos + new Vector2(length, 0);
-                var endpos2 = endpos + new Vector2(0, 6);
-
-                var lineColor = System.Drawing.Color.White;
-                var textColor = Utility.ConvertColor(spell.GetColor());
-
-                Drawing.DrawLine(startpos, endpos, 1f, lineColor);
-                Drawing.DrawLine(endpos, endpos2, 1f, lineColor);
-
-                var textpos = endpos2 + new Vector2(10, 0);
-                Drawing.DrawText(textpos, textColor, spell.GetRemainTimeString(), 10);
-                var spritepos = textpos + new Vector2(-18, 0);
-                TextureDraw.DrawSprite(spritepos, spell);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW LINE " + spell.Name);
+                e.ErrorMessage("DRAWMANAGER_INIT");
             }
         }
-
-        public static void DrawLine2()
-        {
-            try
-            {
-                var s1 = Config.DebugMenu["s1"].Cast<Slider>().CurrentValue;
-                var s2 = Config.DebugMenu["s2"].Cast<Slider>().CurrentValue;
-                var s3 = Config.DebugMenu["s3"].Cast<Slider>().CurrentValue;
-                var s4 = Config.DebugMenu["s4"].Cast<Slider>().CurrentValue;
-                var s5 = Config.DebugMenu["s5"].Cast<Slider>().CurrentValue;
-
-                var hero = Player.Instance;
-
-                if (!hero.VisibleOnScreen || !hero.IsHPBarRendered)
-                    return;
-
-                //var mainpos = hero.HPBarPosition + new Vector2(-s1, -s2);
-                var mainpos = hero.Position.WorldToScreen();
-                //var startpos = hero.IsMe ? mainpos + new Vector2(29, 29) : mainpos + new Vector2(3, 32);
-                var startpos = mainpos + new Vector2(-50, 45);
-                float length = 100;
-                var endpos = startpos + new Vector2(length, 0);
-                var endpos2 = endpos + new Vector2(0, 6);
-
-                var lineColor = System.Drawing.Color.LawnGreen;
-                var textColor = System.Drawing.Color.White; //Utility.ConvertColor(spell.GetColor());
-
-                Drawing.DrawLine(startpos, endpos, s3, lineColor);
-                Drawing.DrawLine(endpos, endpos2, s3, lineColor);
-
-                var textpos = endpos2 + new Vector2(10, 0) + new Vector2(s4, s5);
-                Drawing.DrawText(textpos, textColor, "3.7", 10);
-                var spritepos = textpos + new Vector2(0, 0);
-                TextureDraw.DrawTest(spritepos);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW LINE ");
-            }
-        }
-
-        public static void DrawKappa()
-        {
-            var s1 = Config.DebugMenu["s1"].Cast<Slider>().CurrentValue;
-            var s2 = Config.DebugMenu["s2"].Cast<Slider>().CurrentValue;
-            var s3 = Config.DebugMenu["s3"].Cast<Slider>().CurrentValue;
-            var s4 = Config.DebugMenu["s4"].Cast<Slider>().CurrentValue;
-            var s5 = Config.DebugMenu["s5"].Cast<Slider>().CurrentValue;
-
-            var centerpos = Game.CursorPos2D + new Vector2(-300, -200);
-
-            Drawing.DrawLine(centerpos + new Vector2(-500, 0), centerpos + new Vector2(500, 0), 1, System.Drawing.Color.Red);
-            Drawing.DrawLine(centerpos + new Vector2(0, -500), centerpos + new Vector2(0, 500), 1, System.Drawing.Color.Red);
-            
-            DrawText(Game.Time.ToString("F3"), (centerpos + new Vector2(-15, -13)), Color.White, SpellType.Spell);
-            // -15, -13
-
-            var length = s5 / 50f * 50f;
-
-            var linestart = centerpos - new Vector2(length, 0);
-            var lineend = centerpos + new Vector2(length, 0);
-
-            Drawing.DrawLine(linestart, lineend, 4, System.Drawing.Color.LawnGreen);
-        }
-
-        public static void DrawDynamicTimer(Spell spell)
-        {
-            int s5 = 25;
-            Vector2 centerpos = Drawing.WorldToScreen(spell.GameObject ? spell.Object.Position : spell.SkillShot ? spell.CastPosition : spell.Target.Position) + new Vector2(0, s5);
-
-            //Drawing.DrawLine(centerpos + new Vector2(-500, 0), centerpos + new Vector2(500, 0), 1, System.Drawing.Color.Red);
-            //Drawing.DrawLine(centerpos + new Vector2(0, -500), centerpos + new Vector2(0, 500), 1, System.Drawing.Color.Red);
-
-            float remain = spell.GetRemainTime();
-            float full = spell.GetFullTime();
-            bool Kappa = full >= 3000 ? true : false;
-
-            float length = Kappa ? remain / full * 70f : remain / full * 55f;
-            
-            if (spell.GetFullTime() >= 3500 && full - remain <= 500)
-            {
-                float length2 = (full - remain) / 500f * length;
-                length = length2;
-            }
-            
-            DrawText(spell.GetRemainTimeString(), centerpos + new Vector2(-15, -13), Color.White, SpellType.Spell);
-            // -15, -13
-            var barColor = spell.Team == Team.Ally ? System.Drawing.Color.LawnGreen : spell.Team == Team.Enemy ? System.Drawing.Color.Red : System.Drawing.Color.Orange;
-
-            var linepos = centerpos + new Vector2(0, 15);
-            var linestart = linepos - new Vector2(length, 0);
-            var lineend = linepos + new Vector2(length, 0);
-
-            Drawing.DrawLine(linestart - new Vector2(1, 0), lineend + new Vector2(1, 0), 6, System.Drawing.Color.Black);
-            Drawing.DrawLine(linestart, lineend, 4, barColor);
-        }
-        public static void DrawBlink(this Spell spell)
-        {
-            try
-            {
-                Vector3 startpos = spell.StartPosition;
-                Vector3 endpos = spell.KappaRoss(); 
-
-                Drawing.DrawLine(Drawing.WorldToScreen(startpos), Drawing.WorldToScreen(endpos), 2, spell.Color.ConvertColor());
-                new Circle { Color = spell.Color.ConvertColor(), Radius = 30f, BorderWidth = 1 }.Draw(endpos);
-                Drawing.DrawText(Drawing.WorldToScreen(endpos) + new Vector2(-20, 15), System.Drawing.Color.White, spell.Caster.BaseSkinName, 10);
-                //new Geometry.Polygon.Line(startpos, endpos).Draw(spell.Color);
-                //new Geometry.Polygon.Sector(endpos, startpos, 50 * (float)Math.PI / 180, 50).Draw(spell.Color);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_BLINK " + spell.Name, Color.LightBlue);
-            }
-        }
-
-
-        public static void DrawLine(Spell spell)
-        {
-            try
-            {
-                var hero = spell.SpellType == SpellType.Buff ? spell.Target : spell.Caster;
-
-                if (!hero.VisibleOnScreen || !hero.IsHPBarRendered)
-                    return;
-                
-                var barpos = hero.HPBarPosition;
-                var startpos = barpos + new Vector2(20, 134);
-                float length = spell.SpellType == SpellType.Buff 
-                    ? spell.GetRemainTimeFloat() / spell.FullTime * 100
-                    : spell.GetRemainTimeFloat() / Utility.GetDatabase(spell).EndTime * 100;
-                var endpos = startpos + new Vector2(length, 0);
-                var endpos2 = endpos + new Vector2(0, 6);
-
-                var lineColor = System.Drawing.Color.White;
-                var textColor = System.Drawing.Color.White; //Utility.ConvertColor(spell.GetColor());
-
-                Drawing.DrawLine(startpos, endpos, 1f, lineColor);
-                Drawing.DrawLine(endpos, endpos2, 1f, lineColor);
-
-                var textpos = endpos2 + new Vector2(-8, 0);
-                Drawing.DrawText(textpos, textColor, (spell.GetRemainTimeFloat() / 1000f).ToString("F1"), 10);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW LINE " + spell.Name);
-            }
-        }
-
-        public static void Test()
-        {
-            var s1 = Config.DebugMenu["s1"].Cast<Slider>().CurrentValue;
-            var s2 = Config.DebugMenu["s2"].Cast<Slider>().CurrentValue;
-            var s3 = Config.DebugMenu["s3"].Cast<Slider>().CurrentValue;
-            var s4 = Config.DebugMenu["s4"].Cast<Slider>().CurrentValue;
-            var s5 = Config.DebugMenu["s5"].Cast<Slider>().CurrentValue;
-
-            //var centerpos = new Vector2(Drawing.Width, Drawing.Height / 2) + new Vector2(-s1, -s2);
-            var centerpos = Game.CursorPos2D + new Vector2(-500, -200);
-
-            Drawing.DrawLine(centerpos + new Vector2(-500, 0), centerpos + new Vector2(500, 0), 1, System.Drawing.Color.Red);
-            Drawing.DrawLine(centerpos + new Vector2(0, -500), centerpos + new Vector2(0, 500), 1, System.Drawing.Color.Red);
-            Drawing.DrawLine(centerpos + new Vector2(0, 41), centerpos + new Vector2(240, 41), 82, System.Drawing.Color.Black);
-            var sprite1 = TextureDraw.SpriteList["SC2Blue"];
-            sprite1.Draw(centerpos);
-
-        }
-
-        public static void Test2()
-        {
-            var s1 = Config.DebugMenu["s1"].Cast<Slider>().CurrentValue;
-            var s2 = Config.DebugMenu["s2"].Cast<Slider>().CurrentValue;
-            var s3 = Config.DebugMenu["s3"].Cast<Slider>().CurrentValue;
-            var s4 = Config.DebugMenu["s4"].Cast<Slider>().CurrentValue;
-            var s5 = Config.DebugMenu["s5"].Cast<Slider>().CurrentValue;
-
-            //var centerpos = new Vector2(Drawing.Width, Drawing.Height / 2) + new Vector2(-s1, -s2);
-            var centerpos = Game.CursorPos2D + new Vector2(-500, -200);
-
-
-            var namepos = centerpos + new Vector2(24, 1);
-            var name = "Summoner Flash";
-            TestFont.DrawText(null, name, (int)(namepos).X, (int)(namepos).Y, SharpDX.Color.White);
-
-            var timerpos = centerpos + new Vector2(85, 21);
-            var timer = 8.1f.ToString();
-            TestFont2.DrawText(null, timer, (int)(timerpos).X, (int)(timerpos).Y, SharpDX.Color.White);
-
-            var iconpos = centerpos + new Vector2(25, 25);
-            var sprite2 = TextureDraw.SpriteList["sc2TwitchR"];
-            sprite2.Draw(iconpos);
-
-            var length = 200f / 200f * s5;
-            Drawing.DrawLine(centerpos + new Vector2(s1, s2), centerpos + new Vector2(s1 + length, s2), s3, System.Drawing.Color.DarkCyan);
-        }
-        */
     }
 }

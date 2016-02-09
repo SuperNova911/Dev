@@ -2659,4 +2659,10 @@
   <data name="DrMundoE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DrMundoE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="EliseHumanE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EliseHumanE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EliseHumanW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EliseHumanW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

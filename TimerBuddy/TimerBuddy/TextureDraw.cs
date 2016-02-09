@@ -1,27 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using EloBuddy;
-using EloBuddy.SDK;
-using EloBuddy.SDK.Enumerations;
-using EloBuddy.SDK.Events;
-using EloBuddy.SDK.Menu;
-using EloBuddy.SDK.Menu.Values;
+﻿using EloBuddy.SDK;
 using EloBuddy.SDK.Rendering;
-using EloBuddy.SDK.Utils;
 using SharpDX;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TimerBuddy.Properties;
-using Color = System.Drawing.Color;
-using Font = System.Drawing.Font;
 using Sprite = EloBuddy.SDK.Rendering.Sprite;
 
 namespace TimerBuddy
 {
     public class TextureDraw
     {
-        public static readonly TextureLoader TextureLoader = new TextureLoader();
+        private static readonly TextureLoader TextureLoader = new TextureLoader();
 
         private static Sprite MainBar { get; set; }
 
@@ -100,8 +90,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE SPRITE_LOAD");
+                e.ErrorMessage("SPRITE_LOAD");
             }
         }
 
@@ -109,51 +98,55 @@ namespace TimerBuddy
         {
             try
             {
-                var sprite = SpriteList[spell.MenuCode];
-
-                sprite.Draw(pos);
+                SpriteList[spell.MenuCode].Draw(pos);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE DRAW_SPRITE " + spell.MenuCode);
+                e.ErrorMessage("DRAW_SPRITE", spell.MenuCode);
             }
         }
-
-        public static void DrawTest(Vector2 vector2)
-        {
-            var sprite = SpriteList["Summoner Teleport"];
-
-            sprite.Draw(vector2 + new Vector2(-18, 0));
-        }
-
+        
         public static void DrawSC2Hud(SC2Timer sc2, Vector2 position)
         {
-            if (sc2.Caster != null && sc2.Caster.IsMe)
+            try
             {
-                SpriteList["SC2Green"].Draw(position);
-                return;
+                if (sc2.Caster != null && sc2.Caster.IsMe)
+                {
+                    SpriteList["SC2Green"].Draw(position);
+                    return;
+                }
+
+                switch (sc2.Team)
+                {
+                    case Team.Ally:
+                        SpriteList["SC2Blue"].Draw(position);
+                        return;
+
+                    case Team.Enemy:
+                        SpriteList["SC2Red"].Draw(position);
+                        return;
+
+                    case Team.Neutral:
+                        SpriteList["SC2Orange"].Draw(position);
+                        return;
+                }
             }
-
-            switch (sc2.Team)
+            catch (Exception e)
             {
-                case Team.Ally:
-                    SpriteList["SC2Blue"].Draw(position);
-                    return;
-
-                case Team.Enemy:
-                    SpriteList["SC2Red"].Draw(position);
-                    return;
-
-                case Team.Neutral:
-                    SpriteList["SC2Orange"].Draw(position);
-                    return;
+                e.ErrorMessage("DRAW_SC2_HUD");
             }
         }
         
         public static void Initialize()
         {
+            try
+            {
 
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("TEXTURE_DRAW_INIT");
+            }
         }
     }
 }

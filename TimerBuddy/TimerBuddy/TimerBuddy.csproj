@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorMenu.cs" />
+    <Compile Include="MenuUtlility.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="DrawManager.cs" />
@@ -71,7 +71,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SC2Timer.cs" />
-    <Compile Include="SpellDetector.cs" />
     <Compile Include="TextureDraw.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
@@ -2049,6 +2048,8 @@
   <ItemGroup>
     <None Include="Resources\DrMundoQ.png" />
     <None Include="Resources\DrMundoE.png" />
+    <None Include="Resources\EliseHumanE.png" />
+    <None Include="Resources\EliseHumanW.png" />
     <Content Include="Resources\SC2\HUD\SC2Blue.png" />
     <Content Include="Resources\SC2\HUD\SC2Green.png" />
     <Content Include="Resources\SC2\HUD\SC2Orange.png" />

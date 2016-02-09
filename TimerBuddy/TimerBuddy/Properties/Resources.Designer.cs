@@ -1403,6 +1403,26 @@ namespace TimerBuddy.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap EliseHumanE {
+            get {
+                object obj = ResourceManager.GetObject("EliseHumanE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap EliseHumanW {
+            get {
+                object obj = ResourceManager.GetObject("EliseHumanW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap EliseR {
             get {
                 object obj = ResourceManager.GetObject("EliseR", resourceCulture);

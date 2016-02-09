@@ -13,7 +13,6 @@ namespace TimerBuddy
         public static Menu Menu, SpellMenu, DebugMenu, SummonerMenu, TrapMenu, ItemMenu, WardMenu, SC2Menu, MiscMenu;
         public static List<string> MenuChecker = new List<string>();
         
-
         static Config()
         {
             try
@@ -148,7 +147,7 @@ namespace TimerBuddy
                         TrapMenu.AddCheckBox(t.MenuCode + "ally", "Draw ally trap", true);
                         TrapMenu.AddCheckBox(t.MenuCode + "drawCircle", "Draw circle", true);
                         TrapMenu.AddCheckBox(t.MenuCode + "enemy", "Draw enemy trap", true);
-                        TrapMenu.AddColorItem(t.MenuCode + "color", 11);
+                        TrapMenu.AddColorItem(t.MenuCode + "color", 0);
                         TrapMenu.AddSeparator();
                     }
                     TrapMenu.AddGroupLabel("Misc");
@@ -177,8 +176,13 @@ namespace TimerBuddy
                 MiscMenu = Menu.AddSubMenu("Misc Settigns");
                 MiscMenu.AddGroupLabel("Drawing");
                 MiscMenu.AddCheckBox("error", "Show Error Message", true);
+                MiscMenu.AddLabel("If you find bugs, please report bugs with error code");
+                MiscMenu.AddSeparator();
+                MiscMenu.AddGroupLabel("Blink Tracker");
+                MiscMenu.AddCheckBox("blinkAlly", "Draw Ally", false);
+                MiscMenu.AddCheckBox("blinlEnemy", "Draw Enemy", true);
                 #endregion
-
+                /*
                 DebugMenu = Menu.AddSubMenu("Debug");
                 DebugMenu.Add("s1", new Slider("Slider 1", 0, 0, 200));
                 DebugMenu.Add("s2", new Slider("Slider 2", 0, 0, 200));
@@ -187,18 +191,24 @@ namespace TimerBuddy
                 DebugMenu.Add("s5", new Slider("Slider 5", 0, 0, 200));
                 DebugMenu.Add("c1", new CheckBox("CheckBox 1"));
                 DebugMenu.Add("c2", new CheckBox("CheckBox 2"));
-                DebugMenu.Add("c3", new CheckBox("CheckBox 3"));
+                DebugMenu.Add("c3", new CheckBox("CheckBox 3"));*/
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE MENU");
+                e.ErrorMessage("MENU");
             }
         }
         
         public static void Initialize()
         {
+            try
+            {
 
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("CONFIG_INIT");
+            }
         }
     }
 }

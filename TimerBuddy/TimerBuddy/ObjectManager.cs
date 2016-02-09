@@ -212,8 +212,9 @@ namespace TimerBuddy
                 //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Ekko", Name = "", MenuCode = "Ekko W", SpriteName = Resources.EkkoW },
                 //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Ekko", Name = "", MenuCode = "Ekko E", SpriteName = Resources.EkkoE },
                 
-                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Elise", Name = "VolatileSpiderling", EndTime = 3000, MenuCode = "Elise Human W", SpriteName = Resources.EliseSpiderW },
+                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Elise", Name = "VolatileSpiderling", EndTime = 3000, MenuCode = "Elise Human W", SpriteName = Resources.EliseHumanW },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Elise", Name = "EliseSpiderW", MenuCode = "Elise Spider W", SpriteName = Resources.EliseSpiderW },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Elise", Name = "BuffEliseCocoon", MenuCode = "Elise Human E", SpriteName = Resources.EliseHumanE, Importance = Importance.High },
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.E, GameObject = true, ChampionName = "Elise", Name = "EliseSpider_Base_E_indicator_", EndTime = 2500, MenuCode = "Elise Spider E", SpriteName = Resources.EliseSpiderE, Importance = Importance.High },
                 
                 //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Evelynn", Name = "", MenuCode = "Evelynn Passive", SpriteName = Resources.EvelynnPassive },

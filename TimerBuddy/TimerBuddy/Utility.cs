@@ -1,49 +1,15 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Rendering;
 using SharpDX;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TimerBuddy
 {
     public static class Utility
     {
-        /*public static string GetRemainTime(this Spell list)
-        {
-            try
-            {
-                Spell database = null;
-                if (list.SpellType == SpellType.Spell)
-                    database = SpellDatabase.Database.FirstOrDefault(d => d.ChampionName == list.ChampionName && d.Slot == list.Slot);
-                else
-                    database = SpellDatabase.Database.FirstOrDefault(d => d.Name == list.Name);
-
-                if (database == null)
-                {
-                    //Chat.Print("error: CODE REMAIN_TIMER KAPPA " + list.Caster.BaseSkinName);
-                    //return "Kappa";
-                    return list.EndTime - TickCount >= 0 ? ((list.EndTime - TickCount) / 1000f).ToString("F1") : 0f.ToString("F1");
-                }
-                                
-                if (database.EndTime > 10000)
-                    return ((int)(list.EndTime - TickCount) / 1000 + 1).ToString();
-                else
-                    return list.EndTime - TickCount >= 0 ? ((list.EndTime - TickCount) / 1000f).ToString("F1") : 0f.ToString("F1");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE REMAIN_TIMER " + list.Caster.BaseSkinName);
-                return "Kappa";
-            }
-        }*/
-
         public static string GetRemainTimeString(this Spell spell)
         {
             try
@@ -54,40 +20,10 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE REMAIN_STRING " + spell.Caster.BaseSkinName);
+                e.ErrorMessage("REMAIN_TIME_STRING", spell.Caster.BaseSkinName);
                 return "KAPPA";
             }
         }
-
-        /*public static float GetRemainTimeFloat(this Spell list)
-        {
-            try
-            {
-                if (list.Buff == true)
-                    return list.BuffRemainTime();
-                Spell database = null;
-                if (list.SpellType == SpellType.Spell)
-                    database = SpellDatabase.Database.FirstOrDefault(d => d.ChampionName == list.ChampionName && d.Slot == list.Slot);
-                else
-                    database = SpellDatabase.Database.FirstOrDefault(d => d.Name == list.Name);
-                
-                if (database == null)
-                {
-                    Chat.Print("error: CODE REMAIN_TIMER KAPPA " + list.Caster.BaseSkinName);
-                    //return "Kappa";
-                    return list.EndTime - TickCount >= 0 ? ((list.EndTime - TickCount)) : 0f;
-                }
-
-                return list.EndTime - TickCount >= 0 ? ((list.EndTime - TickCount)) : 0f;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE REMAIN_FLOAT " + list.Caster.BaseSkinName);
-                return 777f;
-            }
-        }*/
 
         public static float GetRemainTime(this Spell spell)
         {
@@ -102,8 +38,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE REMAIN_TIME " + spell.Caster.BaseSkinName);
+                e.ErrorMessage("REMAIN_TIME", spell.Caster.BaseSkinName);
                 return 4444;
             }
         }
@@ -132,8 +67,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error CODE BUFF_REMAIN " + spell.Name);
+                e.ErrorMessage("BUFF_REMAIN_TIME", spell.Name);
                 return 0f;
             }
         }
@@ -149,8 +83,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error CODE GET_FULL " + spell.Name);
+                e.ErrorMessage("GET_FULL_TIME", spell.Name);
                 return 0f;
             }
         }
@@ -175,8 +108,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error CODE GET_DRAW_TYPE " + spell.Name);
+                e.ErrorMessage("GET_DRAW_TYPE", spell.Name);
                 return DrawType.Default;
             }
         }
@@ -202,47 +134,21 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error CODE GET_COLOR " + spell.Name);
+                e.ErrorMessage("GET_COLOR", spell.Name);
                 return Color.White;
             }
         }
 
         public static System.Drawing.Color ConvertColor(this Color color)
         {
-            return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
-        }
-
-        public static Spell GetDatabase(this Spell spell)
-        {
             try
             {
-                if (spell.Buff == true)
-                    return SpellDatabase.Database.FirstOrDefault(d => d.Name == spell.Name && d.Buff == true);
-
-                switch (spell.SpellType)
-                {
-                    case SpellType.SummonerSpell:
-                        return SpellDatabase.Database.FirstOrDefault(d => d.Name == spell.Name && d.SpellType == SpellType.SummonerSpell);
-                    case SpellType.Trap:
-                        return SpellDatabase.Database.FirstOrDefault(d => d.Name == spell.Name && d.ObjectName == spell.ObjectName && d.GameObject == true && d.SpellType == SpellType.Trap);
-                    case SpellType.Item:
-                        return SpellDatabase.Database.FirstOrDefault(d => d.Name == spell.Name && d.SpellType == SpellType.Item);
-                    case SpellType.Spell:
-                        if (spell.GameObject == true)
-                            return SpellDatabase.Database.FirstOrDefault(d => d.Name == spell.Name && d.ChampionName == spell.ChampionName && d.GameObject == true && d.SpellType == SpellType.Spell);
-                        else
-                            return SpellDatabase.Database.FirstOrDefault(d => d.ChampionName == spell.ChampionName && d.Slot == spell.Slot && d.GameObject == false && d.SpellType == SpellType.Spell);
-                }
-
-                Chat.Print("error CODE GET_DATA " + spell.Name);
-                return SpellDatabase.Database.FirstOrDefault(d => d.Name == spell.Name);
+                return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error CODE GET_DATA " + spell.Name);
-                return SpellDatabase.Database.FirstOrDefault(d => d.Name == spell.Name);
+                e.ErrorMessage("CONVERT_COLOR", color.ToString());
+                return System.Drawing.Color.White;
             }
         }
         
@@ -250,8 +156,6 @@ namespace TimerBuddy
         {
             try
             {
-                Chat.Print("FINDING CASTER....", System.Drawing.Color.LightBlue);
-
                 Obj_AI_Base result;
 
                 if (database.SpellType == SpellType.Item)
@@ -259,7 +163,6 @@ namespace TimerBuddy
                     result = EntityManager.Heroes.AllHeroes.OrderBy(d => d.Position.Distance(sender.Position)).FirstOrDefault();
                     if (result != null)
                     {
-                        Chat.Print("Caster Item Near " + result.BaseSkinName, System.Drawing.Color.Purple);
                         return result;
                     }
                 }
@@ -269,7 +172,6 @@ namespace TimerBuddy
                     var caster = Program.CasterList.FirstOrDefault(c => c.SpellType == SpellType.SummonerSpell);
                     if (caster != null)
                     {
-                        Chat.Print("Caster SS " + caster.Caster.BaseSkinName, System.Drawing.Color.Red);
                         result = caster.Caster;
                         Program.CasterList.Remove(caster);
                         return caster.Caster;
@@ -291,7 +193,6 @@ namespace TimerBuddy
 
                     if (caster != null)
                     {
-                        Chat.Print("Caster " + caster.Caster.BaseSkinName, System.Drawing.Color.Red);
                         result = caster.Caster;
                         Program.CasterList.Remove(caster);
                         return caster.Caster;
@@ -300,18 +201,14 @@ namespace TimerBuddy
                 result = EntityManager.Heroes.AllHeroes.Where(d => d.BaseSkinName == database.ChampionName).OrderBy(d => d.Distance(sender.Position)).FirstOrDefault();
                 if (result != null)
                 {
-                    Chat.Print("Caster Near " + result.BaseSkinName, System.Drawing.Color.Purple);
                     return result;
                 }
-
-                Chat.Print("Failed to find caster " + database.Name);
-                Chat.Print("Caster " + Player.Instance.BaseSkinName, System.Drawing.Color.Red);
+                
                 return Player.Instance;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error CODE FIND_CASTER " + database.Name);
+                e.ErrorMessage("FIND_CASTER", database.Name);
                 return Player.Instance;
             }
         }
@@ -364,77 +261,92 @@ namespace TimerBuddy
                     if (hero != null)
                         return hero;
                 }
-
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE FIND_CASTER_WARD2 " + sender.Name, Color.LightBlue);
+                
                 return Player.Instance;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE FIND_CASTER_WARD " + sender.Name, Color.LightBlue);
+                e.ErrorMessage("FIND_CASTER_WARD", sender.Name);
                 return Player.Instance;
             }
         }
 
         public static string BaseObjectName(this GameObject sender)
         {
-            var baseObject = sender as Obj_AI_Base;
-            return baseObject == null ? sender.Name : baseObject.BaseSkinName;
+            try
+            {
+                var baseObject = sender as Obj_AI_Base;
+                return baseObject == null ? sender.Name : baseObject.BaseSkinName;
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("BASE_OBJECT_NAME");
+                return sender.Name;
+            }
         }
 
         public static void ShacoBoxActive(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (args.SData.Name == "ShacoBoxSpell")
-            {
-                var shacobox = Program.SpellList.FirstOrDefault(d => d.GameObject && sender.NetworkId == d.NetworkID && d.Cancel == false);
-
-                if (shacobox != null)
-                {
-                    shacobox.Cancel = true;
-                    shacobox.EndTime = 5000 + TickCount;
-                }
-
-                return;
-            }
-        }
-
-        public static void CastCancel(Spell list)
-        {
             try
             {
-                list.Cancel = true;
-                list.EndTime = TickCount + 2000;
+                if (args.SData.Name == "ShacoBoxSpell")
+                {
+                    var shacobox = Program.SpellList.FirstOrDefault(d => d.GameObject && sender.NetworkId == d.NetworkID && d.Cancel == false);
+
+                    if (shacobox != null)
+                    {
+                        shacobox.Cancel = true;
+                        shacobox.EndTime = 5000 + TickCount;
+                    }
+
+                    return;
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("error: CODE CANCEL");
+                e.ErrorMessage("SHACO_BOX_ACTIVE");
             }
         }
-
+        
         public static bool IsHero(this Obj_AI_Base unit)
         {
-            if (unit.IsMinion || unit.IsMonster || unit.IsWard())
+            try
+            {
+                if (unit.IsMinion || unit.IsMonster || unit.IsWard())
+                    return false;
+                return true;
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("IS_HERO", unit.BaseSkinName);
                 return false;
-            return true;
+            }
         }
 
         public static Vector3 KappaRoss(this Spell spell)
         {
-            Vector3 Kappa;
-            Vector3 vec3 = spell.CastPosition - spell.StartPosition;
-            var length = Math.Sqrt(Math.Pow(vec3.X, 2) + Math.Pow(vec3.Y, 2));
-
-            if (length > spell.Range)
+            try
             {
-                Kappa.X = vec3.X / (float)length;
-                Kappa.Y = vec3.Y / (float)length;
-                Kappa.Z = vec3.Z / (float)length;
+                Vector3 Kappa;
+                Vector3 vec3 = spell.CastPosition - spell.StartPosition;
+                var length = Math.Sqrt(Math.Pow(vec3.X, 2) + Math.Pow(vec3.Y, 2));
 
-                return Kappa * spell.Range + spell.StartPosition;
+                if (length > spell.Range)
+                {
+                    Kappa.X = vec3.X / (float)length;
+                    Kappa.Y = vec3.Y / (float)length;
+                    Kappa.Z = vec3.Z / (float)length;
+
+                    return Kappa * spell.Range + spell.StartPosition;
+                }
+
+                return spell.CastPosition;
             }
-
-            return spell.CastPosition;
+            catch (Exception e)
+            {
+                e.ErrorMessage("KAPPA_ROSS", spell.Name);
+                return spell.CastPosition;
+            }
         }
 
         public static void CloneTracker()
@@ -459,91 +371,6 @@ namespace TimerBuddy
             }
         }
 
-        public static void AddCheckBox(this Menu menu, string uid, string displayName, bool defaultvalue)
-        {
-            try
-            {
-                menu.Add(uid, new CheckBox(displayName, defaultvalue));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ADD_CHECKBOX " + displayName, Color.LightBlue);
-            }
-        }
-
-        public static void AddSlider(this Menu menu, string uid, string displayName, int a, int b, int c)
-        {
-            try
-            {
-                menu.Add(uid, new Slider(displayName, a, b, c));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ADD_SLIDER " + displayName, Color.LightBlue);
-            }
-        }
-
-        public static void AddBlank(this Menu menu, string uid)
-        {
-            try
-            {
-                menu.Add(uid, new CheckBox("Blank"));
-                menu[uid].Cast<CheckBox>().IsVisible = false;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ADD_BLANK " + uid, Color.LightBlue);
-            }
-        }
-
-        public static bool CheckboxValue(this Menu menu, string uid)
-        {
-            try
-            {
-                if (menu[uid].Cast<CheckBox>().CurrentValue)
-                    return true;
-
-                return false;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE CHECKBOX_VALUE " + uid, Color.LightBlue);
-                return false;
-            }
-        }
-
-        public static int SliderValue(this Menu menu, string uid)
-        {
-            try
-            {
-                return menu[uid].Cast<Slider>().CurrentValue;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE SLIDER_VALUE " + uid, Color.LightBlue);
-                return 0;
-            }
-        }
-
-        public static int ComboBoxValue(this Menu menu, string uid)
-        {
-            try
-            {
-                return menu[uid].Cast<ComboBox>().CurrentValue;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE COMBOBOX_VALUE " + uid, Color.LightBlue);
-                return 0;
-            }
-        }
-
         public static int ToInt(this DrawType type)
         {
             try
@@ -563,8 +390,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE DRAW_TYPE_TO_INT " + type.ToString(), Color.LightBlue);
+                e.ErrorMessage("TO_INT_DRAWTYPE", type.ToString());
                 return 0;
             }
         }
@@ -588,8 +414,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE IMPORTANCE_TO_INT " + type.ToString(), Color.LightBlue);
+                e.ErrorMessage("TO_INT_IMPORTANCE", type.ToString());
                 return 1;
             }
         }
@@ -611,8 +436,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE IMPORTANCE_TO_INT " + color.ToString(), Color.LightBlue);
+                e.ErrorMessage("TO_INT_COLOR", color.ToString());
                 return 0;
             }
         }
@@ -625,8 +449,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE GET_TEAM " + unit.BaseSkinName, Color.LightBlue);
+                e.ErrorMessage("GET_TEAM", unit.BaseSkinName);
                 return 0;
             }
         }
@@ -644,13 +467,12 @@ namespace TimerBuddy
                     case SC2Type.Jungle:
                         return "sc2" + sc2.DisplayName;
                 }
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE GET_MENU_CODE2 " + sc2.SpriteName.ToString(), Color.LightBlue);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE GET_MENU_CODE2 " + sc2.SpriteName.ToString(), Color.SpringGreen);
                 return "sc2" + sc2.DisplayName;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE GET_MENU_CODE " + sc2.SpriteName.ToString(), Color.LightBlue);
+                e.ErrorMessage("GET_MENU_CODE", sc2.SpriteName.ToString());
                 return "sc2" + sc2.DisplayName;
             }
         }
@@ -668,8 +490,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE GET_MENU_CODE " + sc2.SpriteName.ToString(), Color.LightBlue);
+                e.ErrorMessage("GET_DISPLAY_NAME", sc2.SpriteName.ToString());
                 return sc2.DisplayName;
             }
         }
@@ -683,8 +504,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE YELLOW_TRINKET_REMAIN_TIME " + unit.BaseSkinName, Color.LightBlue);
+                e.ErrorMessage("YELLOW_TRINKET_REMAIN_TIME");
                 return 60000f + 3.5f * (Player.Instance.Level - 1) * 1000f;
             }
         }
@@ -700,8 +520,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE HAS_SMITE " + unit.BaseSkinName, Color.LightBlue);
+                e.ErrorMessage("HAS_SMITE", unit.BaseSkinName);
                 return false;
             }
         }
@@ -714,9 +533,26 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
+                e.ErrorMessage("CLOCK_STYLE", seconds.ToString());
+                return TimeSpan.FromSeconds(seconds).ToString(@"m\:ss");
+            }
+        }
+
+        public static void ErrorMessage(this Exception e, string CODE, string moreInfo = "")
+        {
+            try
+            {
+                if (!Config.MiscMenu.CheckboxValue("error"))
+                    return;
+
                 Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE CLOCK_STYLE " + seconds, Color.LightBlue);
-                return seconds.ToString();
+                Chat.Print("<font color='#FF0000'>ERROR: </font>CODE " + CODE + " " + moreInfo, System.Drawing.Color.SpringGreen);
+            }
+            catch (Exception f)
+            {
+                Console.WriteLine(f);
+                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ERROR_MESSAGE", Color.SpringGreen);
+                Chat.Print("WTF Kappa Kappa Kappa", Color.Gold);
             }
         }
     }

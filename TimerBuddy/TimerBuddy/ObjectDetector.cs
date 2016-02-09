@@ -29,8 +29,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE OBJ_INIT", Color.LightBlue);
+                e.ErrorMessage("OBJECT_DETECTOR_INIT2");
             }
         }
         
@@ -71,15 +70,12 @@ namespace TimerBuddy
                         SpriteName = database.SpriteName,
                     });
 
-                    Chat.Print("Buff " + args.Buff.DisplayName + " " + sender.BaseSkinName, Color.LawnGreen);
-
                     return;
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE BUFF_GAIN " + args.Buff.DisplayName, Color.LightBlue);
+                e.ErrorMessage("BUFF_GAIN", args.Buff.DisplayName);
             }
         }
 
@@ -97,8 +93,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE BUFF_LOSE " + args.Buff.DisplayName, Color.LightBlue);
+                e.ErrorMessage("BUFF_LOSE", args.Buff.DisplayName);
             }
         }
 
@@ -149,15 +144,12 @@ namespace TimerBuddy
                         SpriteName = database.SpriteName,
                     });
 
-                    Chat.Print("GameObject " + sender.Name + " " + caster.BaseSkinName, Color.LawnGreen);
-
                     return;
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_CREATE " + sender.Name, Color.LightBlue);
+                e.ErrorMessage("ON_CREATE", sender.Name);
             }
         }
 
@@ -167,8 +159,6 @@ namespace TimerBuddy
             {
                 if (!sender.IsValid)
                     return;
-                SC2TimerManager.SC2JungleDetector(sender, args);
-
 
                 Program.SpellList.RemoveAll(d => d.GameObject && d.NetworkID == sender.NetworkId/* && d.Name == sender.Name && d.ObjectName == sender.BaseObjectName()*/);
                 DrawManager.Line.RemoveAll(d => d.GameObject && d.NetworkID == sender.NetworkId);
@@ -177,8 +167,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_DELETE " + sender.Name, Color.LightBlue);
+                e.ErrorMessage("ON_DELETE", sender.Name);
             }
         }
 
@@ -190,9 +179,7 @@ namespace TimerBuddy
                     return;
 
                 Utility.ShacoBoxActive(sender, args);
-
-                Core.DelayAction(() => SC2TimerManager.SC2TimerDetector(sender, args), 1000);
-
+                
                 var database = SpellDatabase.Database.FirstOrDefault(d => d.GameObject == false && d.Buff == false && 
                 (d.SpellType == SpellType.Spell && d.ChampionName == sender.BaseSkinName && d.Slot == args.Slot) ||
                 ((d.SpellType == SpellType.Item || d.SpellType == SpellType.Blink) && d.Name == args.SData.Name));
@@ -230,8 +217,6 @@ namespace TimerBuddy
                         SpriteName = database.SpriteName,
                     });
 
-                    Chat.Print("Spell " + sender.BaseSkinName + " " + args.Slot + " | " + args.SData.Name, Color.LawnGreen);
-
                     return;
                 }
 
@@ -257,7 +242,7 @@ namespace TimerBuddy
                             Slot = spellDatabase.Slot,
                             EndTime = 10000 + Utility.TickCount,
                         });
-                    //Chat.Print("CasterList " + sender.BaseSkinName + " | " + spellDatabase.Slot.ToString(), Color.Red);
+
                     return;
                 }
 
@@ -271,14 +256,13 @@ namespace TimerBuddy
                         Name = wardDatabase.Name,
                         EndTime = 2000 + Utility.TickCount,
                     });
-                    //Chat.Print("WardCasterList " + sender.BaseSkinName + " | " + wardDatabase.ObjectName, Color.Red);
+
                     return;
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_SPELLCAST " + sender.BaseSkinName + " " + args.Slot, Color.LightBlue);
+                e.ErrorMessage("OBJECT_DETECTOR_SPELLCAST", sender.BaseSkinName + " " + args.Slot);
             }
         }
 
@@ -295,9 +279,7 @@ namespace TimerBuddy
                     Program.CasterList.RemoveAll(d => d.EndTime < Utility.TickCount);
                 if (Program.WardCasterList.Count > 0)
                     Program.WardCasterList.RemoveAll(d => d.EndTime < Utility.TickCount);
-
-                SC2TimerManager.SC2TimerRemover();
-
+                
                 foreach (var hero in EntityManager.Heroes.AllHeroes.Where(h => h.IsValid() && h.VisibleOnScreen))
                 {
                     foreach (var buff in hero.Buffs.Where(b => b.IsValid()))
@@ -311,8 +293,7 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE ON_TICK", Color.LightBlue);
+                e.ErrorMessage("OBJECT_DETECTOR_ONTICK");
             }
         }
 
@@ -324,12 +305,11 @@ namespace TimerBuddy
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE OBJECT_DETECTOR", Color.LightBlue);
+                e.ErrorMessage("OBJECT_DETECTOR_INIT");
             }
         }
 
-        public static void WardDetector(GameObject sender, EventArgs args)
+        private static void WardDetector(GameObject sender, EventArgs args)
         {
             try
             {
@@ -366,15 +346,13 @@ namespace TimerBuddy
                         SpriteName = database.SpriteName,
                     })
                     , database.ObjectName == "YellowTrinket" ? 500 : 0);
-                    Chat.Print("Ward " + sender.BaseObjectName() + " " + caster.BaseSkinName, Color.LawnGreen);
 
                     return;
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Chat.Print("<font color='#FF0000'>ERROR:</font> CODE WARD_DETECT", Color.LightBlue);
+                e.ErrorMessage("WARD_DETECTOR");
             }
         }
     }
