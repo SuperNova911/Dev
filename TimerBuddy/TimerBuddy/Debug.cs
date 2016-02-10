@@ -41,12 +41,12 @@ namespace TimerBuddy
 
         private static void GameObject_OnDelete(GameObject sender, EventArgs args)
         {
-            if (!sender.IsValid || sender.Distance(Player.Instance) > 1000)
+            if (!sender.IsValid)
                 return;
 
             if (sender.Name.Contains("NAV") || sender.Name.Contains("Odin") || sender.Name.Contains("Shopkeeper") || 
-                sender.GetType().Name == "MissileClient" || sender.GetType().Name == "DrawFX" || sender.Name.Contains("SRU") || sender.Name.Contains("empty.troy") || sender.Name.Contains("LevelProp")
-                 || sender.Name.Contains("FeelNoPain") || sender.Name.Contains("LaserSight"))
+                sender.GetType().Name == "MissileClient" || sender.GetType().Name == "DrawFX" || sender.Name.Contains("empty.troy") || sender.Name.Contains("LevelProp")
+                 || sender.Name.Contains("FeelNoPain") || sender.Name.Contains("LaserSight") || sender.Name.Contains("SRU"))
                 return;
 
             Console.WriteLine("Delete\tType: {0} | Name: {1}", sender.GetType().Name, sender.Name);
@@ -54,15 +54,15 @@ namespace TimerBuddy
 
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            Chat.Print(sender.BaseSkinName + " | " + args.Slot.ToString() + " | " + args.SData.Name, System.Drawing.Color.IndianRed);
+            //Chat.Print(sender.BaseSkinName + " | " + args.Slot.ToString() + " | " + args.SData.Name, System.Drawing.Color.IndianRed);
         }
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
         {
-            if (!sender.IsValid/* || sender.Distance(Player.Instance) > 1000*/)
+            if (!sender.IsValid)
                 return;
 
-            if (sender.Name.Contains("Minion") || sender.GetType().Name == "MissileClient" || sender.Name.Contains("SRU") || sender.Name.Contains("FeelNoPain") || sender.Name.Contains("crystal_beam"))
+            if (sender.Name.Contains("Minion") || sender.Name.Contains("_Turret_Cas.troy") || sender.Name.Contains("SRU") || sender.GetType().Name == "MissileClient" || sender.Name.Contains("FeelNoPain") || sender.Name.Contains("crystal_beam"))
                 return;
             
             Console.WriteLine("Add\tType: {0} | Name: {1} | NetID: {2} | objectName: {3}", sender.GetType().Name, sender.Name, sender.NetworkId, sender.BaseObjectName());
@@ -73,7 +73,7 @@ namespace TimerBuddy
             if (!sender.IsMe)
                 return;
 
-            Chat.Print(args.Buff.DisplayName + " " + args.Buff.Name, System.Drawing.Color.LawnGreen);
+            //Chat.Print(args.Buff.DisplayName + " " + args.Buff.Name, System.Drawing.Color.LawnGreen);
         }
 
         private static void Obj_AI_Base_OnBuffUpdate(Obj_AI_Base sender, Obj_AI_BaseBuffUpdateEventArgs args)
@@ -81,7 +81,7 @@ namespace TimerBuddy
             if (!sender.IsMe)
                 return;
 
-            Chat.Print(args.Buff.DisplayName, System.Drawing.Color.Orange);
+            //Chat.Print(args.Buff.DisplayName, System.Drawing.Color.Orange);
         }
 
         private static void Obj_AI_Base_OnBuffLose(Obj_AI_Base sender, Obj_AI_BaseBuffLoseEventArgs args)
@@ -89,7 +89,7 @@ namespace TimerBuddy
             if (!sender.IsMe)
                 return;
 
-            Chat.Print(args.Buff.DisplayName, System.Drawing.Color.Red);
+            //Chat.Print(args.Buff.DisplayName, System.Drawing.Color.Red);
         }
 
         public static void Initialize()

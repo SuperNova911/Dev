@@ -31,6 +31,7 @@ namespace TimerBuddy
                 Config.Initialize();
                 TextureDraw.Initialize();
                 ObjectDetector.Initialize();
+                SC2TimerManager.Initialize();
                 DrawManager.Initialize();
 
                 Drawing.OnEndScene += Drawing_OnEndScene;

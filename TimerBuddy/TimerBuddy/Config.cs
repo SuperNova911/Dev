@@ -10,7 +10,7 @@ namespace TimerBuddy
 {
     internal class Config
     {
-        public static Menu Menu, SpellMenu, DebugMenu, SummonerMenu, TrapMenu, ItemMenu, WardMenu, SC2Menu, MiscMenu;
+        public static Menu Menu, SpellMenu, SummonerMenu, TrapMenu, ItemMenu, WardMenu, SC2Menu, MiscMenu;
         public static List<string> MenuChecker = new List<string>();
         
         static Config()
@@ -43,7 +43,7 @@ namespace TimerBuddy
 
                 Menu.AddGroupLabel("Additional Features");
                 Menu.AddCheckBox("blinkTracker", "Blink Tracker", true);
-                Menu.AddCheckBox("cloneTracker", "Clone Tracker", false);
+                Menu.AddCheckBox("cloneTracker", "Clone Tracker (WIP)", false);
                 Menu.AddSeparator();
 
                 Menu.AddGroupLabel("Credits");
@@ -180,7 +180,7 @@ namespace TimerBuddy
                 MiscMenu.AddSeparator();
                 MiscMenu.AddGroupLabel("Blink Tracker");
                 MiscMenu.AddCheckBox("blinkAlly", "Draw Ally", false);
-                MiscMenu.AddCheckBox("blinlEnemy", "Draw Enemy", true);
+                MiscMenu.AddCheckBox("blinkEnemy", "Draw Enemy", true);
                 #endregion
                 /*
                 DebugMenu = Menu.AddSubMenu("Debug");
