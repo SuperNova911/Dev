@@ -368,23 +368,22 @@ namespace TimerBuddy
                 if (!hero.VisibleOnScreen || !hero.IsHPBarRendered || !hero.IsHero())
                     return;
 
-                Vector2 mainpos = hero.HPBarPosition;
-                Vector2 startpos = hero.IsMe ? mainpos + new Vector2(25, 25) : mainpos + new Vector2(3, 32);
-
                 float length = spell.GetRemainTime() / spell.GetFullTime() * 100f;
+
+                Vector2 mainpos = hero.HPBarPosition;
+                Vector2 startpos = hero.IsMe ? mainpos + new Vector2(26, 25) : mainpos + new Vector2(1, 30);
                 Vector2 endpos = startpos + new Vector2(length, 0);
                 Vector2 endpos2 = endpos + new Vector2(0, 6);
-
+                Vector2 textpos = endpos2 + new Vector2(10, 3);
+                Vector2 spritepos = textpos + new Vector2(-18, 0);
+                
                 Color lineColor = spell.GetColor().ConvertColor();
                 SharpDX.Color textColor = spell.GetColor();
 
                 Drawing.DrawLine(startpos, endpos, 1f, lineColor);
                 Drawing.DrawLine(endpos, endpos2, 1f, lineColor);
-
-                Vector2 textpos = endpos2 + new Vector2(10, 3);
-                //Drawing.DrawText(textpos, textColor, spell.GetRemainTimeString(), 10);
+                
                 LineFont.DrawText(null, spell.GetRemainTimeString(), (int)textpos.X, (int)textpos.Y, textColor);
-                Vector2 spritepos = textpos + new Vector2(-18, 0);
                 TextureDraw.DrawSprite(spritepos, spell);
             }
             catch (Exception e)
