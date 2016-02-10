@@ -187,9 +187,9 @@ namespace TimerBuddy
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Cassiopeia", Name = "CassiopeiaTwinFangDebuff", MenuCode = "Cassiopeia E", SpriteName = Resources.CassiopeiaE, Importance = Importance.Low },
 
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Corki", Name = "CorkiLoaded", MenuCode = "Corki Package", SpriteName = Resources.CorkiBoom },
-                //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Corki", Name = "", MenuCode = "Corki Q", SpriteName = Resources.CorkiQ },
-                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Corki", Name = "Corki_Base_W_tar.troy", EndTime = 2000, MenuCode = "Corki W", SpriteName = Resources.CorkiW, Importance = Importance.Low },
-                //new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Corki", Name = "", EndTime = 5000, MenuCode = "Corki W", SpriteName = Resources.CorkiW },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Corki", Name = "PhosphorusBomb", MenuCode = "Corki Q", SpriteName = Resources.CorkiQ, Importance = Importance.Low },
+                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Corki", Name = "Corki_Base_W_tar.troy", EndTime = 2000, MenuCode = "Corki W", SpriteName = Resources.CorkiW, Importance = Importance.Low, DrawType = DrawType.Number },
+                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Corki", Name = "Corki_Base_W_AoE_ground.troy", EndTime = 5000, MenuCode = "Corki W", SpriteName = Resources.CorkiW, Importance = Importance.Low, DrawType = DrawType.Number },
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.E, ChampionName = "Corki", EndTime = 4000, MenuCode = "Corki E", SpriteName = Resources.CorkiE },
 
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Darius", Name = "DariusHemo", MenuCode = "Darius Passive", SpriteName = Resources.DariusPassive },
@@ -666,9 +666,7 @@ namespace TimerBuddy
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.R, GameObject = true, ChampionName = "Zed", Name = "Zed_Base_R_cloneswap_buf", EndTime = 6000, MenuCode = "Zed R", SpriteName = Resources.ZedR, Importance = Importance.High },
                 //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Zed", Name = "", MenuCode = "Zed R", SpriteName = Resources.ZedR },
                 
-                //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Ziggs", Name = "", MenuCode = "Ziggs Passive", SpriteName = Resources.ZiggsP },
-                //new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Ziggs", Name = "", EndTime = 4000, MenuCode = "Ziggs W", SpriteName = Resources.ZiggsW },
-                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.E, ChampionName = "Ziggs", EndTime = 10000, SkillShot = true, MenuCode = "Ziggs E", SpriteName = Resources.ZiggsE },
+                new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, GameObject = true, ChampionName = "Ziggs", Name = "Ziggs_Base_W_aoe_", EndTime = 4000, MenuCode = "Ziggs W", SpriteName = Resources.ZiggsW, Importance = Importance.High },
 
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.Q, GameObject = true, ChampionName = "Zilean", Name = "Zilean_Base_Q_Indicator_", EndTime = 3000, MenuCode = "Zilean Q", SpriteName = Resources.ZileanQ, Importance = Importance.High },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Zilean", Name = "TimeWarp", MenuCode = "Zilean E", SpriteName = Resources.ZileanE },
