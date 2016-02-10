@@ -167,8 +167,15 @@ namespace TimerBuddy
 
                 //new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_Red", FullTime = 300000, DisplayName = "Red Brambleback", SpriteName = Resources.Red_Brambleback_BIG },
                 //new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_Blue", FullTime = 300000, DisplayName = "Blue Sentinel", SpriteName = Resources.Blue_Sentinel_BIG },
-                new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_Dragon_death_sound.troy", FullTime = 360000 - 2600, DisplayName = "Dragon", SpriteName = Resources.Dragon_BIG },
-                new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_Baron_death_sound.troy", FullTime = 420000 - 3000, DisplayName = "Baron Nashor", SpriteName = Resources.Baron_Nashor_BIG },
+                new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_JungleBuff_Dragon_Activation_Buf.troy", FullTime = 360000, DisplayName = "Dragon", SpriteName = Resources.Dragon_BIG },
+                new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_JungleBuff_Baron_SiegeMin_Cas.troy", FullTime = 420000, DisplayName = "Baron Nashor", SpriteName = Resources.Baron_Nashor_BIG },
+
+                //Add     Type: Obj_GeneralParticleEmitter | Name: SRU_JungleBuff_Dragon_Activation_Buf_avatar.troy | NetID: 1073749625 | objectName: SRU_JungleBuff_Dragon_Activation_Buf_avatar.troy
+                //Add     Type: Obj_GeneralParticleEmitter | Name: SRU_JungleBuff_Dragon_Activation_Buf.troy | NetID: 1073749624 | objectName: SRU_JungleBuff_Dragon_Activation_Buf.troy
+                //Delete  Type: Obj_GeneralParticleEmitter | Name: SRU_JungleBuff_Dragon_Activation_Buf.troy
+                //Delete  Type: Obj_GeneralParticleEmitter | Name: SRU_JungleBuff_Dragon_Activation_Buf_avatar.troy
+                //SRU_JungleBuff_Baron_SiegeMin_Cas.troy
+                //
             };
         }
     }
@@ -236,7 +243,7 @@ namespace TimerBuddy
             try
             {
                 Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
-                GameObject.OnDelete += GameObject_OnDelete;
+                GameObject.OnCreate += GameObject_OnCreate;
                 Game.OnTick += Game_OnTick;
                 Drawing.OnDraw += Drawing_OnDraw;
                 Drawing.OnEndScene += Drawing_OnEndScene;
@@ -247,7 +254,7 @@ namespace TimerBuddy
             }            
         }
 
-        private static void GameObject_OnDelete(GameObject sender, EventArgs args)
+        private static void GameObject_OnCreate(GameObject sender, EventArgs args)
         {
             try
             {
@@ -447,12 +454,11 @@ namespace TimerBuddy
                     }
                 }
 
-                if (HeroList.Count > 0)
-                {
-                    var database = HeroList.FirstOrDefault(d => d.Endtime < Utility.TickCount);
+                var herolist = HeroList.FirstOrDefault(d => d.Hero.Distance(Player.Instance) > 3500 && d.Endtime < Utility.TickCount);
 
-                    if (database != null)
-                        HeroList.Remove(database);
+                if (herolist != null)
+                {
+                    HeroList.Remove(herolist);
                 }
             }
             catch (Exception e)
@@ -622,6 +628,7 @@ namespace TimerBuddy
                         Global = database.Global,
                         SpriteName = database.SpriteName,
                     });
+
                     return;
                 }
             }
@@ -638,7 +645,14 @@ namespace TimerBuddy
                 if (!Config.SC2Menu.CheckboxValue("jungleEnable"))
                     return;
 
-                var database = SC2TimerDatabase.Database.FirstOrDefault(d => d.SC2Type == SC2Type.Jungle && d.Name == sender.BaseObjectName());
+                var check = Program.SC2TimerList.FirstOrDefault(d => d.SC2Type == SC2Type.Jungle && d.Name == sender.Name);
+
+                if (check != null)
+                {
+                    return;
+                }
+
+                var database = SC2TimerDatabase.Database.FirstOrDefault(d => d.SC2Type == SC2Type.Jungle && d.Name == sender.Name);
 
                 if (database != null)
                 {
@@ -678,6 +692,18 @@ namespace TimerBuddy
             catch (Exception e)
             {
                 e.ErrorMessage("SC2TIMER_REMOVER");
+            }
+        }
+
+        public static void Initialize()
+        {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("SC2TIMER_INIT");
             }
         }
     }
