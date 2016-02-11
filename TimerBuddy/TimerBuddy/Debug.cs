@@ -1,16 +1,7 @@
 ﻿using EloBuddy;
-using EloBuddy.SDK;
-using EloBuddy.SDK.Enumerations;
-using EloBuddy.SDK.Events;
-using EloBuddy.SDK.Menu;
-using EloBuddy.SDK.Menu.Values;
-using EloBuddy.SDK.Rendering;
 using SharpDX;
-using SharpDX.Direct3D9;
+//using EloBuddy.SDK.Rendering;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Color = SharpDX.Color;
 
 namespace TimerBuddy
 {
@@ -37,11 +28,19 @@ namespace TimerBuddy
         private static void Drawing_OnEndScene(EventArgs args)
         {
             //DrawManager.Test2();
+            var gap = 0;
+            foreach (var list in Program.SC2TimerList)
+            {
+                Drawing.DrawText(Game.CursorPos2D + new Vector2(0, gap), System.Drawing.Color.Orange,
+                    string.Format("DisplayName: {0} | SC2Type: {1} | EndTime: {2}", list.DisplayName, list.SC2Type.ToString(), ((list.EndTime - Utility.TickCount) / 1000f)), 10);
+                gap += 20;
+            }
+            
         }
 
         private static void GameObject_OnDelete(GameObject sender, EventArgs args)
         {
-            if (!sender.IsValid)
+            if (!sender.IsValid || !sender.Name.Contains("Baron"))
                 return;
 
             if (sender.Name.Contains("NAV") || sender.Name.Contains("Odin") || sender.Name.Contains("Shopkeeper") || 
@@ -59,7 +58,7 @@ namespace TimerBuddy
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
         {
-            if (!sender.IsValid)
+            if (!sender.IsValid || !sender.Name.Contains("Baron"))
                 return;
 
             if (sender.Name.Contains("Minion") || sender.Name.Contains("_Turret_Cas.troy") || sender.Name.Contains("SRU") || sender.GetType().Name == "MissileClient" || sender.Name.Contains("FeelNoPain") || sender.Name.Contains("crystal_beam"))

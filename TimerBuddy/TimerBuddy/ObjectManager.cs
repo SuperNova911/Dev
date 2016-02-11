@@ -1,21 +1,9 @@
-﻿using System;
+﻿using EloBuddy;
+using SharpDX;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using EloBuddy;
-using EloBuddy.SDK;
-using EloBuddy.SDK.Enumerations;
-using EloBuddy.SDK.Events;
-using EloBuddy.SDK.Menu;
-using EloBuddy.SDK.Menu.Values;
-using EloBuddy.SDK.Rendering;
-using EloBuddy.SDK.Utils;
-using SharpDX;
 using TimerBuddy.Properties;
 using Color = SharpDX.Color;
-using Font = System.Drawing.Font;
-using Sprite = EloBuddy.SDK.Rendering.Sprite;
 
 namespace TimerBuddy
 {
@@ -565,10 +553,10 @@ namespace TimerBuddy
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.Q, ChampionName = "Tristana", EndTime = 5000, MenuCode = "Tristana Q", SpriteName = Resources.TristanaQ },
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Tristana", Name = "TristanaEChargeSound", MenuCode = "Tristana E", SpriteName = Resources.TristanaE, Importance = Importance.High },
 
-                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Trundle", Name = "TrundleQDebuff", MenuCode = "Trundle Q", SpriteName = Resources.TrundleQ },
+                //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Trundle", Name = "TrundleQDebuff", MenuCode = "Trundle Q", SpriteName = Resources.TrundleQ },
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.W, ChampionName = "Trundle", EndTime = 8000, SkillShot = true, MenuCode = "Trundle W", SpriteName = Resources.TrundleW, Importance = Importance.High },
                 new Spell { SpellType = SpellType.Spell, Slot = SpellSlot.E, ChampionName = "Trundle", EndTime = 6000, SkillShot = true, MenuCode = "Trundle E", SpriteName = Resources.TrundleE, Importance = Importance.Low },
-                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Trundle", Name = "TrundleCircleSlow", MenuCode = "Trundle E", SpriteName = Resources.TrundleE },
+                new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Trundle", Name = "TrundleCircleSlow", MenuCode = "Trundle E", SpriteName = Resources.TrundleE, Importance = Importance.Low },
                 //new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Trundle", Name = "", MenuCode = "Trundle R", SpriteName = Resources.TrundleR },
                 
                 new Spell { SpellType = SpellType.Spell, Buff = true, ChampionName = "Tryndamere", Name = "Mocking Shout", MenuCode = "Tryndamere W", SpriteName = Resources.TryndamereW },

@@ -1,7 +1,7 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
-using EloBuddy.SDK.Rendering;
+//using EloBuddy.SDK.Rendering;
 using SharpDX;
 using System;
 using System.Linq;
@@ -110,6 +110,29 @@ namespace TimerBuddy
             {
                 e.ErrorMessage("GET_DRAW_TYPE", spell.Name);
                 return DrawType.Default;
+            }
+        }
+
+        public static Importance GetImportance(this Spell spell)
+        {
+            try
+            {
+                switch (spell.SpellType)
+                {
+
+                    case SpellType.Spell:
+                        return Config.SpellMenu.GetImportance(spell.MenuCode + "importance");
+
+                    case SpellType.SummonerSpell:
+                        return Config.SummonerMenu.GetImportance(spell.MenuCode + "importance");
+                }
+
+                return Importance.Medium;
+            }
+            catch (Exception e)
+            {
+                e.ErrorMessage("GET_IMPORTANCE", spell.Name);
+                return Importance.Medium;
             }
         }
 
@@ -358,7 +381,7 @@ namespace TimerBuddy
                     foreach (var enemy in EntityManager.Heroes.AllHeroes.Where(d => !d.IsDead && d.VisibleOnScreen &&
                     (d.BaseSkinName == "Leblanc" || d.BaseSkinName == "Shaco" || d.BaseSkinName == "MonkeyKing" || d.BaseSkinName == "Yorick")))
                     {
-                        new Circle { Color = System.Drawing.Color.Gold, Radius = enemy.BoundingRadius, BorderWidth = 4 }.Draw(enemy.Position);
+                        // Kappa new Circle { Color = System.Drawing.Color.Gold, Radius = enemy.BoundingRadius, BorderWidth = 4 }.Draw(enemy.Position);
                     }
                 }
             }

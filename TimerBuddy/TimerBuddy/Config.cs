@@ -53,19 +53,19 @@ namespace TimerBuddy
                 #endregion
 
                 #region SC2Menu
-                SC2Menu = Menu.AddSubMenu("Notifications");
+                SC2Menu = Menu.AddSubMenu("Time Tracking List");
                 SC2Menu.AddGroupLabel("Dragon, Baron Nashor Spawn Time");
                 SC2Menu.AddCheckBox("jungleEnable", "Enable", true);
                 SC2Menu.AddBlank("blank");
-                SC2Menu.AddCheckBox("jungle", "Notifications when 10 seconds left", true);
-                SC2Menu.AddCheckBox("jungle1min", "Notifications when 1 minute left", true);
+                SC2Menu.AddCheckBox("jungle", "Alarm 10 seconds before", true);
+                SC2Menu.AddCheckBox("jungle1min", "Alarm 1 minute before", true);
                 SC2Menu.AddSeparator();
                 SC2Menu.AddGroupLabel("Spell Cooldown");
                 SC2Menu.AddCheckBox("ult", "Ultimate (Near heros)", true);
                 SC2Menu.AddCheckBox("globalUlt", "Global Ultimate", true);
                 SC2Menu.AddCheckBox("ss", "Summoner Spell (Player Only)", true);
                 SC2Menu.AddSeparator();
-                SC2Menu.AddGroupLabel("Global Notification");
+                SC2Menu.AddGroupLabel("Global Alarms");
                 foreach (var database in SC2TimerDatabase.Database.Where(d => heroName.Contains(d.ChampionName) && d.SC2Type == SC2Type.Spell))
                     SC2Menu.AddCheckBox("sc2global" + database.ChampionName, database.ChampionName + " " + database.Slot.ToString(), database.Global);
                 SC2Menu.AddSeparator();

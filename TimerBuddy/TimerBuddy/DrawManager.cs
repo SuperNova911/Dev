@@ -1,7 +1,7 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
-using EloBuddy.SDK.Rendering;
+//using EloBuddy.SDK.Rendering;
 using SharpDX;
 using SharpDX.Direct3D9;
 using System;
@@ -333,7 +333,10 @@ namespace TimerBuddy
         {
             try
             {
-                foreach (var list in Timer.Where(d => d.EndTime >= (d.Buff ? Game.Time : Utility.TickCount)))
+                int minImportance = Config.Menu.ComboBoxValue("minImportance");
+
+                foreach (var list in Timer.Where(d => d.EndTime >= (d.Buff ? Game.Time : Utility.TickCount) &&
+                ((d.SpellType == SpellType.Spell || d.SpellType == SpellType.SummonerSpell) ? d.GetImportance().ToInt() >= minImportance : true)))
                 {
                     DrawTimer(list);
                 }
@@ -348,7 +351,10 @@ namespace TimerBuddy
         {
             try
             {
-                foreach (var list in TimerLine.Where(d => d.EndTime >= (d.Buff ? Game.Time : Utility.TickCount)))
+                int minImportance = Config.Menu.ComboBoxValue("minImportance");
+
+                foreach (var list in TimerLine.Where(d => d.EndTime >= (d.Buff ? Game.Time : Utility.TickCount) &&
+                ((d.SpellType == SpellType.Spell || d.SpellType == SpellType.SummonerSpell) ? d.GetImportance().ToInt() >= minImportance : true)))
                 {
                     DrawTimerLine(list);
                 }
@@ -477,7 +483,7 @@ namespace TimerBuddy
                     if (spell.Team == Team.Ally && Config.TrapMenu.CheckboxValue("circleOnlyEnemy"))
                         return;
 
-                    Circle.Draw(spell.GetColor(), spell.Object.BoundingRadius, 4, spell.Object.Position);
+                    // Kappa Circle.Draw(spell.GetColor(), spell.Object.BoundingRadius, 4, spell.Object.Position);
                 }
             }
             catch (Exception e)
@@ -513,7 +519,8 @@ namespace TimerBuddy
                 Drawing.DrawLine(Drawing.WorldToScreen(startpos), Drawing.WorldToScreen(endpos), 2, spell.Color.ConvertColor());
                 Drawing.DrawText(Drawing.WorldToScreen(endpos) + new Vector2(-20, 15), Color.White, spell.Caster.BaseSkinName, 10);
                 if (DrawBlinkFix == false)
-                    new Circle { Color = spell.Color.ConvertColor(), Radius = 30f, BorderWidth = 1 }.Draw(endpos);
+                    // Kappa new Circle { Color = spell.Color.ConvertColor(), Radius = 30f, BorderWidth = 1 }.Draw(endpos);
+                    ;
             }
             catch (Exception e)
             {
@@ -556,7 +563,7 @@ namespace TimerBuddy
 
                 if (Config.WardMenu.CheckboxValue(spell.MenuCode + "drawCircle") && DrawWardFix == false)
                 {
-                    Circle.Draw(spell.GetColor(), 50, 4, spell.Object.Position);
+                    // Kappa Circle.Draw(spell.GetColor(), 50, 4, spell.Object.Position);
                     //new Circle { Color = spell.Color.ConvertColor(), Radius = 50f, BorderWidth = 2 }.Draw(spell.Object.Position);
                 }
             }

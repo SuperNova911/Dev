@@ -168,7 +168,7 @@ namespace TimerBuddy
                 //new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_Red", FullTime = 300000, DisplayName = "Red Brambleback", SpriteName = Resources.Red_Brambleback_BIG },
                 //new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_Blue", FullTime = 300000, DisplayName = "Blue Sentinel", SpriteName = Resources.Blue_Sentinel_BIG },
                 new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_JungleBuff_Dragon_Activation_Buf.troy", FullTime = 360000, DisplayName = "Dragon", SpriteName = Resources.Dragon_BIG },
-                new SC2Timer { SC2Type = SC2Type.Jungle, Name = "SRU_JungleBuff_Baron_SiegeMin_Cas.troy", FullTime = 420000, DisplayName = "Baron Nashor", SpriteName = Resources.Baron_Nashor_BIG },
+                new SC2Timer { SC2Type = SC2Type.Jungle, Name = "HandOfBaron", FullTime = 420000, DisplayName = "Baron Nashor", SpriteName = Resources.Baron_Nashor_BIG },
 
                 //Add     Type: Obj_GeneralParticleEmitter | Name: SRU_JungleBuff_Dragon_Activation_Buf_avatar.troy | NetID: 1073749625 | objectName: SRU_JungleBuff_Dragon_Activation_Buf_avatar.troy
                 //Add     Type: Obj_GeneralParticleEmitter | Name: SRU_JungleBuff_Dragon_Activation_Buf.troy | NetID: 1073749624 | objectName: SRU_JungleBuff_Dragon_Activation_Buf.troy
@@ -247,11 +247,17 @@ namespace TimerBuddy
                 Game.OnTick += Game_OnTick;
                 Drawing.OnDraw += Drawing_OnDraw;
                 Drawing.OnEndScene += Drawing_OnEndScene;
+                BaronDetector();
             }
             catch (Exception e)
             {
                 e.ErrorMessage("SC2TIMER_MANAGER_INIT");
             }            
+        }
+
+        private static void Obj_AI_Base_OnBuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)
+        {
+            throw new NotImplementedException();
         }
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
@@ -273,7 +279,7 @@ namespace TimerBuddy
         {
             try
             {
-                Core.DelayAction(() => SC2TimerDetector(sender, args), 1000);
+                Core.DelayAction(() => SC2TimerDetector(sender, args), 3000);
             }
             catch (Exception e)
             {
@@ -396,7 +402,6 @@ namespace TimerBuddy
         {
             try
             {
-                bool menuMe = true;
                 bool menuSS = Config.SC2Menu.CheckboxValue("ss");
                 bool menuJungle = Config.SC2Menu.CheckboxValue("jungleEnable");
 
@@ -410,7 +415,7 @@ namespace TimerBuddy
                 {
                     bool menuGlobal = Config.SC2Menu.CheckboxValue("sc2global" + sc2.ChampionName);
 
-                    if (sc2.Caster.IsMe && menuMe)
+                    if (sc2.Caster.IsMe)
                         return true;
 
                     if (sc2.Global && menuGlobal)
@@ -433,9 +438,9 @@ namespace TimerBuddy
         {
             try
             {
-                if (HeroList.Count < 4)
+                if (HeroList.Count < 5)
                 {
-                    foreach (var hero in EntityManager.Heroes.AllHeroes.Where(d => d.Position.Distance(Player.Instance.Position) < 3500).OrderBy(d => d.Distance(Player.Instance)))
+                    foreach (var hero in EntityManager.Heroes.AllHeroes.Where(d => d.Position.Distance(Player.Instance.Position) < 4000).OrderBy(d => d.Distance(Player.Instance)))
                     {
                         int ally = 0;
                         int enemy = 0;
@@ -445,16 +450,16 @@ namespace TimerBuddy
                             enemy++;
 
                         var database = HeroList.FirstOrDefault(d => d.Hero == hero);
-                        if (database == null && HeroList.Count < 4 && ((hero.IsAlly && ally < 2) || (hero.IsEnemy && enemy < 2)))
+                        if (database == null && HeroList.Count < 4 && ((hero.IsAlly && ally < 3) || (hero.IsEnemy && enemy < 2)))
                             HeroList.Add(new HeroList
                             {
                                 Hero = hero,
-                                Endtime = 60000 + Utility.TickCount
+                                Endtime = 90000 + Utility.TickCount
                             });
                     }
                 }
 
-                var herolist = HeroList.FirstOrDefault(d => d.Hero.Distance(Player.Instance) > 3500 && d.Endtime < Utility.TickCount);
+                var herolist = HeroList.FirstOrDefault(d => d.Hero.Distance(Player.Instance) > 4000 && d.Endtime > Utility.TickCount);
 
                 if (herolist != null)
                 {
@@ -598,7 +603,7 @@ namespace TimerBuddy
                     check.StartTime = Utility.TickCount;
                     check.StartTime = Utility.TickCount;
                     check.EndTime = cooldown + Utility.TickCount;
-
+                    
                     return;
                 }
 
@@ -680,13 +685,42 @@ namespace TimerBuddy
             }
         }
 
+        private static void BaronDetector()
+        {
+            foreach (var hero in EntityManager.Heroes.AllHeroes.Where(d => d.IsValid && d.VisibleOnScreen))
+            {
+                var buff = hero.Buffs.FirstOrDefault(d => d.DisplayName == "HandOfBaron");
+
+                if (buff != null && Program.SC2TimerList.FirstOrDefault(d => d.Name == "HandOfBaron") == null)
+                {
+                    var database = SC2TimerDatabase.Database.FirstOrDefault(d => d.SC2Type == SC2Type.Jungle && d.Name == "HandOfBaron");
+                    var endtime = (buff.EndTime - Game.Time) * 1000 + 240000;
+                    Program.SC2TimerList.Add(new SC2Timer
+                    {
+                        SC2Type = SC2Type.Jungle,
+                        Team = Team.Neutral,
+                        Name = "HandOfBaron",
+                        MenuCode = database.GetMenuCode(),
+                        DisplayName = database.DisplayName,
+                        FullTime = database.FullTime,
+                        StartTime = buff.StartTime * 1000f,
+                        EndTime = Utility.TickCount + endtime,
+                        Global = true,
+                        SpriteName = database.SpriteName,
+                    });
+
+                }
+            }
+            Core.DelayAction(() => BaronDetector(), 10000);
+        }
+
         private static void SC2TimerRemover()
         {
             try
             {
                 if (Program.SC2TimerList.Count > 0)
                 {
-                    Program.SC2TimerList.RemoveAll(d => d.EndTime + 3500 < Utility.TickCount);
+                    //Program.SC2TimerList.RemoveAll(d => d.EndTime + 3500 < Utility.TickCount);
                 }
             }
             catch (Exception e)

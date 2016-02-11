@@ -33,10 +33,11 @@ namespace TimerBuddy
                 ObjectDetector.Initialize();
                 SC2TimerManager.Initialize();
                 DrawManager.Initialize();
+                //Debug.Initialize();
 
                 Drawing.OnEndScene += Drawing_OnEndScene;
                 
-                Chat.Print("TimerBuddy Loaded", System.Drawing.Color.LawnGreen);
+                Chat.Print("<font color='#9400D3'>TimerBuddy</font> <font color='#FFFFFF'>Loaded</font>");
             }
             catch (Exception e)
             {
